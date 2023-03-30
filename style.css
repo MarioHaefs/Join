@@ -114,10 +114,16 @@ body {
     transform: scale(1.05);
 }
 
+
+
 /*** Login Page ***/
 .log-in {
     position: relative;
     height: 100vh;
+    background-color: #F6F7F8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .log-in-logo {
@@ -150,4 +156,77 @@ body {
     position: absolute;
     right: 8%;
     top: 5%;
+}
+
+.log-in-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-class {
+    height: 350px;
+    width: 450px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 14px 3px #0000000A;
+}
+
+.log-in-headline {
+    font-size: 50px;
+    font-weight: 700;
+    border-bottom: 3px solid #29ABE2;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    margin-top: 16px;
+}
+
+.email-input {
+    margin-bottom: 25px;
+    padding: 10px;
+    border-radius: 8px;
+    width: 60%;
+    border: 1px solid #D1D1D1;
+    background: white url('assets/img/letter-icon.png') right no-repeat;
+    background-position: 94% 55%;
+}
+
+.password-input {
+    padding: 10px;
+    border-radius: 10px;
+    width: 60%;
+    border: 1px solid #D1D1D1;
+    background: white url('assets/img/lock-icon.png') right no-repeat;
+    background-position: 94% 55%;
+}
+
+::placeholder{
+    opacity: 0.5;
+}
+
+.log-in-checkbox-div {
+    margin-top: 25px;
+    font-size: 13px;
+    display: flex;
+}
+
+.forgot-password-link {
+    text-decoration: none;
+    color: #29ABE2;
+    margin-left: 25px;
+}
+
+.forgot-password-link:hover {
+    color: #1188bb;
+}
+
+.remember-me {
+    margin-left: 8px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: #2A3647;
 }
