@@ -4,7 +4,7 @@ body {
     height: 100vh;
 }
 
-/* dekstop_template.html */
+/*** dekstop_template.html ***/
 .menu {
     background-color: #2A3647;
     color: #ffffffd5;
@@ -114,4 +114,40 @@ body {
     transform: scale(1.05);
 }
 
-/*************************************/
+/*** Login Page ***/
+.log-in {
+    position: relative;
+    height: 100vh;
+}
+
+.log-in-logo {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+}
+
+.sign-up-button {
+    color: white;
+    font-size: 16px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 12px;
+    padding-right: 12px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    margin-left: 24px;
+}
+
+.sign-up-button:hover {
+    background-color: #29ABE2;
+}
+
+.sign-up {
+    position: absolute;
+    right: 8%;
+    top: 5%;
+}
