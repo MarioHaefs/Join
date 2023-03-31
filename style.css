@@ -4,7 +4,9 @@ body {
     height: 100vh;
 }
 
+
 /*** dekstop_template.html ***/
+
 .menu {
     background-color: #2A3647;
     color: #ffffffd5;
@@ -115,8 +117,8 @@ body {
 }
 
 
-
 /*** Login Page ***/
+
 .log-in {
     position: relative;
     height: 100vh;
@@ -208,6 +210,7 @@ body {
     margin-top: 25px;
     font-size: 13px;
     display: flex;
+    margin-bottom: 25px;
 }
 
 .forgot-password-link {
@@ -229,4 +232,48 @@ body {
 input[type="checkbox"] {
     cursor: pointer;
     accent-color: #2A3647;
+}
+
+input:focus {
+    outline: none;
+}
+
+.log-in-button {
+    color: white;
+    font-size: 16px;
+    background-color: #2A3647;
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 32px;
+    padding-right: 32px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 24px;
+}
+
+.log-in-button:hover {
+    background-color: #29ABE2;
+}
+
+.guest-log-in-button {
+    color: #2A3647;
+    background-color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-decoration: none;
+    border: 1px solid #2A3647;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.guest-log-in-button:hover {
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
 }
