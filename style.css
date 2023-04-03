@@ -10,7 +10,7 @@ body {
 .menu {
     background-color: #2A3647;
     color: #ffffffd5;
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     float: left;
@@ -315,4 +315,10 @@ input:focus {
 .reset-password-height {
     height: 350px !important;
     width: 600px !important;
+}
+
+/*** Legal notice ***/
+.legal-notice-content {
+    margin-left: 200px;
+    text-align: center;
 }
