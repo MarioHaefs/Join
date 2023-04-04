@@ -49,6 +49,11 @@ body {
     cursor: pointer;
 }
 
+.menu-a {
+    text-decoration: none;
+    color: white;
+}
+
 .legal-notice {
     display: flex;
     align-items: center;
@@ -56,6 +61,7 @@ body {
     height: 50px;
     position: absolute;
     top: 650px;
+    left: 0%;
 }
 
 .legal-notice:hover {
