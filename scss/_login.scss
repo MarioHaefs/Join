@@ -1,0 +1,118 @@
+.log-in {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .log-in-logo {
+        position: absolute;
+        top: 8%;
+        left: 8%;
+    }
+
+    .sign-up {
+        position: absolute;
+        right: 8%;
+        top: 5%;
+
+        .sign-up-button {
+            @include button-darkblue;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 24px;
+        }
+    }
+
+    .form-class {
+        height: 400px;
+        width: 500px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0px 0px 14px 3px #0000000A;
+        position: relative;
+
+        .log-in-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .log-in-headline {
+                font-size: 50px;
+                font-weight: 700;
+                border-bottom: 3px solid $lightblue;
+                padding-bottom: 10px;
+                margin-bottom: 25px;
+                margin-top: 16px;
+            }
+
+            .name-input {
+                margin-bottom: 25px;
+                width: 60%;
+                @include inputForm('../assets/img/person-icon.png', 94%, 55%);
+            }
+
+            .email-input {
+                margin-bottom: 25px;
+                width: 60%;
+                @include inputForm('../assets/img/letter-icon.png', 94%, 55%);
+            }
+
+            .password-input {
+                margin-bottom: 25px;
+                width: 60%;
+                @include inputForm('../assets/img/lock-icon.png', 94%, 55%);
+            }
+
+            ::placeholder {
+                opacity: 0.5;
+            }
+
+            .log-in-checkbox-div {
+                font-size: 13px;
+                display: flex;
+                margin-bottom: 25px;
+
+                .remember-me {
+                    margin-left: 8px;
+                    font-style: normal;
+                    font-weight: 500;
+                }
+
+                .forgot-password-link {
+                    text-decoration: none;
+                    color: $lightblue;
+                    margin-left: 25px;
+
+                    &:hover {
+                        color: $lightblueHover;
+                    }
+                }
+
+                input[type="checkbox"] {
+                    cursor: pointer;
+                    accent-color: $darkblue;
+                }
+
+                input:focus {
+                    outline: none;
+                }
+            }
+
+            .log-in-button {
+                @include button-darkblue;
+                font-size: 16px;
+                text-decoration: none;
+                margin-right: 24px;
+            }
+
+            .guest-log-in-button {
+                @include button-White;
+                font-size: 16px;
+            }
+
+        }
+    }
+
+}
