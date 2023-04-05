@@ -11,16 +11,18 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="/css/contacts.css">
+    <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
+    <script src="./js/script.js"></script>
     <script src="./js/contacts.js"></script>
 
 
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(), init()">
     <div w3-include-html="desktop_template.html"></div>
     <div id="contacts-container">
-        <div class="contacts-list">
+        <div class="contacts-list" id="contacts-list">
             <div class="list-header">
                 A
             </div>
@@ -151,12 +153,12 @@
                 </div>
             </div>
         </div>
-        <div class="new-contact">
+        <div class="new-contact" onclick="toggleDNone('overlayContent')">
             New Contact
             <img src="./assets/img/contacts-icons/addContact.png" alt="">
         </div>
     </div>
-    <div id="overlayContent">
+    <div id="overlayContent" class="d-none">
         <div class="overlay-left">
             <img src="./assets/img/menu-logo.png" alt="">
             <p class="overlay-title">Add contact</p>
@@ -170,8 +172,8 @@
                 <input class="email-input" placeholder="Email" type="email" required>
                 <input class="phone-input" placeholder="Phone" type="tel" required>
                 <div class="buttons">
-                    <button class="cancel-contact-btn">Cancel <img src="./assets/img/contacts-icons/cancel-icon.png"
-                            alt=""></button>
+                    <button type="button" class="cancel-contact-btn" onclick="toggleDNone('overlayContent')">Cancel <img
+                            src="./assets/img/contacts-icons/cancel-icon.png" alt=""></button>
                     <button type="submit" class="add-contact-btn">
                         Create contact
                         <img src="./assets/img/contacts-icons/check-icon.png" alt="">

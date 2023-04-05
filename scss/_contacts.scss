@@ -55,6 +55,19 @@ body {
             font-size: 16px;
             cursor: pointer;
 
+            .user-frame {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                width: fit-content;
+                min-width: 42px;
+                height: 42px;
+                color: #FFFFFF;
+                border-radius: 100%;
+                background-color: orange;
+            }
+
             img {
                 height: 42px;
                 width: 42px;
@@ -281,7 +294,7 @@ body {
         gap: 40px;
         padding: 0px 48px;
 
-        & > img {
+        &>img {
             padding-bottom: 80px;
         }
 
