@@ -1,0 +1,45 @@
+$lightblue: #29ABE2;
+$lightblueHover: #1188bb;
+$darkblue: #2A3647;
+$blue: #0038FF;
+$orange: #FF7A00;
+$lightgreen: #1FD7C1;
+$green: #93E751;
+$pagebackground: #F6F7F8;
+
+@mixin button-White() {
+    color: $darkblue;
+    background-color: white;
+    cursor: pointer;
+    padding: 10px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    border: 1px solid $darkblue;
+
+    &:hover {
+        color: $lightblue;
+        border: 1px solid $lightblue;
+    }
+}
+
+@mixin button-darkblue() {
+    background-color: $darkblue;
+    color: white;
+    padding: 10px 32px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+
+    &:hover {
+        background-color: $lightblue;
+    }
+}
+
+@mixin inputForm($imgurl, $posx, $posy) {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    background: white url($imgurl) right no-repeat;
+    background-position: $posx $posy;
+}

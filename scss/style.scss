@@ -1,0 +1,15 @@
+@import './predefinedStyle';
+@import './fonts';
+
+@import './login';
+@import './forgotpaswd';
+@import './desktop_template';
+@import './legal_notice';
+
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+    background-color: $pagebackground;
+}

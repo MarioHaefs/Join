@@ -1,0 +1,111 @@
+.menu {
+    background-color: $darkblue;
+    color: #ffffffd5;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    float: left;
+    width: 200px;
+    font-size: 16px;
+
+    .menu-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+
+        .menu-logo {
+            height: 100px;
+            width: 80px;
+            margin-top: 50px;
+            margin-bottom: 75px;
+            cursor: pointer;
+        }
+
+        .menu-nav {
+            a {
+                color: #ffffffd5;
+                text-decoration: none;
+            }
+            .nav-text {
+                display: flex;
+                align-items: center;
+                margin-bottom: 16px;
+                width: 200px;
+                height: 50px;
+
+                &:hover {
+                    background-color: #091931;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .nav-icon-box {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+            margin-left: 30px;
+        }
+
+        .legal-notice {
+            display: flex;
+            align-items: center;
+            width: 200px;
+            height: 50px;
+            position: absolute;
+            top: 650px;
+
+            &:hover {
+                background-color: #091931;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 200px;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+    height: 75px;
+
+    .header-headline {
+        margin-left: 50px;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 21px;
+    }
+
+    .header-icons {
+        display: flex;
+        align-items: center;
+
+        .profil-pic {
+            height: 40px;
+            width: 40px;
+            border-radius: 100px;
+            margin-right: 16px;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+            }
+        }
+
+        .question-icon {
+            height: 20px;
+            width: 20px;
+            margin-right: 16px;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+            }
+        }
+    }
+}

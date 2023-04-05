@@ -1,0 +1,333 @@
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+}
+
+
+/*** dekstop_template.html ***/
+
+.menu {
+    background-color: #2A3647;
+    color: #ffffffd5;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    float: left;
+    width: 200px;
+    font-size: 16px;
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.menu-logo {
+    height: 100px;
+    width: 80px;
+    margin-top: 50px;
+    margin-bottom: 75px;
+}
+
+.menu-logo:hover {
+    cursor: pointer;
+}
+
+.nav-text {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    width: 200px;
+    height: 50px;
+}
+
+.nav-text:hover {
+    background-color: #091931;
+    cursor: pointer;
+}
+
+.legal-notice {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    top: 650px;
+}
+
+.legal-notice:hover {
+    background-color: #091931;
+    cursor: pointer;
+}
+
+.nav-icon-box {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-left: 30px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 200px;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+    height: 75px;
+}
+
+.header-headline {
+    margin-left: 50px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 21px;
+}
+
+.profil-pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+    margin-right: 16px;
+}
+
+.question-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 16px;
+}
+
+.question-icon:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.profil-pic:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+
+/*** Log in & Sign up Pages ***/
+
+.log-in {
+    position: relative;
+    height: 100vh;
+    background-color: #F6F7F8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.log-in-logo {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+}
+
+.sign-up-button {
+    color: white;
+    font-size: 16px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 12px;
+    padding-right: 12px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    margin-left: 24px;
+}
+
+.sign-up-button:hover {
+    background-color: #29ABE2;
+}
+
+.sign-up {
+    position: absolute;
+    right: 8%;
+    top: 5%;
+}
+
+.log-in-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-class {
+    height: 400px;
+    width: 500px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 14px 3px #0000000A;
+    position: relative;
+}
+
+.log-in-headline {
+    font-size: 50px;
+    font-weight: 700;
+    border-bottom: 3px solid #29ABE2;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    margin-top: 16px;
+}
+
+.email-input {
+    margin-bottom: 25px;
+    padding: 10px;
+    border-radius: 8px;
+    width: 60%;
+    border: 1px solid #D1D1D1;
+    background: white url('assets/img/letter-icon.png') right no-repeat;
+    background-position: 94% 55%;
+}
+
+.password-input {
+    margin-bottom: 25px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 60%;
+    border: 1px solid #D1D1D1;
+    background: white url('assets/img/lock-icon.png') right no-repeat;
+    background-position: 94% 55%;
+}
+
+.name-input {
+    margin-bottom: 25px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 60%;
+    border: 1px solid #D1D1D1;
+    background: white url('assets/img/person-icon.png') right no-repeat;
+    background-position: 94% 55%;
+}
+
+::placeholder {
+    opacity: 0.5;
+}
+
+.log-in-checkbox-div {
+    font-size: 13px;
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.forgot-password-link {
+    text-decoration: none;
+    color: #29ABE2;
+    margin-left: 25px;
+}
+
+.forgot-password-link:hover {
+    color: #1188bb;
+}
+
+.remember-me {
+    margin-left: 8px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: #2A3647;
+}
+
+input:focus {
+    outline: none;
+}
+
+.log-in-button {
+    color: white;
+    font-size: 16px;
+    background-color: #2A3647;
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 32px;
+    padding-right: 32px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 24px;
+}
+
+.log-in-button:hover {
+    background-color: #29ABE2;
+}
+
+.guest-log-in-button {
+    color: #2A3647;
+    background-color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-decoration: none;
+    border: 1px solid #2A3647;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.guest-log-in-button:hover {
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+}
+
+.arrow-left-icon {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    cursor: pointer;
+}
+
+.text-center {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.forgot-password-text {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 40px !important;
+}
+
+.forgot-password-height {
+    height: 300px !important;
+    width: 600px !important;
+}
+
+.reset-password-height {
+    height: 350px !important;
+    width: 600px !important;
+}
+
+/*** Legal notice ***/
+.legal-notice-content {
+    margin-left: 300px ;
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    position: relative;
+}
+
+.arrow-black {
+    position: absolute; 
+    right: 10% ;
+    cursor: pointer;
+}
