@@ -9,7 +9,7 @@
 
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="stylesheet" href="./css/style.css">
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
 
 </head>
 
@@ -19,14 +19,15 @@
         <img class="log-in-logo" src="assets/img/logo.png">
         <div class="form-class">
             <img onclick="window.history.go(-1); return false;" class="arrow-left-icon" src="assets/img/arrow-left.png">
-            <form class="log-in-form">
+            <form onsubmit="addUser(); return false" class="log-in-form">
                 <span class="log-in-headline">Sign up</span>
-                <input class="name-input" placeholder="Name" type="text" required>
-                <input class="email-input" placeholder="Email" type="email" required>
-                <input class="password-input" placeholder="Password" type="password" required>
+                <input id="register-name" class="name-input" placeholder="Name" type="text" required>
+                <input id="register-email" class="email-input" placeholder="Email" type="email" required>
+                <input id="register-password" class="password-input" placeholder="Password" type="password" required>
                 <div>
                     <button class="log-in-button">Sign up</button>
                 </div>
+                <span id="register-success" style="display:none; margin-top: 16px; background-color:#2A3647; border-radius: 10px; color: white; padding: 8px; ">Du hast dich erfolgreich registriert !</span>
             </form>
         </div>
     </div>
