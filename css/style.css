@@ -379,6 +379,204 @@
 }
 
 body {
+  overflow: hidden;
+}
+
+#contacts-container {
+  position: relative;
+  margin-left: 200px;
+  display: flex;
+}
+#contacts-container .contacts-list {
+  height: calc(100vh - 75px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 30vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+#contacts-container .contacts-list::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+#contacts-container .contacts-list::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+  background: #A8A8A8;
+}
+#contacts-container .contacts-list .list-header {
+  text-align: center;
+  width: 80%;
+  padding-top: 8px;
+  padding-bottom: 16px;
+  font-size: 21px;
+  font-weight: 400;
+  border-bottom: 1px solid gray;
+  margin-bottom: 16px;
+}
+#contacts-container .contacts-list .list-contact {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 15px 25px;
+  margin-left: 48px;
+  margin-right: 48px;
+  gap: 35px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 16px;
+  cursor: pointer;
+}
+#contacts-container .contacts-list .list-contact img {
+  height: 42px;
+  width: 42px;
+  padding-right: 8px;
+}
+#contacts-container .contacts-list .list-contact div p {
+  margin: 0;
+  font-size: 16px;
+}
+#contacts-container .contacts-list .list-contact div p:first-child {
+  font-size: 21px;
+}
+#contacts-container .contacts-list .list-contact div p:last-child {
+  padding-top: 4px;
+  color: #007CEE;
+}
+#contacts-container .contacts-list .list-contact:hover {
+  background-color: #E6E6E6;
+}
+#contacts-container .contacts-list .list-contact-activ {
+  background-color: #2A3647;
+  color: white;
+}
+#contacts-container .contacts-list .list-contact-activ:hover {
+  background-color: #2A3647;
+  translate: 5px;
+}
+#contacts-container .contact-info {
+  padding-left: 32px;
+}
+#contacts-container .contact-info .contact-headline {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+#contacts-container .contact-info .contact-headline h3 {
+  font-size: 61px;
+  border-right: 3px solid #29ABE2;
+  padding-right: 24px;
+}
+#contacts-container .contact-info .contact-headline p {
+  font-size: 27px;
+}
+#contacts-container .contact-info .contact-details {
+  margin-left: 24px;
+}
+#contacts-container .contact-info .contact-details .contact-details-head {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  margin-left: 38px;
+}
+#contacts-container .contact-info .contact-details .contact-details-head .list-contact-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 42px;
+  height: 42px;
+  color: #FFFFFF;
+  border-radius: 100%;
+  background-color: orange;
+  scale: 3;
+}
+#contacts-container .contact-info .contact-details .contact-details-head .contactInfo {
+  margin-left: 0px;
+}
+#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .contact-name {
+  font-size: 47px;
+  margin-bottom: 16px;
+}
+#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .add-task {
+  margin-top: 18px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #29ABE2;
+}
+#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .add-task:hover {
+  transform: scale(1.1);
+  transition: all 125ms ease-in-out;
+}
+#contacts-container .contact-info .contact-details .contact-info-head {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+#contacts-container .contact-info .contact-details .contact-info-head > p {
+  font-size: 21px;
+}
+#contacts-container .contact-info .contact-details .contact-info-head .contact-edit {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+#contacts-container .contact-info .contact-details .contact-info-head .contact-edit img {
+  width: 21px;
+  height: 30px;
+}
+#contacts-container .contact-info .contact-details .contact-info-head .contact-edit:hover {
+  filter: invert(65%) sepia(21%) saturate(6259%) hue-rotate(164deg) brightness(97%) contrast(82%);
+}
+#contacts-container .contact-info .contact-info-container .contact-info-segment {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+#contacts-container .contact-info .contact-info-container .contact-info-segment .contact-info-title {
+  font-weight: 700;
+}
+#contacts-container .contact-info .contact-info-container .contact-info-segment a {
+  text-decoration: none;
+  color: #29ABE2;
+}
+#contacts-container .contact-info .contact-info-container .contact-info-segment a:hover {
+  color: #1188bb;
+}
+#contacts-container .new-contact {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  bottom: 24px;
+  right: 24px;
+  background-color: #2A3647;
+  color: white;
+  padding: 10px 32px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  box-sizing: border-box;
+}
+#contacts-container .new-contact:hover {
+  background-color: #29ABE2;
+}
+
+body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
   height: 100vh;
