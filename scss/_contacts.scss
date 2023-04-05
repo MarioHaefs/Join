@@ -156,49 +156,59 @@ body {
                     }
                 }
             }
+
             .contact-info-head {
                 margin-top: 24px;
                 display: flex;
                 align-items: center;
                 gap: 50px;
-                & > p {
+
+                &>p {
                     font-size: 21px;
                 }
+
                 .contact-edit {
                     display: flex;
                     gap: 10px;
                     align-items: center;
                     cursor: pointer;
+
                     img {
                         width: 21px;
                         height: 30px;
                     }
+
                     &:hover {
                         filter: invert(65%) sepia(21%) saturate(6259%) hue-rotate(164deg) brightness(97%) contrast(82%);
                     }
                 }
             }
         }
+
         .contact-info-container {
             .contact-info-segment {
                 display: flex;
                 flex-direction: column;
                 gap: 8px;
                 margin-bottom: 24px;
+
                 .contact-info-title {
                     font-weight: 700;
                 }
+
                 a {
                     text-decoration: none;
                     color: $lightblue;
+
                     &:hover {
                         color: $lightblueHover;
                     }
                 }
             }
         }
-        
+
     }
+
     .new-contact {
         display: flex;
         position: absolute;
@@ -209,5 +219,112 @@ body {
         right: 24px;
         @include button-darkblue;
         box-sizing: border-box;
+    }
+}
+
+#overlayContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.712);
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    justify-content: center;
+
+    .overlay-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: $darkblue;
+        height: 50vh;
+        color: white;
+        padding: 0px 24px;
+        border-bottom-left-radius: 32px;
+        border-top-left-radius: 32px;
+
+        img {
+            height: 66px;
+            width: 55px;
+        }
+
+        .overlay-title {
+            font-size: 61px;
+            font-weight: 700;
+            margin: 0px;
+        }
+
+        p {
+            margin: 0px;
+            font-size: 27px;
+        }
+
+        .overlay-sep {
+            margin-top: 16px;
+            width: 80px;
+            height: 3px;
+            background-color: $lightblue;
+        }
+    }
+
+    .overlay-right {
+        border-top-right-radius: 32px;
+        border-bottom-right-radius: 32px;
+        height: 50vh;
+        background-color: $pagebackground;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        padding: 0px 48px;
+
+        & > img {
+            padding-bottom: 80px;
+        }
+
+        .phone-input {
+            margin-bottom: 25px;
+            @include inputForm('../assets/img/phone-icon.png', 94%, 55%);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            .buttons {
+                display: flex;
+                gap: 16px;
+            }
+
+            .cancel-contact-btn {
+                @include button-White;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
+                    img {
+                        filter: invert(65%) sepia(21%) saturate(6259%) hue-rotate(164deg) brightness(97%) contrast(82%);
+                    }
+                }
+            }
+
+            .add-contact-btn {
+                @include button-darkblue;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px 8px;
+                font-weight: 700;
+            }
+        }
+
+        [class*="-input"] {
+            width: 250px;
+            height: 25px !important;
+        }
     }
 }

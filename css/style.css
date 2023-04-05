@@ -576,9 +576,146 @@ body {
   background-color: #29ABE2;
 }
 
+#overlayContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.712);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#overlayContent .overlay-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #2A3647;
+  height: 50vh;
+  color: white;
+  padding: 0px 24px;
+  border-bottom-left-radius: 32px;
+  border-top-left-radius: 32px;
+}
+#overlayContent .overlay-left img {
+  height: 66px;
+  width: 55px;
+}
+#overlayContent .overlay-left .overlay-title {
+  font-size: 61px;
+  font-weight: 700;
+  margin: 0px;
+}
+#overlayContent .overlay-left p {
+  margin: 0px;
+  font-size: 27px;
+}
+#overlayContent .overlay-left .overlay-sep {
+  margin-top: 16px;
+  width: 80px;
+  height: 3px;
+  background-color: #29ABE2;
+}
+#overlayContent .overlay-right {
+  border-top-right-radius: 32px;
+  border-bottom-right-radius: 32px;
+  height: 50vh;
+  background-color: #F6F7F8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 0px 48px;
+}
+#overlayContent .overlay-right > img {
+  padding-bottom: 80px;
+}
+#overlayContent .overlay-right .phone-input {
+  margin-bottom: 25px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background: white url("../assets/img/phone-icon.png") right no-repeat;
+  background-position: 94% 55%;
+}
+#overlayContent .overlay-right form {
+  display: flex;
+  flex-direction: column;
+}
+#overlayContent .overlay-right form .buttons {
+  display: flex;
+  gap: 16px;
+}
+#overlayContent .overlay-right form .cancel-contact-btn {
+  color: #2A3647;
+  background-color: white;
+  cursor: pointer;
+  padding: 10px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  border: 1px solid #2A3647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#overlayContent .overlay-right form .cancel-contact-btn:hover {
+  color: #29ABE2;
+  border: 1px solid #29ABE2;
+}
+#overlayContent .overlay-right form .cancel-contact-btn:hover img {
+  filter: invert(65%) sepia(21%) saturate(6259%) hue-rotate(164deg) brightness(97%) contrast(82%);
+}
+#overlayContent .overlay-right form .add-contact-btn {
+  background-color: #2A3647;
+  color: white;
+  padding: 10px 32px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 8px;
+  font-weight: 700;
+}
+#overlayContent .overlay-right form .add-contact-btn:hover {
+  background-color: #29ABE2;
+}
+#overlayContent .overlay-right [class*=-input] {
+  width: 250px;
+  height: 25px !important;
+}
+
 body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
   height: 100vh;
   background-color: #F6F7F8;
+}
+
+.name-input {
+  margin-bottom: 25px;
+  width: 60%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background: white url("../assets/img/person-icon.png") right no-repeat;
+  background-position: 94% 55%;
+}
+
+.email-input {
+  margin-bottom: 25px;
+  width: 60%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background: white url("../assets/img/letter-icon.png") right no-repeat;
+  background-position: 94% 55%;
+}
+
+.d-none {
+  display: none !important;
 }/*# sourceMappingURL=style.css.map */

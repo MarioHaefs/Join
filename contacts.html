@@ -156,8 +156,29 @@
             <img src="./assets/img/contacts-icons/addContact.png" alt="">
         </div>
     </div>
-    <div id="overlay">
-        
+    <div id="overlayContent">
+        <div class="overlay-left">
+            <img src="./assets/img/menu-logo.png" alt="">
+            <p class="overlay-title">Add contact</p>
+            <p>Task are better with a team!</p>
+            <div class="overlay-sep"></div>
+        </div>
+        <div class="overlay-right">
+            <img src="./assets/img/contacts-icons/userIcon.png" alt="">
+            <form onsubmit="createContact(); return false;">
+                <input class="name-input" placeholder="Name" type="text" required>
+                <input class="email-input" placeholder="Email" type="email" required>
+                <input class="phone-input" placeholder="Phone" type="tel" required>
+                <div class="buttons">
+                    <button class="cancel-contact-btn">Cancel <img src="./assets/img/contacts-icons/cancel-icon.png"
+                            alt=""></button>
+                    <button type="submit" class="add-contact-btn">
+                        Create contact
+                        <img src="./assets/img/contacts-icons/check-icon.png" alt="">
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 
