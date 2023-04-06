@@ -434,7 +434,7 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
-#contacts-container .contacts-list .list-contact .user-frame {
+#contacts-container .contacts-list .list-contact .contact-frame {
   display: flex;
   align-items: center;
   justify-content: center;

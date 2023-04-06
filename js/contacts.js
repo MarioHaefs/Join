@@ -1,11 +1,11 @@
-let users = [];
-let user = [{
-    firstname: 'Test',
-    lastname: 'Zwei',
-    mail: 'TestZwei@mail.de',
+let contacts = [];
+let contact = {
+    firstname: 'daran',
+    lastname: 'tollername',
+    mail: 'Test4@mail.de',
     phone: '012347596521'
-}];
-
+};
+let orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
 setURL('http://gruppe-5009.developerakademie.net/smallest_backend_ever');
 
 /**
@@ -14,54 +14,71 @@ setURL('http://gruppe-5009.developerakademie.net/smallest_backend_ever');
  */
 async function init() {
     await downloadFromServer();
-    users = JSON.parse(backend.getItem('users')) || [];
-    insertUsersToContactList();
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    insertContactsToContactList();
 };
 
 /**
  * add User to Database
  */
 async function addUser() {
-    users.push(user);
-    await backend.setItem('users', JSON.stringify(users));
+    contacts.push(contact);
+    await backend.setItem('contacts', JSON.stringify(contacts));
 }
 
 /**
- * del all Users from Database
+ * del all Contacts from Database
  */
-async function deleteUsers() {
-    await backend.deleteItem('users');
+async function deleteContacts() {
+    await backend.deleteItem('contacts');
 }
 
 /**
- * load all Users to contacts list
+ * load all Contacts to contacts list
  * 
  */
-async function insertUsersToContactList() {
+async function insertContactsToContactList() {
     let container = document.getElementById('contacts-list');
     container.innerHTML = '';
+    sortContacts();
+    orderContacts();
+    for (let i = 0; i < orderedContacts.length; i++) {
+        if (orderedContacts[i].length > 0) {
+            container.innerHTML += genContactsHeader(i);
+            for (let j = 0; j < orderedContacts[i].length; j++) {
+                const contact = orderedContacts[i][j];
+                let shortname = contact.firstname.charAt(0) + contact.lastname.charAt(0);
+                container.innerHTML += genContactHtml(orderedContacts[i][j], shortname);
+            }
+        }
+    }
+}
 
-    users.forEach(user => {
-        let shortname = user[0].firstname.charAt(0) + user[0].lastname.charAt(0);
-        container.innerHTML += /*html */`
-        <div class="list-contact">
-                <span class="user-frame">${shortname}</span>
-                <div>
-                    <p>${user[0].firstname} ${user[0].lastname}</p>
-                    <p>${user[0].mail}</p>
-                </div>
-            </div>   
-        
-        `;
+/**
+ * Sort Contacts by Firstname from A to Z
+ */
+function sortContacts() {
+    contacts = contacts.sort(function (a, b) {
+        return a.firstname.toLowerCase().localeCompare(
+            b.firstname.toLowerCase()
+        );
     });
 }
 
-
-
-
-
-
-
+/**
+ * Sort Contacts alphabetical to orderedContacts
+ * 
+ */
+function orderContacts() {
+    for (let i = 0; i < contacts.length; i++) {
+        contacts[i].id = i;
+        let letter = contacts[i].firstname.toLowerCase().toString();
+        letter = letter.replace(/\u00e4/g, "ae").replace(/\u00fc/g, "ue").replace(/\u00f6/g, "oe");
+        letter = letter.slice(0, 1);
+        letter = letter.charCodeAt(0) - 97;
+        orderedContacts[letter].push(contacts[i]);
+    }
+}
 
 
 
@@ -73,3 +90,35 @@ async function insertUsersToContactList() {
 
 /*Gen HTML Content */
 
+
+/**
+ * 
+ * @param {JSON} contact - User from Database
+ * @param {String} shortname - Combinate first Char from Firstname and Lastname
+ * @returns html template
+ */
+function genContactHtml(contact, shortname) {
+    return /*html */`
+    <div class="list-contact">
+            <span class="contact-frame">${shortname}</span>
+            <div>
+                <p>${contact.firstname} ${contact.lastname}</p>
+                <p>${contact.mail}</p>
+            </div>
+        </div>   
+    
+    `;
+}
+
+/**
+ * 
+ * @param {Number} i formCharCode  
+ * @returns HTML template Contactlist header
+ */
+function genContactsHeader(i) {
+    return /*html */ `
+        <div class="list-header">
+               ${String.fromCharCode(i + 97).toUpperCase()}
+        </div>
+    `;
+}
