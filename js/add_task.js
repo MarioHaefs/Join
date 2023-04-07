@@ -1,4 +1,6 @@
 let prio;
+let categorys = [];
+let menuOpen = false;
 
 function setPrio(x) {
     if (x == prio) removePrio();
@@ -25,5 +27,38 @@ function removePrio() {
     document.getElementById('prioLow').classList.remove('prio_button_low');
     prio = '';
 };
+
+
+function showNewCategory() {
+    if (!menuOpen) {
+        document.getElementById('dropDown').classList.add('drop_down_open');
+        document.getElementById('categorys').innerHTML = `<div onclick="inputCategory()" class="new_category">New category</div>`;
+        menuOpen = true;
+    } else {
+        document.getElementById('dropDown').classList.remove('drop_down_open');
+        document.getElementById('categorys').innerHTML = ``;
+        menuOpen = false;
+    }
+}
+
+
+function inputCategory() {
+    showInputCategoryHTML();
+}
+
+
+function clearInputField() {
+    showCategoryHTML();
+    menuOpen = false;
+};
+
+
+function setColor(color) {
+document.getElementById(color).style.transform = 'scale(1)';
+}
+
+
+
+
 
 
