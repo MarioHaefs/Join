@@ -58,13 +58,14 @@
 
         .tasks {
             width: 25%;
+            padding: 4px;
 
             .task-header {
                 display: flex;
                 justify-content: space-between;
                 height: 32px;
 
-                h2 {
+                h3 {
                     margin: unset;
                 }
 

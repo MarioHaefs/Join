@@ -441,13 +441,14 @@
 }
 .board-content .board-tasks .tasks {
   width: 25%;
+  padding: 4px;
 }
 .board-content .board-tasks .tasks .task-header {
   display: flex;
   justify-content: space-between;
   height: 32px;
 }
-.board-content .board-tasks .tasks .task-header h2 {
+.board-content .board-tasks .tasks .task-header h3 {
   margin: unset;
 }
 .board-content .board-tasks .tasks .task-header img {
