@@ -1,6 +1,9 @@
 let prio;
+let category;
 let categorys = [];
+let colors = [];
 let menuOpen = false;
+let color;
 
 function setPrio(x) {
     if (x == prio) removePrio();
@@ -53,9 +56,27 @@ function clearInputField() {
 };
 
 
-function setColor(color) {
-document.getElementById(color).style.transform = 'scale(1)';
-}
+function setColor(clr) {
+    if (color) {
+        document.getElementById(color).classList.remove('color_active');
+    }
+    document.getElementById(clr).classList.add('color_active');
+    color = clr;
+};
+
+
+function addNewCategory() {
+    let categoryValue = document.getElementById('categoryValue').value;
+    if (categoryValue.length < 1 || !color) {
+        alert('wird ersetzt')
+    } else {
+        colors.push(color);
+        categorys.push(categoryValue);
+        category = categoryValue;
+        showCategoryColorHTML(category, color);
+        menuOpen = false;
+    }
+};
 
 
 

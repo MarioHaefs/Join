@@ -5,7 +5,7 @@ function showInputCategoryHTML() {
                     <input class="input_category_name" type="text" placeholder="New category name" id="categoryValue" required>
                     <div class="x✔">
                         <div onclick="clearInputField()" class="x"><img src="assets/img/x.svg" alt=""></div>
-                        <button><img class="hook" src="assets/img/haken.png" alt=""></button>
+                        <button onclick="addNewCategory()"><img class="hook" src="assets/img/haken.png"></button>
                     </div>
                 </form>
                 </div>
@@ -24,6 +24,19 @@ function showCategoryHTML() {
     return document.getElementById('categoryBox').innerHTML = `
     <div class="drop_down" id="dropDown">
                     Select task category
+                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="showNewCategory()">
+                </div>
+                <div id="categorys"></div>`;
+};
+
+
+function showCategoryColorHTML(cgry, clr) {
+    return document.getElementById('categoryBox').innerHTML = `
+    <div class="drop_down" id="dropDown">
+                    <div class="category_color">
+                        ${cgry}
+                        <div  class="color2" style="background-color: ${clr};"></div>
+                    </div>
                     <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="showNewCategory()">
                 </div>
                 <div id="categorys"></div>`;

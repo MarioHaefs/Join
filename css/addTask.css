@@ -198,10 +198,30 @@ span {
     border: 1px solid white;
     margin-left: 20px;
     margin-bottom: 38px;
+    transition: 300ms;
+}
+
+.color2 {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    border: 1px solid white;
+    margin-left: 10px;
+}
+
+.color_active {
+    border: 1px solid black;
+    transform: scale(1.2);
+    transition: 300ms;
 }
 
 .color:hover {
     cursor: pointer;
+}
+
+.category_color {
+    display: flex;
+    align-items: center;
 }
 
 .down_image:hover {
