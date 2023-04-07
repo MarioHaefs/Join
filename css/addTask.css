@@ -1,0 +1,211 @@
+.head {
+    color: black;
+    margin-left: 250px;
+}
+
+h1 {
+    margin-top: 80px;
+    font-size: 61px;
+}
+
+.form {
+    margin-left: 250px;
+}
+
+.form {
+    display: flex;
+}
+
+.form_left {
+    border-right: 1px solid #D1D1D1;
+    padding-right: 59px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 60px;
+}
+
+input {
+    outline: none;
+    font-size: 20px;
+    box-sizing: border-box;
+    border: 1px solid #D1D1D1;
+    width: 422px;
+    height: 51px;
+    padding: 13px 21px;
+    border-radius: 10px;
+    margin-bottom: 34px;
+}
+
+textarea {
+    outline: none;
+    font-size: 20px;
+    box-sizing: border-box;
+    border: 1px solid #D1D1D1;
+    width: 422px;
+    height: 120px;
+    padding: 13px 21px;
+    border-radius: 10px;
+    margin-bottom: 34px;
+}
+
+textarea::placeholder {
+    color: #D1D1D1;
+    font-family: Open Sans;
+}
+
+input::placeholder {
+    position: absolute;
+    color: #D1D1D1;
+}
+
+::-webkit-datetime-edit-year-field,
+::-webkit-datetime-edit-month-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-text {
+    color: #D1D1D1;
+}
+
+span {
+    font-size: 21px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+select {
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #D1D1D1;
+    width: 422px;
+    height: 51px;
+    border-radius: 10px;
+    margin-bottom: 34px;
+    outline: none;
+}
+
+.prio {
+    display: flex;
+    justify-content: space-between;
+    width: 422px;
+}
+
+.prio_button {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-weight: 400;
+    font-size: 21px;
+    background-color: white;
+    width: 136px;
+    height: 51px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    transition: 500ms;
+    margin-bottom: 34px;
+}
+
+.prio_button img {
+    width: 20px;
+    height: 12.5px;
+}
+
+.prio_button:hover {
+    transition: 500ms;
+    cursor: pointer;
+    -webkit-box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.3);
+}
+
+.prio_button_urgent  {
+    color: white;
+    background-color: #FF3D00;
+}
+
+.prio_button_urgent img {
+    filter: brightness(0) invert(1);
+}
+
+.prio_button_medium {
+    color: white;
+    background-color: #FFA800;
+}
+
+.prio_button_medium img {
+    filter: brightness(0) invert(1);
+}
+
+.prio_button_low {
+    color: white;
+    background-color: #7AE229;
+}
+
+.prio_button_low img {
+    filter: brightness(0) invert(1);
+}
+
+.subtasks {
+    position: relative;
+}
+
+.plus_image {
+    position: absolute;
+    top: 13px;
+    left: 390px;
+}
+
+.plus_image:hover {
+    cursor: pointer;
+}
+
+.clear_create_task {
+    position: absolute;
+    bottom: 0;
+    width: 422px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.clear_button {
+    margin-right: 35px;
+    font-weight: 400;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    width: 100px;
+    height: 61px;
+    transition: 300ms;
+}
+
+.clear_button:hover {
+    cursor: pointer;
+    color: #29ABE2;
+    border-color: #29ABE2;
+    transition: 300ms;
+}
+
+.create_button {
+    justify-content: center;
+    width: 177px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 21px;
+    font-weight: 700;
+    color: white;
+    background-color: #2A3647;
+    transition: 300ms;
+}
+
+.create_button:hover {
+    cursor: pointer;
+    background: #29ABE2;
+    transition: 300ms;
+}

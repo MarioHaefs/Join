@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,10 +10,46 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <script src="./js/includeHTML.js"></script>
     <script src="./js/add_task.js"></script>
+    <link rel="stylesheet" href="./css/addTask.css">
 
 </head>
+
 <body onload="includeHTML()">
     <div w3-include-html="desktop_template.html"></div>
-   
+    <div class="head">
+        <h1>Add Task</h1>
+    </div>
+    <div class="form">
+        <div class="form_left">
+            <span>Title</span>
+            <input type="text" placeholder="Enter a title">
+            <span>Description</span>
+            <textarea placeholder="Enter a Description"></textarea>
+            <span>Category</span>
+            <select name="category" id="category"> </select>
+            <span>Assigned to</span>
+            <select name="" id=""></select>
+        </div>
+        <div class="form_right">
+            <span>Due date</span>
+            <input type="date">
+            <span>Prio</span>
+            <div class="prio">
+                <div class="prio_button" id="prioUrgent" onclick="setPrio('urgent')">Urgent<img src="assets/img/prioUrgent.png"></div>
+                <div class="prio_button" id="prioMedium" onclick="setPrio('medium')">Medium <img src="assets/img/prioMedium.png"></div>
+                <div class="prio_button" id="prioLow" onclick="setPrio('low')">Low <img src="assets/img/prioLow.png"></div>
+            </div>
+            <span>Subtasks</span>
+            <div class="subtasks">
+                <input type="text" placeholder="Add  new subtask">
+                <img class="plus_image" src="assets/img/plus.svg" alt="">
+            </div>
+            <div class="clear_create_task">
+                <div class="clear_button">Clear x</div>
+                <div class="create_button">Create Task ✔</div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
