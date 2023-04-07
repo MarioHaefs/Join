@@ -379,21 +379,25 @@
 }
 
 .board-content {
-  display: flex;
-  justify-content: space-between;
   margin-left: 200px;
   padding-left: 56px;
   padding-top: 56px;
+  padding-right: 56px;
 }
-.board-content h1 {
+.board-content .board-header {
+  display: flex;
+  justify-content: space-between;
+}
+.board-content .board-header h1 {
   font-size: 48px;
   margin: unset;
 }
-.board-content .search-container {
+.board-content .board-header .search-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
-.board-content .search-container #search-input {
+.board-content .board-header .search-container #search-input {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #D1D1D1;
@@ -402,7 +406,7 @@
   padding-right: 56px;
   height: 48px;
 }
-.board-content .search-container .search-input-icon {
+.board-content .board-header .search-container .search-input-icon {
   height: 24px;
   transform: translateX(-100%);
   padding: 6px 12px 6px 12px;
@@ -411,7 +415,7 @@
      object-fit: contain;
   cursor: pointer;
 }
-.board-content .search-container .btn-add-task {
+.board-content .board-header .search-container .btn-add-task {
   background-color: #2A3647;
   color: white;
   padding: 10px 32px;
@@ -420,13 +424,34 @@
   border-radius: 10px;
   border: none;
   padding-left: 16px;
+  height: 48px;
 }
-.board-content .search-container .btn-add-task:hover {
+.board-content .board-header .search-container .btn-add-task:hover {
   background-color: #29ABE2;
 }
-.board-content .search-container .add-task-plus-icon {
+.board-content .board-header .search-container .add-task-plus-icon {
   transform: translateX(-100%);
   padding-right: 6px;
+}
+.board-content .board-tasks {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  margin-top: 56px;
+}
+.board-content .board-tasks .tasks {
+  width: 25%;
+}
+.board-content .board-tasks .tasks .task-header {
+  display: flex;
+  justify-content: space-between;
+  height: 32px;
+}
+.board-content .board-tasks .tasks .task-header h2 {
+  margin: unset;
+}
+.board-content .board-tasks .tasks .task-header img {
+  cursor: pointer;
 }
 
 body {

@@ -1,46 +1,77 @@
 .board-content {
-    display: flex;
-    justify-content: space-between;
     margin-left: 200px;
     padding-left: 56px;
     padding-top: 56px;
+    padding-right: 56px;
 
-    h1 {
-        font-size: 48px;
-        margin: unset;
+    .board-header {
+        display: flex;
+        justify-content: space-between;
+
+        h1 {
+            font-size: 48px;
+            margin: unset;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            $heightInput: 48px;
+            $paddingIcon: 6px;
+
+
+            #search-input {
+                @include inputForm(none, none, none);
+                padding-right: 56px;
+                height: $heightInput;
+            }
+
+            .search-input-icon {
+                height: calc($heightInput - 4 * $paddingIcon);
+                transform: translateX(calc(-100%));
+                padding: $paddingIcon 2*$paddingIcon $paddingIcon 2*$paddingIcon;
+                border-left: 2px solid #D1D1D1;
+                object-fit: contain;
+                cursor: pointer;
+            }
+
+            .btn-add-task {
+                @include button-darkblue();
+                padding-left: 16px;
+                height: $heightInput;
+            }
+
+            .add-task-plus-icon {
+                transform: translateX(calc(-100%));
+                padding-right: $paddingIcon;
+            }
+        }
     }
 
-    .search-container {
+    .board-tasks {
         display: flex;
-        align-items: center;
-        $heightInput: 48px;
-        $paddingIcon: 6px;
-        
+        width: 100%;
+        gap: 16px;
+        margin-top: 56px;
 
-        #search-input {
-            @include inputForm(none, none, none);
-            padding-right: 56px;
-            height: $heightInput;
-        }
 
-        .search-input-icon {
-            height: calc($heightInput - 4 * $paddingIcon);
-            transform: translateX(calc(-100%));
-            padding: $paddingIcon 2*$paddingIcon $paddingIcon 2*$paddingIcon; 
-            border-left: 2px solid #D1D1D1;
-            object-fit: contain;
-            cursor: pointer;
-        }
+        .tasks {
+            width: 25%;
 
-        .btn-add-task {
-            @include button-darkblue();
-            padding-left: 16px;
-        }
+            .task-header {
+                display: flex;
+                justify-content: space-between;
+                height: 32px;
 
-        .add-task-plus-icon {
-            transform: translateX(calc(-100%));
-            padding-right: $paddingIcon;
+                h2 {
+                    margin: unset;
+                }
+
+                img {
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
-

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,25 +10,58 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="/css/board.css">
     <script src="./js/includeHTML.js"></script>
     <script src="./js/board.js"></script>
 
 
 </head>
+
 <body onload="includeHTML()">
     <div w3-include-html="desktop_template.html"></div>
 
     <div class="board-content">
-        <h1>Board</h1>
-        <div class="search-container">
-            <input type="search" id="search-input" placeholder="Find Task">
-            <img src="./assets/img/search-icon.png" class="search-input-icon">
-            <button class="btn-add-task">Add Task</button>
-            <img src="./assets/img/add-task-plus-icon.png" class="add-task-plus-icon">
+        <div class="board-header">
+            <h1>Board</h1>
+            <div class="search-container">
+                <input type="search" id="search-input" placeholder="Find Task">
+                <img src="./assets/img/search-icon.png" class="search-input-icon">
+                <button class="btn-add-task">Add Task</button>
+                <img src="./assets/img/add-task-plus-icon.png" class="add-task-plus-icon">
+            </div>
         </div>
+
+        <div class="board-tasks">
+            <div class="tasks">
+                <div class="task-header">
+                    <h2>To do</h2>
+                    <img src="./assets/img/plus-button.png">
+                </div>
+                <div>
+
+                </div>
+            </div>
+            <div class="tasks">
+                <div class="task-header">
+                    <h2>To do</h2>
+                    <img src="./assets/img/plus-button.png">
+                </div>
+            </div>
+            <div class="tasks">
+                <div class="task-header">
+                    <h2>To do</h2>
+                    <img src="./assets/img/plus-button.png">
+                </div>
+            </div>
+            <div class="tasks">
+                <div class="task-header">
+                    <h2>To do</h2>
+                    <img src="./assets/img/plus-button.png">
+                </div>
+            </div>
+        </div>
+
     </div>
-    
-   
+
 </body>
+
 </html>
