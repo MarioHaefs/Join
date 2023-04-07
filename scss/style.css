@@ -374,17 +374,8 @@
 }
 
 .legal-notice-content {
-  margin-left: 300px;
-  text-align: left;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  position: relative;
-}
-
-.arrow-black {
-  position: absolute;
-  right: 10%;
-  cursor: pointer;
+  margin-left: 200px;
+  padding-left: 10px;
 }
 
 .board-content {
@@ -456,7 +447,6 @@
   display: flex;
   justify-content: space-between;
   height: 32px;
-  margin-bottom: 32px;
 }
 .board-content .board-tasks .tasks .task-header h3 {
   margin: unset;
@@ -467,7 +457,7 @@
 .board-content .board-tasks .tasks .task {
   display: flex;
   flex-direction: column;
-  background-color: #F6F7F8;
+  background-color: blue;
   border-radius: 6px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
