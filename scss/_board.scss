@@ -87,12 +87,37 @@
                     margin: 8px 0px;
                 }
 
+                span {
+                    color: $gray;
+                }
+
                 .task-topic {
                     padding: 4px 18px;
+                    margin-bottom: 16px;
                     width: fit-content;
                     border-radius: 6px;
                     color: white;
                     background-color: orangered;
+                }
+
+                .task-subtasks {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    min-height: 20px;
+                    width: 100%;
+                    margin: 8px 0;
+
+                    .task-subtasks-line {
+                        height: 4px;
+                        width: calc(100% - 60px);
+                        background-color: #f4f4f4;
+                    }
+
+                    span {
+                        font-size: small;
+                        color: black;
+                    }
                 }
             }
         }

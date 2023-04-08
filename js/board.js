@@ -19,6 +19,9 @@ function renderSingleTask() {
         <div class="task" id="task1">
             ${htmlTaskTopic()}
             ${htmlTaskTitle()}
+            ${htmlTaskDescription()}
+            ${htmlTaskSubtasks()}
+            ${htmlTaskEditors()}
         </div>
     `;
 }
@@ -39,4 +42,25 @@ function htmlTaskTitle() {
     return `
         <h4>Titel</h4>
     `;
+}
+
+function htmlTaskDescription() {
+    return `
+        <span>
+            Aufgabenbeschreibung
+        </span>
+    `;
+}
+
+function htmlTaskSubtasks() {
+    return `
+        <div class="task-subtasks">
+            <div class="task-subtasks-line"></div>
+            <span>1/2 Done</span>
+        </div>
+    `;
+}
+
+function htmlTaskEditors() {
+    //todo
 }

@@ -466,13 +466,34 @@
 .board-content .board-tasks .tasks .task h4 {
   margin: 8px 0px;
 }
+.board-content .board-tasks .tasks .task span {
+  color: #a8a8a8;
+}
 .board-content .board-tasks .tasks .task .task-topic {
   padding: 4px 18px;
+  margin-bottom: 16px;
   width: -moz-fit-content;
   width: fit-content;
   border-radius: 6px;
   color: white;
   background-color: orangered;
+}
+.board-content .board-tasks .tasks .task .task-subtasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 20px;
+  width: 100%;
+  margin: 8px 0;
+}
+.board-content .board-tasks .tasks .task .task-subtasks .task-subtasks-line {
+  height: 4px;
+  width: calc(100% - 60px);
+  background-color: #f4f4f4;
+}
+.board-content .board-tasks .tasks .task .task-subtasks span {
+  font-size: small;
+  color: black;
 }
 
 body {
