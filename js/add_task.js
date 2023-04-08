@@ -1,9 +1,11 @@
 let prio;
-let category;
-let categorys = [];
-let colors = [];
+let categorys = {
+    'category': [],
+    'color': []
+};
 let menuOpen = false;
 let color;
+let taskCategory
 
 function setPrio(x) {
     if (x == prio) removePrio();
@@ -33,15 +35,40 @@ function removePrio() {
 
 
 function showNewCategory() {
+    loadData();
     if (!menuOpen) {
+        document.getElementById('categorys').style.borderBottom = `1px solid #D1D1D1`;
         document.getElementById('dropDown').classList.add('drop_down_open');
-        document.getElementById('categorys').innerHTML = `<div onclick="inputCategory()" class="new_category">New category</div>`;
         menuOpen = true;
+        renderCategorys();
     } else {
+        document.getElementById('categorys').innerHTML = ''
         document.getElementById('dropDown').classList.remove('drop_down_open');
-        document.getElementById('categorys').innerHTML = ``;
+        document.getElementById('categorys').style.borderBottom = `0`;
         menuOpen = false;
     }
+}
+
+
+function renderCategorys() {
+    document.getElementById('categorys').innerHTML = ''
+    document.getElementById('categorys').innerHTML = `<div class="render_categorys" onclick="inputCategory()">New category</div>`;
+    for (let i = 0; i < categorys['color'].length; i++) {
+        let clr = categorys['color'][i];
+        let category = categorys['category'][i];
+        renderCategorysHTML(clr, i, category);
+    }
+};
+
+
+function deleteCategory(i) {
+    if(categorys['category'][i] == taskCategory) {
+        document.getElementById('dropDown').innerHTML = `Select task category`;
+    }
+    categorys['category'].splice(i, 1);
+    categorys['color'].splice(i, 1);
+    saveInLocalStorage();
+    renderCategorys();
 }
 
 
@@ -70,13 +97,34 @@ function addNewCategory() {
     if (categoryValue.length < 1 || !color) {
         alert('wird ersetzt')
     } else {
-        colors.push(color);
-        categorys.push(categoryValue);
-        category = categoryValue;
-        showCategoryColorHTML(category, color);
+        categorys['color'].push(color);
+        categorys['category'].push(categoryValue);
+        saveInLocalStorage();
+        taskCategory = categoryValue;
+        showCategoryColorHTML();
         menuOpen = false;
     }
 };
+
+
+function setCategory(ctgry, clr) {
+    color = clr;
+    taskCategory = ctgry;
+    showCategoryColorHTML();
+    menuOpen = false;
+};
+
+
+function saveInLocalStorage() {
+    let arrayAsString = JSON.stringify(categorys);
+    localStorage.setItem('category', arrayAsString);
+}
+
+
+function loadData() {
+    let arrayAsString = localStorage.getItem('category')
+    categorys = JSON.parse(arrayAsString);
+}
 
 
 

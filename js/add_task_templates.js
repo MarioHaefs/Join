@@ -1,13 +1,11 @@
 function showInputCategoryHTML() {
     return document.getElementById('categoryBox').innerHTML = `
-    <div class="category_name_box">
-                <form>
-                    <input class="input_category_name" type="text" placeholder="New category name" id="categoryValue" required>
+    <div class="category_name_box">  
+                    <input class="input_category_name" type="text" placeholder="New category name" id="categoryValue" required maxlength="29">
                     <div class="x✔">
                         <div onclick="clearInputField()" class="x"><img src="assets/img/x.svg" alt=""></div>
                         <button onclick="addNewCategory()"><img class="hook" src="assets/img/haken.png"></button>
                     </div>
-                </form>
                 </div>
                 <div class="color_points">
                     <div id="#8AA4FF" class="color" onclick="setColor('#8AA4FF')" style="background-color: #8AA4FF;"></div>
@@ -26,18 +24,30 @@ function showCategoryHTML() {
                     Select task category
                     <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="showNewCategory()">
                 </div>
-                <div id="categorys"></div>`;
+                <div id="categorys" class="render_categorys_box"></div>`;
 };
 
 
-function showCategoryColorHTML(cgry, clr) {
+function showCategoryColorHTML() {
     return document.getElementById('categoryBox').innerHTML = `
     <div class="drop_down" id="dropDown">
                     <div class="category_color">
-                        ${cgry}
-                        <div  class="color2" style="background-color: ${clr};"></div>
+                        ${taskCategory}
+                        <div  class="color2" style="background-color: ${color};"></div>
                     </div>
                     <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="showNewCategory()">
                 </div>
-                <div id="categorys"></div>`;
+                <div id="categorys" class="render_categorys_box"></div>`;
+};
+
+
+function renderCategorysHTML(clr, i, category) {
+    document.getElementById('categorys').innerHTML += `
+        <div class="render_categorys">
+                   <div class="set_category" onclick="setCategory('${category}', '${clr}')">
+                        ${category}
+                        <div  class="color2" style="background-color: ${clr};"></div>
+                    </div>
+                        <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
+                    </div>`;
 };

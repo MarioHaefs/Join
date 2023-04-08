@@ -3,6 +3,32 @@
     margin-left: 250px;
 }
 
+textarea {
+    resize: none;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #dee1e6 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #dee1e6;
+    border-radius: 10px;
+
+}
+
 button {
     background-color: white;
     border: none;
@@ -30,7 +56,6 @@ h1 {
 }
 
 .form_right {
-    position: relative;
     display: flex;
     flex-direction: column;
     margin-left: 60px;
@@ -91,6 +116,7 @@ span {
     position: relative;
     background-color: white;
     padding: 20px;
+    padding-left: 60px;
     box-sizing: border-box;
     border: 1px solid #D1D1D1;
     width: 422px;
@@ -101,7 +127,6 @@ span {
 
 .drop_down_open {
     margin-bottom: 0;
-    border-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -114,31 +139,57 @@ span {
     height: 16px;
 }
 
-.new_category {
-    font-size: 21px;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    position: relative;
-    background-color: white;
-    padding: 20px;
-    box-sizing: border-box;
-    border: 1px solid #D1D1D1;
-    width: 422px;
-    height: 51px;
-    border-top: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin-bottom: 34px;
-    transition: 200ms;
+.delete_image {
+    z-index: 10;
+    position: absolute;
+    left: 370px;
+    top: 14px;
+    width: 24px;
+    height: 24px;
 }
 
-.new_category:hover {
+.delete_image:hover {
+    filter: brightness(0) invert(1);
+    border: 2px solid white;
+    border-radius: 100%;
+}
+
+.render_categorys:hover {
     cursor: pointer;
     background-color: #AFAFAF;
     transition: 200ms;
+}
+
+.render_categorys_box {
+    overflow: auto;
+    box-sizing: border-box;
+    max-height: 153px;
+    margin-bottom: 34px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-right: 1px solid #D1D1D1;
+}
+
+.render_categorys {
+    position: relative;
+    border-left: 1px solid #D1D1D1;
+    border-top: 1px solid #D1D1D1;
+    font-size: 21px;
+    font-weight: 400;
+    background-color: white;
+    padding: 20px;
+    padding-left: 60px;
+    box-sizing: border-box;
+    height: 51px;
+    display: flex;
+        align-items: center;
+}
+
+.set_category {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 310px;
 }
 
 .category_name_box {
@@ -202,6 +253,8 @@ span {
 }
 
 .color2 {
+    position: absolute;
+    left: 10px;
     width: 20px;
     height: 20px;
     border-radius: 100%;
@@ -257,8 +310,7 @@ span {
 .prio_button:hover {
     transition: 500ms;
     cursor: pointer;
-    -webkit-box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.3);
-    box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.41)
 }
 
 .prio_button_urgent {
@@ -304,7 +356,7 @@ span {
 
 .clear_create_task {
     position: absolute;
-    bottom: 0;
+    bottom: 60px;
     width: 422px;
     display: flex;
     justify-content: flex-end;
@@ -329,6 +381,7 @@ span {
     color: #29ABE2;
     border-color: #29ABE2;
     transition: 300ms;
+    box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.41)
 }
 
 .create_button {
@@ -348,4 +401,5 @@ span {
     cursor: pointer;
     background: #29ABE2;
     transition: 300ms;
+    box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.41)
 }
