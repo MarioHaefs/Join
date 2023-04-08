@@ -424,14 +424,14 @@
   border-radius: 10px;
   border: none;
   padding-left: 16px;
+  padding-right: 16px;
   height: 48px;
 }
 .board-content .board-header .search-container .btn-add-task:hover {
   background-color: #29ABE2;
 }
 .board-content .board-header .search-container .add-task-plus-icon {
-  transform: translateX(-100%);
-  padding-right: 6px;
+  margin-left: 6px;
 }
 .board-content .board-tasks {
   display: flex;

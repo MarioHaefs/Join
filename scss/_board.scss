@@ -39,12 +39,12 @@
             .btn-add-task {
                 @include button-darkblue();
                 padding-left: 16px;
+                padding-right: 16px;
                 height: $heightInput;
             }
 
             .add-task-plus-icon {
-                transform: translateX(calc(-100%));
-                padding-right: $paddingIcon;
+                margin-left: 6px;
             }
         }
     }
