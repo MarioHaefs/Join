@@ -42,7 +42,7 @@ function showCategoryColorHTML() {
 
 
 function renderCategorysHTML(clr, i, category) {
-    document.getElementById('categorys').innerHTML += `
+   return document.getElementById('categorys').innerHTML += `
         <div class="render_categorys">
                    <div class="set_category" onclick="setCategory('${category}', '${clr}')">
                         ${category}
@@ -50,4 +50,13 @@ function renderCategorysHTML(clr, i, category) {
                     </div>
                         <img class="delete_image" src="assets/img/x.svg" onclick="deleteCategory(${i})">
                     </div>`;
+};
+
+
+function renderSubtasHTML(subTask, i) {
+   return document.getElementById('subtaskBox').innerHTML += `
+        <div class="subtask_child">
+            <input class="input_subtask" type="checkbox"> ${subTask}
+            <img src="assets/img/x.svg" onclick="deleteSubtask(${i})">
+        </div>`;
 };

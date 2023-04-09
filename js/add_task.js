@@ -6,6 +6,7 @@ let categorys = {
 let menuOpen = false;
 let color;
 let taskCategory
+let subTasks = [];
 
 function setPrio(x) {
     if (x == prio) removePrio();
@@ -62,7 +63,7 @@ function renderCategorys() {
 
 
 function deleteCategory(i) {
-    if(categorys['category'][i] == taskCategory) {
+    if (categorys['category'][i] == taskCategory) {
         document.getElementById('dropDown').innerHTML = `Select task category`;
     }
     categorys['category'].splice(i, 1);
@@ -115,16 +116,54 @@ function setCategory(ctgry, clr) {
 };
 
 
+function addSubtask() {
+    subtaskValue = document.getElementById('subTask').value
+    if (subtaskValue.length < 1) {
+        alert('wird ersetzt');
+    } else {
+        document.getElementById('subTask').value = '';
+        document.getElementById('subtaskBox').innerHTML = '';
+        subTasks.push(subtaskValue);
+        for (let i = 0; i < subTasks.length; i++) {
+            let subTask = subTasks[i];
+            renderSubtasHTML(subTask, i);
+        }
+    }
+};
+
+
+function deleteSubtask(i) {
+    subTasks.splice(i, 1);
+    document.getElementById('subtaskBox').innerHTML = '';
+    for (let i = 0; i < subTasks.length; i++) {
+        let subTask = subTasks[i];
+        renderSubtasHTML(subTask, i);
+    }
+};
+
+
+function clearAll() {
+    document.getElementById('description').value = '';
+    document.getElementById('title').value = '';
+    document.getElementById('subtaskBox').innerHTML = '';
+    document.getElementById('dropDown').innerHTML = `Select task category`;
+    color = '';
+    taskCategory = '';
+    removePrio();
+    subTasks.length = 0;      
+}
+
+
 function saveInLocalStorage() {
     let arrayAsString = JSON.stringify(categorys);
     localStorage.setItem('category', arrayAsString);
-}
+};
 
 
 function loadData() {
     let arrayAsString = localStorage.getItem('category')
     categorys = JSON.parse(arrayAsString);
-}
+};
 
 
 

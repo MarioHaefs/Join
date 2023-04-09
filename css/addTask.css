@@ -26,7 +26,11 @@ textarea {
 *::-webkit-scrollbar-thumb {
     background-color: #dee1e6;
     border-radius: 10px;
+}
 
+[type="checkbox"] {
+    width: 16px;
+    height: 16px;
 }
 
 button {
@@ -182,7 +186,7 @@ span {
     box-sizing: border-box;
     height: 51px;
     display: flex;
-        align-items: center;
+    align-items: center;
 }
 
 .set_category {
@@ -402,4 +406,33 @@ span {
     background: #29ABE2;
     transition: 300ms;
     box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.41)
+}
+
+.input_subtask {
+    margin: 0;
+    margin-right: 20px;
+}
+
+.subtask_child {
+    position: relative;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.subtask_child img {
+    position: absolute;
+    left: 400px;
+    top: 1px;
+}
+
+.subtask_child img:hover {
+    cursor: pointer;
+}
+
+.subtask_box {
+    width: 435px;
+    min-height: 150px ;
+    overflow: auto;
 }

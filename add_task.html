@@ -23,9 +23,9 @@
     <div class="form">
         <div class="form_left">
             <span>Title</span>
-            <input type="text" placeholder="Enter a title">
+            <input type="text" placeholder="Enter a title" id="title">
             <span>Description</span>
-            <textarea placeholder="Enter a Description"></textarea>
+            <textarea placeholder="Enter a Description" id="description"></textarea>
             <span>Category</span>
             <div id="categoryBox">
                 <div class="drop_down" id="dropDown">
@@ -54,11 +54,12 @@
             </div>
             <span>Subtasks</span>
             <div class="subtasks">
-                <input type="text" placeholder="Add  new subtask">
-                <img class="plus_image" src="assets/img/plus.svg" alt="">
+                <input type="text" placeholder="Add new subtask" id="subTask" maxlength="29">
+                <img class="plus_image" src="assets/img/plus.svg" onclick="addSubtask()">
             </div>
+            <div class="subtask_box" id="subtaskBox"></div>
             <div class="clear_create_task">
-                <div class="clear_button">Clear x</div>
+                <div class="clear_button" onclick="clearAll()">Clear x</div>
                 <div class="create_button">Create Task ✔</div>
             </div>
         </div>
