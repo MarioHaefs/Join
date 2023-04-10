@@ -1,11 +1,8 @@
 let prio;
+let contacts = [];
 let title;
 let description;
 let date;
-let categorys = {
-    'category': [],
-    'color': []
-};
 let menuOpen = false;
 let color;
 let taskCategory
@@ -20,8 +17,12 @@ let task = {
     'prio': prio,
     'subtasks': subTasks
 };
+let categorys = {
+    'category': [],
+    'color': []
+};
 
-setURL('http://gruppe-5009.developerakademie.net/smallest_backend_ever');
+setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 
 function setPrio(x) {
     if (x == prio) removePrio();
@@ -51,7 +52,6 @@ function removePrio() {
 
 
 function showNewCategory() {
-    loadData();
     if (!menuOpen) {
         document.getElementById('categorys').style.borderBottom = `1px solid #D1D1D1`;
         document.getElementById('dropDown').classList.add('drop_down_open');
@@ -69,7 +69,7 @@ function showNewCategory() {
 function renderCategorys() {
     document.getElementById('categorys').innerHTML = ''
     document.getElementById('categorys').innerHTML = `<div class="render_categorys" onclick="inputCategory()">New category</div>`;
-    for (let i = 0; i < categorys['color'].length; i++) {
+    for (let i = 0; i < categorys['category'].length; i++) {
         let clr = categorys['color'][i];
         let category = categorys['category'][i];
         renderCategorysHTML(clr, i, category);
@@ -169,21 +169,21 @@ function clearAll() {
 };
 
 
-function saveInLocalStorage() {
-    let arrayAsString = JSON.stringify(categorys);
-    localStorage.setItem('category', arrayAsString);
+async function saveInLocalStorage() {
+    await backend.setItem('categorys', JSON.stringify(categorys));
 };
 
 
-function loadData() {
-    let arrayAsString = localStorage.getItem('category')
-    categorys = JSON.parse(arrayAsString);
+async function loadData() {
+    await downloadFromServer();
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    categorys = JSON.parse(backend.getItem('categorys')) || [];
 };
 
 
 function createTask() {
     title = document.getElementById('title').value;
-    description = document.getElementById('description').value; 
+    description = document.getElementById('description').value;
     date = document.getElementById('date').value;
 }
 
