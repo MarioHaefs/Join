@@ -149,9 +149,9 @@ function clearAll() {
     document.getElementById('dropDown').innerHTML = `Select task category`;
     color = '';
     taskCategory = '';
-    removePrio();
-    subTasks.length = 0;      
-}
+    subTasks.length = 0;
+    removePrio();       
+};
 
 
 function saveInLocalStorage() {
