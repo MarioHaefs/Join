@@ -8,6 +8,7 @@
     <title>Join</title>
 
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
     <script src="./js/add_task.js"></script>
     <script src="./js/add_task_templates.js"></script>
@@ -23,7 +24,7 @@
     <div class="form">
         <div class="form_left">
             <span>Title</span>
-            <input type="text" placeholder="Enter a title" id="title">
+            <input type="text" placeholder="Enter a title" id="title" maxlength="29">
             <span>Description</span>
             <textarea placeholder="Enter a Description" id="description"></textarea>
             <span>Category</span>
@@ -42,7 +43,7 @@
         </div>
         <div class="form_right">
             <span>Due date</span>
-            <input type="date">
+            <input type="date" id="date">
             <span>Prio</span>
             <div class="prio">
                 <div class="prio_button" id="prioUrgent" onclick="setPrio('urgent')">Urgent<img
@@ -60,7 +61,7 @@
             <div class="subtask_box" id="subtaskBox"></div>
             <div class="clear_create_task">
                 <div class="clear_button" onclick="clearAll()">Clear x</div>
-                <div class="create_button">Create Task ✔</div>
+                <div class="create_button" onclick="createTask()">Create Task ✔</div>
             </div>
         </div>
     </div>

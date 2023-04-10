@@ -1,4 +1,7 @@
 let prio;
+let title;
+let description;
+let date;
 let categorys = {
     'category': [],
     'color': []
@@ -7,6 +10,18 @@ let menuOpen = false;
 let color;
 let taskCategory
 let subTasks = [];
+let task = {
+    'title': title,
+    'description': description,
+    'category': taskCategory,
+    'color': color,
+    'contacts': [],
+    'date': date,
+    'prio': prio,
+    'subtasks': subTasks
+};
+
+setURL('http://gruppe-5009.developerakademie.net/smallest_backend_ever');
 
 function setPrio(x) {
     if (x == prio) removePrio();
@@ -150,7 +165,7 @@ function clearAll() {
     color = '';
     taskCategory = '';
     subTasks.length = 0;
-    removePrio();       
+    removePrio();
 };
 
 
@@ -164,6 +179,13 @@ function loadData() {
     let arrayAsString = localStorage.getItem('category')
     categorys = JSON.parse(arrayAsString);
 };
+
+
+function createTask() {
+    title = document.getElementById('title').value;
+    description = document.getElementById('description').value; 
+    date = document.getElementById('date').value;
+}
 
 
 
