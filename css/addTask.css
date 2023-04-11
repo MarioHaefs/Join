@@ -126,7 +126,6 @@ span {
     width: 422px;
     height: 51px;
     border-radius: 10px;
-    margin-bottom: 34px;
 }
 
 .drop_down_open {
@@ -165,9 +164,10 @@ span {
 }
 
 .render_categorys_box {
+    width: 422px;
     overflow: auto;
     box-sizing: border-box;
-    max-height: 153px;
+    max-height: 155px;
     margin-bottom: 34px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -464,4 +464,23 @@ span {
     width: 10px;
     height: 10px;
     background-color: black;
+}
+
+.initials_box {
+    width: 422px;
+    display: flex;  
+    flex-wrap: wrap;
+    padding-left: 15px;
+}
+
+.initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    background-color: #29ABE2;
+    border-radius: 100%;
 }

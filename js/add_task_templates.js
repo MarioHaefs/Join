@@ -70,7 +70,4 @@ function renderContactsHTML(i, userName) {
                     <div id="Checkbox${i}"></div>
                 </div>
             </div>`;
-    if (initials['mail'].includes(contacts[i]['mail'])) {
-        document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
-    }
 };

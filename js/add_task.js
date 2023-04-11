@@ -28,7 +28,11 @@ let categorys = {
     'color': []
 };
 
+//address of the backend server
+
 setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
+
+//sets the priority of the task
 
 function setPrio(x) {
     if (x == prio) removePrio();
@@ -49,6 +53,8 @@ function setPrio(x) {
     }
 };
 
+//remove the class properties from all prio-buttons
+
 function removePrio() {
     document.getElementById('prioUrgent').classList.remove('prio_button_urgent');
     document.getElementById('prioMedium').classList.remove('prio_button_medium');
@@ -56,6 +62,7 @@ function removePrio() {
     prio = '';
 };
 
+//opens or close the category menu. When opened, the existing categories are displayed
 
 function openCategory() {
     if (!menuOpen) {
@@ -68,16 +75,14 @@ function openCategory() {
     }
 }
 
+//opens or close the contacts menu. When opened, the existing contacts are displayed
 
 function openContacts() {
     if (!menuContactsOpen) {
         document.getElementById('contacts').innerHTML = '';
         openMenu('contacts', 'dropDownContacts');
         menuContactsOpen = true;
-        for (let i = 0; i < contacts.length; i++) {
-            let userName = contacts[i]['name'];
-            renderContactsHTML(i, userName);
-        }
+        renderContacts();
     } else {
         closeMenu('contacts', 'dropDownContacts')
         showInitials();
@@ -85,6 +90,34 @@ function openContacts() {
     }
 };
 
+//the individual contacts are rendered in the contacts-menu
+
+function renderContacts() {
+    for (let i = 0; i < contacts.length; i++) {
+        let userName = contacts[i]['name'];
+        renderContactsHTML(i, userName);
+        if (initials['mail'].includes(contacts[i]['mail'])) {
+            document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
+        }
+    }
+};
+
+//deletes the selected contacts and closes the contacts menu if it's open
+
+function clearContacts() {
+    initials['initials'].length = 0;
+    initials['mail'].length = 0;
+    showInitials();
+    if (menuContactsOpen) {
+        closeMenu('contacts', 'dropDownContacts')
+        menuContactsOpen = false;
+    }
+};
+
+//*
+//*checks whether the contact has already been selected. if so, the contact is deleted and the checkbox is set to not active
+//*if not, the checkbox is active and the contact is selected
+//*
 
 function setContacts(i) {
     let index = initials['mail'].indexOf(contacts[i]['mail'])
@@ -101,6 +134,7 @@ function setContacts(i) {
     }
 };
 
+//renders the initials of the selected contact on the screen
 
 function showInitials() {
     document.getElementById('initials').innerHTML = '';
@@ -113,12 +147,14 @@ function showInitials() {
     }
 }
 
+//open the contact- or category menu
 
 function openMenu(id1, id2) {
     document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
     document.getElementById(id2).classList.add('drop_down_open');
 }
 
+//close the contact- or category menu
 
 function closeMenu(id1, id2) {
     document.getElementById(id1).innerHTML = ''
@@ -126,6 +162,7 @@ function closeMenu(id1, id2) {
     document.getElementById(id1).style.borderBottom = `0`;
 };
 
+//renders the categories into the category menu
 
 function renderCategorys() {
     document.getElementById('categorys').innerHTML = ''
@@ -137,6 +174,7 @@ function renderCategorys() {
     }
 };
 
+//remove the category from the category menu
 
 function deleteCategory(i) {
     if (categorys['category'][i] == taskCategory) {
@@ -148,17 +186,20 @@ function deleteCategory(i) {
     renderCategorys();
 }
 
+//renders the input field for a new category
 
 function inputCategory() {
     showInputCategoryHTML();
 }
 
+//sets the category menu to its initial state
 
 function clearInputField() {
     showCategoryHTML();
     menuOpen = false;
 };
 
+//sets the color of the category
 
 function setColor(clr) {
     if (color) {
@@ -168,6 +209,7 @@ function setColor(clr) {
     color = clr;
 };
 
+//saves a new category
 
 function addNewCategory() {
     let categoryValue = document.getElementById('categoryValue').value;
@@ -183,6 +225,7 @@ function addNewCategory() {
     }
 };
 
+//renders the selected category into the input field
 
 function setCategory(ctgry, clr) {
     color = clr;
@@ -191,6 +234,7 @@ function setCategory(ctgry, clr) {
     menuOpen = false;
 };
 
+//render a subtask to the screen
 
 function addSubtask() {
     subtaskValue = document.getElementById('subTask').value
@@ -207,6 +251,7 @@ function addSubtask() {
     }
 };
 
+//remove the subtask from the screen
 
 function deleteSubtask(i) {
     subTasks.splice(i, 1);
@@ -217,6 +262,7 @@ function deleteSubtask(i) {
     }
 };
 
+// clear all inputfields en remove selected categorys and contacts
 
 function clearAll() {
     document.getElementById('description').value = '';
@@ -225,28 +271,33 @@ function clearAll() {
     color = '';
     taskCategory = '';
     subTasks.length = 0;
+    initials['initials'].length = 0;
     clearInputField();
     removePrio();
+    clearContacts();
 };
 
-
-async function saveInLocalStorage() {
-    await backend.setItem('categorys', JSON.stringify(categorys));
-};
-
-
-async function loadData() {
-    await downloadFromServer();
-    contacts = JSON.parse(backend.getItem('contacts')) || [];
-    categorys = JSON.parse(backend.getItem('categorys')) || [];
-};
-
+// fill the task JSON
 
 function createTask() {
     title = document.getElementById('title').value;
     description = document.getElementById('description').value;
     date = document.getElementById('date').value;
 }
+
+//save content on the backend server
+
+async function saveInLocalStorage() {
+    await backend.setItem('categorys', JSON.stringify(categorys));
+};
+
+//load content from the backend server
+
+async function loadData() {
+    await downloadFromServer();
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    categorys = JSON.parse(backend.getItem('categorys')) || [];
+};
 
 
 
