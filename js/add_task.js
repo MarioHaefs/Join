@@ -32,6 +32,12 @@ let categorys = {
 
 setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 
+//displays the current date
+
+function getDate() {
+    document.getElementById('date').valueAsDate = new Date();
+};
+
 //sets the priority of the task
 
 function setPrio(x) {
@@ -178,7 +184,11 @@ function renderCategorys() {
 
 function deleteCategory(i) {
     if (categorys['category'][i] == taskCategory) {
-        document.getElementById('dropDown').innerHTML = `Select task category`;
+        document.getElementById('dropDown').innerHTML = `
+        Select task category
+        <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
+        `;
+        taskCategory = undefined;
     }
     categorys['category'].splice(i, 1);
     categorys['color'].splice(i, 1);
@@ -239,7 +249,7 @@ function setCategory(ctgry, clr) {
 function addSubtask() {
     subtaskValue = document.getElementById('subTask').value
     if (subtaskValue.length < 1) {
-        alert('wird ersetzt');
+        showNotice('pleaseEnterName');
     } else {
         document.getElementById('subTask').value = '';
         document.getElementById('subtaskBox').innerHTML = '';
@@ -280,9 +290,39 @@ function clearAll() {
 // fill the task JSON
 
 function createTask() {
-    title = document.getElementById('title').value;
-    description = document.getElementById('description').value;
-    date = document.getElementById('date').value;
+    if (allFilled()) {
+        showTasktoBoardBox();
+        title = document.getElementById('title').value;
+        description = document.getElementById('description').value;
+        date = document.getElementById('date').value;
+    } else {
+        showNotice('missing');
+    }
+};
+
+
+function allFilled() {
+    if (document.getElementById('title').value.length > 0 &&
+        document.getElementById('description').value.length > 0 &&
+        taskCategory &&
+        initials['initials'].length > 0 &&
+        prio) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+
+function showTasktoBoardBox() {
+    document.getElementById('addBordBox').classList.add('addBord_box_active');
+};
+
+
+function showNotice(id) {
+    document.getElementById(id).classList.remove('addBord_box_inactive')
+    document.getElementById(id).classList.add('addBord_box_active');
+    setTimeout(() => document.getElementById(id).classList.add('addBord_box_inactive'), 2000);
 }
 
 //save content on the backend server

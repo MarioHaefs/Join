@@ -16,7 +16,7 @@
 
 </head>
 
-<body onload="includeHTML(), loadData()">
+<body onload="includeHTML(), loadData(), getDate()">
     <div w3-include-html="desktop_template.html"></div>
     <div class="head">
         <h1>Add Task</h1>
@@ -27,6 +27,9 @@
             <input type="text" placeholder="Enter a title" id="title" maxlength="29">
             <span>Description</span>
             <textarea placeholder="Enter a Description" id="description"></textarea>
+
+            <!---------------------------------------------------------Category Menu--------------------------------------------------------------------------->
+
             <span>Category</span>
             <div id="categoryBox">
                 <div class="drop_down" id="dropDown">
@@ -35,6 +38,9 @@
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>
             </div>
+
+            <!-------------------------------------------------------------Contacts Menu----------------------------------------------------------------------->
+
             <span>Assigned to</span>
             <div class="drop_down" id="dropDownContacts">
                 Select contacts to assign
@@ -42,10 +48,30 @@
             </div>
             <div id="contacts" class="render_categorys_box"></div>
             <div id="initials" class="initials_box"></div>
+
+            <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
+            <div class="addBord_box" id="addBordBox">
+                Task added to Board
+                <img src="assets/img/board.png" class="add_board_image">
+            </div>
+            <div class="addBord_box" id="pleaseEnterName">
+                Please enter a Task Name
+            </div>
+            <div class="addBord_box" id="missing">
+                Something is missing
+            </div>
+            <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
         </div>
+
         <div class="form_right">
+
+            <!-------------------------------------------------------------input Date------------------------------------------------------------------------->
+
             <span>Due date</span>
-            <input type="date" id="date">
+            <input type="date" id="date" autofocus>
+
+            <!-------------------------------------------------------------input Priority--------------------------------------------------------------------->
+
             <span>Prio</span>
             <div class="prio">
                 <div class="prio_button" id="prioUrgent" onclick="setPrio('urgent')">Urgent<img
@@ -55,6 +81,9 @@
                 <div class="prio_button" id="prioLow" onclick="setPrio('low')">Low <img src="assets/img/prioLow.png">
                 </div>
             </div>
+
+            <!-------------------------------------------------------------input Subtasks--------------------------------------------------------------------->
+
             <span>Subtasks</span>
             <div class="subtasks">
                 <input type="text" placeholder="Add new subtask" id="subTask" maxlength="29">
