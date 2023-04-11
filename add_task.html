@@ -16,17 +16,23 @@
 
 </head>
 
-<body onload="includeHTML(), loadData(), getDate()">
+<body onload="includeHTML(), loadData(), getDate(), hideNotices()" id="body">
     <div w3-include-html="desktop_template.html"></div>
     <div class="head">
         <h1>Add Task</h1>
     </div>
     <div class="form">
         <div class="form_left">
+
+            <!---------------------------------------------------------Title Input----------------------------------------------------------------------------->
+
             <span>Title</span>
-            <input type="text" placeholder="Enter a title" id="title" maxlength="29">
+            <input type="text" placeholder="Enter a title" id="title" maxlength="29" onfocus="removeBorder('title')">
+
+            <!---------------------------------------------------------Description Input----------------------------------------------------------------------->
+
             <span>Description</span>
-            <textarea placeholder="Enter a Description" id="description"></textarea>
+            <textarea placeholder="Enter a Description" id="description" onfocus="removeBorder('description')"></textarea>
 
             <!---------------------------------------------------------Category Menu--------------------------------------------------------------------------->
 
@@ -48,19 +54,6 @@
             </div>
             <div id="contacts" class="render_categorys_box"></div>
             <div id="initials" class="initials_box"></div>
-
-            <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
-            <div class="addBord_box" id="addBordBox">
-                Task added to Board
-                <img src="assets/img/board.png" class="add_board_image">
-            </div>
-            <div class="addBord_box" id="pleaseEnterName">
-                Please enter a Task Name
-            </div>
-            <div class="addBord_box" id="missing">
-                Something is missing
-            </div>
-            <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
         </div>
 
         <div class="form_right">
@@ -73,7 +66,7 @@
             <!-------------------------------------------------------------input Priority--------------------------------------------------------------------->
 
             <span>Prio</span>
-            <div class="prio">
+            <div class="prio" id="prio">
                 <div class="prio_button" id="prioUrgent" onclick="setPrio('urgent')">Urgent<img
                         src="assets/img/prioUrgent.png"></div>
                 <div class="prio_button" id="prioMedium" onclick="setPrio('medium')">Medium <img
@@ -84,7 +77,7 @@
 
             <!-------------------------------------------------------------input Subtasks--------------------------------------------------------------------->
 
-            <span>Subtasks</span>
+            <span style="margin-top: 34px;">Subtasks</span>
             <div class="subtasks">
                 <input type="text" placeholder="Add new subtask" id="subTask" maxlength="29">
                 <img class="plus_image" src="assets/img/plus.svg" onclick="addSubtask()">
@@ -94,6 +87,23 @@
                 <div class="clear_button" onclick="clearAll()">Clear x</div>
                 <div class="create_button" onclick="createTask()">Create Task ✔</div>
             </div>
+
+            <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
+            <div class="addBord_box" id="addBordBox">
+                Task added to Board
+                <img src="assets/img/board.png" class="add_board_image">
+            </div>
+            <div class="addBord_box" id="pleaseEnterName">
+                Please enter a Task Name
+            </div>
+            <div class="addBord_box" id="pleaseCategoryName">
+                Please enter a Category Name
+            </div>
+            <div class="addBord_box" id="missing">
+                Something is missing
+            </div>
+            <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
+            
         </div>
     </div>
 </body>

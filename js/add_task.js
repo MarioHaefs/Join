@@ -3,7 +3,7 @@ let checked;
 let menuContactsOpen = false;
 let contacts = [];
 let initials = {
-    'mail': [],
+    'id': [],
     'initials': []
 };
 let title;
@@ -14,14 +14,14 @@ let color;
 let taskCategory
 let subTasks = [];
 let task = {
-    'title': title,
-    'description': description,
-    'category': taskCategory,
-    'color': color,
+    'title': '',
+    'description': '',
+    'category': '',
+    'color': '',
     'contacts': [],
-    'date': date,
-    'prio': prio,
-    'subtasks': subTasks
+    'date': '',
+    'prio': '',
+    'subtasks': []
 };
 let categorys = {
     'category': [],
@@ -36,11 +36,13 @@ setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 
 function getDate() {
     document.getElementById('date').valueAsDate = new Date();
+    date = document.getElementById('date').value;
 };
 
 //sets the priority of the task
 
 function setPrio(x) {
+    document.getElementById('prio').style.borderColor = `#F6F7F8`;
     if (x == prio) removePrio();
     else {
         removePrio();
@@ -65,7 +67,7 @@ function removePrio() {
     document.getElementById('prioUrgent').classList.remove('prio_button_urgent');
     document.getElementById('prioMedium').classList.remove('prio_button_medium');
     document.getElementById('prioLow').classList.remove('prio_button_low');
-    prio = '';
+    prio = undefined;
 };
 
 //opens or close the category menu. When opened, the existing categories are displayed
@@ -77,7 +79,6 @@ function openCategory() {
         renderCategorys();
     } else {
         closeMenu('categorys', 'dropDown');
-        menuOpen = false;
     }
 }
 
@@ -102,7 +103,7 @@ function renderContacts() {
     for (let i = 0; i < contacts.length; i++) {
         let userName = contacts[i]['name'];
         renderContactsHTML(i, userName);
-        if (initials['mail'].includes(contacts[i]['mail'])) {
+        if (initials['id'].includes(contacts[i]['id'])) {
             document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         }
     }
@@ -112,11 +113,10 @@ function renderContacts() {
 
 function clearContacts() {
     initials['initials'].length = 0;
-    initials['mail'].length = 0;
+    initials['id'].length = 0;
     showInitials();
     if (menuContactsOpen) {
         closeMenu('contacts', 'dropDownContacts')
-        menuContactsOpen = false;
     }
 };
 
@@ -126,16 +126,16 @@ function clearContacts() {
 //*
 
 function setContacts(i) {
-    let index = initials['mail'].indexOf(contacts[i]['mail'])
+    let index = initials['id'].indexOf(contacts[i]['id'])
     if (index == -1) {
         document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         initials['initials'].push(contacts[i]['initials']);
-        initials['mail'].push(contacts[i]['mail']);
+        initials['id'].push(contacts[i]['id']);
         showInitials();
     } else {
         document.getElementById('Checkbox' + i).classList.remove('custom_checkBox_child');
         initials['initials'].splice(index, 1);
-        initials['mail'].splice(index, 1);
+        initials['id'].splice(index, 1);
         showInitials();
     }
 };
@@ -156,6 +156,7 @@ function showInitials() {
 //open the contact- or category menu
 
 function openMenu(id1, id2) {
+    removeBorder(id2)
     document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
     document.getElementById(id2).classList.add('drop_down_open');
 }
@@ -166,6 +167,8 @@ function closeMenu(id1, id2) {
     document.getElementById(id1).innerHTML = ''
     document.getElementById(id2).classList.remove('drop_down_open');
     document.getElementById(id1).style.borderBottom = `0`;
+    menuOpen = false;
+    menuContactsOpen = false;
 };
 
 //renders the categories into the category menu
@@ -199,6 +202,8 @@ function deleteCategory(i) {
 //renders the input field for a new category
 
 function inputCategory() {
+    color = undefined;
+    taskCategory = undefined;
     showInputCategoryHTML();
 }
 
@@ -224,7 +229,7 @@ function setColor(clr) {
 function addNewCategory() {
     let categoryValue = document.getElementById('categoryValue').value;
     if (categoryValue.length < 1 || !color) {
-        alert('wird ersetzt')
+        showNotice('pleaseCategoryName');
     } else {
         categorys['color'].push(color);
         categorys['category'].push(categoryValue);
@@ -278,8 +283,8 @@ function clearAll() {
     document.getElementById('description').value = '';
     document.getElementById('title').value = '';
     document.getElementById('subtaskBox').innerHTML = '';
-    color = '';
-    taskCategory = '';
+    color = undefined;
+    taskCategory = undefined;
     subTasks.length = 0;
     initials['initials'].length = 0;
     clearInputField();
@@ -287,19 +292,50 @@ function clearAll() {
     clearContacts();
 };
 
-// fill the task JSON
+// fill the task JSON when the mandatory fields are filled or shows the alert : something is missing
 
 function createTask() {
     if (allFilled()) {
-        showTasktoBoardBox();
-        title = document.getElementById('title').value;
-        description = document.getElementById('description').value;
-        date = document.getElementById('date').value;
+        closeMenu('contacts', 'dropDownContacts')
+        showNotice('addBordBox');
+        fillTaskjJson();
+       loadBoardHTML();
     } else {
+        if (!taskCategory) clearInputField();
+        if (taskCategory) setCategory(taskCategory, color);
+        closeMenu('contacts', 'dropDownContacts')
         showNotice('missing');
+        checkWhichFieldIsEmpty()
     }
 };
 
+
+function fillTaskjJson() {
+    title = document.getElementById('title').value;
+    description = document.getElementById('description').value;
+}
+
+
+function loadBoardHTML() {
+    setTimeout(() => document.getElementById('body').classList.add('body_move_right'), 2400);
+    setTimeout(() => location.href = "board.html", 2800);
+}
+
+
+function checkWhichFieldIsEmpty() {
+    if (document.getElementById('title').value.length < 1) document.getElementById('title').style.borderColor = `red`;
+    if (document.getElementById('description').value.length < 1) document.getElementById('description').style.borderColor = `red`;
+    if (!taskCategory) document.getElementById('dropDown').style.borderColor = `red`;
+    if (initials['initials'].length < 1) document.getElementById('dropDownContacts').style.borderColor = `red`;
+    if (!prio) document.getElementById('prio').style.borderColor = `red`;
+};
+
+
+function removeBorder(id) {
+    document.getElementById(id).style.borderColor = `#D1D1D1`;
+}
+
+// Checks whether the mandatory fields are filled
 
 function allFilled() {
     if (document.getElementById('title').value.length > 0 &&
@@ -314,15 +350,20 @@ function allFilled() {
 };
 
 
-function showTasktoBoardBox() {
-    document.getElementById('addBordBox').classList.add('addBord_box_active');
-};
-
-
 function showNotice(id) {
+    document.getElementById(id).style.display = ''
+    setTimeout(() => document.getElementById(id).style.display = 'none', 2300);
     document.getElementById(id).classList.remove('addBord_box_inactive')
     document.getElementById(id).classList.add('addBord_box_active');
     setTimeout(() => document.getElementById(id).classList.add('addBord_box_inactive'), 2000);
+}
+
+
+function hideNotices() {
+    document.getElementById('addBordBox').style.display = 'none'
+    document.getElementById('pleaseEnterName').style.display = 'none'
+    document.getElementById('missing').style.display = 'none'
+    document.getElementById('pleaseCategoryName').style.display = 'none'
 }
 
 //save content on the backend server
@@ -338,6 +379,7 @@ async function loadData() {
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
 };
+
 
 
 

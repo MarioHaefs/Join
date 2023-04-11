@@ -1,5 +1,6 @@
 body {
-    overflow: hidden;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
 }
 
 input[type="date"] {
@@ -58,7 +59,6 @@ h1 {
 }
 
 .form_left {
-    position: relative;
     border-right: 1px solid #D1D1D1;
     padding-right: 110px;
     display: flex;
@@ -66,6 +66,7 @@ h1 {
 }
 
 .form_right {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin-left: 110px;
@@ -292,6 +293,8 @@ span {
 }
 
 .prio {
+    border-radius: 10px;
+    border: 1px solid #F6F7F8;
     display: flex;
     justify-content: space-between;
     width: 422px;
@@ -309,7 +312,6 @@ span {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     transition: 500ms;
-    margin-bottom: 34px;
 }
 
 .prio_button img {
@@ -366,7 +368,8 @@ span {
 
 .clear_create_task {
     position: absolute;
-    bottom: 60px;
+    right: 10px;
+    top: 500px;
     width: 422px;
     display: flex;
     justify-content: flex-end;
@@ -494,7 +497,7 @@ span {
 .addBord_box {
     bottom: -200px;
     position: absolute;
-    left: 380px;
+    left: -273px;
     color: white;
     font-weight: 400;
     font-size: 21px;
@@ -507,12 +510,17 @@ span {
     background: #2A3647;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.55);
     border-radius: 20px;
-    animation-duration: 0.5s;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
 }
 
 .addBord_box_active {
     animation-name: slipe-up;
-    bottom: 0px;
+    bottom: 100px;
+}
+
+.body_move_right {
+    animation-name: slipe-right;
 }
 
 .addBord_box_inactive {
@@ -526,7 +534,7 @@ span {
 
 @keyframes slipe-up {
     from {
-        transform: translateY(200px);
+        transform: translateY(300px);
     }
 
     to {
@@ -536,10 +544,20 @@ span {
 
 @keyframes slipe-down {
     from {
-        transform: translateY(-200px);
+        transform: translateY(-300px);
     }
 
     to {
         transform: translateX(0px);
+    }
+}
+
+@keyframes slipe-right {
+    from {
+        transform: translateY(0px);
+    }
+
+    to {
+        transform: translateX(2000px);
     }
 }
