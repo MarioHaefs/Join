@@ -22,6 +22,10 @@ async function addUser() {
     await backend.setItem('contacts', JSON.stringify(contacts));
 }
 
+async function addContacts() {
+    await backend.setItem('contacts', JSON.stringify(contacts));
+}
+
 /**
  * del all Contacts from Database
  */
@@ -91,7 +95,7 @@ function createContact() {
     }
     addUser();
     toggleDNone('overlayContent');
-    insertContactsToContactList()
+    insertContactsToContactList();
 }
 
 /**
@@ -138,8 +142,24 @@ function showFirstContact() {
 }
 
 
+/**
+ * 
+ * @param {Integer} id - id from user you want to edit
+ */
+function editContact(id) {
+    let name = document.getElementById('name-input').value;
+    let email = document.getElementById('email-input').value;
+    let phone = document.getElementById('phone-input').value;
+    let initials = getInitial(name);
 
-
+    contacts[id].name = name;
+    contacts[id].mail = email;
+    contacts[id].phone = phone;
+    contacts[id].initials = initials;
+    addContacts();
+    toggleDNone('overlayContent');
+    insertContactsToContactList();
+}
 
 
 
@@ -180,6 +200,7 @@ function genContactsHeader(i) {
 
 function showDetails(id) {
     changeActiv();
+    let editname = id;
     document.getElementById('contactDetails').innerHTML = '';
     document.getElementById('contactDetails').innerHTML = /*html */`
     <div class="contact-details-head">
@@ -193,7 +214,7 @@ function showDetails(id) {
         <p>Contact Information</p>
         <div class="contact-edit">
             <img src="./assets/img/contacts-icons/pen.png" alt="">
-            <p>Edit Contact</p>
+            <p onclick="editShowContact(${editname})">Edit Contact</p>
         </div>
     </div>
     <div class="contact-info-container">
@@ -206,4 +227,68 @@ function showDetails(id) {
             <a href="tel:+4915166456">${contacts[id].phone}</a>
         </div>
     </div>`;
+}
+
+function editShowContact(contact) {
+    document.getElementById('overlayContent').innerHTML = ''; //createContact
+
+    if (typeof contact !== 'undefined') {
+        showEditContact(contact);
+    } else {
+        showCreateContact();
+    }
+
+
+    toggleDNone('overlayContent');
+}
+
+function showCreateContact() {
+    document.getElementById('overlayContent').innerHTML =  /*html */`<div class="overlay-left">
+    <img src="./assets/img/menu-logo.png" alt="">
+    <p class="overlay-title">Add contact</p>
+    <p>Task are better with a team!</p>
+    <div class="overlay-sep"></div>
+</div>
+<div class="overlay-right">
+    <img src="./assets/img/contacts-icons/userIcon.png" alt="">
+    <form action="#" onsubmit="createContact(); return false">
+        <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required>
+        <input class="email-input" id="email-input" placeholder="Email" type="email" required>
+        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+/ ]*" minlength="6" maxlength="30" required>
+        <div class="buttons">
+            <button type="button" class="cancel-contact-btn" onclick="toggleDNone('overlayContent')">Cancel <img
+                    src="./assets/img/contacts-icons/cancel-icon.png" alt=""></button>
+            <button type="submit" class="add-contact-btn" >
+                Create contact
+                <img src="./assets/img/contacts-icons/check-icon.png" alt="">
+            </button>
+        </div>
+    </form>
+</div>`
+}
+
+
+function showEditContact(id) {
+    let userId = id;
+    document.getElementById('overlayContent').innerHTML =  /*html */`<div class="overlay-left">
+    <img src="./assets/img/menu-logo.png" alt="">
+    <p class="overlay-title">Edit contact</p>
+    <div class="overlay-sep"></div>
+</div>
+<div class="overlay-right">
+    <img src="./assets/img/contacts-icons/userIcon.png" alt="">
+    <form action="#" onsubmit="editContact(${userId}); return false">
+        <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required value="${contacts[id].name}">
+        <input class="email-input" id="email-input" placeholder="Email" type="email" required value="${contacts[id].mail}">
+        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+/ ]*" minlength="6" maxlength="30" required value="${contacts[id].phone}">
+        <div class="buttons">
+            <button type="button" class="cancel-contact-btn" onclick="toggleDNone('overlayContent')">Cancel <img
+                    src="./assets/img/contacts-icons/cancel-icon.png" alt=""></button>
+            <button type="submit" class="add-contact-btn" >
+                Save
+                <img src="./assets/img/contacts-icons/check-icon.png" alt="">
+            </button>
+        </div>
+    </form>
+</div>`
 }
