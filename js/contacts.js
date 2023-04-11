@@ -11,7 +11,7 @@ async function init() {
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     insertContactsToContactList();
-    showFirstContact();
+    showContact(0);
 };
 
 /**
@@ -20,8 +20,17 @@ async function init() {
 async function addUser() {
     contacts.push(contact);
     await backend.setItem('contacts', JSON.stringify(contacts));
+    showAlert();
+    showContact(contacts.length-1);
+    
 }
 
+function showAlert() {
+    document.getElementById('alert').classList.add('animate');
+    setTimeout(() => {
+        document.getElementById('alert').classList.remove('animate');
+    }, 2500);
+}
 async function addContacts() {
     await backend.setItem('contacts', JSON.stringify(contacts));
 }
@@ -134,11 +143,16 @@ function changeActiv() {
 /**
  * shows the first Contact at the details
  */
-function showFirstContact() {
+function showContact(id) {
     let btnContainer = document.getElementById('contacts-list');
     let btns = btnContainer.getElementsByClassName('list-contact');
-    btns[0].className += " list-contact-activ";
-    showDetails(0);
+    let contactId = id || btns[0].id
+    let contactElement = document.getElementById(contactId);
+
+    Array.from(document.querySelectorAll('.list-contact.list-contact-activ')).forEach((el) => el.classList.remove('list-contact-activ'));
+    contactElement.className += " list-contact-activ";
+    showDetails(contactId);
+    document.getElementById(contacts.length-1).scrollIntoView();
 }
 
 
@@ -173,7 +187,7 @@ function editContact(id) {
  */
 function genContactHtml(contact) {
     return /*html */`
-    <div class="list-contact" onclick="showDetails(${contact.id})">
+    <div class="list-contact" onclick="showDetails(${contact.id})" id="${contact.id}">
             <span class="contact-frame">${contact.initials}</span>
             <div>
                 <p>${contact.name}</p>

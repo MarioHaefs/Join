@@ -47,28 +47,13 @@
         </div>
     </div>
     <div id="overlayContent" class="d-none">
-        <div class="overlay-left">
-            <img src="./assets/img/menu-logo.png" alt="">
-            <p class="overlay-title">Add contact</p>
-            <p>Task are better with a team!</p>
-            <div class="overlay-sep"></div>
-        </div>
-        <div class="overlay-right">
-            <img src="./assets/img/contacts-icons/userIcon.png" alt="">
-            <form action="#" onsubmit="createContact(); return false">
-                <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required>
-                <input class="email-input" id="email-input" placeholder="Email" type="email" required>
-                <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+/ ]*" minlength="6" maxlength="30" required>
-                <div class="buttons">
-                    <button type="button" class="cancel-contact-btn" onclick="toggleDNone('overlayContent')">Cancel <img
-                            src="./assets/img/contacts-icons/cancel-icon.png" alt=""></button>
-                    <button type="submit" class="add-contact-btn" >
-                        Create contact
-                        <img src="./assets/img/contacts-icons/check-icon.png" alt="">
-                    </button>
-                </div>
-            </form>
-        </div>
+       
+    </div>
+    <div class="alert" id="alert"> 
+        <div class="alert-content">
+            Contact succesfuly created
+
+        </div> 
     </div>
 </body>
 
