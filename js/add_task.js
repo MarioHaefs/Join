@@ -1,5 +1,11 @@
 let prio;
+let checked;
+let menuContactsOpen = false;
 let contacts = [];
+let initials = {
+    'mail': [],
+    'initials': []
+};
 let title;
 let description;
 let date;
@@ -51,19 +57,74 @@ function removePrio() {
 };
 
 
-function showNewCategory() {
+function openCategory() {
     if (!menuOpen) {
-        document.getElementById('categorys').style.borderBottom = `1px solid #D1D1D1`;
-        document.getElementById('dropDown').classList.add('drop_down_open');
+        openMenu('categorys', 'dropDown')
         menuOpen = true;
         renderCategorys();
     } else {
-        document.getElementById('categorys').innerHTML = ''
-        document.getElementById('dropDown').classList.remove('drop_down_open');
-        document.getElementById('categorys').style.borderBottom = `0`;
+        closeMenu('categorys', 'dropDown');
         menuOpen = false;
     }
 }
+
+
+function openContacts() {
+    if (!menuContactsOpen) {
+        document.getElementById('contacts').innerHTML = '';
+        openMenu('contacts', 'dropDownContacts');
+        menuContactsOpen = true;
+        for (let i = 0; i < contacts.length; i++) {
+            let userName = contacts[i]['name'];
+            renderContactsHTML(i, userName);
+        }
+    } else {
+        closeMenu('contacts', 'dropDownContacts')
+        showInitials();
+        menuContactsOpen = false;
+    }
+};
+
+
+function setContacts(i) {
+    let index = initials['mail'].indexOf(contacts[i]['mail'])
+    if (index == -1) {
+        document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
+        initials['initials'].push(contacts[i]['initials']);
+        initials['mail'].push(contacts[i]['mail']);
+        showInitials();
+    } else {
+        document.getElementById('Checkbox' + i).classList.remove('custom_checkBox_child');
+        initials['initials'].splice(index, 1);
+        initials['mail'].splice(index, 1);
+        showInitials();
+    }
+};
+
+
+function showInitials() {
+    document.getElementById('initials').innerHTML = '';
+    for (let i = 0; i < initials['initials'].length; i++) {
+        let initial = initials['initials'][i];
+        document.getElementById('initials').innerHTML += `
+        <div class="initials">
+        ${initial}
+        </div>`;
+    }
+}
+
+
+function openMenu(id1, id2) {
+    document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
+    document.getElementById(id2).classList.add('drop_down_open');
+}
+
+
+function closeMenu(id1, id2) {
+    document.getElementById(id1).innerHTML = ''
+    document.getElementById(id2).classList.remove('drop_down_open');
+    document.getElementById(id1).style.borderBottom = `0`;
+};
 
 
 function renderCategorys() {
@@ -161,10 +222,10 @@ function clearAll() {
     document.getElementById('description').value = '';
     document.getElementById('title').value = '';
     document.getElementById('subtaskBox').innerHTML = '';
-    document.getElementById('dropDown').innerHTML = `Select task category`;
     color = '';
     taskCategory = '';
     subTasks.length = 0;
+    clearInputField();
     removePrio();
 };
 
@@ -186,7 +247,6 @@ function createTask() {
     description = document.getElementById('description').value;
     date = document.getElementById('date').value;
 }
-
 
 
 

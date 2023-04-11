@@ -22,7 +22,7 @@ function showCategoryHTML() {
     return document.getElementById('categoryBox').innerHTML = `
     <div class="drop_down" id="dropDown">
                     Select task category
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="showNewCategory()">
+                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>`;
 };
@@ -35,14 +35,14 @@ function showCategoryColorHTML() {
                         ${taskCategory}
                         <div  class="color2" style="background-color: ${color};"></div>
                     </div>
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="showNewCategory()">
+                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>`;
 };
 
 
 function renderCategorysHTML(clr, i, category) {
-   return document.getElementById('categorys').innerHTML += `
+    return document.getElementById('categorys').innerHTML += `
         <div class="render_categorys">
                    <div class="set_category" onclick="setCategory('${category}', '${clr}')">
                         ${category}
@@ -54,9 +54,23 @@ function renderCategorysHTML(clr, i, category) {
 
 
 function renderSubtasHTML(subTask, i) {
-   return document.getElementById('subtaskBox').innerHTML += `
+    return document.getElementById('subtaskBox').innerHTML += `
         <div class="subtask_child">
             <input class="input_subtask" type="checkbox"> ${subTask}
             <img src="assets/img/x.svg" onclick="deleteSubtask(${i})">
         </div>`;
+};
+
+
+function renderContactsHTML(i, userName) {
+    document.getElementById('contacts').innerHTML += `
+            <div class="render_categorys" onclick="setContacts(${i})">
+                ${userName}  
+                <div class="custom_checkBox" id="checkbox${i}">
+                    <div id="Checkbox${i}"></div>
+                </div>
+            </div>`;
+    if (initials['mail'].includes(contacts[i]['mail'])) {
+        document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
+    }
 };

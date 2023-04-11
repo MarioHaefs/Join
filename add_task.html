@@ -31,15 +31,17 @@
             <div id="categoryBox">
                 <div class="drop_down" id="dropDown">
                     Select task category
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="showNewCategory()">
+                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>
             </div>
             <span>Assigned to</span>
-            <div class="drop_down">
+            <div class="drop_down" id="dropDownContacts">
                 Select contacts to assign
-                <img class="down_image" src="assets/img/drop-down-arrow.png">
+                <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openContacts()">
             </div>
+            <div id="contacts" class="render_categorys_box"></div>
+            <div id="initials"></div>
         </div>
         <div class="form_right">
             <span>Due date</span>

@@ -436,3 +436,32 @@ span {
     min-height: 150px ;
     overflow: auto;
 }
+
+.contact_checkbox {
+    position: absolute;
+    top: 14px;
+    right: 10px;
+}
+
+.contact_checkbox:hover {
+    cursor: pointer;
+}
+
+.custom_checkBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 15px;
+    left: 370px;
+    border: 1px solid rgb(0, 0, 0);
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+.custom_checkBox_child {
+    width: 10px;
+    height: 10px;
+    background-color: black;
+}
