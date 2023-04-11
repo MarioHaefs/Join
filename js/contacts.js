@@ -1,12 +1,7 @@
 let contacts = [];
-let contact = {
-    firstname: 'daran',
-    lastname: 'tollername',
-    mail: 'Test4@mail.de',
-    phone: '012347596521'
-};
+let contact = {};
 let orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
-setURL('http://gruppe-5009.developerakademie.net/smallest_backend_ever');
+setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 
 /**
  * Load Data from server
@@ -40,15 +35,13 @@ async function deleteContacts() {
 async function insertContactsToContactList() {
     let container = document.getElementById('contacts-list');
     container.innerHTML = '';
-    sortContacts();
     orderContacts();
     for (let i = 0; i < orderedContacts.length; i++) {
         if (orderedContacts[i].length > 0) {
             container.innerHTML += genContactsHeader(i);
             for (let j = 0; j < orderedContacts[i].length; j++) {
                 const contact = orderedContacts[i][j];
-                let shortname = contact.firstname.charAt(0) + contact.lastname.charAt(0);
-                container.innerHTML += genContactHtml(orderedContacts[i][j], shortname);
+                container.innerHTML += genContactHtml(orderedContacts[i][j]);
             }
         }
     }
@@ -59,8 +52,8 @@ async function insertContactsToContactList() {
  */
 function sortContacts() {
     contacts = contacts.sort(function (a, b) {
-        return a.firstname.toLowerCase().localeCompare(
-            b.firstname.toLowerCase()
+        return a.name.toLowerCase().localeCompare(
+            b.name.toLowerCase()
         );
     });
 }
@@ -70,9 +63,10 @@ function sortContacts() {
  * 
  */
 function orderContacts() {
+    orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
     for (let i = 0; i < contacts.length; i++) {
         contacts[i].id = i;
-        let letter = contacts[i].firstname.toLowerCase().toString();
+        let letter = contacts[i].name.toLowerCase().toString();
         letter = letter.replace(/\u00e4/g, "ae").replace(/\u00fc/g, "ue").replace(/\u00f6/g, "oe");
         letter = letter.slice(0, 1);
         letter = letter.charCodeAt(0) - 97;
@@ -80,7 +74,42 @@ function orderContacts() {
     }
 }
 
+/**
+ * Create Contact || Add Contact to the list.
+ */
+function createContact() {
+    let name = document.getElementById('name-input').value;
+    let email = document.getElementById('email-input').value;
+    let phone = document.getElementById('phone-input').value;
+    let initials = getInitial(name);
+    contact = {
+        name: name,
+        mail: email,
+        phone: phone,
+        initials: initials
+    }
+    addUser();
+    toggleDNone('overlayContent');
+    insertContactsToContactList()
+}
 
+/**
+ * The function returns the first letter of the first name and last name.
+ * If the last name does not exist, then only the first letter of the first name is output
+ * @example
+ * getInitial('Max Mustermann');
+ * @returns {String} MM
+ * @param {String} username The name of the person you want to get the initials of.
+ * @returns first letter of the first name and last name or only the first letter of the first name.
+ * 
+ */
+function getInitial(username) {
+    if (username.includes(' ')) {
+        return username.charAt(0).toUpperCase() + username.charAt(username.lastIndexOf(' ') + 1).toUpperCase();
+    } else {
+        return username.charAt(0).toUpperCase();
+    }
+}
 
 
 
@@ -94,15 +123,14 @@ function orderContacts() {
 /**
  * 
  * @param {JSON} contact - User from Database
- * @param {String} shortname - Combinate first Char from Firstname and Lastname
  * @returns html template
  */
-function genContactHtml(contact, shortname) {
+function genContactHtml(contact) {
     return /*html */`
     <div class="list-contact">
-            <span class="contact-frame">${shortname}</span>
+            <span class="contact-frame">${contact.initials}</span>
             <div>
-                <p>${contact.firstname} ${contact.lastname}</p>
+                <p>${contact.name}</p>
                 <p>${contact.mail}</p>
             </div>
         </div>   
