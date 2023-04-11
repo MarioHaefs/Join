@@ -117,6 +117,11 @@ function getInitial(username) {
 
 
 
+
+
+
+
+
 /*Gen HTML Content */
 
 
@@ -127,7 +132,7 @@ function getInitial(username) {
  */
 function genContactHtml(contact) {
     return /*html */`
-    <div class="list-contact">
+    <div class="list-contact" onclick="showDetails(${contact.id})">
             <span class="contact-frame">${contact.initials}</span>
             <div>
                 <p>${contact.name}</p>
@@ -149,4 +154,34 @@ function genContactsHeader(i) {
                ${String.fromCharCode(i + 97).toUpperCase()}
         </div>
     `;
+}
+
+
+function showDetails(id) {
+    document.getElementById('contactDetails').innerHTML = '';
+    document.getElementById('contactDetails').innerHTML = /*html */`
+    <div class="contact-details-head">
+    <span class="list-contact-frame">${contacts[id].initials}</span>
+    <div class="contactInfo">
+        <span class="contact-name">${contacts[id].name}</span>
+        <div class="add-task"> + Add Task</div>
+    </div>
+    </div>
+    <div class="contact-info-head">
+        <p>Contact Information</p>
+        <div class="contact-edit">
+            <img src="./assets/img/contacts-icons/pen.png" alt="">
+            <p>Edit Contact</p>
+        </div>
+    </div>
+    <div class="contact-info-container">
+        <div class="contact-info-segment">
+            <span class="contact-info-title">Email</span>
+            <a href="mailto:mail@egal.de">${contacts[id].mail}</a>
+        </div>
+        <div class="contact-info-segment">
+            <span class="contact-info-title">Phone</span>
+            <a href="tel:+4915166456">${contacts[id].phone}</a>
+        </div>
+    </div>`;
 }
