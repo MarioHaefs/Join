@@ -189,7 +189,7 @@ function genContactHtml(contact) {
     return /*html */`
     <div class="list-contact" onclick="showDetails(${contact.id})" id="${contact.id}">
             <span class="contact-frame">${contact.initials}</span>
-            <div>
+            <div class="list-contact-info">
                 <p>${contact.name}</p>
                 <p>${contact.mail}</p>
             </div>

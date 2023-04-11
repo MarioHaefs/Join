@@ -447,6 +447,9 @@ body {
   border-radius: 100%;
   background-color: orange;
 }
+#contacts-container .contacts-list .list-contact .list-contact-info {
+  min-width: 150px;
+}
 #contacts-container .contacts-list .list-contact img {
   height: 42px;
   width: 42px;
