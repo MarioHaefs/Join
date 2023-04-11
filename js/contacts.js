@@ -11,6 +11,7 @@ async function init() {
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     insertContactsToContactList();
+    showFirstContact();
 };
 
 /**
@@ -112,9 +113,29 @@ function getInitial(username) {
 }
 
 
+function changeActiv() {
+    let btnContainer = document.getElementById('contacts-list');
+    let btns = btnContainer.getElementsByClassName('list-contact');
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function () {
+            var current = document.getElementsByClassName("list-contact-activ");
+            current[0].className = current[0].className.replace("list-contact-activ", "");
+            this.className += " list-contact-activ";
+        }
+        );
+    }
 
+}
 
-
+/**
+ * shows the first Contact at the details
+ */
+function showFirstContact() {
+    let btnContainer = document.getElementById('contacts-list');
+    let btns = btnContainer.getElementsByClassName('list-contact');
+    btns[0].className += " list-contact-activ";
+    showDetails(0);
+}
 
 
 
@@ -158,6 +179,7 @@ function genContactsHeader(i) {
 
 
 function showDetails(id) {
+    changeActiv();
     document.getElementById('contactDetails').innerHTML = '';
     document.getElementById('contactDetails').innerHTML = /*html */`
     <div class="contact-details-head">
