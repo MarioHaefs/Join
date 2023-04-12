@@ -21,8 +21,8 @@ async function addUser() {
     contacts.push(contact);
     await backend.setItem('contacts', JSON.stringify(contacts));
     showAlert();
-    showContact(contacts.length-1);
-    
+    showContact(contacts.length - 1);
+
 }
 
 function showAlert() {
@@ -96,15 +96,30 @@ function createContact() {
     let email = document.getElementById('email-input').value;
     let phone = document.getElementById('phone-input').value;
     let initials = getInitial(name);
+    let color = getRandomColor();
     contact = {
         name: name,
         mail: email,
         phone: phone,
-        initials: initials
+        initials: initials,
+        color: color
     }
     addUser();
     toggleDNone('overlayContent');
     insertContactsToContactList();
+}
+
+/**
+ * Retrunt a random Color-Hexcode 
+ * @returns random color hexcode (#7D735F)
+ */
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 /**
@@ -152,7 +167,7 @@ function showContact(id) {
     Array.from(document.querySelectorAll('.list-contact.list-contact-activ')).forEach((el) => el.classList.remove('list-contact-activ'));
     contactElement.className += " list-contact-activ";
     showDetails(contactId);
-    document.getElementById(contacts.length-1).scrollIntoView();
+
 }
 
 
@@ -173,6 +188,7 @@ function editContact(id) {
     addContacts();
     toggleDNone('overlayContent');
     insertContactsToContactList();
+    showContact(id);
 }
 
 
@@ -188,7 +204,7 @@ function editContact(id) {
 function genContactHtml(contact) {
     return /*html */`
     <div class="list-contact" onclick="showDetails(${contact.id})" id="${contact.id}">
-            <span class="contact-frame">${contact.initials}</span>
+            <span class="contact-frame" style="background-color: ${contact.color}" >${contact.initials}</span>
             <div class="list-contact-info">
                 <p>${contact.name}</p>
                 <p>${contact.mail}</p>
@@ -218,7 +234,7 @@ function showDetails(id) {
     document.getElementById('contactDetails').innerHTML = '';
     document.getElementById('contactDetails').innerHTML = /*html */`
     <div class="contact-details-head">
-    <span class="list-contact-frame">${contacts[id].initials}</span>
+    <span class="list-contact-frame" style="background-color: ${contacts[id].color}">${contacts[id].initials}</span>
     <div class="contactInfo">
         <span class="contact-name">${contacts[id].name}</span>
         <div class="add-task"> + Add Task</div>

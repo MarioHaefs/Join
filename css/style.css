@@ -445,7 +445,6 @@ body {
   height: 42px;
   color: #FFFFFF;
   border-radius: 100%;
-  background-color: orange;
 }
 #contacts-container .contacts-list .list-contact .list-contact-info {
   min-width: 150px;
@@ -513,7 +512,6 @@ body {
   height: 42px;
   color: #FFFFFF;
   border-radius: 100%;
-  background-color: orange;
   scale: 3;
 }
 #contacts-container .contact-info .contact-details .contact-details-head .contactInfo {
