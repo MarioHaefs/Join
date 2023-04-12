@@ -319,6 +319,15 @@ input:focus {
 
 /*** Legal notice ***/
 .legal-notice-content {
-    margin-left: 200px;
-    text-align: center;
+    margin-left: 300px ;
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    position: relative;
+}
+
+.arrow-black {
+    position: absolute; 
+    right: 10% ;
+    cursor: pointer;
 }

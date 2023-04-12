@@ -1,4 +1,13 @@
 .legal-notice-content {
-    margin-left: 200px;
-    padding-left: 10px;
+    margin-left: 300px;
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    position: relative;
+}
+
+.arrow-black {
+    position: absolute;
+    right: 10%;
+    cursor: pointer;
 }

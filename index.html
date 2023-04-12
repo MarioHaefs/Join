@@ -9,6 +9,8 @@
 
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/script.js"></script>
+
 
 </head>
 
@@ -21,18 +23,19 @@
             <a href="sign_up.html"><button class="sign-up-button">Sign up</button></a>
         </div>
         <div class="form-class">
-            <form class="log-in-form">
+            <form onsubmit="login(); return false" class="log-in-form">
                 <span class="log-in-headline">Log in</span>
-                <input class="email-input" placeholder="Email" type="email" required>
-                <input class="password-input" placeholder="Password" type="password" required>
+                <input id="login-email" class="email-input" placeholder="Email" type="email" required>
+                <input id="login-password" class="password-input" placeholder="Password" type="password" required>
                 <div class="log-in-checkbox-div">
-                    <input type="checkbox"><span class="remember-me">Remember me</span>
+                    <input id="remember-checkbox" type="checkbox"><span class="remember-me">Remember me</span>
                     <a class="forgot-password-link" href="forgot_password.html">Forgot my password</a>
                 </div>
                 <div>
                     <button class="log-in-button">Log in</button>
-                    <button class="guest-log-in-button">Guest Log in</button>
+                    <button onclick="goToSummary()" class="guest-log-in-button">Guest Log in</button>
                 </div>
+                <span id="login-false" class="login-popup">Data not correct ! Please check for correctness !</span>
             </form>
         </div>
     </div>
