@@ -23,11 +23,12 @@
                 <span class="log-in-headline">Sign up</span>
                 <input id="register-name" class="name-input" placeholder="Name" type="text" required>
                 <input id="register-email" class="email-input" placeholder="Email" type="email" required>
-                <input id="register-password" class="password-input" placeholder="Password" type="password" required>
+                <input id="register-password" class="password-input" placeholder="Password" type="password" minlength="6" required>
                 <div>
                     <button class="log-in-button">Sign up</button>
                 </div>
-                <span id="register-success" style="display:none; margin-top: 16px; background-color:#2A3647; border-radius: 10px; color: white; padding: 8px; ">Du hast dich erfolgreich registriert !</span>
+                <span id="register-success" class="login-popup">You have successfully registered !</span>
+                <span id="register-error" class="login-popup" >E-Mail already used !</span>
             </form>
         </div>
     </div>
