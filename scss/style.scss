@@ -5,6 +5,7 @@
 @import './forgotpaswd';
 @import './desktop_template';
 @import './legal_notice';
+@import './contacts';
 @import './board';
 
 
@@ -13,4 +14,22 @@ body {
     font-family: 'Open Sans', sans-serif;
     height: 100vh;
     background-color: $pagebackground;
+}
+
+//Global styles
+
+.name-input {
+    margin-bottom: 25px;
+    width: 60%;
+    @include inputForm('../assets/img/person-icon.png', 94%, 55%);
+}
+
+.email-input {
+    margin-bottom: 25px;
+    width: 60%;
+    @include inputForm('../assets/img/letter-icon.png', 94%, 55%);
+}
+
+.d-none {
+    display: none !important;
 }

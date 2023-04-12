@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,16 +8,53 @@
     <title>Join</title>
 
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="/css/contacts.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
+    <script src="./js/script.js"></script>
     <script src="./js/contacts.js"></script>
 
 
 </head>
-<body onload="includeHTML()">
+
+<body onload="includeHTML(), init()">
     <div w3-include-html="desktop_template.html"></div>
-   
+    <div id="contacts-container">
+        <div class="contacts-list" id="contacts-list">
+            <div class="list-header">
+                A
+            </div>
+            <div class="list-contact list-contact-activ">
+                <img src="./assets/img/contacts-icons/Frame 79.png" alt="">
+                <div>
+                    <p>Name hierundso</p>
+                    <p>mail@wasauchimmer.de</p>
+                </div>
+            </div>
+           
+        </div>
+        <div class="contact-info">
+            <div class="contact-headline">
+                <h3>Contacts</h3>
+                <p>Better with a team</p>
+            </div>
+            <div class="contact-details" id="contactDetails"></div>
+        </div>
+        <div class="new-contact" onclick="editShowContact()">
+            New Contact
+            <img src="./assets/img/contacts-icons/addContact.png" alt="">
+        </div>
+    </div>
+    <div id="overlayContent" class="d-none">
+       
+    </div>
+    <div class="alert" id="alert"> 
+        <div class="alert-content">
+            Contact succesfuly created
+
+        </div> 
+    </div>
 </body>
+
 </html>
