@@ -4,7 +4,8 @@ let menuContactsOpen = false;
 let contacts = [];
 let initials = {
     'id': [],
-    'initials': []
+    'initials': [],
+    'color': []
 };
 let title;
 let description;
@@ -131,11 +132,13 @@ function setContacts(i) {
         document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         initials['initials'].push(contacts[i]['initials']);
         initials['id'].push(contacts[i]['id']);
+        initials['color'].push(contacts[i]['color']);
         showInitials();
     } else {
         document.getElementById('Checkbox' + i).classList.remove('custom_checkBox_child');
         initials['initials'].splice(index, 1);
         initials['id'].splice(index, 1);
+        initials['color'].splice(index, 1);
         showInitials();
     }
 };
@@ -146,8 +149,9 @@ function showInitials() {
     document.getElementById('initials').innerHTML = '';
     for (let i = 0; i < initials['initials'].length; i++) {
         let initial = initials['initials'][i];
+        let bgrColor = initials['color'][i];
         document.getElementById('initials').innerHTML += `
-        <div class="initials">
+        <div class="initials" style="background-color: ${bgrColor};">
         ${initial}
         </div>`;
     }
