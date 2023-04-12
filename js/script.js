@@ -28,6 +28,13 @@ function addUser() {
     saveUser();
 }
 
+/**
+ * add/remove class d-none to your Object
+ * @param {string} id - need the id from your Object
+ */
+function toggleDNone(id) {
+    document.getElementById(`${id}`).classList.toggle('d-none');
+}
 
 
 // Weiterleitung zur Log In Seite
