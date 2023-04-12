@@ -1,4 +1,5 @@
 body {
+    overflow: unset !important;
     animation-duration: 0.5s;
     animation-timing-function: ease-in-out;
 }
@@ -63,6 +64,7 @@ h1 {
     padding-right: 110px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 50px;
 }
 
 .form_right {
@@ -442,8 +444,9 @@ span {
 
 .subtask_box {
     width: 435px;
-    min-height: 150px;
-    overflow: auto;
+    min-height: 120px;
+    max-height: 121px;
+    overflow: scroll;
 }
 
 .contact_checkbox {

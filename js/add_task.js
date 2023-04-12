@@ -18,8 +18,8 @@ let task = {
     'title': '',
     'description': '',
     'category': '',
-    'color': '',
-    'contacts': [],
+    'category_color': '',
+    'contacts_id': [],
     'date': '',
     'prio': '',
     'subtasks': []
@@ -28,6 +28,7 @@ let categorys = {
     'category': [],
     'color': []
 };
+let test = [];
 
 //address of the backend server
 
@@ -303,7 +304,7 @@ function createTask() {
         closeMenu('contacts', 'dropDownContacts')
         showNotice('addBordBox');
         fillTaskjJson();
-       loadBoardHTML();
+        loadBoardHTML();
     } else {
         if (!taskCategory) clearInputField();
         if (taskCategory) setCategory(taskCategory, color);
@@ -315,16 +316,25 @@ function createTask() {
 
 
 function fillTaskjJson() {
-    title = document.getElementById('title').value;
-    description = document.getElementById('description').value;
+    task['title'] = document.getElementById('title').value;
+    task['description'] = document.getElementById('description').value
+    task['category'] = taskCategory;
+    task['category_color'] = color;
+    task['contacts_id'] = initials['id'];
+    task['date'] = date;
+    task['prio'] = prio;
+    task['subtasks'] = subTasks;
+    saveInLocalStorage();
 }
 
+//move the body out of the screent and load the board.HTML
 
 function loadBoardHTML() {
     setTimeout(() => document.getElementById('body').classList.add('body_move_right'), 2400);
     setTimeout(() => location.href = "board.html", 2800);
 }
 
+//validates which input field has no value and apply a red boarder
 
 function checkWhichFieldIsEmpty() {
     if (document.getElementById('title').value.length < 1) document.getElementById('title').style.borderColor = `red`;
@@ -334,6 +344,7 @@ function checkWhichFieldIsEmpty() {
     if (!prio) document.getElementById('prio').style.borderColor = `red`;
 };
 
+// remove the red boarder from the priority section
 
 function removeBorder(id) {
     document.getElementById(id).style.borderColor = `#D1D1D1`;
@@ -353,6 +364,7 @@ function allFilled() {
     }
 };
 
+// displays a notice from the bottom edge of the screen
 
 function showNotice(id) {
     document.getElementById(id).style.display = ''
@@ -362,6 +374,7 @@ function showNotice(id) {
     setTimeout(() => document.getElementById(id).classList.add('addBord_box_inactive'), 2000);
 }
 
+// remove the display property from the notice div's
 
 function hideNotices() {
     document.getElementById('addBordBox').style.display = 'none'
@@ -374,6 +387,7 @@ function hideNotices() {
 
 async function saveInLocalStorage() {
     await backend.setItem('categorys', JSON.stringify(categorys));
+    await backend.setItem('tasks', JSON.stringify(task));
 };
 
 //load content from the backend server
@@ -382,6 +396,7 @@ async function loadData() {
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
+    test = JSON.parse(backend.getItem('tasks')) || [];
 };
 
 
