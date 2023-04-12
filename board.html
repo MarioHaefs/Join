@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,14 +10,67 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="/css/board.css">
     <script src="./js/includeHTML.js"></script>
     <script src="./js/board.js"></script>
 
 
 </head>
-<body onload="includeHTML()">
+
+<body onload="includeHTML(), initBoard()">
     <div w3-include-html="desktop_template.html"></div>
-   
+
+    <div class="board-content">
+        <div class="board-header">
+            <h1>Board</h1>
+            <div class="search-container">
+                <input type="search" id="search-input" placeholder="Find Task">
+                <img src="./assets/img/search-icon.png" class="search-input-icon">
+                <button class="btn-add-task">Add Task</button>
+                <img src="./assets/img/add-task-plus-icon.png" class="add-task-plus-icon">
+            </div>
+        </div>
+
+        <div class="board-tasks">
+            <div class="tasks">
+                <div class="task-header">
+                    <h3>To do</h3>
+                    <img src="./assets/img/plus-button.png">
+                </div>
+                <div id="tasks-to-do">
+
+                </div>
+            </div>
+            <div class="tasks">
+                <div class="task-header">
+                    <h3>In progress</h3>
+                    <img src="./assets/img/plus-button.png">
+                </div>
+                <div id="tasks-in-progress">
+
+                </div>
+            </div>
+            <div class="tasks">
+                <div class="task-header">
+                    <h3>Awaiting Feedback</h3>
+                    <img src="./assets/img/plus-button.png">
+                </div>
+                <div id="tasks-awaiting-feedback">
+
+                </div>
+            </div>
+            <div class="tasks">
+                <div class="task-header">
+                    <h3>Done</h3>
+                    <img src="./assets/img/plus-button.png">
+                </div>
+                <div id="tasks-done">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </body>
+
 </html>
