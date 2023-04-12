@@ -544,14 +544,14 @@
   border-radius: 10px;
   border: none;
   padding-left: 16px;
+  padding-right: 16px;
   height: 48px;
 }
 .board-content .board-header .search-container .btn-add-task:hover {
   background-color: #29ABE2;
 }
 .board-content .board-header .search-container .add-task-plus-icon {
-  transform: translateX(-100%);
-  padding-right: 6px;
+  margin-left: 6px;
 }
 .board-content .board-tasks {
   display: flex;
@@ -578,9 +578,42 @@
 .board-content .board-tasks .tasks .task {
   display: flex;
   flex-direction: column;
-  background-color: #F6F7F8;
+  padding: 16px;
+  background-color: white;
+  border-radius: 18px;
+  box-shadow: 0px 1px 6px -2px rgba(0, 0, 0, 0.2);
+}
+.board-content .board-tasks .tasks .task h4 {
+  margin: 8px 0px;
+}
+.board-content .board-tasks .tasks .task span {
+  color: #a8a8a8;
+}
+.board-content .board-tasks .tasks .task .task-topic {
+  padding: 4px 18px;
+  margin-bottom: 16px;
+  width: -moz-fit-content;
+  width: fit-content;
   border-radius: 6px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  color: white;
+  background-color: orangered;
+}
+.board-content .board-tasks .tasks .task .task-subtasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 20px;
+  width: 100%;
+  margin: 8px 0;
+}
+.board-content .board-tasks .tasks .task .task-subtasks .task-subtasks-line {
+  height: 4px;
+  width: calc(100% - 60px);
+  background-color: #f4f4f4;
+}
+.board-content .board-tasks .tasks .task .task-subtasks span {
+  font-size: small;
+  color: black;
 }
 
 body {

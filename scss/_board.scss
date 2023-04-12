@@ -39,12 +39,12 @@
             .btn-add-task {
                 @include button-darkblue();
                 padding-left: 16px;
+                padding-right: 16px;
                 height: $heightInput;
             }
 
             .add-task-plus-icon {
-                transform: translateX(calc(-100%));
-                padding-right: $paddingIcon;
+                margin-left: 6px;
             }
         }
     }
@@ -78,9 +78,47 @@
             .task {
                 display: flex;
                 flex-direction: column;
-                background-color: $pagebackground;
-                border-radius: 6px;
-                box-shadow: 2px 2px 2px 2px rgba($color: #000000, $alpha: 0.2);
+                padding: 16px;
+                background-color: white;
+                border-radius: 18px;
+                box-shadow: 0px 1px 6px -2px rgba($color: #000000, $alpha: 0.2);
+
+                h4 {
+                    margin: 8px 0px;
+                }
+
+                span {
+                    color: $gray;
+                }
+
+                .task-topic {
+                    padding: 4px 18px;
+                    margin-bottom: 16px;
+                    width: fit-content;
+                    border-radius: 6px;
+                    color: white;
+                    background-color: orangered;
+                }
+
+                .task-subtasks {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    min-height: 20px;
+                    width: 100%;
+                    margin: 8px 0;
+
+                    .task-subtasks-line {
+                        height: 4px;
+                        width: calc(100% - 60px);
+                        background-color: #f4f4f4;
+                    }
+
+                    span {
+                        font-size: small;
+                        color: black;
+                    }
+                }
             }
         }
     }
