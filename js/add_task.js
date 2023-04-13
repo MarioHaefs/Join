@@ -329,6 +329,7 @@ function createTask() {
     }
 };
 
+// fill the tasks Array with values and save it on the server
 
 function fillTaskjJson() {
     task['title'] = document.getElementById('title').value;

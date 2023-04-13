@@ -1,6 +1,6 @@
 body {
     overflow: unset !important;
-    animation-duration: 0.5s;
+    animation-duration: 0.4s;
     animation-timing-function: ease-in-out;
 }
 
@@ -141,6 +141,10 @@ span {
     width: 422px;
     height: 51px;
     border-radius: 10px;
+}
+
+.drop_down:hover{
+    cursor: pointer;
 }
 
 .drop_down_open {
@@ -462,7 +466,11 @@ span {
 }
 
 .checkbox_subtask {
-    margin: 0;
+    margin: 0px;
+}
+
+.checkbox_subtask:hover {
+cursor: pointer;
 }
 
 .contact_checkbox {
@@ -517,9 +525,9 @@ span {
 }
 
 .addBord_box {
-    bottom: -200px;
+    bottom: 0px;
     position: absolute;
-    left: -273px;
+    left: calc(50% - 163px);
     color: white;
     font-weight: 400;
     font-size: 21px;
@@ -534,11 +542,11 @@ span {
     border-radius: 20px;
     animation-duration: 0.4s;
     animation-timing-function: ease-in-out;
+    opacity: 0;
 }
 
 .addBord_box_active {
-    animation-name: slipe-up;
-    bottom: 100px;
+    animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .body_move_right {
@@ -546,8 +554,7 @@ span {
 }
 
 .addBord_box_inactive {
-    animation-name: slipe-down;
-    bottom: -200px;
+    animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 .add_board_image {
@@ -558,25 +565,27 @@ span {
 	animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
-@keyframes slipe-up {
-    from {
-        transform: translateY(300px);
+@keyframes slide-in-bottom {
+    0% {
+      transform: translateY(1000px);
+      opacity: 0;
     }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 
-    to {
-        transform: translateX(0px);
+  @keyframes slide-out-bottom {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
     }
-}
-
-@keyframes slipe-down {
-    from {
-        transform: translateY(-300px);
+    100% {
+      transform: translateY(1000px);
+      opacity: 0;
     }
-
-    to {
-        transform: translateX(0px);
-    }
-}
+  }
 
 @keyframes slipe-right {
     from {
@@ -584,7 +593,7 @@ span {
     }
 
     to {
-        transform: translateX(2000px);
+        transform: translateX(4000px);
     }
 }
 
@@ -598,4 +607,5 @@ span {
       opacity: 0;
     }
   }
+  
   
