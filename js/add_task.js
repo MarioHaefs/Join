@@ -1,4 +1,5 @@
 let prio;
+let task_id;
 let checked;
 let menuContactsOpen = false;
 let contacts = [];
@@ -14,7 +15,9 @@ let menuOpen = false;
 let color;
 let taskCategory
 let subTasks = [];
+let tasks = [];
 let task = {
+    'task_id': '',
     'title': '',
     'description': '',
     'category': '',
@@ -200,7 +203,7 @@ function deleteCategory(i) {
     }
     categorys['category'].splice(i, 1);
     categorys['color'].splice(i, 1);
-    saveInLocalStorage();
+    saveInLocalStorage('categorys', categorys);
     renderCategorys();
 }
 
@@ -238,7 +241,7 @@ function addNewCategory() {
     } else {
         categorys['color'].push(color);
         categorys['category'].push(categoryValue);
-        saveInLocalStorage();
+        saveInLocalStorage('categorys', categorys);
         taskCategory = categoryValue;
         showCategoryColorHTML();
         menuOpen = false;
@@ -304,7 +307,7 @@ function createTask() {
         closeMenu('contacts', 'dropDownContacts')
         showNotice('addBordBox');
         fillTaskjJson();
-        loadBoardHTML();
+
     } else {
         if (!taskCategory) clearInputField();
         if (taskCategory) setCategory(taskCategory, color);
@@ -322,9 +325,11 @@ function fillTaskjJson() {
     task['category_color'] = color;
     task['contacts_id'] = initials['id'];
     task['date'] = date;
+    task['task_id'] = task_id;
     task['prio'] = prio;
     task['subtasks'] = subTasks;
-    saveInLocalStorage();
+    tasks.push(task);
+    saveInLocalStorage('tasks', tasks);
 }
 
 //move the body out of the screent and load the board.HTML
@@ -385,9 +390,9 @@ function hideNotices() {
 
 //save content on the backend server
 
-async function saveInLocalStorage() {
-    await backend.setItem('categorys', JSON.stringify(categorys));
-    await backend.setItem('tasks', JSON.stringify(task));
+async function saveInLocalStorage(key, array) {
+    await backend.setItem(key, JSON.stringify(array));
+    await backend.setItem('index', task_id);
 };
 
 //load content from the backend server
@@ -396,7 +401,9 @@ async function loadData() {
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
-    test = JSON.parse(backend.getItem('tasks')) || [];
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
+    task_id = backend.getItem('index');
+    task_id++;
 };
 
 
