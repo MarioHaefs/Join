@@ -119,6 +119,27 @@
                         color: black;
                     }
                 }
+
+                .editors {
+                    display: flex;
+                    height: 42px;
+                    width: 100%;
+
+                    .contact-frame {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+                        min-width: 42px;
+                        height: 42px;
+                        color: #FFFFFF;
+                        border-radius: 100%;
+                    }
+                }
+
+                .task-prio {
+                    display: flex;
+                }
             }
         }
     }
