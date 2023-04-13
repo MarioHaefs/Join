@@ -1,0 +1,125 @@
+.board-content {
+    margin-left: 200px;
+    padding-left: 56px;
+    padding-top: 56px;
+    padding-right: 56px;
+
+    .board-header {
+        display: flex;
+        justify-content: space-between;
+
+        h1 {
+            font-size: 48px;
+            margin: unset;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            $heightInput: 48px;
+            $paddingIcon: 6px;
+
+
+            #search-input {
+                @include inputForm(none, none, none);
+                padding-right: 56px;
+                height: $heightInput;
+            }
+
+            .search-input-icon {
+                height: calc($heightInput - 4 * $paddingIcon);
+                transform: translateX(calc(-100%));
+                padding: $paddingIcon 2*$paddingIcon $paddingIcon 2*$paddingIcon;
+                border-left: 2px solid #D1D1D1;
+                object-fit: contain;
+                cursor: pointer;
+            }
+
+            .btn-add-task {
+                @include button-darkblue();
+                padding-left: 16px;
+                padding-right: 16px;
+                height: $heightInput;
+            }
+
+            .add-task-plus-icon {
+                margin-left: 6px;
+            }
+        }
+    }
+
+    .board-tasks {
+        display: flex;
+        width: 100%;
+        gap: 16px;
+        margin-top: 56px;
+
+
+        .tasks {
+            width: 25%;
+            padding: 4px;
+
+            .task-header {
+                display: flex;
+                justify-content: space-between;
+                height: 32px;
+                margin-bottom: 32px;
+
+                h3 {
+                    margin: unset;
+                }
+
+                img {
+                    cursor: pointer;
+                }
+            }
+
+            .task {
+                display: flex;
+                flex-direction: column;
+                padding: 16px;
+                background-color: white;
+                border-radius: 18px;
+                box-shadow: 0px 1px 6px -2px rgba($color: #000000, $alpha: 0.2);
+
+                h4 {
+                    margin: 8px 0px;
+                }
+
+                span {
+                    color: $gray;
+                }
+
+                .task-topic {
+                    padding: 4px 18px;
+                    margin-bottom: 16px;
+                    width: fit-content;
+                    border-radius: 6px;
+                    color: white;
+                    background-color: orangered;
+                }
+
+                .task-subtasks {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    min-height: 20px;
+                    width: 100%;
+                    margin: 8px 0;
+
+                    .task-subtasks-line {
+                        height: 4px;
+                        width: calc(100% - 60px);
+                        background-color: #f4f4f4;
+                    }
+
+                    span {
+                        font-size: small;
+                        color: black;
+                    }
+                }
+            }
+        }
+    }
+}
