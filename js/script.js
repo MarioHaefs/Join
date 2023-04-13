@@ -1,16 +1,35 @@
+setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 let users = [];
-loadUser();
 
 
-// Registrierung auf sign_up.html
-function addUser() {
+/**
+ * fill your empty array with users from the Server
+ */
+async function initUsers() {
+    await downloadFromServer();
+    users = JSON.parse(backend.getItem('users')) || [];
+}
+
+
+/**
+ * delete all User from your Array
+ */
+function deleteUser() {
+     backend.deleteItem('users');
+  }
+
+
+/**
+ * register User on sign_up.html
+ */
+ async function addUser() {
     let name = document.getElementById('register-name')
     let email = document.getElementById('register-email')
     let password = document.getElementById('register-password')
 
     for (let i = 0; i < users.length; i++) {
         if (users[i].email === email.value) {
-            // Wenn die E-Mail-Adresse bereits registriert ist, die Funktion abbrechen
+            // If Mail already registered, stop sign in
             document.getElementById('register-error').style.display = 'block';
             name.value = '';
             email.value = '';
@@ -21,11 +40,11 @@ function addUser() {
     }
 
     users.push({ name: name.value, email: email.value, password: password.value })
+    await backend.setItem('users', JSON.stringify(users));
 
     document.getElementById('register-success').style.display = 'block';
 
-    setTimeout(goToLogin, 3000);
-    saveUser();
+    setTimeout(goToLogin, 3000);    
 }
 
 /**
@@ -36,30 +55,25 @@ function toggleDNone(id) {
     document.getElementById(`${id}`).classList.toggle('d-none');
 }
 
+/**
+ * add/remove class d-none to your Object
+ * @param {string} id - need the id from your Object
+ */
+function toggleDNone(id) {
+    document.getElementById(`${id}`).classList.toggle('d-none');
+}
 
-// Weiterleitung zur Log In Seite
+/**
+ * go to index.html
+ */
 function goToLogin() {
     window.location.href = "index.html"
 }
 
-// Speichert User-Daten
-function saveUser() {
-    let user = JSON.stringify(users);
-    localStorage.setItem('users', user);
-}
 
-
-// Lädt User-Daten
-function loadUser() {
-    let user = localStorage.getItem('users');
-
-    if (user) {
-        users = JSON.parse(user);
-    }
-}
-
-
-// Login Vorgang erfolgreich, wenn Daten aus der Registrierung verwendet werden! Wenn nicht wird im "else" Teil darauf hingewiesen!
+/**
+ * Login Function
+ */
 function login() {
     let email = document.getElementById('login-email');
     let password = document.getElementById('login-password');
@@ -76,24 +90,33 @@ function login() {
 }
 
 
-// Guest Log In 
+/**
+ * Guest Login
+ */ 
 function goToSummary() {
     window.location.href = "summary.html"
 }
 
 
-// Anzeige von nicht korrekter Email und Passwort Nachricht wieder verbergen!
+/**
+ * hide "false Login" Message
+ */
 function hideFalseData() {
     document.getElementById('login-false').style.display = 'none';
 }
 
-// Anzeige von bereits registrierter Email Nachricht wieder verbergen!
+
+/**
+ * hide "Mail already registered" Message
+ */
 function hideMailAlreadyUsed() {
     document.getElementById('register-error').style.display = 'none';
 }
 
 
-// Anzeige des Log out Buttons
+/**
+ * show and hide Log out Button in desktop_template.html
+ */
 function openProfilIconMenu() {
     let logOutField = document.getElementById('log-out-field');
 
