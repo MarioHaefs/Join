@@ -1,4 +1,5 @@
 let prio;
+let checkbox_subTask = false;
 let task_id;
 let checked;
 let menuContactsOpen = false;
@@ -9,6 +10,7 @@ let initials = {
     'color': []
 };
 let title;
+let boolians = [];
 let description;
 let date;
 let menuOpen = false;
@@ -25,13 +27,13 @@ let task = {
     'contacts_id': [],
     'date': '',
     'prio': '',
-    'subtasks': []
+    'subtasks': [],
+    'done': []
 };
 let categorys = {
     'category': [],
     'color': []
 };
-let test = [];
 
 //address of the backend server
 
@@ -267,6 +269,7 @@ function addSubtask() {
         document.getElementById('subTask').value = '';
         document.getElementById('subtaskBox').innerHTML = '';
         subTasks.push(subtaskValue);
+        boolians.push(false);
         for (let i = 0; i < subTasks.length; i++) {
             let subTask = subTasks[i];
             renderSubtasHTML(subTask, i);
@@ -277,13 +280,22 @@ function addSubtask() {
 //remove the subtask from the screen
 
 function deleteSubtask(i) {
+    document.getElementById('subTask' + i).classList.add('slide-out-right');
     subTasks.splice(i, 1);
-    document.getElementById('subtaskBox').innerHTML = '';
-    for (let i = 0; i < subTasks.length; i++) {
-        let subTask = subTasks[i];
-        renderSubtasHTML(subTask, i);
-    }
+    setTimeout(() => {
+        document.getElementById('subtaskBox').innerHTML = '';
+        for (let i = 0; i < subTasks.length; i++) {
+            let subTask = subTasks[i];
+            renderSubtasHTML(subTask, i);
+        }
+    }, 500);
+
 };
+
+function setSubtaskStatus(i) {
+    if (document.getElementById('CheckboxTask' + i).checked == true) boolians[i] = true;
+    else  boolians[i] = false;
+}
 
 // clear all inputfields en remove selected categorys and contacts
 
@@ -307,7 +319,7 @@ function createTask() {
         closeMenu('contacts', 'dropDownContacts')
         showNotice('addBordBox');
         fillTaskjJson();
-
+        loadBoardHTML();
     } else {
         if (!taskCategory) clearInputField();
         if (taskCategory) setCategory(taskCategory, color);
@@ -324,6 +336,7 @@ function fillTaskjJson() {
     task['category'] = taskCategory;
     task['category_color'] = color;
     task['contacts_id'] = initials['id'];
+    task['done'] = boolians;
     task['date'] = date;
     task['task_id'] = task_id;
     task['prio'] = prio;

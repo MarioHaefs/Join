@@ -436,6 +436,7 @@ span {
     font-size: 16px;
     display: flex;
     align-items: center;
+    
 }
 
 .subtask_child img {
@@ -449,10 +450,19 @@ span {
 }
 
 .subtask_box {
+    overflow-x: hidden;
     width: 435px;
-    min-height: 120px;
-    max-height: 121px;
-    overflow: scroll;
+    min-height: 110px;
+    max-height: 111px;
+    overflow-y: scroll;
+}
+
+.subTask_Text {
+    margin-left: 30px;
+}
+
+.checkbox_subtask {
+    margin: 0;
 }
 
 .contact_checkbox {
@@ -476,6 +486,10 @@ span {
     width: 16px;
     height: 16px;
     border-radius: 3px;
+}
+
+.custom_checkBox:hover {
+    cursor: pointer;
 }
 
 .custom_checkBox_child {
@@ -540,6 +554,10 @@ span {
     margin-left: 30px;
 }
 
+.slide-out-right {
+	animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
 @keyframes slipe-up {
     from {
         transform: translateY(300px);
@@ -569,3 +587,15 @@ span {
         transform: translateX(2000px);
     }
 }
+
+@keyframes slide-out-right {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(1000px);
+      opacity: 0;
+    }
+  }
+  

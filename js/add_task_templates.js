@@ -55,8 +55,9 @@ function renderCategorysHTML(clr, i, category) {
 
 function renderSubtasHTML(subTask, i) {
     return document.getElementById('subtaskBox').innerHTML += `
-        <div class="subtask_child">
-            <input class="input_subtask" type="checkbox"> ${subTask}
+        <div class="subtask_child" id="subTask${i}">
+            <input type="checkbox" id="CheckboxTask${i}" class="checkbox_subtask" onclick="setSubtaskStatus(${i})")>
+            <div class ="subTask_Text">${subTask}</div>
             <img src="assets/img/x.svg" onclick="deleteSubtask(${i})">
         </div>`;
 };
@@ -66,7 +67,7 @@ function renderContactsHTML(i, userName) {
     document.getElementById('contacts').innerHTML += `
             <div class="render_categorys" onclick="setContacts(${i})">
                 ${userName}  
-                <div class="custom_checkBox" id="checkbox${i}">
+                <div class="custom_checkBox">
                     <div id="Checkbox${i}"></div>
                 </div>
             </div>`;
