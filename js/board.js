@@ -1,40 +1,13 @@
 let currentDraggedElement;
-let todos = [
-    {
-        'id': 0,
-        'category': 'todo',
-        'topic': 'Finanzen',
-        'title': 'Steuererklärung',
-        'description': 'Steuererklärung erledigen',
-        'subtasks': {
-            'quantity': 2,
-            'done': 1
-        },
-        'editors': [0],
-        'prio': 'medium'
-    },
-    {
-        'id': 1,
-        'category': 'progress',
-        'topic': 'Hobby',
-        'title': 'Notenmappe',
-        'description': 'Notenmappe sortieren',
-        'subtasks': {
-            'quantity': 5,
-            'done': 2
-        },
-        'editors': [0],
-        'prio': 'medium'
-    }
-];
-
 let editors;
+let tasks;
 
 async function initBoard() {
     setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
     await downloadFromServer();
     editors = JSON.parse(backend.getItem('contacts')) || [];
-    console.log(editors);
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
+    console.log(tasks);
     renderTasks();
 }
 
@@ -42,8 +15,8 @@ function renderTasks() {
     //renderSingleTask();
     deleteTasksOnBoard();
 
-    for (let i = 0; i < todos.length; i++) {
-        const task = todos[i];
+    for (let i = 0; i < tasks.length; i++) {
+        const task = tasks[i];
         renderSingleTask(task);
     }
 }
@@ -54,9 +27,9 @@ function renderTasks() {
  * @todo complete task
  */
 function renderSingleTask(task) {
-    let destination = document.getElementById(`tasks-${task['category']}`);
+    let destination = document.getElementById(`${checkTaskStatus(task)}`);//${task['category']}`);
     destination.innerHTML += `
-        <div draggable="true" ondragstart="startDragging(0)" class="task" id="task1">
+        <div draggable="true" ondragstart="startDragging(${task['task_id']})" class="task" id="task1">
             ${htmlTaskTopic(task)}
             ${htmlTaskTitle(task)}
             ${htmlTaskDescription(task)}
@@ -71,7 +44,7 @@ function renderSingleTask(task) {
  * @returns html code for the topic of the task
  */
 function htmlTaskTopic(task) {
-    return `<div class="task-topic">${task['topic']}</div>`;
+    return `<div class="task-topic">${task['category']}</div>`;
 }
 
 function htmlTaskTitle(task) {
@@ -85,15 +58,16 @@ function htmlTaskDescription(task) {
 function htmlTaskSubtasks(task) {
     return `<div class="task-subtasks">
                 <div class="task-subtasks-line"></div>
-                <span>${task['subtasks']['done']}/${task['subtasks']['quantity']} Done</span>
+                <span>${task['done'].filter(Boolean).length}/${task['subtasks'].length} Done</span>
             </div>
     `;
 }
 
 function htmlTaskEditors(task) {
     let htmlCodeTemp = '';
-    for (let i = 0; i < task['editors'].length; i++) {
-        const editor = task['editors'][i];
+    for (let i = 0; i < task['contacts_id'].length; i++) {
+        const editor = task['contacts_id'][i];
+        if (editor == null) return;
         htmlCodeTemp += `
             <div class="contact-frame" style="background-color: ${editors[editor]['color']}">
                 ${editors[editor]['initials']}
@@ -109,14 +83,17 @@ function htmlTaskPrio(task) {
 
 function startDragging(id) {
     currentDraggedElement = id;
+    console.log('Dragging ID: ', currentDraggedElement);
 }
 
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function moveTo(category) {
-    todos[currentDraggedElement]['category'] = category;
+function moveTo(status) {
+    let taskIndex = tasks.findIndex((task) => task['task_id'] == currentDraggedElement);
+    console.log(taskIndex);
+    tasks[taskIndex]['status'] = status;
     renderTasks();
 }
 
@@ -125,4 +102,12 @@ function deleteTasksOnBoard() {
     document.getElementById('tasks-progress').innerHTML = '';
     document.getElementById('tasks-feedback').innerHTML = '';
     document.getElementById('tasks-done').innerHTML = '';
+}
+
+function checkTaskStatus(task) {
+    if (task['status'] != null) {
+        return `tasks-${task['status']}`;
+    } else {
+        return 'tasks-todo';
+    }
 }
