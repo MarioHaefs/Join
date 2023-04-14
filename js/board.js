@@ -55,6 +55,14 @@ function htmlTaskDescription(task) {
     return `<span>${task['description']}</span>`;
 }
 
+
+/**
+ * 
+ * @param {JSON} task includes all information to render the task on board - it is loaded from the server
+ * @returns html code for progress in subtasks
+ * task has property 'done' as array with booleans, if true, subtask is already done
+ * filter(Boolean) returns only true values of array
+ */
 function htmlTaskSubtasks(task) {
     return `<div class="task-subtasks">
                 <div class="task-subtasks-line"></div>
@@ -63,6 +71,15 @@ function htmlTaskSubtasks(task) {
     `;
 }
 
+/**
+ * 
+ * @param {JSON} task includes all information to render the task on board - it is loaded from the server
+ * @returns html code for the editors of the task 
+ * 
+ * all available editors are loaded from server and are stored global
+ * get assigned contact id's from param task
+ * get initials and color with contact id from global editors
+ */
 function htmlTaskEditors(task) {
     let htmlCodeTemp = '';
     for (let i = 0; i < task['contacts_id'].length; i++) {
@@ -83,13 +100,17 @@ function htmlTaskPrio(task) {
 
 function startDragging(id) {
     currentDraggedElement = id;
-    console.log('Dragging ID: ', currentDraggedElement);
 }
 
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
+/**
+ * 
+ * @param {String} status assign column in board - todo, progress, feedback, done
+ * task_id != currentDraggedElement, therefore find Index of task in task with task_id
+ */
 function moveTo(status) {
     let taskIndex = tasks.findIndex((task) => task['task_id'] == currentDraggedElement);
     console.log(taskIndex);
@@ -104,6 +125,12 @@ function deleteTasksOnBoard() {
     document.getElementById('tasks-done').innerHTML = '';
 }
 
+/**
+ * 
+ * @param {JSON} task includes all information to render the task on board - it is loaded from the server
+ * @returns column where task has to be rendered
+ * if no status is available, task is new and not started
+ */
 function checkTaskStatus(task) {
     if (task['status'] != null) {
         return `tasks-${task['status']}`;
