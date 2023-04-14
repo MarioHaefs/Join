@@ -13,8 +13,7 @@ $bgr_color2: #2A3647
 @mixin hover()
     background-color: $bgr_color2
     cursor: pointer
-    width: 180px
-    height: 180px
+    scale: 1.1
     color: #fff
     -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.46)
     box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.46)
@@ -95,8 +94,6 @@ $bgr_color2: #2A3647
     transition: 300ms
     &:hover
         @include hover()
-        width: 590px
-        height: 160px
 
 .todo_done
     display: flex
@@ -112,8 +109,6 @@ $bgr_color2: #2A3647
     gap: 40px
     &:hover
         @include hover()
-        width: 282.5px
-        height: 160px
         img
             filter: invert(100%) brightness(2)
 .todo

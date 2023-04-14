@@ -69,8 +69,7 @@
 .task_sub:hover {
   background-color: #2A3647;
   cursor: pointer;
-  width: 180px;
-  height: 180px;
+  scale: 1.1;
   color: #fff;
   -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
@@ -102,13 +101,10 @@
 .prio_date:hover {
   background-color: #2A3647;
   cursor: pointer;
-  width: 180px;
-  height: 180px;
+  scale: 1.1;
   color: #fff;
   -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
-  width: 590px;
-  height: 160px;
 }
 
 .todo_done {
@@ -132,13 +128,10 @@
 .todo_done_sub:hover {
   background-color: #2A3647;
   cursor: pointer;
-  width: 180px;
-  height: 180px;
+  scale: 1.1;
   color: #fff;
   -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
-  width: 282.5px;
-  height: 160px;
 }
 .todo_done_sub:hover img {
   filter: invert(100%) brightness(2);
