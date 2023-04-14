@@ -20,9 +20,9 @@ function showInputCategoryHTML() {
 
 function showCategoryHTML() {
     return document.getElementById('categoryBox').innerHTML = `
-    <div class="drop_down" id="dropDown">
+    <div class="drop_down" id="dropDown"  onclick="openCategory()">
                     Select task category
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>`;
 };
@@ -30,12 +30,12 @@ function showCategoryHTML() {
 
 function showCategoryColorHTML() {
     return document.getElementById('categoryBox').innerHTML = `
-    <div class="drop_down" id="dropDown">
+    <div class="drop_down" id="dropDown" onclick="openCategory()">
                     <div class="category_color">
                         ${taskCategory}
                         <div  class="color2" style="background-color: ${color};"></div>
                     </div>
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>`;
 };
@@ -43,7 +43,7 @@ function showCategoryColorHTML() {
 
 function renderCategorysHTML(clr, i, category) {
     return document.getElementById('categorys').innerHTML += `
-        <div class="render_categorys">
+        <div class="render_categorys" id="ctgry${i}">
                    <div class="set_category" onclick="setCategory('${category}', '${clr}')">
                         ${category}
                         <div  class="color2" style="background-color: ${clr};"></div>

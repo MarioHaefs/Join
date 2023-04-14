@@ -184,8 +184,8 @@ function closeMenu(id1, id2) {
 //renders the categories into the category menu
 
 function renderCategorys() {
-    document.getElementById('categorys').innerHTML = ''
-    document.getElementById('categorys').innerHTML = `<div class="render_categorys" onclick="inputCategory()">New category</div>`;
+        document.getElementById('categorys').innerHTML = ''
+        document.getElementById('categorys').innerHTML = `<div class="render_categorys" onclick="inputCategory()">New category</div>`; 
     for (let i = 0; i < categorys['category'].length; i++) {
         let clr = categorys['color'][i];
         let category = categorys['category'][i];
@@ -203,10 +203,12 @@ function deleteCategory(i) {
         `;
         taskCategory = undefined;
     }
+    document.getElementById('ctgry' + i).classList.add('slide-out-right');
     categorys['category'].splice(i, 1);
     categorys['color'].splice(i, 1);
     saveInLocalStorage('categorys', categorys);
-    renderCategorys();
+    setTimeout(() => renderCategorys(), 500);
+    
 }
 
 //renders the input field for a new category

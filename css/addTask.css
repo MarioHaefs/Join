@@ -143,7 +143,7 @@ span {
     border-radius: 10px;
 }
 
-.drop_down:hover{
+.drop_down:hover {
     cursor: pointer;
 }
 
@@ -183,19 +183,21 @@ span {
 }
 
 .render_categorys_box {
+    background-color: white;
+    overflow-x: hidden;
     width: 422px;
-    overflow: auto;
+    overflow-y: auto;
     box-sizing: border-box;
     max-height: 155px;
     margin-bottom: 34px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-right: 1px solid #D1D1D1;
+    border-left: 1px solid #D1D1D1;
 }
 
 .render_categorys {
     position: relative;
-    border-left: 1px solid #D1D1D1;
     border-top: 1px solid #D1D1D1;
     font-size: 21px;
     font-weight: 400;
@@ -206,6 +208,7 @@ span {
     height: 51px;
     display: flex;
     align-items: center;
+    animation: ease-in-out;
 }
 
 .set_category {
@@ -440,7 +443,7 @@ span {
     font-size: 16px;
     display: flex;
     align-items: center;
-    
+
 }
 
 .subtask_child img {
@@ -470,7 +473,7 @@ span {
 }
 
 .checkbox_subtask:hover {
-cursor: pointer;
+    cursor: pointer;
 }
 
 .contact_checkbox {
@@ -562,30 +565,32 @@ cursor: pointer;
 }
 
 .slide-out-right {
-	animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 @keyframes slide-in-bottom {
     0% {
-      transform: translateY(1000px);
-      opacity: 0;
+        transform: translateY(1000px);
+        opacity: 0;
     }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
 
-  @keyframes slide-out-bottom {
-    0% {
-      transform: translateY(0);
-      opacity: 1;
-    }
     100% {
-      transform: translateY(1000px);
-      opacity: 0;
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
+}
+
+@keyframes slide-out-bottom {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(1000px);
+        opacity: 0;
+    }
+}
 
 @keyframes slipe-right {
     from {
@@ -599,13 +604,12 @@ cursor: pointer;
 
 @keyframes slide-out-right {
     0% {
-      transform: translateX(0);
-      opacity: 1;
+        transform: translateX(0);
+        opacity: 1;
     }
+
     100% {
-      transform: translateX(1000px);
-      opacity: 0;
+        transform: translateX(1000px);
+        opacity: 0;
     }
-  }
-  
-  
+}
