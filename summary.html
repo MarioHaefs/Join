@@ -15,7 +15,7 @@
 
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(), greet()">
     <div w3-include-html="desktop_template.html"></div>
 <div class="main_box">
     <div class="overview">
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="task">
-            <div class="task_sub">
+            <a href="board.html" class="task_sub">
                 <span class="count">
                     5
                 </span>
@@ -34,8 +34,8 @@
                     Tasks in <br>
                     Board
                 </span>
-            </div>
-            <div class="task_sub">
+            </a>
+            <a href="board.html" class="task_sub">
                 <span class="count">
                     5
                 </span>
@@ -43,8 +43,8 @@
                     Tasks in <br>
                     Progress
                 </span>
-            </div>
-            <div class="task_sub">
+            </a>
+            <a href="board.html" class="task_sub">
                 <span class="count">
                     5
                 </span>
@@ -52,9 +52,9 @@
                     Awaiting <br>
                     Feedback
                 </span>
-            </div>
+            </a>
         </div>
-        <div class="prio_date">
+        <a href="board.html" class="prio_date">
             <div class="prio_date_sub">
                 <img src="assets/img/urgent.svg" alt="">
                 <div class="todo">
@@ -75,9 +75,9 @@
                     
                 </div>
             </div>
-        </div>
+        </a>
         <div class="todo_done">
-            <div class="todo_done_sub">
+            <a href="board.html" class="todo_done_sub">
                 <img src="assets/img/pencil.svg" alt="">
                 <div class="todo">
                     <span class="count">
@@ -87,8 +87,8 @@
                         To-do
                     </span>
                 </div>
-            </div>
-            <div class="todo_done_sub">
+            </a>
+            <a href="board.html" class="todo_done_sub">
                 <img src="assets/img/check.svg" alt="">
                 <div class="todo">
                     <span class="count">
@@ -98,11 +98,11 @@
                         Done
                     </span>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
     <div class="greeting">
-        <span class="hallo">Good Morning</span>
+        <span id="hallo" class="hallo"></span>
         <span class="name"> John Doe</span>
     </div>
 </div>
