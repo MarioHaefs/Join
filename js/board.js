@@ -100,6 +100,7 @@ function htmlTaskPrio(task) {
 
 function startDragging(id) {
     currentDraggedElement = id;
+    markDraggableArea(`2px dotted #a8a8a8`);
 }
 
 function allowDrop(ev) {
@@ -113,8 +114,8 @@ function allowDrop(ev) {
  */
 function moveTo(status) {
     let taskIndex = tasks.findIndex((task) => task['task_id'] == currentDraggedElement);
-    console.log(taskIndex);
     tasks[taskIndex]['status'] = status;
+    markDraggableArea(``);
     renderTasks();
 }
 
@@ -136,5 +137,13 @@ function checkTaskStatus(task) {
         return `tasks-${task['status']}`;
     } else {
         return 'tasks-todo';
+    }
+}
+
+function markDraggableArea(style) {
+    let draggableArea = document.getElementsByClassName('task-body');
+    for (let i = 0; i < draggableArea.length; i++) {
+        const area = draggableArea[i];
+        area.style.border = style;
     }
 }

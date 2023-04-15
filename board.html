@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
 
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <link rel="stylesheet" href="./css/style.css">
 
-    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="./css/fonts.css">
     <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
     <script src="./js/script.js"></script>
@@ -19,7 +19,7 @@
 
 </head>
 
-<body onload="includeHTML(), initBoard()">
+<body onload="includeHTML(), initBoard()" ondragend="markDraggableArea('')">
     <div w3-include-html="desktop_template.html"></div>
 
     <div class="board-content">
