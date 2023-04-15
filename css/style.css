@@ -186,9 +186,11 @@
   background: white url("../assets/img/lock-icon.png") right no-repeat;
   background-position: 94% 55%;
 }
+
 .log-in .form-class .log-in-form ::-moz-placeholder {
   opacity: 0.5;
 }
+
 .log-in .form-class .log-in-form ::placeholder {
   opacity: 0.5;
 }
@@ -428,7 +430,6 @@ body {
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 15px 25px;
   margin-left: 48px;
@@ -437,7 +438,6 @@ body {
   width: 100%;
   box-sizing: border-box;
   border-radius: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   font-size: 16px;
   cursor: pointer;
@@ -447,7 +447,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -514,7 +513,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -745,14 +743,17 @@ body {
  */
 @keyframes slide-top {
   0% {
+    -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 0;
   }
   50% {
+    -webkit-transform: translateY(-200px);
     transform: translateY(-200px);
     opacity: 1;
   }
   100% {
+    -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 0;
   }
@@ -776,6 +777,122 @@ body {
     background-color: rgba(0, 0, 0, 0.3);
   }
 }
+.board-content {
+  margin-left: 200px;
+  padding-left: 56px;
+  padding-top: 56px;
+  padding-right: 56px;
+}
+.board-content .board-header {
+  display: flex;
+  justify-content: space-between;
+}
+.board-content .board-header h1 {
+  font-size: 48px;
+  margin: unset;
+}
+.board-content .board-header .search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.board-content .board-header .search-container #search-input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background: white url(none) right no-repeat;
+  background-position: none none;
+  padding-right: 56px;
+  height: 48px;
+}
+.board-content .board-header .search-container .search-input-icon {
+  height: 24px;
+  transform: translateX(-100%);
+  padding: 6px 12px 6px 12px;
+  border-left: 2px solid #D1D1D1;
+  object-fit: contain;
+  cursor: pointer;
+}
+.board-content .board-header .search-container .btn-add-task {
+  background-color: #2A3647;
+  color: white;
+  padding: 10px 32px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 48px;
+}
+.board-content .board-header .search-container .btn-add-task:hover {
+  background-color: #29ABE2;
+}
+.board-content .board-header .search-container .add-task-plus-icon {
+  margin-left: 6px;
+}
+.board-content .board-tasks {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  margin-top: 56px;
+}
+.board-content .board-tasks .tasks {
+  width: 25%;
+  padding: 4px;
+}
+.board-content .board-tasks .tasks .task-header {
+  display: flex;
+  justify-content: space-between;
+  height: 32px;
+  margin-bottom: 32px;
+}
+.board-content .board-tasks .tasks .task-header h3 {
+  margin: unset;
+}
+.board-content .board-tasks .tasks .task-header img {
+  cursor: pointer;
+}
+.board-content .board-tasks .tasks .task {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: white;
+  border-radius: 18px;
+  box-shadow: 0px 1px 6px -2px rgba(0, 0, 0, 0.2);
+}
+.board-content .board-tasks .tasks .task h4 {
+  margin: 8px 0px;
+}
+.board-content .board-tasks .tasks .task span {
+  color: #a8a8a8;
+}
+.board-content .board-tasks .tasks .task .task-topic {
+  padding: 4px 18px;
+  margin-bottom: 16px;
+  width: fit-content;
+  border-radius: 6px;
+  color: white;
+  background-color: orangered;
+}
+.board-content .board-tasks .tasks .task .task-subtasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 20px;
+  width: 100%;
+  margin: 8px 0;
+}
+.board-content .board-tasks .tasks .task .task-subtasks .task-subtasks-line {
+  height: 4px;
+  width: calc(100% - 60px);
+  background-color: #f4f4f4;
+}
+.board-content .board-tasks .tasks .task .task-subtasks span {
+  font-size: small;
+  color: black;
+}
+
 body {
   overflow: auto;
 }

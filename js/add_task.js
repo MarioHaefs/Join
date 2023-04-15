@@ -1,4 +1,6 @@
 let prio;
+let checkbox_subTask = false;
+let task_id;
 let checked;
 let menuContactsOpen = false;
 let contacts = [];
@@ -8,21 +10,25 @@ let initials = {
     'color': []
 };
 let title;
+let boolians = [];
 let description;
 let date;
 let menuOpen = false;
 let color;
 let taskCategory
 let subTasks = [];
+let tasks = [];
 let task = {
+    'task_id': '',
     'title': '',
     'description': '',
     'category': '',
-    'color': '',
-    'contacts': [],
+    'category_color': '',
+    'contacts_id': [],
     'date': '',
     'prio': '',
-    'subtasks': []
+    'subtasks': [],
+    'done': []
 };
 let categorys = {
     'category': [],
@@ -178,8 +184,8 @@ function closeMenu(id1, id2) {
 //renders the categories into the category menu
 
 function renderCategorys() {
-    document.getElementById('categorys').innerHTML = ''
-    document.getElementById('categorys').innerHTML = `<div class="render_categorys" onclick="inputCategory()">New category</div>`;
+        document.getElementById('categorys').innerHTML = ''
+        document.getElementById('categorys').innerHTML = `<div class="render_categorys" onclick="inputCategory()">New category</div>`; 
     for (let i = 0; i < categorys['category'].length; i++) {
         let clr = categorys['color'][i];
         let category = categorys['category'][i];
@@ -197,10 +203,12 @@ function deleteCategory(i) {
         `;
         taskCategory = undefined;
     }
+    document.getElementById('ctgry' + i).classList.add('slide-out-right');
     categorys['category'].splice(i, 1);
     categorys['color'].splice(i, 1);
-    saveInLocalStorage();
-    renderCategorys();
+    saveInLocalStorage('categorys', categorys);
+    setTimeout(() => renderCategorys(), 500);
+    
 }
 
 //renders the input field for a new category
@@ -237,7 +245,7 @@ function addNewCategory() {
     } else {
         categorys['color'].push(color);
         categorys['category'].push(categoryValue);
-        saveInLocalStorage();
+        saveInLocalStorage('categorys', categorys);
         taskCategory = categoryValue;
         showCategoryColorHTML();
         menuOpen = false;
@@ -263,6 +271,7 @@ function addSubtask() {
         document.getElementById('subTask').value = '';
         document.getElementById('subtaskBox').innerHTML = '';
         subTasks.push(subtaskValue);
+        boolians.push(false);
         for (let i = 0; i < subTasks.length; i++) {
             let subTask = subTasks[i];
             renderSubtasHTML(subTask, i);
@@ -273,13 +282,22 @@ function addSubtask() {
 //remove the subtask from the screen
 
 function deleteSubtask(i) {
+    document.getElementById('subTask' + i).classList.add('slide-out-right');
     subTasks.splice(i, 1);
-    document.getElementById('subtaskBox').innerHTML = '';
-    for (let i = 0; i < subTasks.length; i++) {
-        let subTask = subTasks[i];
-        renderSubtasHTML(subTask, i);
-    }
+    setTimeout(() => {
+        document.getElementById('subtaskBox').innerHTML = '';
+        for (let i = 0; i < subTasks.length; i++) {
+            let subTask = subTasks[i];
+            renderSubtasHTML(subTask, i);
+        }
+    }, 500);
+
 };
+
+function setSubtaskStatus(i) {
+    if (document.getElementById('CheckboxTask' + i).checked == true) boolians[i] = true;
+    else  boolians[i] = false;
+}
 
 // clear all inputfields en remove selected categorys and contacts
 
@@ -303,7 +321,7 @@ function createTask() {
         closeMenu('contacts', 'dropDownContacts')
         showNotice('addBordBox');
         fillTaskjJson();
-       loadBoardHTML();
+        loadBoardHTML();
     } else {
         if (!taskCategory) clearInputField();
         if (taskCategory) setCategory(taskCategory, color);
@@ -313,18 +331,31 @@ function createTask() {
     }
 };
 
+// fill the tasks Array with values and save it on the server
 
 function fillTaskjJson() {
-    title = document.getElementById('title').value;
-    description = document.getElementById('description').value;
+    task['title'] = document.getElementById('title').value;
+    task['description'] = document.getElementById('description').value
+    task['category'] = taskCategory;
+    task['category_color'] = color;
+    task['contacts_id'] = initials['id'];
+    task['done'] = boolians;
+    task['date'] = date;
+    task['task_id'] = task_id;
+    task['prio'] = prio;
+    task['subtasks'] = subTasks;
+    tasks.push(task);
+    saveInLocalStorage('tasks', tasks);
 }
 
+//move the body out of the screent and load the board.HTML
 
 function loadBoardHTML() {
     setTimeout(() => document.getElementById('body').classList.add('body_move_right'), 2400);
     setTimeout(() => location.href = "board.html", 2800);
 }
 
+//validates which input field has no value and apply a red boarder
 
 function checkWhichFieldIsEmpty() {
     if (document.getElementById('title').value.length < 1) document.getElementById('title').style.borderColor = `red`;
@@ -334,6 +365,7 @@ function checkWhichFieldIsEmpty() {
     if (!prio) document.getElementById('prio').style.borderColor = `red`;
 };
 
+// remove the red boarder from the priority section
 
 function removeBorder(id) {
     document.getElementById(id).style.borderColor = `#D1D1D1`;
@@ -353,6 +385,7 @@ function allFilled() {
     }
 };
 
+// displays a notice from the bottom edge of the screen
 
 function showNotice(id) {
     document.getElementById(id).style.display = ''
@@ -362,6 +395,7 @@ function showNotice(id) {
     setTimeout(() => document.getElementById(id).classList.add('addBord_box_inactive'), 2000);
 }
 
+// remove the display property from the notice div's
 
 function hideNotices() {
     document.getElementById('addBordBox').style.display = 'none'
@@ -372,8 +406,9 @@ function hideNotices() {
 
 //save content on the backend server
 
-async function saveInLocalStorage() {
-    await backend.setItem('categorys', JSON.stringify(categorys));
+async function saveInLocalStorage(key, array) {
+    await backend.setItem(key, JSON.stringify(array));
+    await backend.setItem('index', task_id);
 };
 
 //load content from the backend server
@@ -382,6 +417,9 @@ async function loadData() {
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
+    task_id = backend.getItem('index');
+    task_id++;
 };
 
 

@@ -1,5 +1,6 @@
 body {
-    animation-duration: 0.5s;
+    overflow: unset !important;
+    animation-duration: 0.4s;
     animation-timing-function: ease-in-out;
 }
 
@@ -49,11 +50,17 @@ button {
 }
 
 h1 {
-    margin-top: 80px;
+    position: absolute;
+    top: 80px;
+    left: calc(50% - 437px);
     font-size: 61px;
 }
 
 .form {
+
+    position: absolute;
+    left: calc(50% - 690px);
+    top: 260px;
     display: flex;
     margin-left: 250px;
 }
@@ -63,6 +70,7 @@ h1 {
     padding-right: 110px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 50px;
 }
 
 .form_right {
@@ -135,6 +143,10 @@ span {
     border-radius: 10px;
 }
 
+.drop_down:hover {
+    cursor: pointer;
+}
+
 .drop_down_open {
     margin-bottom: 0;
     border-bottom-left-radius: 0;
@@ -171,19 +183,21 @@ span {
 }
 
 .render_categorys_box {
+    background-color: white;
+    overflow-x: hidden;
     width: 422px;
-    overflow: auto;
+    overflow-y: auto;
     box-sizing: border-box;
     max-height: 155px;
     margin-bottom: 34px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-right: 1px solid #D1D1D1;
+    border-left: 1px solid #D1D1D1;
 }
 
 .render_categorys {
     position: relative;
-    border-left: 1px solid #D1D1D1;
     border-top: 1px solid #D1D1D1;
     font-size: 21px;
     font-weight: 400;
@@ -194,6 +208,7 @@ span {
     height: 51px;
     display: flex;
     align-items: center;
+    animation: ease-in-out;
 }
 
 .set_category {
@@ -428,6 +443,7 @@ span {
     font-size: 16px;
     display: flex;
     align-items: center;
+
 }
 
 .subtask_child img {
@@ -441,9 +457,23 @@ span {
 }
 
 .subtask_box {
+    overflow-x: hidden;
     width: 435px;
-    min-height: 150px;
-    overflow: auto;
+    min-height: 110px;
+    max-height: 111px;
+    overflow-y: scroll;
+}
+
+.subTask_Text {
+    margin-left: 30px;
+}
+
+.checkbox_subtask {
+    margin: 0px;
+}
+
+.checkbox_subtask:hover {
+    cursor: pointer;
 }
 
 .contact_checkbox {
@@ -467,6 +497,10 @@ span {
     width: 16px;
     height: 16px;
     border-radius: 3px;
+}
+
+.custom_checkBox:hover {
+    cursor: pointer;
 }
 
 .custom_checkBox_child {
@@ -494,9 +528,9 @@ span {
 }
 
 .addBord_box {
-    bottom: -200px;
+    bottom: 0px;
     position: absolute;
-    left: -273px;
+    left: calc(50% - 163px);
     color: white;
     font-weight: 400;
     font-size: 21px;
@@ -511,11 +545,11 @@ span {
     border-radius: 20px;
     animation-duration: 0.4s;
     animation-timing-function: ease-in-out;
+    opacity: 0;
 }
 
 .addBord_box_active {
-    animation-name: slipe-up;
-    bottom: 100px;
+    animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .body_move_right {
@@ -523,31 +557,38 @@ span {
 }
 
 .addBord_box_inactive {
-    animation-name: slipe-down;
-    bottom: -200px;
+    animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 .add_board_image {
     margin-left: 30px;
 }
 
-@keyframes slipe-up {
-    from {
-        transform: translateY(300px);
+.slide-out-right {
+    animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+@keyframes slide-in-bottom {
+    0% {
+        transform: translateY(1000px);
+        opacity: 0;
     }
 
-    to {
-        transform: translateX(0px);
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
-@keyframes slipe-down {
-    from {
-        transform: translateY(-300px);
+@keyframes slide-out-bottom {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
     }
 
-    to {
-        transform: translateX(0px);
+    100% {
+        transform: translateY(1000px);
+        opacity: 0;
     }
 }
 
@@ -557,6 +598,18 @@ span {
     }
 
     to {
-        transform: translateX(2000px);
+        transform: translateX(4000px);
+    }
+}
+
+@keyframes slide-out-right {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(1000px);
+        opacity: 0;
     }
 }

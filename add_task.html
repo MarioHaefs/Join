@@ -38,9 +38,9 @@
 
             <span>Category</span>
             <div id="categoryBox">
-                <div class="drop_down" id="dropDown">
+                <div class="drop_down" id="dropDown" onclick="openCategory()">
                     Select task category
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
+                    <img class="down_image" src="assets/img/drop-down-arrow.png" >
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>
             </div>
@@ -48,9 +48,9 @@
             <!-------------------------------------------------------------Contacts Menu----------------------------------------------------------------------->
 
             <span>Assigned to</span>
-            <div class="drop_down" id="dropDownContacts">
+            <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
                 Select contacts to assign
-                <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openContacts()">
+                <img class="down_image" src="assets/img/drop-down-arrow.png" >
             </div>
             <div id="contacts" class="render_categorys_box"></div>
             <div id="initials" class="initials_box"></div>
@@ -86,25 +86,23 @@
             <div class="clear_create_task">
                 <div class="clear_button" onclick="clearAll()">Clear x</div>
                 <div class="create_button" onclick="createTask()">Create Task ✔</div>
-            </div>
-
-            <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
-            <div class="addBord_box" id="addBordBox">
-                Task added to Board
-                <img src="assets/img/board.png" class="add_board_image">
-            </div>
-            <div class="addBord_box" id="pleaseEnterName">
-                Please enter a Task Name
-            </div>
-            <div class="addBord_box" id="pleaseCategoryName">
-                Please enter a Category Name
-            </div>
-            <div class="addBord_box" id="missing">
-                Something is missing
-            </div>
-            <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
-            
+            </div>       
         </div>
+        <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
+        <div class="addBord_box" id="addBordBox">
+            Task added to Board
+            <img src="assets/img/board.png" class="add_board_image">
+        </div>
+        <div class="addBord_box" id="pleaseEnterName">
+            Please enter a Task Name
+        </div>
+        <div class="addBord_box" id="pleaseCategoryName">
+            Please enter a Category Name
+        </div>
+        <div class="addBord_box" id="missing">
+            Something is missing
+        </div>
+        <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
     </div>
 </body>
 
