@@ -32,7 +32,8 @@
             <!---------------------------------------------------------Description Input----------------------------------------------------------------------->
 
             <span>Description</span>
-            <textarea placeholder="Enter a Description" id="description" onfocus="removeBorder('description')"></textarea>
+            <textarea placeholder="Enter a Description" id="description"
+                onfocus="removeBorder('description')"></textarea>
 
             <!---------------------------------------------------------Category Menu--------------------------------------------------------------------------->
 
@@ -40,7 +41,7 @@
             <div id="categoryBox">
                 <div class="drop_down" id="dropDown" onclick="openCategory()">
                     Select task category
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" >
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>
             </div>
@@ -48,11 +49,13 @@
             <!-------------------------------------------------------------Contacts Menu----------------------------------------------------------------------->
 
             <span>Assigned to</span>
-            <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
-                Select contacts to assign
-                <img class="down_image" src="assets/img/drop-down-arrow.png" >
+            <div id="contactBox">
+                <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
+                    Select contacts to assign
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
+                </div>
+                <div id="contacts" class="render_categorys_box"></div>
             </div>
-            <div id="contacts" class="render_categorys_box"></div>
             <div id="initials" class="initials_box"></div>
         </div>
 
@@ -86,7 +89,7 @@
             <div class="clear_create_task">
                 <div class="clear_button" onclick="clearAll()">Clear x</div>
                 <div class="create_button" onclick="createTask()">Create Task ✔</div>
-            </div>       
+            </div>
         </div>
         <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
         <div class="addBord_box" id="addBordBox">
@@ -101,6 +104,12 @@
         </div>
         <div class="addBord_box" id="missing">
             Something is missing
+        </div>
+        <div class="addBord_box" id="emailSend">
+            Email sent
+        </div>
+        <div class="addBord_box" id="enterEmail">
+           Please enter a E-Mail
         </div>
         <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
     </div>
