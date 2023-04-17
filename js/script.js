@@ -15,14 +15,28 @@ async function initUsers() {
  * delete all User from your Array
  */
 function deleteUser() {
-     backend.deleteItem('users');
-  }
+    backend.deleteItem('users');
+}
+
+
+/**
+* hash a string with SHA-256
+*/
+async function hashWithSHA256(string) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(string);
+    const hash = await crypto.subtle.digest('SHA-256', data);
+    // convert hash to hex string
+    return Array.from(new Uint8Array(hash))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
+}
 
 
 /**
  * register User on sign_up.html
  */
- async function addUser() {
+async function addUser() {
     let name = document.getElementById('register-name')
     let email = document.getElementById('register-email')
     let password = document.getElementById('register-password')
@@ -39,13 +53,16 @@ function deleteUser() {
         }
     }
 
-    users.push({ name: name.value, email: email.value, password: password.value })
+    const hashedPassword = await hashWithSHA256(password.value);
+
+    users.push({ name: name.value, email: email.value, password: hashedPassword.toString() })
     await backend.setItem('users', JSON.stringify(users));
 
     document.getElementById('register-success').style.display = 'block';
 
-    setTimeout(goToLogin, 3000);    
+    setTimeout(goToLogin, 3000);
 }
+
 
 /**
  * add/remove class d-none to your Object
@@ -55,13 +72,6 @@ function toggleDNone(id) {
     document.getElementById(`${id}`).classList.toggle('d-none');
 }
 
-/**
- * add/remove class d-none to your Object
- * @param {string} id - need the id from your Object
- */
-function toggleDNone(id) {
-    document.getElementById(`${id}`).classList.toggle('d-none');
-}
 
 /**
  * go to index.html
@@ -74,13 +84,23 @@ function goToLogin() {
 /**
  * Login Function
  */
-function login() {
+async function login() {
     let email = document.getElementById('login-email');
     let password = document.getElementById('login-password');
-    let user = users.find(u => u.email == email.value && u.password == password.value);
+    let user = users.find(u => u.email == email.value);
 
     if (user) {
-        window.location.href = "summary.html";
+        const hashedPassword = await hashWithSHA256(password.value);
+
+        // compare the hashed password with the stored hashed password
+        if (hashedPassword === user.password) {
+            window.location.href = "summary.html";
+        } else {
+            document.getElementById('login-false').style.display = 'block';
+            setTimeout(hideFalseData, 3000);
+            email.value = '';
+            password.value = '';
+        }
     } else {
         document.getElementById('login-false').style.display = 'block';
         setTimeout(hideFalseData, 3000);
@@ -90,9 +110,10 @@ function login() {
 }
 
 
+
 /**
  * Guest Login
- */ 
+ */
 function goToSummary() {
     window.location.href = "summary.html"
 }
