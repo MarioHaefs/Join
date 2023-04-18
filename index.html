@@ -16,7 +16,7 @@
     
 </head>
 
-<body onload="initUsers()">
+<body onload="initUsers(), loadLoginData()">
     <div class="start-animation">
         <img class="logo-animation" src="assets/img/start_transition_logo.png">
     </div>
@@ -32,7 +32,7 @@
                 <input id="login-email" class="email-input" placeholder="Email" type="email" required>
                 <input id="login-password" class="password-input" placeholder="Password" type="password" required>
                 <div class="log-in-checkbox-div">
-                    <input id="remember-checkbox" type="checkbox"><span class="remember-me">Remember me</span>
+                    <input id="remember-checkbox" type="checkbox" name="remember-me"><span class="remember-me">Remember me</span>
                     <a class="forgot-password-link" href="forgot_password.html">Forgot my password</a>
                 </div>
                 <div>

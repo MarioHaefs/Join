@@ -34,7 +34,7 @@ async function hashWithSHA256(string) {
 
 
 /**
- * register User on sign_up.html
+ * register User on sign_up.html including hashed Password
  */
 async function addUser() {
     let name = document.getElementById('register-name')
@@ -82,18 +82,30 @@ function goToLogin() {
 
 
 /**
- * Login Function
+ * Login Function including hashed Password and remember me functionality
  */
 async function login() {
     let email = document.getElementById('login-email');
     let password = document.getElementById('login-password');
+    let rememberMe = document.querySelector('input[name="remember-me"]');
+
     let user = users.find(u => u.email == email.value);
 
     if (user) {
         const hashedPassword = await hashWithSHA256(password.value);
-
         // compare the hashed password with the stored hashed password
         if (hashedPassword === user.password) {
+            // If remember me is checked, save login data in localStorage
+            if (rememberMe.checked) {
+                localStorage.setItem("login-email", email.value);
+                localStorage.setItem("login-password", password.value);
+                localStorage.setItem("rememberMeChecked", true);
+            } else {
+                // If remember me is not checked, remove login data from localStorage
+                localStorage.removeItem("login-email");
+                localStorage.removeItem("login-password");
+                localStorage.removeItem("rememberMeChecked");
+            }
             window.location.href = "summary.html";
         } else {
             document.getElementById('login-false').style.display = 'block';
@@ -106,6 +118,28 @@ async function login() {
         setTimeout(hideFalseData, 3000);
         email.value = '';
         password.value = '';
+    }
+}
+
+
+/**
+ * Remember Me Checkbox on index.html load
+ */
+function loadLoginData() {
+    let storedEmail = localStorage.getItem("login-email");
+    let storedPassword = localStorage.getItem("login-password");
+    let rememberMe = document.querySelector('input[name="remember-me"]');
+    let rememberMeChecked = localStorage.getItem("rememberMeChecked");
+    rememberMeChecked = rememberMeChecked === "true";
+
+    // If login data is stored and remember me is checked, fill in input fields and check the checkbox
+    if (storedEmail && storedPassword && rememberMeChecked) {
+        document.getElementById("login-email").value = storedEmail;
+        document.getElementById("login-password").value = storedPassword;
+        rememberMe.checked = true;
+    } else {
+        // If remember me is not checked or there is no stored login data, uncheck the checkbox
+        rememberMe.checked = false;
     }
 }
 
