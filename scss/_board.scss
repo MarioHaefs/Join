@@ -26,8 +26,10 @@ body {
 
 
             #search-input {
-                @include inputForm(none, none, none);
+                padding: 10px;
                 padding-right: 56px;
+                border-radius: 8px;
+                border: 1px solid #D1D1D1;
                 height: $heightInput;
             }
 
@@ -92,6 +94,7 @@ body {
                 border-radius: 18px;
                 box-shadow: 0px 1px 6px -2px rgba($color: #000000, $alpha: 0.2);
                 margin-bottom: 16px;
+                cursor: pointer;
 
                 h4 {
                     margin: 8px 0px;
@@ -99,6 +102,10 @@ body {
 
                 span {
                     color: $gray;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
                 }
 
                 .task-topic {
@@ -130,25 +137,41 @@ body {
                     }
                 }
 
-                .editors {
+                .task-bottom {
                     display: flex;
-                    height: 42px;
-                    width: 100%;
 
-                    .contact-frame {
+                    .editors {
                         display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 10px;
-                        min-width: 42px;
                         height: 42px;
-                        color: #FFFFFF;
-                        border-radius: 100%;
+                        width: 100%;
+
+                        .contact-frame {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            min-width: 42px;
+                            height: 42px;
+                            color: #FFFFFF;
+                            border-radius: 100%;
+                            background-color: $darkblue;
+                        }
+
+                        .contact-frame:nth-child(2) {
+                            transform: translateX(-10px);
+                        }
+
+                        .contact-frame:nth-child(3) {
+                            transform: translateX(-20px);
+                        }
                     }
                 }
 
                 .task-prio {
                     display: flex;
+
+                    img {
+                        object-fit: contain;
+                    }
                 }
             }
         }

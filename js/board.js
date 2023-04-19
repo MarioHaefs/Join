@@ -34,7 +34,7 @@ function renderSingleTask(task) {
             ${htmlTaskTitle(task)}
             ${htmlTaskDescription(task)}
             ${htmlTaskSubtasks(task)}
-            ${htmlTaskEditors(task)}
+            ${htmlTaskDivBottom(task)}
         </div>
     `;
 }
@@ -71,6 +71,13 @@ function htmlTaskSubtasks(task) {
     `;
 }
 
+function htmlTaskDivBottom(task) {
+    return `<div class="task-bottom">
+                ${htmlTaskEditors(task)}
+                ${htmlTaskPrio(task)}
+            </div>`;
+}
+
 /**
  * 
  * @param {JSON} task includes all information to render the task on board - it is loaded from the server
@@ -79,23 +86,46 @@ function htmlTaskSubtasks(task) {
  * all available editors are loaded from server and are stored global
  * get assigned contact id's from param task
  * get initials and color with contact id from global editors
+ * if more than 2 editors, only show number of left over editors
  */
 function htmlTaskEditors(task) {
     let htmlCodeTemp = '';
     for (let i = 0; i < task['contacts_id'].length; i++) {
         const editor = task['contacts_id'][i];
-        if (editor == null) return;
-        htmlCodeTemp += `
-            <div class="contact-frame" style="background-color: ${editors[editor]['color']}">
-                ${editors[editor]['initials']}
-            </div>
-        `;
+        if (editor == null) break; // exit for each loop when no editor is available - prevent error
+        if (moreThan2Editors(i)) {
+            htmlCodeTemp += htmlTaskLeftOverEditors(task);
+            break;
+        }
+        htmlCodeTemp += htmlTaskSingleEditor(editor);
     }
-    return `<div class="editors">${htmlCodeTemp}${htmlTaskPrio(task)}</div>`;
+    return `<div class="editors">${htmlCodeTemp}</div>`;
+}
+
+function htmlTaskSingleEditor(editor) {
+    return `<div class="contact-frame" style="background-color: ${editors[editor]['color']}">
+                ${editors[editor]['initials']}
+            </div>`;
+}
+
+function htmlTaskLeftOverEditors(task) {
+    return `<div class="contact-frame">
+                +${task['contacts_id'].length - 2}
+            </div>`;
+}
+
+function moreThan2Editors(i) {
+    return i > 1;
 }
 
 function htmlTaskPrio(task) {
-    return `<div class="task-prio">${task['prio']}</div>`;
+    return `<div class="task-prio">
+                <img src="assets/img/prio${capitalizeFirstLetter(task['prio'])}.png">
+            </div>`;
+}
+
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function startDragging(id) {
