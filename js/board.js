@@ -1,12 +1,14 @@
 let currentDraggedElement;
 let editors;
 let tasks;
+let categorys;
 
 async function initBoard() {
     setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
     await downloadFromServer();
     editors = JSON.parse(backend.getItem('contacts')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
+    categorys = JSON.parse(backend.getItem('categorys')) || [];
     console.log(tasks);
     renderTasks();
 }
@@ -44,7 +46,12 @@ function renderSingleTask(task) {
  * @returns html code for the topic of the task
  */
 function htmlTaskTopic(task) {
-    return `<div class="task-topic">${task['category']}</div>`;
+    return `<div class="task-topic" style="background-color: ${getCategorysColor(task['category'])}">${task['category']}</div>`;
+}
+
+function getCategorysColor(category) {
+    let index = categorys['category'].indexOf(category);
+    return categorys['color'][index];
 }
 
 function htmlTaskTitle(task) {
