@@ -107,43 +107,54 @@
   src: url("../assets/fonts/open-sans-v34-latin-800italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-800italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-800italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-800italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-800italic.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
 .start-animation {
+  background-color: #F6F7F8;
   position: absolute;
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  z-index: 5;
+  animation: start-fade-out-background 0.5s ease-in-out both 1s;
 }
 .start-animation .logo-animation {
-  width: 100%;
-  height: 100%;
+  display: block;
   position: absolute;
-  top: 0;
-  left: 0;
-  animation: start-logo-animation 1s ease-in-out both;
-  -o-object-fit: cover;
-     object-fit: cover;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  animation: start-desktop-animation 1s ease-in-out both 1s;
 }
-@keyframes start-logo-animation {
+@keyframes start-fade-out-background {
   0% {
-    transform: translate(0, 0);
     opacity: 1;
-    z-index: 5;
-  }
-  70% {
-    transform: translate(-25%, -25%);
-    opacity: 1;
-    z-index: 5;
-    width: 0%;
-    height: 0%;
   }
   100% {
-    transform: translate(-100%, -100%);
     opacity: 0;
-    width: 0%;
-    height: 0%;
     z-index: 0;
-    top: 16%;
-    left: 15%;
   }
+}
+@keyframes start-desktop-animation {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  70% {
+    opacity: 0.5;
+    transform: scale(0.1);
+    top: 5%;
+    left: 5%;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+    z-index: 0;
+    top: 5%;
+    left: 5%;
+  }
+}
+
+.mobile-logo-animation {
+  display: none;
 }
 
 .log-in {
@@ -287,6 +298,64 @@
   border: 1px solid #29ABE2;
 }
 
+@media (max-width: 600px) {
+  .form-width-mobile {
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+  .start-animation {
+    display: none;
+  }
+  .logo-animation {
+    display: none;
+  }
+  .mobile-start-animation {
+    background-color: #2A3647;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 5;
+    animation: fade-out-background 0.5s ease-in-out both 1s;
+  }
+  @keyframes fade-out-background {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      z-index: 0;
+    }
+  }
+  .mobile-logo-animation {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    animation: start-mobile-animation 1s ease-in-out both 1s;
+  }
+  @keyframes start-mobile-animation {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    70% {
+      opacity: 0.5;
+      transform: scale(0.1);
+      top: 5%;
+      left: 5%;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0);
+      z-index: 0;
+      top: 5%;
+      left: 5%;
+    }
+  }
+}
 .arrow-left-icon {
   position: absolute;
   top: 5%;

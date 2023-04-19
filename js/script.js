@@ -1,7 +1,6 @@
 setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 let users = [];
 
-
 /**
  * fill your empty array with users from the Server
  */
@@ -144,11 +143,10 @@ function loadLoginData() {
 }
 
 
-
 /**
  * Guest Login
  */
-function goToSummary() {
+function guestLogin() {
     window.location.href = "summary.html"
 }
 
