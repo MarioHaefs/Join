@@ -20,9 +20,9 @@ function showInputCategoryHTML() {
 
 function showCategoryHTML() {
     return document.getElementById('categoryBox').innerHTML = `
-    <div class="drop_down" id="dropDown">
+    <div class="drop_down" id="dropDown"  onclick="openCategory()">
                     Select task category
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>`;
 };
@@ -30,12 +30,12 @@ function showCategoryHTML() {
 
 function showCategoryColorHTML() {
     return document.getElementById('categoryBox').innerHTML = `
-    <div class="drop_down" id="dropDown">
+    <div class="drop_down" id="dropDown" onclick="openCategory()">
                     <div class="category_color">
                         ${taskCategory}
                         <div  class="color2" style="background-color: ${color};"></div>
                     </div>
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>`;
 };
@@ -43,7 +43,7 @@ function showCategoryColorHTML() {
 
 function renderCategorysHTML(clr, i, category) {
     return document.getElementById('categorys').innerHTML += `
-        <div class="render_categorys">
+        <div class="render_categorys" id="ctgry${i}">
                    <div class="set_category" onclick="setCategory('${category}', '${clr}')">
                         ${category}
                         <div  class="color2" style="background-color: ${clr};"></div>
@@ -55,8 +55,9 @@ function renderCategorysHTML(clr, i, category) {
 
 function renderSubtasHTML(subTask, i) {
     return document.getElementById('subtaskBox').innerHTML += `
-        <div class="subtask_child">
-            <input class="input_subtask" type="checkbox"> ${subTask}
+        <div class="subtask_child" id="subTask${i}">
+            <input type="checkbox" id="CheckboxTask${i}" class="checkbox_subtask" onclick="setSubtaskStatus(${i})")>
+            <div class ="subTask_Text">${subTask}</div>
             <img src="assets/img/x.svg" onclick="deleteSubtask(${i})">
         </div>`;
 };
@@ -66,7 +67,7 @@ function renderContactsHTML(i, userName) {
     document.getElementById('contacts').innerHTML += `
             <div class="render_categorys" onclick="setContacts(${i})">
                 ${userName}  
-                <div class="custom_checkBox" id="checkbox${i}">
+                <div class="custom_checkBox">
                     <div id="Checkbox${i}"></div>
                 </div>
             </div>`;

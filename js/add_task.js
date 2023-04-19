@@ -1,4 +1,6 @@
 let prio;
+let button_delay = false;
+let checkbox_subTask = false;
 let task_id;
 let checked;
 let menuContactsOpen = false;
@@ -9,6 +11,7 @@ let initials = {
     'color': []
 };
 let title;
+let boolians = [];
 let description;
 let date;
 let menuOpen = false;
@@ -25,13 +28,13 @@ let task = {
     'contacts_id': [],
     'date': '',
     'prio': '',
-    'subtasks': []
+    'subtasks': [],
+    'done': []
 };
 let categorys = {
     'category': [],
     'color': []
 };
-let test = [];
 
 //address of the backend server
 
@@ -105,6 +108,9 @@ function openContacts() {
 //the individual contacts are rendered in the contacts-menu
 
 function renderContacts() {
+    document.getElementById('contacts').innerHTML = ``;
+    document.getElementById('contacts').innerHTML = `<div class="render_categorys">you</div>`;
+    document.getElementById('contacts').innerHTML += `<div class="render_categorys" onclick="inviteContact() ">Invite new contact</div>`;
     for (let i = 0; i < contacts.length; i++) {
         let userName = contacts[i]['name'];
         renderContactsHTML(i, userName);
@@ -113,6 +119,44 @@ function renderContacts() {
         }
     }
 };
+
+
+function inviteContact() {
+    document.getElementById('contactBox').innerHTML = `
+    <div class="category_name_box">  
+                    <input class="input_category_name" type="email" placeholder="Please enter e-mail" id="inviteValue" required maxlength="29">
+                    <div class="x✔">
+                        <div onclick="clearEmailField()" class="x"><img src="assets/img/x.svg" alt=""></div>
+                        <button onclick="sendEmail()"><img class="hook" src="assets/img/haken.png"></button>
+                    </div>
+                </div>`;
+}
+
+
+function clearEmailField() {
+    document.getElementById('contactBox').innerHTML = `
+    <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
+                    Select contacts to assign
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
+                </div>
+                <div id="contacts" class="render_categorys_box"></div>`;
+    menuContactsOpen = false;
+};
+
+
+function sendEmail() {
+    if (document.getElementById('inviteValue').value.includes('@')) {
+        showNotice('emailSend');
+        clearEmailField();
+    } else {
+        if (!button_delay) {
+            button_delay = true;
+            showNotice('enterEmail');
+            setTimeout(() => button_delay = false, 2500);
+        }
+    }
+};
+
 
 //deletes the selected contacts and closes the contacts menu if it's open
 
@@ -201,10 +245,12 @@ function deleteCategory(i) {
         `;
         taskCategory = undefined;
     }
+    document.getElementById('ctgry' + i).classList.add('slide-out-right');
     categorys['category'].splice(i, 1);
     categorys['color'].splice(i, 1);
     saveInLocalStorage('categorys', categorys);
-    renderCategorys();
+    setTimeout(() => renderCategorys(), 500);
+
 }
 
 //renders the input field for a new category
@@ -262,11 +308,16 @@ function setCategory(ctgry, clr) {
 function addSubtask() {
     subtaskValue = document.getElementById('subTask').value
     if (subtaskValue.length < 1) {
-        showNotice('pleaseEnterName');
+        if (!button_delay) {
+            button_delay = true;
+            showNotice('pleaseEnterName');
+            setTimeout(() => button_delay = false, 2500);
+        }
     } else {
         document.getElementById('subTask').value = '';
         document.getElementById('subtaskBox').innerHTML = '';
         subTasks.push(subtaskValue);
+        boolians.push(false);
         for (let i = 0; i < subTasks.length; i++) {
             let subTask = subTasks[i];
             renderSubtasHTML(subTask, i);
@@ -277,13 +328,22 @@ function addSubtask() {
 //remove the subtask from the screen
 
 function deleteSubtask(i) {
+    document.getElementById('subTask' + i).classList.add('slide-out-right');
     subTasks.splice(i, 1);
-    document.getElementById('subtaskBox').innerHTML = '';
-    for (let i = 0; i < subTasks.length; i++) {
-        let subTask = subTasks[i];
-        renderSubtasHTML(subTask, i);
-    }
+    setTimeout(() => {
+        document.getElementById('subtaskBox').innerHTML = '';
+        for (let i = 0; i < subTasks.length; i++) {
+            let subTask = subTasks[i];
+            renderSubtasHTML(subTask, i);
+        }
+    }, 500);
+
 };
+
+function setSubtaskStatus(i) {
+    if (document.getElementById('CheckboxTask' + i).checked == true) boolians[i] = true;
+    else boolians[i] = false;
+}
 
 // clear all inputfields en remove selected categorys and contacts
 
@@ -303,20 +363,25 @@ function clearAll() {
 // fill the task JSON when the mandatory fields are filled or shows the alert : something is missing
 
 function createTask() {
-    if (allFilled()) {
-        closeMenu('contacts', 'dropDownContacts')
-        showNotice('addBordBox');
-        fillTaskjJson();
-
-    } else {
-        if (!taskCategory) clearInputField();
-        if (taskCategory) setCategory(taskCategory, color);
-        closeMenu('contacts', 'dropDownContacts')
-        showNotice('missing');
-        checkWhichFieldIsEmpty()
+    if (!button_delay) {
+        button_delay = true;
+        if (allFilled()) {
+            closeMenu('contacts', 'dropDownContacts')
+            showNotice('addBordBox');
+            fillTaskjJson();
+            loadBoardHTML();
+        } else {
+            if (!taskCategory) clearInputField();
+            if (taskCategory) setCategory(taskCategory, color);
+            closeMenu('contacts', 'dropDownContacts')
+            showNotice('missing');
+            checkWhichFieldIsEmpty()
+            setTimeout(() => button_delay = false, 2500);
+        }
     }
 };
 
+// fill the tasks Array with values and save it on the server
 
 function fillTaskjJson() {
     task['title'] = document.getElementById('title').value;
@@ -324,6 +389,7 @@ function fillTaskjJson() {
     task['category'] = taskCategory;
     task['category_color'] = color;
     task['contacts_id'] = initials['id'];
+    task['done'] = boolians;
     task['date'] = date;
     task['task_id'] = task_id;
     task['prio'] = prio;

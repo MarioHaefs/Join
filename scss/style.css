@@ -972,8 +972,8 @@ body {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #D1D1D1;
-  background: white url(none) right no-repeat;
-  background-position: none none;
+  background: white url() right no-repeat;
+  background-position: none;
   padding-right: 56px;
   height: 48px;
 }

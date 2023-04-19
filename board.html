@@ -9,8 +9,11 @@
 
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
+
     <link rel="stylesheet" href="css/fonts.css">
+    <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
+    <script src="./js/script.js"></script>
     <script src="./js/board.js"></script>
 
 
@@ -38,7 +41,7 @@
                     <h3>To do</h3>
                     <img src="./assets/img/plus-button-darkblue.png">
                 </div>
-                <div id="tasks-to-do">
+                <div id="tasks-todo" class="task-body" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
 
                 </div>
             </div>
@@ -47,7 +50,7 @@
                     <h3>In progress</h3>
                     <img src="./assets/img/plus-button-darkblue.png">
                 </div>
-                <div id="tasks-in-progress">
+                <div id="tasks-progress" class="task-body" ondrop="moveTo('progress')" ondragover="allowDrop(event)">
 
                 </div>
             </div>
@@ -56,7 +59,7 @@
                     <h3>Awaiting Feedback</h3>
                     <img src="./assets/img/plus-button-darkblue.png">
                 </div>
-                <div id="tasks-awaiting-feedback">
+                <div id="tasks-feedback" class="task-body" ondrop="moveTo('feedback')" ondragover="allowDrop(event)">
 
                 </div>
             </div>
@@ -65,7 +68,7 @@
                     <h3>Done</h3>
                     <img src="./assets/img/plus-button-darkblue.png">
                 </div>
-                <div id="tasks-done">
+                <div id="tasks-done" class="task-body" ondrop="moveTo('done')" ondragover="allowDrop(event)">
 
                 </div>
             </div>

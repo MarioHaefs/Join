@@ -1,179 +1,127 @@
 /* open-sans-300 - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 300;
-  src: url("../assets/fonts/open-sans-v34-latin-300.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-300.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-300.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-300.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-300.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-300.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-300.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-300.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-300.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-300.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-300.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-300.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-300italic - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: italic;
   font-weight: 300;
-  src: url("../assets/fonts/open-sans-v34-latin-300italic.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-300italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-300italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-300italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-300italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-300italic.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-300italic.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-300italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-300italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-300italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-300italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-300italic.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-regular - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("../assets/fonts/open-sans-v34-latin-regular.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-regular.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-regular.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-regular.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-regular.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-regular.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-regular.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-regular.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-regular.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-regular.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-regular.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-regular.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-italic - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: italic;
   font-weight: 400;
-  src: url("../assets/fonts/open-sans-v34-latin-italic.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-italic.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-italic.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-italic.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-500 - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 500;
-  src: url("../assets/fonts/open-sans-v34-latin-500.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-500.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-500.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-500.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-500.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-500.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-500.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-500.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-500.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-500.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-500.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-500.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-500italic - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: italic;
   font-weight: 500;
-  src: url("../assets/fonts/open-sans-v34-latin-500italic.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-500italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-500italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-500italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-500italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-500italic.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-500italic.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-500italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-500italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-500italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-500italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-500italic.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-600 - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
-  src: url("../assets/fonts/open-sans-v34-latin-600.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-600.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-600.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-600.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-600.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-600.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-600.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-600.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-600.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-600.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-600.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-600.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-600italic - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: italic;
   font-weight: 600;
-  src: url("../assets/fonts/open-sans-v34-latin-600italic.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-600italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-600italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-600italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-600italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-600italic.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-600italic.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-600italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-600italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-600italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-600italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-600italic.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-700 - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/open-sans-v34-latin-700.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-700.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-700.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-700.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-700.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-700.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-700.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-700.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-700.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-700.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-700.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-700.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-700italic - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: italic;
   font-weight: 700;
-  src: url("../assets/fonts/open-sans-v34-latin-700italic.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-700italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-700italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-700italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-700italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-700italic.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-700italic.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-700italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-700italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-700italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-700italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-700italic.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-800 - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 800;
-  src: url("../assets/fonts/open-sans-v34-latin-800.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-800.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-800.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-800.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-800.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-800.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-800.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-800.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-800.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-800.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-800.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-800.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 /* open-sans-800italic - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Open Sans";
   font-style: italic;
   font-weight: 800;
-  src: url("../assets/fonts/open-sans-v34-latin-800italic.eot");
-  /* IE9 Compat Modes */
-  src: url("../assets/fonts/open-sans-v34-latin-800italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-800italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-800italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-800italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-800italic.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../assets/fonts/open-sans-v34-latin-800italic.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/open-sans-v34-latin-800italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-800italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-800italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-800italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-800italic.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
-
 .log-in {
   position: relative;
   height: 100vh;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .log-in .log-in-logo {
   position: absolute;
   top: 8%;
   left: 8%;
 }
-
 .log-in .sign-up {
   position: absolute;
   right: 8%;
   top: 5%;
 }
-
 .log-in .sign-up .sign-up-button {
   background-color: #2A3647;
   color: white;
@@ -187,11 +135,9 @@
   font-weight: 700;
   margin-left: 24px;
 }
-
 .log-in .sign-up .sign-up-button:hover {
   background-color: #29ABE2;
 }
-
 .log-in .form-class {
   height: 400px;
   width: 500px;
@@ -200,13 +146,11 @@
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.0392156863);
   position: relative;
 }
-
 .log-in .form-class .log-in-form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .log-in .form-class .log-in-form .log-in-headline {
   font-size: 50px;
   font-weight: 700;
@@ -215,7 +159,6 @@
   margin-bottom: 25px;
   margin-top: 16px;
 }
-
 .log-in .form-class .log-in-form .name-input {
   margin-bottom: 25px;
   width: 60%;
@@ -225,7 +168,6 @@
   background: white url("../assets/img/person-icon.png") right no-repeat;
   background-position: 94% 55%;
 }
-
 .log-in .form-class .log-in-form .email-input {
   margin-bottom: 25px;
   width: 60%;
@@ -235,7 +177,6 @@
   background: white url("../assets/img/letter-icon.png") right no-repeat;
   background-position: 94% 55%;
 }
-
 .log-in .form-class .log-in-form .password-input {
   margin-bottom: 25px;
   width: 60%;
@@ -253,38 +194,31 @@
 .log-in .form-class .log-in-form ::placeholder {
   opacity: 0.5;
 }
-
 .log-in .form-class .log-in-form .log-in-checkbox-div {
   font-size: 13px;
   display: flex;
   margin-bottom: 25px;
 }
-
 .log-in .form-class .log-in-form .log-in-checkbox-div .remember-me {
   margin-left: 8px;
   font-style: normal;
   font-weight: 500;
 }
-
 .log-in .form-class .log-in-form .log-in-checkbox-div .forgot-password-link {
   text-decoration: none;
   color: #29ABE2;
   margin-left: 25px;
 }
-
 .log-in .form-class .log-in-form .log-in-checkbox-div .forgot-password-link:hover {
   color: #1188bb;
 }
-
 .log-in .form-class .log-in-form .log-in-checkbox-div input[type=checkbox] {
   cursor: pointer;
   accent-color: #2A3647;
 }
-
 .log-in .form-class .log-in-form .log-in-checkbox-div input:focus {
   outline: none;
 }
-
 .log-in .form-class .log-in-form .log-in-button {
   background-color: #2A3647;
   color: white;
@@ -297,11 +231,9 @@
   text-decoration: none;
   margin-right: 24px;
 }
-
 .log-in .form-class .log-in-form .log-in-button:hover {
   background-color: #29ABE2;
 }
-
 .log-in .form-class .log-in-form .guest-log-in-button {
   color: #2A3647;
   background-color: white;
@@ -312,7 +244,6 @@
   border: 1px solid #2A3647;
   font-size: 16px;
 }
-
 .log-in .form-class .log-in-form .guest-log-in-button:hover {
   color: #29ABE2;
   border: 1px solid #29ABE2;
@@ -356,14 +287,12 @@
   width: 200px;
   font-size: 16px;
 }
-
 .menu .menu-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 }
-
 .menu .menu-content .menu-logo {
   height: 100px;
   width: 80px;
@@ -371,12 +300,10 @@
   margin-bottom: 75px;
   cursor: pointer;
 }
-
 .menu .menu-content .menu-nav a {
   color: rgba(255, 255, 255, 0.8352941176);
   text-decoration: none;
 }
-
 .menu .menu-content .menu-nav .nav-text {
   display: flex;
   align-items: center;
@@ -384,12 +311,10 @@
   width: 200px;
   height: 50px;
 }
-
 .menu .menu-content .menu-nav .nav-text:hover {
   background-color: #091931;
   cursor: pointer;
 }
-
 .menu .menu-content .nav-icon-box {
   width: 30px;
   height: 30px;
@@ -398,7 +323,6 @@
   margin-right: 20px;
   margin-left: 30px;
 }
-
 .menu .menu-content .legal-notice {
   display: flex;
   align-items: center;
@@ -407,7 +331,6 @@
   position: absolute;
   top: 650px;
 }
-
 .menu .menu-content .legal-notice:hover {
   background-color: #091931;
   cursor: pointer;
@@ -421,37 +344,31 @@
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
   height: 75px;
 }
-
 .header .header-headline {
   margin-left: 50px;
   font-weight: 400;
   font-style: normal;
   font-size: 21px;
 }
-
 .header .header-icons {
   display: flex;
   align-items: center;
 }
-
 .header .header-icons .profil-pic {
   height: 40px;
   width: 40px;
   border-radius: 100px;
   margin-right: 16px;
 }
-
 .header .header-icons .profil-pic:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
-
 .header .header-icons .question-icon {
   height: 20px;
   width: 20px;
   margin-right: 16px;
 }
-
 .header .header-icons .question-icon:hover {
   cursor: pointer;
   transform: scale(1.05);
@@ -469,151 +386,6 @@
   position: absolute;
   right: 10%;
   cursor: pointer;
-}
-
-
-.login-popup {
-  display: none;
-  margin-top: 16px;
-  background-color: #2A3647;
-  border-radius: 10px;
-  color: white;
-  padding: 8px;
-}
-
-.log-out-field {
-  background-color: #2A3647;
-  color: white;
-  padding: 10px 10px;
-  cursor: pointer;
-  border: none;
-  position: absolute;
-  top: 8%;
-  right: 4%;
-  border-radius: 15px;
-  border-top-right-radius: 1px;
-}
-
-.log-out-field:hover {
-  background-color: #29ABE2;
-}
-
-.board-content {
-  margin-left: 200px;
-  padding-left: 56px;
-  padding-top: 56px;
-  padding-right: 56px;
-}
-.board-content .board-header {
-  display: flex;
-  justify-content: space-between;
-}
-.board-content .board-header h1 {
-  font-size: 48px;
-  margin: unset;
-}
-.board-content .board-header .search-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.board-content .board-header .search-container #search-input {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #D1D1D1;
-  background: white url(none) right no-repeat;
-  background-position: none none;
-  padding-right: 56px;
-  height: 48px;
-}
-.board-content .board-header .search-container .search-input-icon {
-  height: 24px;
-  transform: translateX(-100%);
-  padding: 6px 12px 6px 12px;
-  border-left: 2px solid #D1D1D1;
-  -o-object-fit: contain;
-     object-fit: contain;
-  cursor: pointer;
-}
-.board-content .board-header .search-container .btn-add-task {
-  background-color: #2A3647;
-  color: white;
-  padding: 10px 32px;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 10px;
-  border: none;
-  padding-left: 16px;
-  padding-right: 16px;
-  height: 48px;
-}
-.board-content .board-header .search-container .btn-add-task:hover {
-  background-color: #29ABE2;
-}
-.board-content .board-header .search-container .add-task-plus-icon {
-  margin-left: 6px;
-}
-.board-content .board-tasks {
-  display: flex;
-  width: 100%;
-  gap: 16px;
-  margin-top: 56px;
-}
-.board-content .board-tasks .tasks {
-  width: 25%;
-  padding: 4px;
-}
-.board-content .board-tasks .tasks .task-header {
-  display: flex;
-  justify-content: space-between;
-  height: 32px;
-  margin-bottom: 32px;
-}
-.board-content .board-tasks .tasks .task-header h3 {
-  margin: unset;
-}
-.board-content .board-tasks .tasks .task-header img {
-  cursor: pointer;
-}
-.board-content .board-tasks .tasks .task {
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  background-color: white;
-  border-radius: 18px;
-  box-shadow: 0px 1px 6px -2px rgba(0, 0, 0, 0.2);
-}
-.board-content .board-tasks .tasks .task h4 {
-  margin: 8px 0px;
-}
-.board-content .board-tasks .tasks .task span {
-  color: #a8a8a8;
-}
-.board-content .board-tasks .tasks .task .task-topic {
-  padding: 4px 18px;
-  margin-bottom: 16px;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 6px;
-  color: white;
-  background-color: orangered;
-}
-.board-content .board-tasks .tasks .task .task-subtasks {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 20px;
-  width: 100%;
-  margin: 8px 0;
-}
-.board-content .board-tasks .tasks .task .task-subtasks .task-subtasks-line {
-  height: 4px;
-  width: calc(100% - 60px);
-  background-color: #f4f4f4;
-}
-.board-content .board-tasks .tasks .task .task-subtasks span {
-  font-size: small;
-  color: black;
 }
 
 body {
@@ -658,7 +430,6 @@ body {
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 15px 25px;
   margin-left: 48px;
@@ -667,7 +438,6 @@ body {
   width: 100%;
   box-sizing: border-box;
   border-radius: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   font-size: 16px;
   cursor: pointer;
@@ -677,7 +447,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -744,7 +513,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -975,14 +743,17 @@ body {
  */
 @keyframes slide-top {
   0% {
+    -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 0;
   }
   50% {
+    -webkit-transform: translateY(-200px);
     transform: translateY(-200px);
     opacity: 1;
   }
   100% {
+    -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 0;
   }
@@ -1006,6 +777,266 @@ body {
     background-color: rgba(0, 0, 0, 0.3);
   }
 }
+.board-content {
+  margin-left: 200px;
+  padding-left: 56px;
+  padding-top: 56px;
+  padding-right: 56px;
+}
+.board-content .board-header {
+  display: flex;
+  justify-content: space-between;
+}
+.board-content .board-header h1 {
+  font-size: 48px;
+  margin: unset;
+}
+.board-content .board-header .search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.board-content .board-header .search-container #search-input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background: white url(none) right no-repeat;
+  background-position: none none;
+  padding-right: 56px;
+  height: 48px;
+}
+.board-content .board-header .search-container .search-input-icon {
+  height: 24px;
+  transform: translateX(-100%);
+  padding: 6px 12px 6px 12px;
+  border-left: 2px solid #D1D1D1;
+  object-fit: contain;
+  cursor: pointer;
+}
+.board-content .board-header .search-container .btn-add-task {
+  background-color: #2A3647;
+  color: white;
+  padding: 10px 32px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 48px;
+}
+.board-content .board-header .search-container .btn-add-task:hover {
+  background-color: #29ABE2;
+}
+.board-content .board-header .search-container .add-task-plus-icon {
+  margin-left: 6px;
+}
+.board-content .board-tasks {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  margin-top: 56px;
+}
+.board-content .board-tasks .tasks {
+  width: 25%;
+  padding: 4px;
+}
+.board-content .board-tasks .tasks .task-header {
+  display: flex;
+  justify-content: space-between;
+  height: 32px;
+  margin-bottom: 32px;
+}
+.board-content .board-tasks .tasks .task-header h3 {
+  margin: unset;
+}
+.board-content .board-tasks .tasks .task-header img {
+  cursor: pointer;
+}
+.board-content .board-tasks .tasks .task {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: white;
+  border-radius: 18px;
+  box-shadow: 0px 1px 6px -2px rgba(0, 0, 0, 0.2);
+}
+.board-content .board-tasks .tasks .task h4 {
+  margin: 8px 0px;
+}
+.board-content .board-tasks .tasks .task span {
+  color: #a8a8a8;
+}
+.board-content .board-tasks .tasks .task .task-topic {
+  padding: 4px 18px;
+  margin-bottom: 16px;
+  width: fit-content;
+  border-radius: 6px;
+  color: white;
+  background-color: orangered;
+}
+.board-content .board-tasks .tasks .task .task-subtasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 20px;
+  width: 100%;
+  margin: 8px 0;
+}
+.board-content .board-tasks .tasks .task .task-subtasks .task-subtasks-line {
+  height: 4px;
+  width: calc(100% - 60px);
+  background-color: #f4f4f4;
+}
+.board-content .board-tasks .tasks .task .task-subtasks span {
+  font-size: small;
+  color: black;
+}
+
+body {
+  overflow: auto;
+}
+
+.board-content {
+  margin-left: 200px;
+  padding-left: 56px;
+  padding-top: 56px;
+  padding-right: 56px;
+}
+.board-content .board-header {
+  display: flex;
+  justify-content: space-between;
+}
+.board-content .board-header h1 {
+  font-size: 48px;
+  margin: unset;
+}
+.board-content .board-header .search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.board-content .board-header .search-container #search-input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  background: white url(none) right no-repeat;
+  background-position:  none;
+  padding-right: 56px;
+  height: 48px;
+}
+.board-content .board-header .search-container .search-input-icon {
+  height: 24px;
+  transform: translateX(-100%);
+  padding: 6px 12px 6px 12px;
+  border-left: 2px solid #D1D1D1;
+  -o-object-fit: contain;
+     object-fit: contain;
+  cursor: pointer;
+}
+.board-content .board-header .search-container .btn-add-task {
+  background-color: #2A3647;
+  color: white;
+  padding: 10px 32px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 48px;
+}
+.board-content .board-header .search-container .btn-add-task:hover {
+  background-color: #29ABE2;
+}
+.board-content .board-header .search-container .add-task-plus-icon {
+  margin-left: 6px;
+}
+.board-content .board-tasks {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  margin-top: 56px;
+}
+.board-content .board-tasks .tasks {
+  width: 25%;
+  padding: 4px;
+}
+.board-content .board-tasks .tasks .task-header {
+  display: flex;
+  justify-content: space-between;
+  height: 32px;
+  margin-bottom: 32px;
+}
+.board-content .board-tasks .tasks .task-header h3 {
+  margin: unset;
+}
+.board-content .board-tasks .tasks .task-header img {
+  cursor: pointer;
+}
+.board-content .board-tasks .tasks .task-body {
+  height: calc(100% - 64px);
+}
+.board-content .board-tasks .tasks .task {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: white;
+  border-radius: 18px;
+  box-shadow: 0px 1px 6px -2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 16px;
+}
+.board-content .board-tasks .tasks .task h4 {
+  margin: 8px 0px;
+}
+.board-content .board-tasks .tasks .task span {
+  color: #a8a8a8;
+}
+.board-content .board-tasks .tasks .task .task-topic {
+  padding: 4px 18px;
+  margin-bottom: 16px;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 6px;
+  color: white;
+  background-color: orangered;
+}
+.board-content .board-tasks .tasks .task .task-subtasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 20px;
+  width: 100%;
+  margin: 8px 0;
+}
+.board-content .board-tasks .tasks .task .task-subtasks .task-subtasks-line {
+  height: 4px;
+  width: calc(100% - 60px);
+  background-color: #f4f4f4;
+}
+.board-content .board-tasks .tasks .task .task-subtasks span {
+  font-size: small;
+  color: black;
+}
+.board-content .board-tasks .tasks .task .editors {
+  display: flex;
+  height: 42px;
+  width: 100%;
+}
+.board-content .board-tasks .tasks .task .editors .contact-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 42px;
+  height: 42px;
+  color: #FFFFFF;
+  border-radius: 100%;
+}
+.board-content .board-tasks .tasks .task .task-prio {
+  display: flex;
+}
+
 body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
@@ -1035,5 +1066,4 @@ body {
 
 .d-none {
   display: none !important;
-}
-
+}/*# sourceMappingURL=style.css.map */
