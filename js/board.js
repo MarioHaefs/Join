@@ -65,17 +65,29 @@ function htmlTaskDescription(task) {
 
 /**
  * 
- * @param {JSON} task includes all information to render the task on board - it is loaded from the server
+ * @param {Array of JSON} task includes all information to render the task on board - it is loaded from the server
  * @returns html code for progress in subtasks
+ * check first for available subtasks
  * task has property 'done' as array with booleans, if true, subtask is already done
  * filter(Boolean) returns only true values of array
  */
 function htmlTaskSubtasks(task) {
+    if (task['subtasks'].length == 0) return '<div class="task-subtasks"></div>';
     return `<div class="task-subtasks">
-                <div class="task-subtasks-line"></div>
+                <div class="task-subtasks-line">
+                    <div class="progress" style="width: ${calcProgress(task)}%"></div>
+                </div>
                 <span>${task['done'].filter(Boolean).length}/${task['subtasks'].length} Done</span>
-            </div>
-    `;
+            </div>`;
+}
+
+/**
+ * 
+ * @param {Array of JSON} task includes all information to render the task on board - it is loaded from the server
+ * @returns progress of subtasks in %
+ */
+function calcProgress(task) {
+    return task['done'].filter(Boolean).length / task['subtasks'].length * 100;
 }
 
 function htmlTaskDivBottom(task) {
@@ -87,7 +99,7 @@ function htmlTaskDivBottom(task) {
 
 /**
  * 
- * @param {JSON} task includes all information to render the task on board - it is loaded from the server
+ * @param {Array of JSON} task includes all information to render the task on board - it is loaded from the server
  * @returns html code for the editors of the task 
  * 
  * all available editors are loaded from server and are stored global
@@ -165,7 +177,7 @@ function deleteTasksOnBoard() {
 
 /**
  * 
- * @param {JSON} task includes all information to render the task on board - it is loaded from the server
+ * @param {Array of JSON} task includes all information to render the task on board - it is loaded from the server
  * @returns column where task has to be rendered
  * if no status is available, task is new and not started
  */

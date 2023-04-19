@@ -897,9 +897,15 @@ body {
   margin: 8px 0;
 }
 .board-content .board-tasks .tasks .task .task-subtasks .task-subtasks-line {
-  height: 4px;
+  height: 8px;
   width: calc(100% - 60px);
   background-color: #f4f4f4;
+  border-radius: 2px;
+}
+.board-content .board-tasks .tasks .task .task-subtasks .task-subtasks-line .progress {
+  background-color: #29ABE2;
+  height: inherit;
+  border-radius: 2px;
 }
 .board-content .board-tasks .tasks .task .task-subtasks span {
   font-size: small;
