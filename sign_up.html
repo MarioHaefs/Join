@@ -9,6 +9,7 @@
 
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./scss/style.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <script src="./js/mini_backend.js"></script>
     <script src="./js/script.js"></script>
@@ -18,15 +19,15 @@
 
     <div class="log-in">
         <img class="log-in-logo" src="assets/img/logo.png">
-        <div class="form-class">
+        <div class="form-class form-width-mobile">
             <img onclick="window.history.go(-1); return false;" class="arrow-left-icon" src="assets/img/arrow-left.png">
             <form onsubmit="addUser(); return false" class="log-in-form">
-                <span class="log-in-headline">Sign up</span>
-                <input id="register-name" class="name-input" placeholder="Name" type="text" required>
-                <input id="register-email" class="email-input" placeholder="Email" type="email" required>
-                <input id="register-password" class="password-input" placeholder="Password" type="password" minlength="6" required>
+                <span class="log-in-headline mobile-space-bottom">Sign up</span>
+                <input id="register-name" class="name-input mobile-space-bottom" placeholder="Name" type="text" required>
+                <input id="register-email" class="email-input mobile-space-bottom" placeholder="Email" type="email" required>
+                <input id="register-password" class="password-input mobile-space-bottom" placeholder="Password" type="password" minlength="6" required>
                 <div>
-                    <button class="log-in-button">Sign up</button>
+                    <button class="log-in-button mobile-button-width">Sign up</button>
                 </div>
                 <span id="register-success" class="login-popup">You have successfully registered !</span>
                 <span id="register-error" class="login-popup" >E-Mail already used !</span>
