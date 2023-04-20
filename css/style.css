@@ -106,7 +106,59 @@
   src: url("../assets/fonts/open-sans-v34-latin-800italic.eot"); /* IE9 Compat Modes */
   src: url("../assets/fonts/open-sans-v34-latin-800italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/open-sans-v34-latin-800italic.woff2") format("woff2"), url("../assets/fonts/open-sans-v34-latin-800italic.woff") format("woff"), url("../assets/fonts/open-sans-v34-latin-800italic.ttf") format("truetype"), url("../assets/fonts/open-sans-v34-latin-800italic.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
+.start-animation {
+  background-color: #F6F7F8;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 5;
+  animation: start-fade-out-background 0.5s ease-in-out both 1s;
+}
+.start-animation .logo-animation {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  animation: start-desktop-animation 1s ease-in-out both 1s;
+}
+@keyframes start-fade-out-background {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    z-index: 0;
+  }
+}
+@keyframes start-desktop-animation {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  70% {
+    opacity: 0.5;
+    transform: scale(0.1);
+    top: 5%;
+    left: 5%;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+    z-index: 0;
+    top: 5%;
+    left: 5%;
+  }
+}
+
+.mobile-logo-animation {
+  display: none;
+}
+
 .log-in {
+  display: flex;
   position: relative;
   height: 100vh;
   justify-content: center;
@@ -133,7 +185,7 @@
   font-size: 16px;
   text-decoration: none;
   font-weight: 700;
-  margin-left: 24px;
+  margin-left: 32px;
 }
 .log-in .sign-up .sign-up-button:hover {
   background-color: #29ABE2;
@@ -185,9 +237,6 @@
   border: 1px solid #D1D1D1;
   background: white url("../assets/img/lock-icon.png") right no-repeat;
   background-position: 94% 55%;
-}
-.log-in .form-class .log-in-form ::-moz-placeholder {
-  opacity: 0.5;
 }
 .log-in .form-class .log-in-form ::placeholder {
   opacity: 0.5;
@@ -246,7 +295,140 @@
   color: #29ABE2;
   border: 1px solid #29ABE2;
 }
+.log-in .login-popup {
+  color: white;
+  background-color: #2A3647;
+  padding: 8px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  border: none;
+  margin-top: 16px;
+  text-align: center;
+}
 
+/*** MEDIA QUERY ***/
+@media (max-width: 600px) {
+  /*** Mobile Animation ***/
+  .start-animation {
+    display: none;
+  }
+  .logo-animation {
+    display: none;
+  }
+  .mobile-start-animation {
+    background-color: #2A3647;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 5;
+    animation: fade-out-background 0.5s ease-in-out both 1s;
+  }
+  @keyframes fade-out-background {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      z-index: 0;
+    }
+  }
+  .mobile-logo-animation {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    animation: start-mobile-animation 1s ease-in-out both 1s;
+  }
+  @keyframes start-mobile-animation {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    70% {
+      opacity: 0.5;
+      transform: scale(0.1);
+      top: 5%;
+      left: 5%;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0);
+      z-index: 0;
+      top: 5%;
+      left: 5%;
+    }
+  }
+  /*** Login Page ***/
+  .form-class {
+    height: 450px !important;
+  }
+  .form-width-mobile {
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+  .log-in-logo {
+    top: 3% !important;
+    height: 100px;
+  }
+  .log-in-checkbox-div {
+    flex-direction: column;
+    text-align: center;
+  }
+  .mobile-remember-me {
+    display: flex;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  #remember-checkbox {
+    margin: 0;
+  }
+  .forgot-password-link {
+    margin: 0 !important;
+  }
+  .mobile-login-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+  .log-in-button {
+    color: white !important;
+    background-color: #2A3647 !important;
+    cursor: pointer;
+    padding: 10px 8px !important;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+    border: none !important;
+    margin-right: 0 !important;
+    margin-bottom: 16px;
+  }
+  .log-in-button:hover {
+    background-color: #29ABE2 !important;
+  }
+  .sign-up {
+    top: 81% !important;
+    right: 0% !important;
+    left: 0% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 48px !important;
+  }
+  /*** Sign-Up Page ***/
+  .mobile-button-width {
+    width: 150px;
+  }
+  .mobile-space-bottom {
+    margin-bottom: 40px !important;
+  }
+}
+@media (max-height: 700px) {
+  .log-in-logo {
+    height: 75px;
+    top: 1% !important;
+  }
+}
 .arrow-left-icon {
   position: absolute;
   top: 5%;
@@ -268,6 +450,8 @@
 .forgot-password-height {
   height: 300px !important;
   width: 600px !important;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .reset-password-height {
@@ -275,6 +459,42 @@
   width: 600px !important;
 }
 
+.email-sent-popup {
+  display: flex;
+  align-items: center;
+}
+
+.popup-margin {
+  margin-right: 16px;
+  height: 30px;
+}
+
+/*** MEDIA QUERY ***/
+@media (max-width: 600px) {
+  .text-center {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 300px;
+  }
+  .forgot-password-text {
+    font-size: 30px !important;
+  }
+  .forgot-password-height {
+    width: 450px !important;
+  }
+}
+@media (max-width: 460px) {
+  .arrow-left-icon {
+    left: 3%;
+    height: 20px !important;
+  }
+  .forgot-password-text {
+    font-size: 25px !important;
+  }
+  .forgot-password-height {
+    width: 350px !important;
+  }
+}
 .menu {
   background-color: #2A3647;
   color: rgba(255, 255, 255, 0.8352941176);
@@ -341,6 +561,7 @@
   margin-left: 200px;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
   height: 75px;
+  position: relative;
 }
 .header .header-headline {
   margin-left: 50px;
@@ -357,6 +578,7 @@
   width: 40px;
   border-radius: 100px;
   margin-right: 16px;
+  position: relative;
 }
 .header .header-icons .profil-pic:hover {
   cursor: pointer;
@@ -371,7 +593,25 @@
   cursor: pointer;
   transform: scale(1.05);
 }
+.header .log-out-field {
+  position: absolute;
+  top: 100%;
+  right: calc(3% + 20px);
+  transform: translate(0, -50%);
+  color: white;
+  background-color: #2A3647;
+  cursor: pointer;
+  padding: 8px 8px;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+  font-weight: 700;
+  border: none;
+}
+.header .log-out-field:hover {
+  background-color: #29ABE2;
+}
 
+/*** MEDIA QUERY ***/
 .legal-notice-content {
   margin-left: 300px;
   text-align: left;
@@ -428,7 +668,6 @@ body {
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 15px 25px;
   margin-left: 48px;
@@ -437,7 +676,6 @@ body {
   width: 100%;
   box-sizing: border-box;
   border-radius: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   font-size: 16px;
   cursor: pointer;
@@ -447,7 +685,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -514,7 +751,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -745,14 +981,17 @@ body {
  */
 @keyframes slide-top {
   0% {
+    -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 0;
   }
   50% {
+    -webkit-transform: translateY(-200px);
     transform: translateY(-200px);
     opacity: 1;
   }
   100% {
+    -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 0;
   }
@@ -811,8 +1050,7 @@ body {
   transform: translateX(-100%);
   padding: 6px 12px 6px 12px;
   border-left: 2px solid #D1D1D1;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   cursor: pointer;
 }
 .board-content .board-header .search-container .btn-add-task {
@@ -823,9 +1061,12 @@ body {
   font-weight: bold;
   border-radius: 10px;
   border: none;
+  display: flex;
+  align-items: center;
   padding-left: 16px;
   padding-right: 16px;
   height: 48px;
+  font-size: 20px;
 }
 .board-content .board-header .search-container .btn-add-task:hover {
   background-color: #29ABE2;
@@ -855,6 +1096,9 @@ body {
 .board-content .board-tasks .tasks .task-header img {
   cursor: pointer;
 }
+.board-content .board-tasks .tasks .task-header img:hover {
+  filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
+}
 .board-content .board-tasks .tasks .task-body {
   height: calc(100% - 64px);
   border: 2px solid transparent;
@@ -882,7 +1126,6 @@ body {
 .board-content .board-tasks .tasks .task .task-topic {
   padding: 4px 18px;
   margin-bottom: 16px;
-  width: -moz-fit-content;
   width: fit-content;
   border-radius: 6px;
   color: white;
@@ -939,10 +1182,56 @@ body {
   display: flex;
 }
 .board-content .board-tasks .tasks .task .task-prio img {
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
+#overlayAddTask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  animation: shadow-background-color 0.25s normal;
+}
+#overlayAddTask .add-task {
+  position: relative;
+  width: 80%;
+  height: 90%;
+  background-color: #F6F7F8;
+  border-radius: 32px;
+  animation: slide-in-from-right 0.25s normal;
+}
+#overlayAddTask .add-task .close {
+  display: flex;
+  justify-content: flex-end;
+  margin: 24px;
+  cursor: pointer;
+}
+
+.display-none {
+  display: none !important;
+}
+
+@keyframes slide-in-from-right {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 0%;
+  }
+}
+@keyframes shadow-background-color {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
 body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
