@@ -44,9 +44,12 @@ body {
 
             .btn-add-task {
                 @include button-darkblue();
+                display: flex;
+                align-items: center;
                 padding-left: 16px;
                 padding-right: 16px;
                 height: $heightInput;
+                font-size: 20px;
             }
 
             .add-task-plus-icon {
