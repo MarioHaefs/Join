@@ -1,5 +1,6 @@
 setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 let users = [];
+let currentUser;
 
 /**
  * fill your empty array with users from the Server
@@ -105,6 +106,7 @@ async function login() {
                 localStorage.removeItem("login-password");
                 localStorage.removeItem("rememberMeChecked");
             }
+            currentUser = user;
             window.location.href = "summary.html";
         } else {
             document.getElementById('login-false').style.display = 'block';
@@ -147,8 +149,19 @@ function loadLoginData() {
  * Guest Login
  */
 function guestLogin() {
+    currentUser = ['Guest'];
     window.location.href = "summary.html"
 }
+
+
+/**
+ * Logout 
+ */
+function logout() {
+    currentUser = '';
+    window.location.href = "index.html"
+}
+
 
 
 /**
@@ -189,6 +202,9 @@ function goToSignUp() {
 }
 
 
+/**
+ * show and hide E-Mail sent Popup
+ */
 function showEmailSentMessage() {
     let popup = document.getElementById('email-sent-popup');
     popup.style.display = 'flex';
@@ -201,6 +217,9 @@ function hideEmailSentMessage() {
 }
 
 
+/**
+ * show and hide reset Password Popup
+ */
 function showResetPasswordMessage() {
     let popup = document.getElementById('reset-password-message');
     popup.style.display = 'block';
