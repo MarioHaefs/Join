@@ -177,7 +177,7 @@ function moveTo(status) {
     tasks[taskIndex]['status'] = status;
     markDraggableArea(``);
     saveData('tasks', tasks);
-    renderTasks();
+    renderTasks(tasks);
 }
 
 function deleteTasksOnBoard() {
