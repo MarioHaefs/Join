@@ -1,0 +1,169 @@
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+.main_box {
+  position: absolute;
+  left: calc(50% - 400px);
+  top: 150px;
+  display: flex;
+  align-items: center;
+  gap: 70px;
+}
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+  margin-top: 200px;
+}
+
+.name {
+  color: #29ABE2;
+  font-weight: 700;
+  font-size: 64px;
+}
+
+.hallo {
+  font-weight: 500;
+  font-size: 47px;
+}
+
+.summery_head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headline {
+  font-weight: 700;
+  font-size: 61px;
+  padding-right: 60px;
+  margin: 0;
+}
+
+.nutshell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  padding-left: 30px;
+  font-weight: 400;
+  font-size: 27px;
+  border-left: 3px solid #29ABE2;
+}
+
+.task {
+  gap: 35px;
+  margin-top: 100px;
+  display: flex;
+}
+
+.task_sub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 170px;
+  height: 170px;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  transition: 300ms;
+}
+.task_sub:hover {
+  background-color: #2A3647;
+  cursor: pointer;
+  scale: 1.1;
+  color: #fff;
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
+}
+
+.count {
+  font-weight: 600;
+  font-size: 47px;
+}
+
+.status {
+  text-align: center;
+  font-weight: 400;
+  font-size: 21px;
+}
+
+.prio_date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 580px;
+  height: 150px;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  margin-top: 35px;
+  transition: 300ms;
+}
+.prio_date:hover {
+  background-color: #2A3647;
+  cursor: pointer;
+  scale: 1.1;
+  color: #fff;
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
+}
+
+.todo_done {
+  display: flex;
+  margin-top: 35px;
+  gap: 35px;
+}
+
+.todo_done_sub {
+  width: 272.5px;
+  height: 150px;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 300ms;
+  gap: 40px;
+}
+.todo_done_sub:hover {
+  background-color: #2A3647;
+  cursor: pointer;
+  scale: 1.1;
+  color: #fff;
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
+}
+.todo_done_sub:hover img {
+  filter: invert(100%) brightness(2);
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.datum {
+  padding-left: 61px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 2px solid #D1D1D1;
+  flex-direction: column;
+  height: 100px;
+  font-weight: 700;
+  font-size: 21px;
+}
+
+.prio_date_sub {
+  padding-right: 61px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.prio_date_sub img {
+  width: 60px;
+  height: 60px;
+}/*# sourceMappingURL=summary.css.map */
