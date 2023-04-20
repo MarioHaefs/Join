@@ -158,6 +158,7 @@
 }
 
 .log-in {
+  display: flex;
   position: relative;
   height: 100vh;
   justify-content: center;
@@ -297,7 +298,18 @@
   color: #29ABE2;
   border: 1px solid #29ABE2;
 }
+.log-in .login-popup {
+  color: white;
+  background-color: #2A3647;
+  padding: 8px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  border: none;
+  margin-top: 16px;
+  text-align: center;
+}
 
+/*** MEDIA QUERY ***/
 @media (max-width: 600px) {
   /*** Mobile Animation ***/
   .start-animation {
@@ -441,6 +453,8 @@
 .forgot-password-height {
   height: 300px !important;
   width: 600px !important;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .reset-password-height {
@@ -448,6 +462,42 @@
   width: 600px !important;
 }
 
+.email-sent-popup {
+  display: flex;
+  align-items: center;
+}
+
+.popup-margin {
+  margin-right: 16px;
+  height: 30px;
+}
+
+/*** MEDIA QUERY ***/
+@media (max-width: 600px) {
+  .text-center {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 300px;
+  }
+  .forgot-password-text {
+    font-size: 30px !important;
+  }
+  .forgot-password-height {
+    width: 450px !important;
+  }
+}
+@media (max-width: 460px) {
+  .arrow-left-icon {
+    left: 3%;
+    height: 20px !important;
+  }
+  .forgot-password-text {
+    font-size: 25px !important;
+  }
+  .forgot-password-height {
+    width: 350px !important;
+  }
+}
 .menu {
   background-color: #2A3647;
   color: rgba(255, 255, 255, 0.8352941176);
@@ -514,6 +564,7 @@
   margin-left: 200px;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
   height: 75px;
+  position: relative;
 }
 .header .header-headline {
   margin-left: 50px;
@@ -530,6 +581,7 @@
   width: 40px;
   border-radius: 100px;
   margin-right: 16px;
+  position: relative;
 }
 .header .header-icons .profil-pic:hover {
   cursor: pointer;
@@ -544,7 +596,25 @@
   cursor: pointer;
   transform: scale(1.05);
 }
+.header .log-out-field {
+  position: absolute;
+  top: 100%;
+  right: calc(3% + 20px);
+  transform: translate(0, -50%);
+  color: white;
+  background-color: #2A3647;
+  cursor: pointer;
+  padding: 8px 8px;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+  font-weight: 700;
+  border: none;
+}
+.header .log-out-field:hover {
+  background-color: #29ABE2;
+}
 
+/*** MEDIA QUERY ***/
 .legal-notice-content {
   margin-left: 300px;
   text-align: left;
@@ -949,6 +1019,10 @@ body {
     background-color: rgba(0, 0, 0, 0.3);
   }
 }
+body {
+  overflow: auto;
+}
+
 .board-content {
   margin-left: 200px;
   padding-left: 56px;
@@ -972,8 +1046,8 @@ body {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #D1D1D1;
-  background: white url() right no-repeat;
-  background-position: none;
+  background: white url(none) right no-repeat;
+  background-position: none none;
   padding-right: 56px;
   height: 48px;
 }
@@ -1026,6 +1100,9 @@ body {
 .board-content .board-tasks .tasks .task-header img {
   cursor: pointer;
 }
+.board-content .board-tasks .tasks .task-body {
+  height: calc(100% - 64px);
+}
 .board-content .board-tasks .tasks .task {
   display: flex;
   flex-direction: column;
@@ -1033,6 +1110,7 @@ body {
   background-color: white;
   border-radius: 18px;
   box-shadow: 0px 1px 6px -2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 16px;
 }
 .board-content .board-tasks .tasks .task h4 {
   margin: 8px 0px;
@@ -1065,6 +1143,24 @@ body {
 .board-content .board-tasks .tasks .task .task-subtasks span {
   font-size: small;
   color: black;
+}
+.board-content .board-tasks .tasks .task .editors {
+  display: flex;
+  height: 42px;
+  width: 100%;
+}
+.board-content .board-tasks .tasks .task .editors .contact-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 42px;
+  height: 42px;
+  color: #FFFFFF;
+  border-radius: 100%;
+}
+.board-content .board-tasks .tasks .task .task-prio {
+  display: flex;
 }
 
 body {

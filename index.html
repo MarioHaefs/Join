@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <script src="./js/mini_backend.js"></script>
     <script src="./js/script.js"></script>
-    
+
 </head>
 
 <body onload="initUsers(), loadLoginData()">
@@ -36,7 +36,8 @@
                 <input id="login-password" class="password-input" placeholder="Password" type="password" required>
                 <div class="log-in-checkbox-div">
                     <div class="mobile-remember-me">
-                        <input id="remember-checkbox" type="checkbox" name="remember-me"><span class="remember-me">Remember me</span>
+                        <input id="remember-checkbox" type="checkbox" name="remember-me"><span
+                            class="remember-me">Remember me</span>
                     </div>
                     <a class="forgot-password-link" href="forgot_password.html">Forgot my password</a>
                 </div>
@@ -44,11 +45,10 @@
                     <button class="log-in-button">Log in</button>
                     <button onclick="guestLogin()" class="guest-log-in-button">Guest Log in</button>
                 </div>
-                <span id="login-false" class="login-popup">Data not correct ! Please check for correctness !</span>
+                <span id="login-false" class="login-popup" style="display: none;">Data not correct ! Please check for correctness !</span>
             </form>
         </div>
     </div>
 </body>
-
 
 </html>

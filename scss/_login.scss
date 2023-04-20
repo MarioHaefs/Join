@@ -57,6 +57,7 @@
 }
 
 .log-in {
+    display: flex;
     position: relative;
     height: 100vh;
     justify-content: center;
@@ -172,8 +173,22 @@
         }
     }
 
+
+    .login-popup {
+        color: white;
+        background-color: $darkblue;
+        padding: 8px 8px;
+        border-radius: 6px;
+        font-weight: 500;
+        border: none;
+        margin-top: 16px;
+        text-align: center;
+    }
+
 }
 
+
+/*** MEDIA QUERY ***/
 @media (max-width: 600px) {
 
     /*** Mobile Animation ***/
