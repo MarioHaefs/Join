@@ -3,18 +3,29 @@ let editors;
 let tasks;
 let categorys;
 
+// set backend url
+setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
+
 async function initBoard() {
-    setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
-    await downloadFromServer();
-    editors = JSON.parse(backend.getItem('contacts')) || [];
-    tasks = JSON.parse(backend.getItem('tasks')) || [];
-    categorys = JSON.parse(backend.getItem('categorys')) || [];
+    await loadData();
     console.log(tasks);
     renderTasks();
 }
 
+// load data from backend
+async function loadData() {
+    await downloadFromServer();
+    editors = JSON.parse(backend.getItem('contacts')) || [];
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
+    categorys = JSON.parse(backend.getItem('categorys')) || [];
+}
+
+// save data to backend
+async function saveData(key, array) {
+    await backend.setItem(key, JSON.stringify(array));
+};
+
 function renderTasks() {
-    //renderSingleTask();
     deleteTasksOnBoard();
 
     for (let i = 0; i < tasks.length; i++) {
@@ -37,8 +48,7 @@ function renderSingleTask(task) {
             ${htmlTaskDescription(task)}
             ${htmlTaskSubtasks(task)}
             ${htmlTaskDivBottom(task)}
-        </div>
-    `;
+        </div>`;
 }
 
 /**
@@ -165,6 +175,7 @@ function moveTo(status) {
     let taskIndex = tasks.findIndex((task) => task['task_id'] == currentDraggedElement);
     tasks[taskIndex]['status'] = status;
     markDraggableArea(``);
+    saveData('tasks', tasks);
     renderTasks();
 }
 
