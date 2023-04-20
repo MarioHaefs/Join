@@ -207,3 +207,15 @@ function markDraggableArea(style) {
         area.style.border = style;
     }
 }
+
+function overlayAddTask() {
+    document.getElementById('overlayAddTask').classList.remove('display-none');
+}
+
+function closeOverlay() {
+    document.getElementById('overlayAddTask').classList.add('display-none');
+}
+
+function noClose(event) {
+    event.stopPropagation();
+}

@@ -9,14 +9,16 @@
 
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
     <link rel="stylesheet" href="./css/style.css">
-
     <link rel="stylesheet" href="./css/fonts.css">
     <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/board.js"></script>
 
-
+    <!-- include add_task files -->
+    <script src="./js/add_task.js"></script>
+    <script src="./js/add_task_templates.js"></script>
+    <!-- <link rel="stylesheet" href="./css/addTask.css"> -->
 </head>
 
 <body onload="includeHTML(), initBoard()" ondragend="markDraggableArea('')">
@@ -28,10 +30,10 @@
             <div class="search-container">
                 <input type="search" id="search-input" placeholder="Find Task">
                 <img src="./assets/img/search-icon.png" class="search-input-icon">
-                <button class="btn-add-task">
+                <button class="btn-add-task" onclick="overlayAddTask()">
                     Add Task
                     <img src="./assets/img/add-task-plus-icon.png" class="add-task-plus-icon">
-                </button> 
+                </button>
             </div>
         </div>
 
@@ -39,7 +41,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>To do</h3>
-                    <img src="./assets/img/plus-button-darkblue.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
                 <div id="tasks-todo" class="task-body" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
 
@@ -48,7 +50,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>In progress</h3>
-                    <img src="./assets/img/plus-button-darkblue.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
                 <div id="tasks-progress" class="task-body" ondrop="moveTo('progress')" ondragover="allowDrop(event)">
 
@@ -57,7 +59,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>Awaiting Feedback</h3>
-                    <img src="./assets/img/plus-button-darkblue.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
                 <div id="tasks-feedback" class="task-body" ondrop="moveTo('feedback')" ondragover="allowDrop(event)">
 
@@ -66,7 +68,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>Done</h3>
-                    <img src="./assets/img/plus-button-darkblue.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
                 <div id="tasks-done" class="task-body" ondrop="moveTo('done')" ondragover="allowDrop(event)">
 
@@ -76,6 +78,113 @@
 
     </div>
 
+    <div id="overlayAddTask" class="display-none" onclick="closeOverlay()">
+        <!-- <iframe src="add_task.html" frameborder="0" width="80%" height="90%"></iframe> -->
+        <div class="add-task" onclick="noClose(event)">
+            <div class="close">
+                <img src="./assets/img/close.png" onclick="closeOverlay()">
+            </div>
+
+            <!-- test add task -->
+            <div class="head">
+                <h1>Add Task</h1>
+            </div>
+            <div class="form">
+                <div class="form_left">
+
+                    <!---------------------------------------------------------Title Input----------------------------------------------------------------------------->
+
+                    <span>Title</span>
+                    <input type="text" placeholder="Enter a title" id="title" maxlength="29"
+                        onfocus="removeBorder('title')">
+
+                    <!---------------------------------------------------------Description Input----------------------------------------------------------------------->
+
+                    <span>Description</span>
+                    <textarea placeholder="Enter a Description" id="description"
+                        onfocus="removeBorder('description')"></textarea>
+
+                    <!---------------------------------------------------------Category Menu--------------------------------------------------------------------------->
+
+                    <span>Category</span>
+                    <div id="categoryBox">
+                        <div class="drop_down" id="dropDown" onclick="openCategory()">
+                            Select task category
+                            <img class="down_image" src="assets/img/drop-down-arrow.png">
+                        </div>
+                        <div id="categorys" class="render_categorys_box"></div>
+                    </div>
+
+                    <!-------------------------------------------------------------Contacts Menu----------------------------------------------------------------------->
+
+                    <span>Assigned to</span>
+                    <div id="contactBox">
+                        <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
+                            Select contacts to assign
+                            <img class="down_image" src="assets/img/drop-down-arrow.png">
+                        </div>
+                        <div id="contacts" class="render_categorys_box"></div>
+                    </div>
+                    <div id="initials" class="initials_box"></div>
+                </div>
+
+                <div class="form_right">
+
+                    <!-------------------------------------------------------------input Date------------------------------------------------------------------------->
+
+                    <span>Due date</span>
+                    <input type="date" id="date" autofocus>
+
+                    <!-------------------------------------------------------------input Priority--------------------------------------------------------------------->
+
+                    <span>Prio</span>
+                    <div class="prio" id="prio">
+                        <div class="prio_button" id="prioUrgent" onclick="setPrio('urgent')">Urgent<img
+                                src="assets/img/prioUrgent.png"></div>
+                        <div class="prio_button" id="prioMedium" onclick="setPrio('medium')">Medium <img
+                                src="assets/img/prioMedium.png"></div>
+                        <div class="prio_button" id="prioLow" onclick="setPrio('low')">Low <img
+                                src="assets/img/prioLow.png">
+                        </div>
+                    </div>
+
+                    <!-------------------------------------------------------------input Subtasks--------------------------------------------------------------------->
+
+                    <span style="margin-top: 34px;">Subtasks</span>
+                    <div class="subtasks">
+                        <input type="text" placeholder="Add new subtask" id="subTask" maxlength="29">
+                        <img class="plus_image" src="assets/img/plus.svg" onclick="addSubtask()">
+                    </div>
+                    <div class="subtask_box" id="subtaskBox"></div>
+                    <div class="clear_create_task">
+                        <div class="clear_button" onclick="clearAll()">Clear x</div>
+                        <div class="create_button" onclick="createTask()">Create Task ✔</div>
+                    </div>
+                </div>
+                <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
+                <div class="addBord_box" id="addBordBox">
+                    Task added to Board
+                    <img src="assets/img/board.png" class="add_board_image">
+                </div>
+                <div class="addBord_box" id="pleaseEnterName">
+                    Please enter a Task Name
+                </div>
+                <div class="addBord_box" id="pleaseCategoryName">
+                    Please enter a Category Name
+                </div>
+                <div class="addBord_box" id="missing">
+                    Something is missing
+                </div>
+                <div class="addBord_box" id="emailSend">
+                    Email sent
+                </div>
+                <div class="addBord_box" id="enterEmail">
+                    Please enter a E-Mail
+                </div>
+                <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
