@@ -187,3 +187,27 @@ function openProfilIconMenu() {
 function goToSignUp() {
     window.location.href = "sign_up.html"
 }
+
+
+function showEmailSentMessage() {
+    let popup = document.getElementById('email-sent-popup');
+    popup.style.display = 'flex';
+    setTimeout(hideEmailSentMessage, 3000);
+}
+
+
+function hideEmailSentMessage() {
+    document.getElementById('email-sent-popup').style.display = 'none';
+}
+
+
+function showResetPasswordMessage() {
+    let popup = document.getElementById('reset-password-message');
+    popup.style.display = 'block';
+    setTimeout(hideResetPasswordMessage, 3000);
+}
+
+
+function hideResetPasswordMessage() {
+    document.getElementById('reset-password-message').style.display = 'none';
+}

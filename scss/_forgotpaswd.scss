@@ -19,9 +19,53 @@
 .forgot-password-height {
     height: 300px !important;
     width: 600px !important;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .reset-password-height {
     height: 350px !important;
     width: 600px !important;
+}
+
+.email-sent-popup {
+    display: flex ;
+    align-items: center;
+}
+
+.popup-margin {
+    margin-right: 16px;
+    height: 30px;
+}
+
+/*** MEDIA QUERY ***/
+@media (max-width: 600px) {
+    .text-center {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        width: 300px;
+    }
+
+    .forgot-password-text {
+        font-size: 30px !important;
+    }
+
+    .forgot-password-height {
+        width: 450px !important;
+    }
+}
+
+@media (max-width: 460px) {
+    .arrow-left-icon {
+        left: 3%;
+        height: 20px !important;
+    }
+
+    .forgot-password-text {
+        font-size: 25px !important;
+    }
+
+    .forgot-password-height {
+        width: 350px !important;
+    }
 }
