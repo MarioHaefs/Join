@@ -107,6 +107,7 @@ async function login() {
                 localStorage.removeItem("rememberMeChecked");
             }
             currentUser = user;
+            localStorage.setItem("currentUser", JSON.stringify(user));
             window.location.href = "summary.html";
         } else {
             document.getElementById('login-false').style.display = 'block';
@@ -149,8 +150,10 @@ function loadLoginData() {
  * Guest Login
  */
 function guestLogin() {
-    currentUser = ['Guest'];
-    window.location.href = "summary.html"
+    event.preventDefault();
+    currentUser = 'Guest';
+    localStorage.setItem('currentUser', 'Guest');
+    window.location.href = 'summary.html';
 }
 
 
@@ -158,7 +161,7 @@ function guestLogin() {
  * Logout 
  */
 function logout() {
-    currentUser = '';
+    localStorage.removeItem("currentUser");
     window.location.href = "index.html"
 }
 
