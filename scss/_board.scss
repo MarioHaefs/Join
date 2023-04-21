@@ -26,8 +26,10 @@ body {
 
 
             #search-input {
-                @include inputForm(none, none, none);
+                padding: 10px;
                 padding-right: 56px;
+                border-radius: 8px;
+                border: 1px solid #D1D1D1;
                 height: $heightInput;
             }
 
@@ -42,9 +44,12 @@ body {
 
             .btn-add-task {
                 @include button-darkblue();
+                display: flex;
+                align-items: center;
                 padding-left: 16px;
                 padding-right: 16px;
                 height: $heightInput;
+                font-size: 20px;
             }
 
             .add-task-plus-icon {
@@ -76,11 +81,16 @@ body {
 
                 img {
                     cursor: pointer;
+
+                    &:hover {
+                        filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
+                    }
                 }
             }
 
             .task-body {
                 height: calc(100% - 64px);
+                border: 2px solid transparent;
             }
 
             .task {
@@ -91,6 +101,7 @@ body {
                 border-radius: 18px;
                 box-shadow: 0px 1px 6px -2px rgba($color: #000000, $alpha: 0.2);
                 margin-bottom: 16px;
+                cursor: pointer;
 
                 h4 {
                     margin: 8px 0px;
@@ -98,6 +109,10 @@ body {
 
                 span {
                     color: $gray;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
                 }
 
                 .task-topic {
@@ -118,9 +133,16 @@ body {
                     margin: 8px 0;
 
                     .task-subtasks-line {
-                        height: 4px;
+                        height: 8px;
                         width: calc(100% - 60px);
                         background-color: #f4f4f4;
+                        border-radius: 2px;
+                        
+                        .progress {
+                            background-color: #29ABE2;
+                            height: inherit;
+                            border-radius: 2px;
+                        }
                     }
 
                     span {
@@ -129,27 +151,86 @@ body {
                     }
                 }
 
-                .editors {
+                .task-bottom {
                     display: flex;
-                    height: 42px;
-                    width: 100%;
 
-                    .contact-frame {
+                    .editors {
                         display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 10px;
-                        min-width: 42px;
                         height: 42px;
-                        color: #FFFFFF;
-                        border-radius: 100%;
+                        width: 100%;
+
+                        .contact-frame {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            min-width: 42px;
+                            height: 42px;
+                            color: #FFFFFF;
+                            border-radius: 100%;
+                            background-color: $darkblue;
+                        }
+
+                        .contact-frame:nth-child(2) {
+                            transform: translateX(-10px);
+                        }
+
+                        .contact-frame:nth-child(3) {
+                            transform: translateX(-20px);
+                        }
                     }
                 }
 
                 .task-prio {
                     display: flex;
+
+                    img {
+                        object-fit: contain;
+                    }
                 }
             }
         }
     }
+}
+
+#overlayAddTask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    animation: shadow-background-color 0.25s normal;
+
+    .add-task {
+        position: relative;
+        width: 80%;
+        height: 90%;
+        background-color: $pagebackground;
+        border-radius: 32px;
+        animation: slide-in-from-right 0.25s normal;
+
+        .close {
+            display: flex;
+            justify-content: flex-end;
+            margin: 24px;
+            cursor: pointer;            
+        }
+    }
+}
+
+.display-none {
+    display: none !important;
+}
+
+@keyframes slide-in-from-right {
+    from {left: 100%;}
+    to {left: 0%;}
+}
+
+@keyframes shadow-background-color {
+    from {background-color: rgba($color: #000000, $alpha: 0.0);}
+    to {background-color: rgba($color: #000000, $alpha: 0.2);}
 }

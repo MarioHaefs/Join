@@ -7,31 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
 
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    <link rel="stylesheet" href="css/style.css">
-
-    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/fonts.css">
     <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/board.js"></script>
 
-
+    <!-- include add_task files -->
+    <!-- <script src="./js/add_task.js"></script> -->
+    <!-- <script src="./js/add_task_templates.js"></script> -->
+    <!-- <link rel="stylesheet" href="./css/addTask.css"> -->
 </head>
 
-<body onload="includeHTML(), initBoard()">
+<body onload="includeHTML(), initBoard()" ondragend="markDraggableArea('')">
     <div w3-include-html="desktop_template.html"></div>
 
     <div class="board-content">
         <div class="board-header">
             <h1>Board</h1>
             <div class="search-container">
-                <input type="search" id="search-input" placeholder="Find Task">
+                <input type="search" id="search-input" placeholder="Find Task" onkeyup="filterTasks()">
                 <img src="./assets/img/search-icon.png" class="search-input-icon">
-                <button class="btn-add-task">
+                <button class="btn-add-task" onclick="overlayAddTask()">
                     Add Task
                     <img src="./assets/img/add-task-plus-icon.png" class="add-task-plus-icon">
-                </button> 
+                </button>
             </div>
         </div>
 
@@ -39,7 +41,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>To do</h3>
-                    <img src="./assets/img/plus-button-darkblue.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
                 <div id="tasks-todo" class="task-body" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
 
@@ -48,7 +50,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>In progress</h3>
-                    <img src="./assets/img/plus-button-darkblue.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
                 <div id="tasks-progress" class="task-body" ondrop="moveTo('progress')" ondragover="allowDrop(event)">
 
@@ -57,7 +59,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>Awaiting Feedback</h3>
-                    <img src="./assets/img/plus-button-darkblue.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
                 <div id="tasks-feedback" class="task-body" ondrop="moveTo('feedback')" ondragover="allowDrop(event)">
 
@@ -66,7 +68,7 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>Done</h3>
-                    <img src="./assets/img/plus-button-darkblue.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
                 <div id="tasks-done" class="task-body" ondrop="moveTo('done')" ondragover="allowDrop(event)">
 
@@ -76,6 +78,52 @@
 
     </div>
 
+    <div id="overlayAddTask" class="display-none" onclick="closeOverlay()">
+        <!-- <iframe src="add_task.html" frameborder="0" width="80%" height="90%"></iframe> -->
+        <div class="add-task" onclick="noClose(event)">
+            <div class="close">
+                <img src="./assets/img/close.png" onclick="closeOverlay()">
+            </div>
+            
+            <!-- ToDo: Render include/render AddTask -->
+            <div class="form_left">
+
+                <!---------------------------------------------------------Title Input----------------------------------------------------------------------------->
+    
+                <span>Title</span>
+                <input type="text" placeholder="Enter a title" id="title" maxlength="29" onfocus="removeBorder('title')">
+    
+                <!---------------------------------------------------------Description Input----------------------------------------------------------------------->
+    
+                <span>Description</span>
+                <textarea placeholder="Enter a Description" id="description"
+                    onfocus="removeBorder('description')"></textarea>
+    
+                <!---------------------------------------------------------Category Menu--------------------------------------------------------------------------->
+    
+                <span>Category</span>
+                <div id="categoryBox">
+                    <div class="drop_down" id="dropDown" onclick="openCategory()">
+                        Select task category
+                        <img class="down_image" src="assets/img/drop-down-arrow.png">
+                    </div>
+                    <div id="categorys" class="render_categorys_box"></div>
+                </div>
+    
+                <!-------------------------------------------------------------Contacts Menu----------------------------------------------------------------------->
+    
+                <span>Assigned to</span>
+                <div id="contactBox">
+                    <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
+                        Select contacts to assign
+                        <img class="down_image" src="assets/img/drop-down-arrow.png">
+                    </div>
+                    <div id="contacts" class="render_categorys_box"></div>
+                </div>
+                <div id="initials" class="initials_box"></div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
