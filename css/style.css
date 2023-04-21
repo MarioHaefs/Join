@@ -238,7 +238,9 @@
   background: white url("../assets/img/lock-icon.png") right no-repeat;
   background-position: 94% 55%;
 }
-
+.log-in .form-class .log-in-form ::-moz-placeholder {
+  opacity: 0.5;
+}
 .log-in .form-class .log-in-form ::placeholder {
   opacity: 0.5;
 }
@@ -613,6 +615,59 @@
 }
 
 /*** MEDIA QUERY ***/
+@media (max-width: 600px) {
+  .menu {
+    float: none;
+    top: unset;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+  .menu .menu-content {
+    height: 75px;
+    justify-content: center;
+  }
+  .menu .menu-logo {
+    display: none;
+  }
+  .menu .menu-nav {
+    display: flex;
+  }
+  .menu .menu-nav .nav-text {
+    width: unset !important;
+    margin-bottom: 0px !important;
+    flex-direction: column;
+    height: unset !important;
+    padding-right: 16px;
+    padding-left: 16px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+  .header {
+    margin-left: unset;
+    justify-content: flex-end;
+  }
+  .header .mobile-template-logo {
+    display: block !important;
+    height: 50px;
+    position: absolute;
+    top: 16%;
+    left: 5%;
+    cursor: pointer;
+  }
+  .header .header-headline {
+    display: none;
+  }
+  .header .question-icon {
+    display: none;
+  }
+}
+@media (max-width: 430px) {
+  .nav-text {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+  }
+}
 .legal-notice-content {
   margin-left: 300px;
   text-align: left;
@@ -1052,7 +1107,8 @@ body {
   transform: translateX(-100%);
   padding: 6px 12px 6px 12px;
   border-left: 2px solid #D1D1D1;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   cursor: pointer;
 }
 .board-content .board-header .search-container .btn-add-task {
@@ -1128,6 +1184,7 @@ body {
 .board-content .board-tasks .tasks .task .task-topic {
   padding: 4px 18px;
   margin-bottom: 16px;
+  width: -moz-fit-content;
   width: fit-content;
   border-radius: 6px;
   color: white;
@@ -1184,7 +1241,8 @@ body {
   display: flex;
 }
 .board-content .board-tasks .tasks .task .task-prio img {
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 #overlayAddTask {
