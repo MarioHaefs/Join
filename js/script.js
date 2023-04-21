@@ -233,3 +233,10 @@ function showResetPasswordMessage() {
 function hideResetPasswordMessage() {
     document.getElementById('reset-password-message').style.display = 'none';
 }
+
+/**
+ * go to summary.html Page
+ */
+function goToSummary() {
+    window.location.href = 'summary.html';
+}
