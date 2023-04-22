@@ -6,13 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/overlay.style.css">
     <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/add_task_templates.js"></script>
+    <script src="./js/add_task.js"></script>
     <script src="./js/board.js"></script>
 
     <!-- include add_task files -->
@@ -21,14 +23,14 @@
     <!-- <link rel="stylesheet" href="./css/addTask.css"> -->
 </head>
 
-<body onload="includeHTML(), initBoard()" ondragend="markDraggableArea('')">
+<body onload="includeHTML(), initBoard(), hideNotices()" ondragend="markDraggableArea('')">
     <div w3-include-html="desktop_template.html"></div>
 
     <div class="board-content">
         <div class="board-header">
             <h1>Board</h1>
             <div class="search-container">
-                <input type="search" id="search-input" placeholder="Find Task" onkeyup="filterTasks()">
+                <input type="search" id="search-input" placeholder="Find Task" onkeyup="filterTasks()" style="margin-bottom: 0;">
                 <img src="./assets/img/search-icon.png" class="search-input-icon">
                 <button class="btn-add-task" onclick="overlayAddTask()">
                     Add Task
@@ -86,44 +88,31 @@
             </div>
             
             <!-- ToDo: Render include/render AddTask -->
-            <div class="form_left">
-
-                <!---------------------------------------------------------Title Input----------------------------------------------------------------------------->
-    
-                <span>Title</span>
-                <input type="text" placeholder="Enter a title" id="title" maxlength="29" onfocus="removeBorder('title')">
-    
-                <!---------------------------------------------------------Description Input----------------------------------------------------------------------->
-    
-                <span>Description</span>
-                <textarea placeholder="Enter a Description" id="description"
-                    onfocus="removeBorder('description')"></textarea>
-    
-                <!---------------------------------------------------------Category Menu--------------------------------------------------------------------------->
-    
-                <span>Category</span>
-                <div id="categoryBox">
-                    <div class="drop_down" id="dropDown" onclick="openCategory()">
-                        Select task category
-                        <img class="down_image" src="assets/img/drop-down-arrow.png">
-                    </div>
-                    <div id="categorys" class="render_categorys_box"></div>
-                </div>
-    
-                <!-------------------------------------------------------------Contacts Menu----------------------------------------------------------------------->
-    
-                <span>Assigned to</span>
-                <div id="contactBox">
-                    <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
-                        Select contacts to assign
-                        <img class="down_image" src="assets/img/drop-down-arrow.png">
-                    </div>
-                    <div id="contacts" class="render_categorys_box"></div>
-                </div>
-                <div id="initials" class="initials_box"></div>
-            </div>
+            <div id="overlay"></div>
         </div>
     </div>
+    <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
+    <div class="addBord_box" id="addBordBox">
+        Task added to Board
+        <img src="assets/img/board.png" class="add_board_image">
+    </div>
+    <div class="addBord_box" id="pleaseEnterName">
+        Please enter a Task Name
+    </div>
+    <div class="addBord_box" id="pleaseCategoryName">
+        Please enter a color and a category 
+    </div>
+    <div class="addBord_box" id="missing">
+        Something is missing
+    </div>
+    <div class="addBord_box" id="emailSend">
+        Email sent
+    </div>
+    <div class="addBord_box" id="enterEmail">
+       Please enter a E-Mail
+    </div>
+    <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
+</div>
 </body>
 
 </html>
