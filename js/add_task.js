@@ -29,7 +29,7 @@ let task = {
     'date': '',
     'prio': '',
     'subtasks': [],
-    'done': []
+    'done': [],
 };
 let categorys = {
     'category': [],
@@ -283,7 +283,11 @@ function setColor(clr) {
 function addNewCategory() {
     let categoryValue = document.getElementById('categoryValue').value;
     if (categoryValue.length < 1 || !color) {
-        showNotice('pleaseCategoryName');
+        if (!button_delay) {
+            button_delay = true;
+            showNotice('pleaseCategoryName');
+            setTimeout(() => button_delay = false, 2500);
+        }
     } else {
         categorys['color'].push(color);
         categorys['category'].push(categoryValue);
