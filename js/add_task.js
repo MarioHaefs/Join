@@ -455,7 +455,6 @@ function renderOverlayAddTask() {
 
 async function saveInLocalStorage(key, array) {
     await backend.setItem(key, JSON.stringify(array));
-    await backend.setItem('index', task_id);
 };
 
 //load content from the backend server
@@ -467,6 +466,7 @@ async function loadData() {
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     task_id = backend.getItem('index');
     task_id++;
+    await backend.setItem('index', task_id);
 };
 
 
