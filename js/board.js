@@ -12,6 +12,15 @@ async function initBoard() {
     renderTasks(tasks_board);
 }
 
+
+//displays the current date
+
+function getDateOverlay() {
+    document.getElementById('dateOverlay').valueAsDate = new Date();
+    date = document.getElementById('dateOverlay').value;
+};
+
+
 // load data from backend
 async function loadData() {
     await downloadFromServer();
@@ -211,6 +220,7 @@ function markDraggableArea(style) {
 function overlayAddTask() {
     document.getElementById('overlayAddTask').classList.remove('display-none');
     renderOverlayAddTask();
+    getDateOverlay();
 }
 
 function closeOverlay() {
