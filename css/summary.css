@@ -76,6 +76,7 @@ a {
   cursor: pointer;
   scale: 1.1;
   color: #fff;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
 }
 
@@ -107,6 +108,7 @@ a {
   cursor: pointer;
   scale: 1.1;
   color: #fff;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
 }
 
@@ -133,6 +135,7 @@ a {
   cursor: pointer;
   scale: 1.1;
   color: #fff;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
 }
 .todo_done_sub:hover img {
