@@ -2,23 +2,35 @@ let currentDraggedElement;
 let editors;
 let tasks;
 let categorys;
+let filteredTasks;
+
+// set backend url
+setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 
 async function initBoard() {
-    setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
+    await loadData();
+    console.log(tasks);
+    renderTasks(tasks);
+}
+
+// load data from backend
+async function loadData() {
     await downloadFromServer();
     editors = JSON.parse(backend.getItem('contacts')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
-    console.log(tasks);
-    renderTasks();
 }
 
-function renderTasks() {
-    //renderSingleTask();
+// save data to backend
+async function saveData(key, array) {
+    await backend.setItem(key, JSON.stringify(array));
+};
+
+function renderTasks(inputArray) {
     deleteTasksOnBoard();
 
-    for (let i = 0; i < tasks.length; i++) {
-        const task = tasks[i];
+    for (let i = 0; i < inputArray.length; i++) {
+        const task = inputArray[i];
         renderSingleTask(task);
     }
 }
@@ -31,14 +43,13 @@ function renderTasks() {
 function renderSingleTask(task) {
     let destination = document.getElementById(`${checkTaskStatus(task)}`);//${task['category']}`);
     destination.innerHTML += `
-        <div draggable="true" ondragstart="startDragging(${task['task_id']})" class="task" id="task1">
+        <div draggable="true" ondragstart="startDragging(${task['task_id']})" class="task" id="task${task['task_id']}">
             ${htmlTaskTopic(task)}
             ${htmlTaskTitle(task)}
             ${htmlTaskDescription(task)}
             ${htmlTaskSubtasks(task)}
             ${htmlTaskDivBottom(task)}
-        </div>
-    `;
+        </div>`;
 }
 
 /**
@@ -165,7 +176,8 @@ function moveTo(status) {
     let taskIndex = tasks.findIndex((task) => task['task_id'] == currentDraggedElement);
     tasks[taskIndex]['status'] = status;
     markDraggableArea(``);
-    renderTasks();
+    saveData('tasks', tasks);
+    renderTasks(tasks);
 }
 
 function deleteTasksOnBoard() {
@@ -195,4 +207,30 @@ function markDraggableArea(style) {
         const area = draggableArea[i];
         area.style.border = style;
     }
+}
+
+function overlayAddTask() {
+    document.getElementById('overlayAddTask').classList.remove('display-none');
+}
+
+function closeOverlay() {
+    document.getElementById('overlayAddTask').classList.add('display-none');
+}
+
+function noClose(event) {
+    event.stopPropagation();
+}
+
+function filterTasks() {
+    filteredTasks = [];
+    let inputValue = document.getElementById('search-input').value;
+    for (let i = 0; i < tasks.length; i++) {
+        const task = tasks[i];
+        if (inputValueIsInTask(inputValue, task)) filteredTasks.push(task);
+    }
+    renderTasks(filteredTasks);
+}
+
+function inputValueIsInTask(input, task) {
+    return task['title'].toLowerCase().includes(input.toLowerCase()) || task['description'].toLowerCase().includes(input.toLowerCase());
 }

@@ -44,9 +44,12 @@ body {
 
             .btn-add-task {
                 @include button-darkblue();
+                display: flex;
+                align-items: center;
                 padding-left: 16px;
                 padding-right: 16px;
                 height: $heightInput;
+                font-size: 20px;
             }
 
             .add-task-plus-icon {
@@ -78,6 +81,10 @@ body {
 
                 img {
                     cursor: pointer;
+
+                    &:hover {
+                        filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
+                    }
                 }
             }
 
@@ -183,4 +190,47 @@ body {
             }
         }
     }
+}
+
+#overlayAddTask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    animation: shadow-background-color 0.25s normal;
+
+    .add-task {
+        position: relative;
+        width: 80%;
+        height: 90%;
+        background-color: $pagebackground;
+        border-radius: 32px;
+        animation: slide-in-from-right 0.25s normal;
+
+        .close {
+            display: flex;
+            justify-content: flex-end;
+            margin: 24px;
+            cursor: pointer;            
+        }
+    }
+}
+
+.display-none {
+    display: none !important;
+}
+
+@keyframes slide-in-from-right {
+    from {left: 100%;}
+    to {left: 0%;}
+}
+
+@keyframes shadow-background-color {
+    from {background-color: rgba($color: #000000, $alpha: 0.0);}
+    to {background-color: rgba($color: #000000, $alpha: 0.2);}
 }
