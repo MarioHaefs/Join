@@ -2,7 +2,7 @@
 
 ########### CONFIG ###############
 
-$redirect = 'success.html';
+
 
 ########### CONFIG END ###########
 
@@ -42,7 +42,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $subject = "Password Reset Request";
         $headers = "From:  noreply@developerakademie.com";
 
-        mail($recipient, $subject, "Please click on tis link sent to you via email to reset your password: https://gruppe-5009.developerakademie.net/reset_password.html", $headers);
+        mail($recipient, $subject, "Please click on tis link sent to you via email to reset your password: https://gruppe-5009.developerakademie.net/send_mail/send_mail.php", $headers);
         header("Location: " . $redirect); 
 
         break;

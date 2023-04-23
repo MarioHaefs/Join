@@ -9,37 +9,46 @@
 
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./scss/style.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <script src="./js/mini_backend.js"></script>
     <script src="./js/script.js"></script>
-
 
 </head>
 
-<body>
-
+<body onload="initUsers(), loadLoginData()">
+    <div class="start-animation">
+        <img class="logo-animation" src="assets/img/logo.png">
+    </div>
+    <div class="mobile-start-animation">
+        <img class="mobile-logo-animation" src="assets/img/menu-logo.png">
+    </div>
     <div class="log-in">
         <img class="log-in-logo" src="assets/img/logo.png">
         <div class="sign-up">
             <span>Not a Join user?</span>
-            <a href="sign_up.html"><button class="sign-up-button">Sign up</button></a>
+            <button onclick="goToSignUp()" class="sign-up-button">Sign up</button>
         </div>
-        <div class="form-class">
+        <div class="form-class form-width-mobile">
             <form onsubmit="login(); return false" class="log-in-form">
                 <span class="log-in-headline">Log in</span>
                 <input id="login-email" class="email-input" placeholder="Email" type="email" required>
                 <input id="login-password" class="password-input" placeholder="Password" type="password" required>
                 <div class="log-in-checkbox-div">
-                    <input id="remember-checkbox" type="checkbox"><span class="remember-me">Remember me</span>
+                    <div class="mobile-remember-me">
+                        <input id="remember-checkbox" type="checkbox" name="remember-me"><span
+                            class="remember-me">Remember me</span>
+                    </div>
                     <a class="forgot-password-link" href="forgot_password.html">Forgot my password</a>
                 </div>
-                <div>
+                <div class="mobile-login-buttons">
                     <button class="log-in-button">Log in</button>
-                    <button onclick="goToSummary()" class="guest-log-in-button">Guest Log in</button>
+                    <button onclick="guestLogin()" class="guest-log-in-button">Guest Log in</button>
                 </div>
-                <span id="login-false" class="login-popup">Data not correct ! Please check for correctness !</span>
+                <span id="login-false" class="login-popup" style="display: none;">Data not correct ! Please check for correctness !</span>
             </form>
         </div>
     </div>
 </body>
-
 
 </html>

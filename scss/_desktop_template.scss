@@ -27,6 +27,7 @@
                 color: #ffffffd5;
                 text-decoration: none;
             }
+
             .nav-text {
                 display: flex;
                 align-items: center;
@@ -73,6 +74,7 @@
     margin-left: 200px;
     box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
     height: 75px;
+    position: relative;
 
     .header-headline {
         margin-left: 50px;
@@ -90,6 +92,7 @@
             width: 40px;
             border-radius: 100px;
             margin-right: 16px;
+            position: relative;
 
             &:hover {
                 cursor: pointer;
@@ -107,5 +110,89 @@
                 transform: scale(1.05);
             }
         }
+    }
+
+    .log-out-field {
+        position: absolute;
+        top: 100%;
+        right: calc(3% + 20px);
+        transform: translate(0, -50%);
+        color: white;
+        background-color: $darkblue;
+        cursor: pointer;
+        padding: 8px 8px;
+        border-radius: 10px;
+        border-top-right-radius: 0px;
+        font-weight: 700;
+        border: none;
+
+        &:hover {
+            background-color: $lightblue;
+        }
+    }
+}
+
+/*** MEDIA QUERY ***/
+@media (max-width: 600px) {
+    .menu {
+        float: none;
+        top: unset;
+        left: 0;
+        right: 0;
+        width: 100%;
+
+        .menu-content {
+            height: 75px;
+            justify-content: center;
+        }
+
+        .menu-logo {
+            display: none;
+        }
+
+        .menu-nav {
+            display: flex;
+
+            .nav-text {
+                width: unset !important;
+                margin-bottom: 0px !important;
+                flex-direction: column;
+                height: unset !important;
+                padding-right: 16px;
+                padding-left: 16px;
+                padding-top: 11px;
+                padding-bottom: 11px;
+            }
+        }
+    }
+
+    .header {
+        margin-left: unset;
+        justify-content: flex-end;
+
+        .mobile-template-logo {
+            display: block !important;
+            height: 50px;
+            position: absolute;
+            top: 16%;
+            left: 5%;
+            cursor: pointer;
+        }
+
+        .header-headline {
+            display: none;
+        }
+
+        .question-icon {
+            display: none;
+        }
+
+    }
+}
+
+@media (max-width: 430px) {
+    .nav-text {
+        padding-right: 5px !important;
+        padding-left: 5px !important;
     }
 }

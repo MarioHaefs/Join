@@ -6,27 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/overlay.style.css">
+    <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/add_task_templates.js"></script>
+    <script src="./js/add_task.js"></script>
     <script src="./js/board.js"></script>
 
-
+    <!-- include add_task files -->
+    <!-- <script src="./js/add_task.js"></script> -->
+    <!-- <script src="./js/add_task_templates.js"></script> -->
+    <!-- <link rel="stylesheet" href="./css/addTask.css"> -->
 </head>
 
-<body onload="includeHTML(), initBoard()">
+<body onload="includeHTML(), initBoard(), hideNotices()" ondragend="markDraggableArea('')">
     <div w3-include-html="desktop_template.html"></div>
 
     <div class="board-content">
         <div class="board-header">
             <h1>Board</h1>
             <div class="search-container">
-                <input type="search" id="search-input" placeholder="Find Task">
+                <input type="search" id="search-input" placeholder="Find Task" onkeyup="filterTasks()" style="margin-bottom: 0;">
                 <img src="./assets/img/search-icon.png" class="search-input-icon">
-                <button class="btn-add-task">Add Task</button>
-                <img src="./assets/img/add-task-plus-icon.png" class="add-task-plus-icon">
+                <button class="btn-add-task" onclick="overlayAddTask()">
+                    Add Task
+                    <img src="./assets/img/add-task-plus-icon.png" class="add-task-plus-icon">
+                </button>
             </div>
         </div>
 
@@ -34,36 +43,36 @@
             <div class="tasks">
                 <div class="task-header">
                     <h3>To do</h3>
-                    <img src="./assets/img/plus-button.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
-                <div id="tasks-to-do">
+                <div id="tasks-todo" class="task-body" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
 
                 </div>
             </div>
             <div class="tasks">
                 <div class="task-header">
                     <h3>In progress</h3>
-                    <img src="./assets/img/plus-button.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
-                <div id="tasks-in-progress">
+                <div id="tasks-progress" class="task-body" ondrop="moveTo('progress')" ondragover="allowDrop(event)">
 
                 </div>
             </div>
             <div class="tasks">
                 <div class="task-header">
                     <h3>Awaiting Feedback</h3>
-                    <img src="./assets/img/plus-button.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
-                <div id="tasks-awaiting-feedback">
+                <div id="tasks-feedback" class="task-body" ondrop="moveTo('feedback')" ondragover="allowDrop(event)">
 
                 </div>
             </div>
             <div class="tasks">
                 <div class="task-header">
                     <h3>Done</h3>
-                    <img src="./assets/img/plus-button.png">
+                    <img src="./assets/img/plus-button-darkblue.png" onclick="overlayAddTask()">
                 </div>
-                <div id="tasks-done">
+                <div id="tasks-done" class="task-body" ondrop="moveTo('done')" ondragover="allowDrop(event)">
 
                 </div>
             </div>
@@ -71,6 +80,39 @@
 
     </div>
 
+    <div id="overlayAddTask" class="display-none" onclick="closeOverlay()">
+        <!-- <iframe src="add_task.html" frameborder="0" width="80%" height="90%"></iframe> -->
+        <div class="add-task" onclick="noClose(event)">
+            <div class="close">
+                <img src="./assets/img/close.png" onclick="closeOverlay()">
+            </div>
+            
+            <!-- ToDo: Render include/render AddTask -->
+            <div id="overlay"></div>
+        </div>
+    </div>
+    <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
+    <div class="addBord_box" id="addBordBox">
+        Task added to Board
+        <img src="assets/img/board.png" class="add_board_image">
+    </div>
+    <div class="addBord_box" id="pleaseEnterName">
+        Please enter a Task Name
+    </div>
+    <div class="addBord_box" id="pleaseCategoryName">
+        Please enter a color and a category 
+    </div>
+    <div class="addBord_box" id="missing">
+        Something is missing
+    </div>
+    <div class="addBord_box" id="emailSend">
+        Email sent
+    </div>
+    <div class="addBord_box" id="enterEmail">
+       Please enter a E-Mail
+    </div>
+    <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
+</div>
 </body>
 
 </html>

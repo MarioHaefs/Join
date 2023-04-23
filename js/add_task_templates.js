@@ -20,9 +20,9 @@ function showInputCategoryHTML() {
 
 function showCategoryHTML() {
     return document.getElementById('categoryBox').innerHTML = `
-    <div class="drop_down" id="dropDown">
+    <div class="drop_down" id="dropDown"  onclick="openCategory()">
                     Select task category
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>`;
 };
@@ -30,12 +30,12 @@ function showCategoryHTML() {
 
 function showCategoryColorHTML() {
     return document.getElementById('categoryBox').innerHTML = `
-    <div class="drop_down" id="dropDown">
+    <div class="drop_down" id="dropDown" onclick="openCategory()">
                     <div class="category_color">
                         ${taskCategory}
                         <div  class="color2" style="background-color: ${color};"></div>
                     </div>
-                    <img class="down_image" src="assets/img/drop-down-arrow.png" onclick="openCategory()">
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
                 </div>
                 <div id="categorys" class="render_categorys_box"></div>`;
 };
@@ -43,7 +43,7 @@ function showCategoryColorHTML() {
 
 function renderCategorysHTML(clr, i, category) {
     return document.getElementById('categorys').innerHTML += `
-        <div class="render_categorys">
+        <div class="render_categorys" id="ctgry${i}">
                    <div class="set_category" onclick="setCategory('${category}', '${clr}')">
                         ${category}
                         <div  class="color2" style="background-color: ${clr};"></div>
@@ -55,8 +55,9 @@ function renderCategorysHTML(clr, i, category) {
 
 function renderSubtasHTML(subTask, i) {
     return document.getElementById('subtaskBox').innerHTML += `
-        <div class="subtask_child">
-            <input class="input_subtask" type="checkbox"> ${subTask}
+        <div class="subtask_child" id="subTask${i}">
+            <input type="checkbox" id="CheckboxTask${i}" class="checkbox_subtask" onclick="setSubtaskStatus(${i})")>
+            <div class ="subTask_Text">${subTask}</div>
             <img src="assets/img/x.svg" onclick="deleteSubtask(${i})">
         </div>`;
 };
@@ -66,8 +67,104 @@ function renderContactsHTML(i, userName) {
     document.getElementById('contacts').innerHTML += `
             <div class="render_categorys" onclick="setContacts(${i})">
                 ${userName}  
-                <div class="custom_checkBox" id="checkbox${i}">
+                <div class="custom_checkBox">
                     <div id="Checkbox${i}"></div>
                 </div>
             </div>`;
 };
+
+function renderOverlayHTML() {
+    document.getElementById('overlay').innerHTML = `
+    <div class="form">
+        <div class="form_left">
+
+            <!---------------------------------------------------------Title Input----------------------------------------------------------------------------->
+
+            <span>Title</span>
+            <input type="text" placeholder="Enter a title" id="title" maxlength="29" onfocus="removeBorder('title')">
+
+            <!---------------------------------------------------------Description Input----------------------------------------------------------------------->
+
+            <span>Description</span>
+            <textarea placeholder="Enter a Description" id="description"
+                onfocus="removeBorder('description')"></textarea>
+
+            <!---------------------------------------------------------Category Menu--------------------------------------------------------------------------->
+
+            <span>Category</span>
+            <div id="categoryBox">
+                <div class="drop_down" id="dropDown" onclick="openCategory()">
+                    Select task category
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
+                </div>
+                <div id="categorys" class="render_categorys_box"></div>
+            </div>
+
+            <!-------------------------------------------------------------Contacts Menu----------------------------------------------------------------------->
+
+            <span>Assigned to</span>
+            <div id="contactBox">
+                <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
+                    Select contacts to assign
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
+                </div>
+                <div id="contacts" class="render_categorys_box"></div>
+            </div>
+            <div id="initials" class="initials_box"></div>
+        </div>
+
+        <div class="form_right">
+
+            <!-------------------------------------------------------------input Date------------------------------------------------------------------------->
+
+            <span>Due date</span>
+            <input type="date" id="dateOverlay" autofocus>
+
+            <!-------------------------------------------------------------input Priority--------------------------------------------------------------------->
+
+            <span>Prio</span>
+            <div class="prio" id="prio">
+                <div class="prio_button" id="prioUrgent" onclick="setPrio('urgent')">Urgent<img
+                        src="assets/img/prioUrgent.png"></div>
+                <div class="prio_button" id="prioMedium" onclick="setPrio('medium')">Medium <img
+                        src="assets/img/prioMedium.png"></div>
+                <div class="prio_button" id="prioLow" onclick="setPrio('low')">Low <img src="assets/img/prioLow.png">
+                </div>
+            </div>
+
+            <!-------------------------------------------------------------input Subtasks--------------------------------------------------------------------->
+
+            <span style="margin-top: 34px;">Subtasks</span>
+            <div class="subtasks">
+                <input type="text" placeholder="Add new subtask" id="subTask" maxlength="29">
+                <img class="plus_image" src="assets/img/plus.svg" onclick="addSubtask()">
+            </div>
+            <div class="subtask_box" id="subtaskBox"></div>
+            <div class="clear_create_task">
+                <div class="clear_button" onclick="clearAll()">Clear x</div>
+                <div class="create_button" onclick="createTask()">Create Task ✔</div>
+            </div>
+        </div>`;
+}
+
+
+function renderClearEmaailHTML() {
+    document.getElementById('contactBox').innerHTML = `
+    <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
+                    Select contacts to assign
+                    <img class="down_image" src="assets/img/drop-down-arrow.png">
+                </div>
+                <div id="contacts" class="render_categorys_box"></div>`;
+}
+
+
+function renderInviteContactHTML() {
+    document.getElementById('contactBox').innerHTML = `
+    <div class="category_name_box">  
+                    <input class="input_category_name" type="email" placeholder="Please enter e-mail" id="inviteValue" required maxlength="29">
+                    <div class="x✔">
+                        <div onclick="clearEmailField()" class="x"><img src="assets/img/x.svg" alt=""></div>
+                        <button onclick="sendEmail()"><img class="hook" src="assets/img/haken.png"></button>
+                    </div>
+                </div>`;
+}
