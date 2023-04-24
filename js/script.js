@@ -107,7 +107,7 @@ async function login() {
                 localStorage.removeItem("rememberMeChecked");
             }
             currentUser = user;
-            localStorage.setItem("currentUser", JSON.stringify(user));
+            localStorage.setItem("currentUser", user.name);
             window.location.href = "summary.html";
         } else {
             document.getElementById('login-false').style.display = 'block';
