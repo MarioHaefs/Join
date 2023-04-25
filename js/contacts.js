@@ -302,14 +302,14 @@ function editShowContact(contact) {
 
 function showCreateContact() {
     document.getElementById('overlayContent').innerHTML =  /*html */`<div class="overlay-left">
-    <img src="./assets/img/menu-logo.png" alt="">
+    <img src="./assets/img/menu-logo.png" alt="" id="logo">
     <p class="overlay-title">Add contact</p>
     <p>Task are better with a team!</p>
     <div class="overlay-sep"></div>
 </div>
 <!-- createContact -->
 <div class="overlay-right">
-    <img src="./assets/img/contacts-icons/userIcon.png" alt="">
+    <img src="./assets/img/contacts-icons/userIcon.png" alt="" class="user-icon">
     <form action="#" onsubmit="addContact(); return false">
         <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required>
         <input class="email-input" id="email-input" placeholder="Email" type="email" required>
