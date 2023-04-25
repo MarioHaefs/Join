@@ -34,17 +34,21 @@
             </div>
            
         </div>
-        <div class="contact-info">
+        <div class="contact-info d-none-mobile">
             <div class="contact-headline">
+                <img src="./assets/img/contacts-icons/arrow-left.png" class="arrowLeftMobile" style="display: none;" onclick="hideContactInfo()">
                 <h3>Contacts</h3>
                 <p>Better with a team</p>
+                <div class="seperator" style="display: none;"></div>
             </div>
             <div class="contact-details" id="contactDetails"></div>
+            <div id="mobile-menu"></div>
         </div>
         <div class="new-contact" onclick="editShowContact()">
             New Contact
             <img src="./assets/img/contacts-icons/addContact.png" alt="">
         </div>
+        
     </div>
     <div id="overlayContent" class="d-none">
        
