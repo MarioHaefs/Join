@@ -122,7 +122,6 @@ function changeActiv() {
         }
         );
     }
-
 }
 
 /**
@@ -186,6 +185,12 @@ function addContact() {
     let name = document.getElementById('name-input').value;
     let email = document.getElementById('email-input').value;
     let phone = document.getElementById('phone-input').value;
+    // Verify that the user entered a name, email address, and phone number.
+    if (!name || !email || !phone) {
+        alert('Bitte geben Sie einen Namen, eine E-Mail-Adresse und eine Telefonnummer ein.');
+        return;
+    }
+    
     let initials = getInitial(name);
     let color = getRandomColor();
     let singelContact = {
@@ -195,6 +200,7 @@ function addContact() {
         initials: initials,
         color: color
     }
+    
     contacts.push(singelContact);
     addContactsToUser();    
     toggleDNone('overlayContent');
