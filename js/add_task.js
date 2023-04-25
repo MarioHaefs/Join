@@ -29,7 +29,7 @@ let task = {
     'date': '',
     'prio': '',
     'subtasks': [],
-    'done': []
+    'done': [],
 };
 let categorys = {
     'category': [],
@@ -122,24 +122,12 @@ function renderContacts() {
 
 
 function inviteContact() {
-    document.getElementById('contactBox').innerHTML = `
-    <div class="category_name_box">  
-                    <input class="input_category_name" type="email" placeholder="Please enter e-mail" id="inviteValue" required maxlength="29">
-                    <div class="x✔">
-                        <div onclick="clearEmailField()" class="x"><img src="assets/img/x.svg" alt=""></div>
-                        <button onclick="sendEmail()"><img class="hook" src="assets/img/haken.png"></button>
-                    </div>
-                </div>`;
+    renderInviteContactHTML();
 }
 
 
 function clearEmailField() {
-    document.getElementById('contactBox').innerHTML = `
-    <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
-                    Select contacts to assign
-                    <img class="down_image" src="assets/img/drop-down-arrow.png">
-                </div>
-                <div id="contacts" class="render_categorys_box"></div>`;
+    renderClearEmaailHTML();
     menuContactsOpen = false;
 };
 
@@ -283,7 +271,11 @@ function setColor(clr) {
 function addNewCategory() {
     let categoryValue = document.getElementById('categoryValue').value;
     if (categoryValue.length < 1 || !color) {
-        showNotice('pleaseCategoryName');
+        if (!button_delay) {
+            button_delay = true;
+            showNotice('pleaseCategoryName');
+            setTimeout(() => button_delay = false, 2500);
+        }
     } else {
         categorys['color'].push(color);
         categorys['category'].push(categoryValue);
@@ -454,11 +446,15 @@ function hideNotices() {
     document.getElementById('pleaseCategoryName').style.display = 'none'
 }
 
+function renderOverlayAddTask() {
+    document.getElementById('overlay').innerHTML = ``;
+    renderOverlayHTML();
+}
+
 //save content on the backend server
 
 async function saveInLocalStorage(key, array) {
     await backend.setItem(key, JSON.stringify(array));
-    await backend.setItem('index', task_id);
 };
 
 //load content from the backend server
@@ -470,6 +466,7 @@ async function loadData() {
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     task_id = backend.getItem('index');
     task_id++;
+    await backend.setItem('index', task_id);
 };
 
 

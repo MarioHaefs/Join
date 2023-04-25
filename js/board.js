@@ -1,7 +1,7 @@
 let currentDraggedElement;
 let editors;
-let tasks;
-let categorys;
+let tasks_board;
+let categorys_board;
 let filteredTasks;
 
 // set backend url
@@ -9,16 +9,24 @@ setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 
 async function initBoard() {
     await loadData();
-    console.log(tasks);
-    renderTasks(tasks);
+    renderTasks(tasks_board);
 }
+
+
+//displays the current date
+
+function getDateOverlay() {
+    document.getElementById('dateOverlay').valueAsDate = new Date();
+    date = document.getElementById('dateOverlay').value;
+};
+
 
 // load data from backend
 async function loadData() {
     await downloadFromServer();
     editors = JSON.parse(backend.getItem('contacts')) || [];
-    tasks = JSON.parse(backend.getItem('tasks')) || [];
-    categorys = JSON.parse(backend.getItem('categorys')) || [];
+    tasks_board = JSON.parse(backend.getItem('tasks')) || [];
+    categorys_board = JSON.parse(backend.getItem('categorys')) || [];
 }
 
 // save data to backend
@@ -61,8 +69,8 @@ function htmlTaskTopic(task) {
 }
 
 function getCategorysColor(category) {
-    let index = categorys['category'].indexOf(category);
-    return categorys['color'][index];
+    let index = categorys_board['category'].indexOf(category);
+    return categorys_board['color'][index];
 }
 
 function htmlTaskTitle(task) {
@@ -173,11 +181,11 @@ function allowDrop(ev) {
  * task_id != currentDraggedElement, therefore find Index of task in task with task_id
  */
 function moveTo(status) {
-    let taskIndex = tasks.findIndex((task) => task['task_id'] == currentDraggedElement);
-    tasks[taskIndex]['status'] = status;
+    let taskIndex = tasks_board.findIndex((task) => task['task_id'] == currentDraggedElement);
+    tasks_board[taskIndex]['status'] = status;
     markDraggableArea(``);
-    saveData('tasks', tasks);
-    renderTasks(tasks);
+    saveData('tasks', tasks_board);
+    renderTasks(tasks_board);
 }
 
 function deleteTasksOnBoard() {
@@ -211,6 +219,8 @@ function markDraggableArea(style) {
 
 function overlayAddTask() {
     document.getElementById('overlayAddTask').classList.remove('display-none');
+    renderOverlayAddTask();
+    getDateOverlay();
 }
 
 function closeOverlay() {
@@ -224,8 +234,8 @@ function noClose(event) {
 function filterTasks() {
     filteredTasks = [];
     let inputValue = document.getElementById('search-input').value;
-    for (let i = 0; i < tasks.length; i++) {
-        const task = tasks[i];
+    for (let i = 0; i < tasks_board.length; i++) {
+        const task = tasks_board[i];
         if (inputValueIsInTask(inputValue, task)) filteredTasks.push(task);
     }
     renderTasks(filteredTasks);

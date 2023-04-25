@@ -1,9 +1,3 @@
-body {
-    overflow: unset !important;
-    animation-duration: 0.4s;
-    animation-timing-function: ease-in-out;
-}
-
 input[type="date"] {
     -webkit-text-fill-color: rgb(0, 0, 0);
 }
@@ -49,20 +43,12 @@ button {
     padding: 0;
 }
 
-h1 {
-    position: absolute;
-    top: 80px;
-    left: calc(50% - 437px);
-    font-size: 61px;
-}
-
 .form {
-
     position: absolute;
-    left: calc(50% - 690px);
-    top: 260px;
+    left: calc(50% - 550px);
+    top: calc(50% - 300px);
     display: flex;
-    margin-left: 250px;
+
 }
 
 .form_left {
@@ -528,7 +514,7 @@ span {
 }
 
 .addBord_box {
-    bottom: 0px;
+    bottom: 400px;
     position: absolute;
     left: calc(50% - 163px);
     color: white;
