@@ -1,5 +1,10 @@
 let contacts = [];
 let contact = {};
+let allUsers;
+let regUser = localStorage.getItem('currentUser');
+let userData;
+let userArryId;
+
 let orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
 setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 
@@ -9,21 +14,12 @@ setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
  */
 async function init() {
     await downloadFromServer();
-    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    // contacts = JSON.parse(backend.getItem('contacts')) || [];
+    await getAllUsers();
     insertContactsToContactList();
     showContact(0);
 };
 
-/**
- * add User to Database
- */
-async function addUser() {
-    contacts.push(contact);
-    await backend.setItem('contacts', JSON.stringify(contacts));
-    showAlert();
-    showContact(contacts.length - 1);
-
-}
 
 function showAlert() {
     document.getElementById('alert').classList.add('animate');
@@ -33,13 +29,6 @@ function showAlert() {
 }
 async function addContacts() {
     await backend.setItem('contacts', JSON.stringify(contacts));
-}
-
-/**
- * del all Contacts from Database
- */
-async function deleteContacts() {
-    await backend.deleteItem('contacts');
 }
 
 /**
@@ -77,6 +66,7 @@ function sortContacts() {
  * 
  */
 function orderContacts() {
+    sortContacts();
     orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
     for (let i = 0; i < contacts.length; i++) {
         contacts[i].id = i;
@@ -88,26 +78,6 @@ function orderContacts() {
     }
 }
 
-/**
- * Create Contact || Add Contact to the list.
- */
-function createContact() {
-    let name = document.getElementById('name-input').value;
-    let email = document.getElementById('email-input').value;
-    let phone = document.getElementById('phone-input').value;
-    let initials = getInitial(name);
-    let color = getRandomColor();
-    contact = {
-        name: name,
-        mail: email,
-        phone: phone,
-        initials: initials,
-        color: color
-    }
-    addUser();
-    toggleDNone('overlayContent');
-    insertContactsToContactList();
-}
 
 /**
  * Retrunt a random Color-Hexcode 
@@ -152,13 +122,12 @@ function changeActiv() {
         }
         );
     }
-
 }
 
 /**
  * shows the first Contact at the details
  */
-function showContact(id) {
+async function showContact(id) {
     let btnContainer = document.getElementById('contacts-list');
     let btns = btnContainer.getElementsByClassName('list-contact');
     let contactId = id || btns[0].id
@@ -191,6 +160,65 @@ function editContact(id) {
     showContact(id);
 }
 
+/**
+ * AB HIER ALLES NEUE
+ */
+
+
+
+async function getAllUsers() {
+    allUsers = await JSON.parse(backend.getItem('users')) || [];
+    getCurrentUserData();
+}
+
+async function getCurrentUserData() {
+    await allUsers.forEach(function users(value, index) {
+        if (value.name === regUser) {
+            userData = value;
+            userArryId = index;
+            contacts = value.contacts || [];
+        }
+    })
+}
+
+function addContact() {
+    let name = document.getElementById('name-input').value;
+    let email = document.getElementById('email-input').value;
+    let phone = document.getElementById('phone-input').value;
+    // Verify that the user entered a name, email address, and phone number.
+    if (!name || !email || !phone) {
+        alert('Bitte geben Sie einen Namen, eine E-Mail-Adresse und eine Telefonnummer ein.');
+        return;
+    }
+    
+    let initials = getInitial(name);
+    let color = getRandomColor();
+    let singelContact = {
+        name: name,
+        mail: email,
+        phone: phone,
+        initials: initials,
+        color: color
+    }
+    
+    contacts.push(singelContact);
+    addContactsToUser();    
+    toggleDNone('overlayContent');
+    showContact(contacts.length - 1);
+    insertContactsToContactList();
+    showAlert();
+}
+
+async function pushToServer() {
+    await backend.setItem('users', JSON.stringify(allUsers))
+}
+
+function addContactsToUser() {
+    allUsers.splice(userArryId, 1);
+    allUsers.push(userData);
+    userData = { ...userData, contacts: contacts };
+    pushToServer();
+}
 
 
 /*Gen HTML Content */
@@ -279,9 +307,10 @@ function showCreateContact() {
     <p>Task are better with a team!</p>
     <div class="overlay-sep"></div>
 </div>
+<!-- createContact -->
 <div class="overlay-right">
     <img src="./assets/img/contacts-icons/userIcon.png" alt="">
-    <form action="#" onsubmit="createContact(); return false">
+    <form action="#" onsubmit="addContact(); return false">
         <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required>
         <input class="email-input" id="email-input" placeholder="Email" type="email" required>
         <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+/ ]*" minlength="6" maxlength="30" required>
