@@ -7,15 +7,96 @@
         padding-top: 75px;
     }
 
-    .contact-info {
-        display: none;
-    }
 
     .new-contact {
         top: 24px !important;
         right: 24px !important;
         bottom: 85vh !important;
         height: 60px !important;
+    }
+    .d-none-mobile {
+        display: none !important;
+    }
+    #contacts-container {
+        .contact-info {
+            padding: 0px !important;
+            width: 100vw !important;
+            .arrowLeftMobile {
+                display: block !important;
+                position: absolute;
+                top: 24px;
+                right: 32px;
+                cursor: pointer;
+            }
+            .contact-headline {
+                padding-left: 24px !important;
+                display: block !important;
+
+                h3 {
+                    margin: 0px !important;
+                    font-size: 47px !important;
+                    border-right: none !important;
+                }
+
+                p {
+                    margin: 10px 0px !important;
+                }
+
+                .seperator {
+                    display: block !important;
+                    width: 32px;
+                    height: 2px;
+                    background-color: $lightblue;
+                    margin-bottom: 16px;
+                }
+            }
+
+            #contactDetails {
+                .contact-info-head {
+                    .contact-edit {
+                        display: none !important;
+                    }
+                }
+            }
+
+            #mobile-menu {
+                display: flex;
+                flex: 1;
+                justify-content: flex-end;
+                margin-right: 16px;
+                margin-top: 37px;
+
+                .mobile-icon {
+                    background-color: $darkblue;
+                    padding: 8px 16px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 10px;
+                }
+
+            }
+        }
+        .new-contact {
+            padding: 2px 15px !important;
+        }
+        #contactDetails {
+            .contact-details-head {
+                gap: 50px !important;
+                margin-left: 26px !important;
+
+                .list-contact-frame {
+                    min-width: 31px !important;
+                    height: 31px !important;
+                }
+
+                .contactInfo {
+                    .contact-name {
+                        font-size: 36px !important;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -28,9 +109,11 @@
             border-top-right-radius: 32px !important;
             height: 279px !important;
             width: 320px !important;
+
             #logo {
                 display: none !important;
             }
+
             .overlay-title {
                 font-size: 47px !important;
             }
@@ -76,7 +159,7 @@
         height: 60px !important;
     }
 
-   
+
 }
 
 
@@ -491,4 +574,8 @@ body {
         opacity: 1;
         background-color: rgba(0, 0, 0, 0.3);
     }
+}
+
+.d-none-mobile {
+    display: block;
 }
