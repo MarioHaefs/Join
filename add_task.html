@@ -19,8 +19,10 @@
 <body onload="includeHTML(), loadData(), getDate(), hideNotices()" id="body">
     <div w3-include-html="desktop_template.html"></div>
     <div class="head">
+        <span class="sub_headline">Kanban Project Management Tool</span>
         <h1>Add Task</h1>
     </div>
+    <div class="mobile_create_button" onclick="createTask()">Create<img src="assets/img/haken.png" alt=""></div>
     <div class="form">
         <div class="form_left">
 
@@ -88,7 +90,7 @@
             <div class="subtask_box" id="subtaskBox"></div>
             <div class="clear_create_task">
                 <div class="clear_button" onclick="clearAll()">Clear x</div>
-                <div class="create_button" onclick="createTask()">Create Task ✔</div>
+                <div class="create_button" onclick="createTask()">Create<div class="task_text">Task</div><img src="assets/img/haken.png" alt=""></div>
             </div>
         </div>
         <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->

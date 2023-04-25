@@ -1,4 +1,6 @@
 let prio;
+let enter_email = false
+let current_user;
 let button_delay = false;
 let checkbox_subTask = false;
 let task_id;
@@ -123,12 +125,14 @@ function renderContacts() {
 
 function inviteContact() {
     renderInviteContactHTML();
+    enter_email = true;
 }
 
 
 function clearEmailField() {
     renderClearEmaailHTML();
     menuContactsOpen = false;
+    enter_email = false;
 };
 
 
@@ -365,6 +369,7 @@ function createTask() {
         } else {
             if (!taskCategory) clearInputField();
             if (taskCategory) setCategory(taskCategory, color);
+            if (enter_email) clearEmailField();
             closeMenu('contacts', 'dropDownContacts')
             showNotice('missing');
             checkWhichFieldIsEmpty()
@@ -461,6 +466,7 @@ async function saveInLocalStorage(key, array) {
 
 async function loadData() {
     await downloadFromServer();
+    current_user = localStorage.getItem('currentUser');
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
