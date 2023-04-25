@@ -34,33 +34,50 @@ async function hashWithSHA256(string) {
 
 
 /**
- * register User on sign_up.html including hashed Password
+ * register User on sign_up.html including hashed Password 
  */
 async function addUser() {
-    let name = document.getElementById('register-name')
-    let email = document.getElementById('register-email')
-    let password = document.getElementById('register-password')
+    let nameInput = document.getElementById('register-name');
+    let emailInput = document.getElementById('register-email');
+    let passwordInput = document.getElementById('register-password');
 
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].email === email.value) {
-            // If Mail already registered, stop sign in
-            document.getElementById('register-error').style.display = 'block';
-            name.value = '';
-            email.value = '';
-            password.value = '';
-            setTimeout(hideMailAlreadyUsed, 3000);
-            return;
-        }
+    if (isEmailAlreadyRegistered(emailInput.value)) {
+        handleEmailAlreadyRegisteredError(nameInput, emailInput, passwordInput);
+        return;
     }
 
-    const hashedPassword = await hashWithSHA256(password.value);
-
-    users.push({ name: name.value, email: email.value, password: hashedPassword.toString() })
-    await backend.setItem('users', JSON.stringify(users));
-
-    document.getElementById('register-success').style.display = 'block';
-
+    let hashedPassword = await hashWithSHA256(passwordInput.value);
+    let newUser = { name: nameInput.value, email: emailInput.value, password: hashedPassword.toString() };
+    addNewUser(newUser);
+    showSuccessMessage();
     setTimeout(goToLogin, 3000);
+}
+
+
+function isEmailAlreadyRegistered(email) {
+    return users.some(user => user.email === email);
+}
+
+
+function handleEmailAlreadyRegisteredError(nameInput, emailInput, passwordInput) {
+    let errorMessage = document.getElementById('register-error');
+    errorMessage.style.display = 'block';
+    nameInput.value = '';
+    emailInput.value = '';
+    passwordInput.value = '';
+    setTimeout(hideMailAlreadyUsed, 3000);
+}
+
+
+function addNewUser(newUser) {
+    users.push(newUser);
+    backend.setItem('users', JSON.stringify(users));
+}
+
+
+function showSuccessMessage() {
+    const successMessage = document.getElementById('register-success');
+    successMessage.style.display = 'block';
 }
 
 
@@ -85,42 +102,73 @@ function goToLogin() {
  * Login Function including hashed Password and remember me functionality
  */
 async function login() {
-    let email = document.getElementById('login-email');
-    let password = document.getElementById('login-password');
-    let rememberMe = document.querySelector('input[name="remember-me"]');
-
-    let user = users.find(u => u.email == email.value);
-
-    if (user) {
-        const hashedPassword = await hashWithSHA256(password.value);
-        // compare the hashed password with the stored hashed password
-        if (hashedPassword === user.password) {
-            // If remember me is checked, save login data in localStorage
-            if (rememberMe.checked) {
-                localStorage.setItem("login-email", email.value);
-                localStorage.setItem("login-password", password.value);
-                localStorage.setItem("rememberMeChecked", true);
-            } else {
-                // If remember me is not checked, remove login data from localStorage
-                localStorage.removeItem("login-email");
-                localStorage.removeItem("login-password");
-                localStorage.removeItem("rememberMeChecked");
-            }
-            currentUser = user;
-            localStorage.setItem("currentUser", JSON.stringify(user));
-            window.location.href = "summary.html";
-        } else {
-            document.getElementById('login-false').style.display = 'block';
-            setTimeout(hideFalseData, 3000);
-            email.value = '';
-            password.value = '';
-        }
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    const rememberMe = document.querySelector('input[name="remember-me"]').checked;
+    const user = users.find(u => u.email == email);
+    if (user && await isPasswordValid(password, user.password)) {
+        handleLoginSuccess(email, password, rememberMe, user);
     } else {
-        document.getElementById('login-false').style.display = 'block';
-        setTimeout(hideFalseData, 3000);
-        email.value = '';
-        password.value = '';
+        handleLoginFailure();
     }
+}
+
+
+async function isPasswordValid(password, hashedPassword) {
+    return await hashWithSHA256(password) === hashedPassword;
+}
+
+
+function handleLoginSuccess(email, password, rememberMe, user) {
+    if (rememberMe) {
+        saveLoginData(email, password);
+    } else {
+        clearLoginData();
+    }
+    setCurrentUser(user);
+    redirectToSummaryPage();
+}
+
+
+function handleLoginFailure() {
+    showLoginFailureMessage();
+    clearLoginFields();
+}
+
+
+function saveLoginData(email, password) {
+    localStorage.setItem("login-email", email);
+    localStorage.setItem("login-password", password);
+    localStorage.setItem("rememberMeChecked", true);
+}
+
+
+function clearLoginData() {
+    localStorage.removeItem("login-email");
+    localStorage.removeItem("login-password");
+    localStorage.removeItem("rememberMeChecked");
+}
+
+
+function setCurrentUser(user) {
+    localStorage.setItem("currentUser", JSON.stringify(user));
+}
+
+
+function redirectToSummaryPage() {
+    window.location.href = "summary.html";
+}
+
+
+function showLoginFailureMessage() {
+    document.getElementById('login-false').style.display = 'block';
+    setTimeout(hideFalseData, 3000);
+}
+
+
+function clearLoginFields() {
+    document.getElementById('login-email').value = '';
+    document.getElementById('login-password').value = '';
 }
 
 
@@ -134,13 +182,11 @@ function loadLoginData() {
     let rememberMeChecked = localStorage.getItem("rememberMeChecked");
     rememberMeChecked = rememberMeChecked === "true";
 
-    // If login data is stored and remember me is checked, fill in input fields and check the checkbox
     if (storedEmail && storedPassword && rememberMeChecked) {
         document.getElementById("login-email").value = storedEmail;
         document.getElementById("login-password").value = storedPassword;
         rememberMe.checked = true;
     } else {
-        // If remember me is not checked or there is no stored login data, uncheck the checkbox
         rememberMe.checked = false;
     }
 }
@@ -240,3 +286,5 @@ function hideResetPasswordMessage() {
 function goToSummary() {
     window.location.href = 'summary.html';
 }
+
+
