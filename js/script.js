@@ -102,10 +102,11 @@ function goToLogin() {
  * Login Function including hashed Password and remember me functionality
  */
 async function login() {
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-    const rememberMe = document.querySelector('input[name="remember-me"]').checked;
-    const user = users.find(u => u.email == email);
+    let email = document.getElementById('login-email').value;
+    let password = document.getElementById('login-password').value;
+    let rememberMe = document.querySelector('input[name="remember-me"]').checked;
+    let user = users.find(u => u.email == email);
+    
     if (user && await isPasswordValid(password, user.password)) {
         handleLoginSuccess(email, password, rememberMe, user);
     } else {
