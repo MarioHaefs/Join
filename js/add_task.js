@@ -1,6 +1,6 @@
 let prio;
 let enter_email = false
-let users;
+let user;
 let current_user;
 let button_delay = false;
 let checkbox_subTask = false;
@@ -112,7 +112,7 @@ function openContacts() {
 
 function renderContacts() {
     document.getElementById('contacts').innerHTML = ``;
-    document.getElementById('contacts').innerHTML = `<div class="render_categorys">you</div>`;
+    document.getElementById('contacts').innerHTML = `<div class="render_categorys" onclick="">you</div>`;
     document.getElementById('contacts').innerHTML += `<div class="render_categorys" onclick="inviteContact() ">Invite new contact</div>`;
     for (let i = 0; i < contacts.length; i++) {
         let userName = contacts[i]['name'];
@@ -459,7 +459,7 @@ function renderOverlayAddTask() {
 
 
 function getUserContacts() {
-    users.forEach(e => {
+    user.forEach(e => {
         if (e.name === current_user) {
             contacts = e.contacts;
         }
@@ -477,7 +477,7 @@ async function saveInLocalStorage(key, array) {
 async function loadData() {
     await downloadFromServer();
     current_user = localStorage.getItem('currentUser');
-    users =  JSON.parse(backend.getItem('users')) || [];
+    user =  JSON.parse(backend.getItem('users')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     task_id = backend.getItem('index');
