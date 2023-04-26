@@ -14,13 +14,16 @@
         bottom: 85vh !important;
         height: 60px !important;
     }
+
     .d-none-mobile {
         display: none !important;
     }
+
     #contacts-container {
         .contact-info {
             padding: 0px !important;
             width: 100vw !important;
+
             .arrowLeftMobile {
                 display: block !important;
                 position: absolute;
@@ -28,6 +31,7 @@
                 right: 32px;
                 cursor: pointer;
             }
+
             .contact-headline {
                 padding-left: 24px !important;
                 display: block !important;
@@ -77,9 +81,11 @@
 
             }
         }
+
         .new-contact {
             padding: 2px 15px !important;
         }
+
         #contactDetails {
             .contact-details-head {
                 gap: 50px !important;
@@ -123,6 +129,28 @@
             }
         }
 
+        .close-top {
+            display: block !important;
+            height: auto !important;
+            position: absolute !important;
+            top: 118px !important;
+            padding-left: 18rem !important;
+            height: 32px;
+
+            .white {
+                display: block !important;
+                height: 23px;
+                width: 23px;
+            }
+        }
+
+        .close {
+
+            .dark {
+                display: none !important;
+            }
+        }
+
         .overlay-right {
             flex-direction: column !important;
             gap: 0px !important;
@@ -132,12 +160,19 @@
             width: 320px !important;
             border-top-right-radius: 0px !important;
 
+            &>img {
+                position: absolute;
+                top: 19rem;
+            }
+
             .user-icon {
                 transform: translate(0px, -50px) !important;
+                top: 22rem !important;
             }
 
             form {
                 transform: translate(0px, -100px) !important;
+                margin-top: 10rem;
             }
         }
     }
@@ -164,8 +199,8 @@
 
 
 
-body {
-    overflow: hidden;
+.overflow {
+    overflow: hidden !important;
 }
 
 #contacts-container {
@@ -448,6 +483,25 @@ body {
             width: 80px;
             height: 3px;
             background-color: $lightblue;
+        }
+    }
+
+    .close-top {
+        display: none;
+    }
+
+    .close {
+        height: 100%;
+        margin-top: 35px;
+
+        img {
+            height: 23px;
+            width: 23px;
+            cursor: pointer;
+        }
+
+        .white {
+            display: none;
         }
     }
 

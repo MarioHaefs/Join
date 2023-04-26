@@ -787,6 +787,22 @@
   #overlayContent .overlay-left p {
     font-size: 21px !important;
   }
+  #overlayContent .close-top {
+    display: block !important;
+    height: auto !important;
+    position: absolute !important;
+    top: 118px !important;
+    padding-left: 18rem !important;
+    height: 32px;
+  }
+  #overlayContent .close-top .white {
+    display: block !important;
+    height: 23px;
+    width: 23px;
+  }
+  #overlayContent .close .dark {
+    display: none !important;
+  }
   #overlayContent .overlay-right {
     flex-direction: column !important;
     gap: 0px !important;
@@ -796,11 +812,17 @@
     width: 320px !important;
     border-top-right-radius: 0px !important;
   }
+  #overlayContent .overlay-right > img {
+    position: absolute;
+    top: 19rem;
+  }
   #overlayContent .overlay-right .user-icon {
     transform: translate(0px, -50px) !important;
+    top: 22rem !important;
   }
   #overlayContent .overlay-right form {
     transform: translate(0px, -100px) !important;
+    margin-top: 10rem;
   }
 }
 @media (max-width: 600px) {
@@ -816,8 +838,8 @@
     height: 60px !important;
   }
 }
-body {
-  overflow: hidden;
+.overflow {
+  overflow: hidden !important;
 }
 
 #contacts-container {
@@ -1066,6 +1088,21 @@ body {
   width: 80px;
   height: 3px;
   background-color: #29ABE2;
+}
+#overlayContent .close-top {
+  display: none;
+}
+#overlayContent .close {
+  height: 100%;
+  margin-top: 35px;
+}
+#overlayContent .close img {
+  height: 23px;
+  width: 23px;
+  cursor: pointer;
+}
+#overlayContent .close .white {
+  display: none;
 }
 #overlayContent .overlay-right {
   border-top-right-radius: 32px;
