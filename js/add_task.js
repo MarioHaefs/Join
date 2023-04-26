@@ -1,4 +1,5 @@
 let prio;
+let allUsers
 let enter_email = false
 let user;
 let current_user;
@@ -9,7 +10,7 @@ let checked;
 let menuContactsOpen = false;
 let contacts = [];
 let initials = {
-    'id': [],
+    'mail': [],
     'initials': [],
     'color': []
 };
@@ -20,6 +21,7 @@ let date;
 let menuOpen = false;
 let color;
 let taskCategory
+let task_contacts = [];
 let subTasks = [];
 let tasks = [];
 let task = {
@@ -28,7 +30,7 @@ let task = {
     'description': '',
     'category': '',
     'category_color': '',
-    'contacts_id': [],
+    'contacts': [],
     'date': '',
     'prio': '',
     'subtasks': [],
@@ -117,7 +119,7 @@ function renderContacts() {
     for (let i = 0; i < contacts.length; i++) {
         let userName = contacts[i]['name'];
         renderContactsHTML(i, userName);
-        if (initials['id'].includes(contacts[i]['id'])) {
+        if (initials['mail'].includes(contacts[i]['mail'])) {
             document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         }
     }
@@ -155,7 +157,7 @@ function sendEmail() {
 
 function clearContacts() {
     initials['initials'].length = 0;
-    initials['id'].length = 0;
+    initials['mail'].length = 0;
     showInitials();
     if (menuContactsOpen) {
         closeMenu('contacts', 'dropDownContacts')
@@ -168,18 +170,20 @@ function clearContacts() {
 //*
 
 function setContacts(i) {
-    let index = initials['id'].indexOf(contacts[i]['id'])
+    let index = initials['mail'].indexOf(contacts[i]['mail'])
     if (index == -1) {
         document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         initials['initials'].push(contacts[i]['initials']);
-        initials['id'].push(contacts[i]['id']);
+        initials['mail'].push(contacts[i]['mail']);
         initials['color'].push(contacts[i]['color']);
+        task_contacts.push(contacts[i]);
         showInitials();
     } else {
         document.getElementById('Checkbox' + i).classList.remove('custom_checkBox_child');
         initials['initials'].splice(index, 1);
-        initials['id'].splice(index, 1);
+        initials['mail'].splice(index, 1);
         initials['color'].splice(index, 1);
+        task_contacts.splice(index, 1);
         showInitials();
     }
 };
@@ -386,7 +390,7 @@ function fillTaskjJson() {
     task['description'] = document.getElementById('description').value
     task['category'] = taskCategory;
     task['category_color'] = color;
-    task['contacts_id'] = initials['id'];
+    task['contacts'] = task_contacts;
     task['done'] = boolians;
     task['date'] = date;
     task['task_id'] = task_id;
@@ -400,7 +404,7 @@ function fillTaskjJson() {
 
 function loadBoardHTML() {
     setTimeout(() => document.getElementById('body').classList.add('body_move_right'), 2400);
-    setTimeout(() => location.href = "board.html", 2800);
+    setTimeout(() => location.href = "board.html", 2000);
 }
 
 //validates which input field has no value and apply a red boarder
@@ -476,6 +480,7 @@ async function saveInLocalStorage(key, array) {
 
 async function loadData() {
     await downloadFromServer();
+    allUsers = await JSON.parse(backend.getItem('users')) || [];
     current_user = localStorage.getItem('currentUser');
     user =  JSON.parse(backend.getItem('users')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];

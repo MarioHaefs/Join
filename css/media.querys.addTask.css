@@ -211,6 +211,10 @@
     .subtask_box {
         min-height: 150px;
     }
+
+    .custom_checkBox {
+        top: 12px;
+    }
 }
 
 @media only screen and (max-width: 400px) {
@@ -255,7 +259,7 @@
     }
 
     .initials_box {
-        width: 320px;
+        width: 315px;
     }
 
     .x✔ {
