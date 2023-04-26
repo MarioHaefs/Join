@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/summary.css">
     <script src="./js/includeHTML.js"></script>
+    <script src="./js/mini_backend.js"></script>
     <script src="./js/summary.js"></script>
     <script src="./js/script.js"></script>
 </head>
@@ -18,88 +19,8 @@
 <body onload="includeHTML(), greet()">
     <div w3-include-html="desktop_template.html"></div>
 <div class="main_box">
-    <div class="overview">
-        <div class="summery_head">
-            <div class="headline">Summary</div>
-            <div class="nutshell">
-                <span>Everything in a nutshell!</span>
-            </div>
-        </div>
-        <div class="task">
-            <a href="board.html" class="task_sub">
-                <span class="count">
-                    5
-                </span>
-                <span class="status">
-                    Tasks in <br>
-                    Board
-                </span>
-            </a>
-            <a href="board.html" class="task_sub">
-                <span class="count">
-                    5
-                </span>
-                <span class="status">
-                    Tasks in <br>
-                    Progress
-                </span>
-            </a>
-            <a href="board.html" class="task_sub">
-                <span class="count">
-                    5
-                </span>
-                <span class="status">
-                    Awaiting <br>
-                    Feedback
-                </span>
-            </a>
-        </div>
-        <a href="board.html" class="prio_date">
-            <div class="prio_date_sub">
-                <img src="assets/img/urgent.svg" alt="">
-                <div class="todo">
-                    <span class="count">
-                        5
-                    </span>
-                    <span class="status">
-                        Urgent
-                    </span>
-                </div>
-            </div>
-            <div>
-                <div class="todo">
-                    <span class="datum">
-                        Datum
-                        <span class="status">Upcoming Deadline</span>
-                    </span>
-                    
-                </div>
-            </div>
-        </a>
-        <div class="todo_done">
-            <a href="board.html" class="todo_done_sub">
-                <img src="assets/img/pencil.svg" alt="">
-                <div class="todo">
-                    <span class="count">
-                        5
-                    </span>
-                    <span class="status">
-                        To-do
-                    </span>
-                </div>
-            </a>
-            <a href="board.html" class="todo_done_sub">
-                <img src="assets/img/check.svg" alt="">
-                <div class="todo">
-                    <span class="count">
-                        5
-                    </span>
-                    <span class="status">
-                        Done
-                    </span>
-                </div>
-            </a>
-        </div>
+    <div class="overview" id="overview">
+        
     </div>
     <div class="greeting">
         <span id="hallo" class="hallo"></span>
