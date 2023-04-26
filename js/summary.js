@@ -4,6 +4,8 @@ let taskInBoard = 0;
 let todoCount = 0;
 let doneCount = 0;
 let urgentCount = 0;
+let current_user = {};
+let user_name;
 
 let tada = [];
 
@@ -23,17 +25,25 @@ async function init() {
     await downloadFromServer();
     let tasks = await JSON.parse(backend.getItem('tasks'));
     let tada = await JSON.parse(backend.getItem('users'));
+    current_user = JSON.parse(localStorage.getItem('currentUser'));
+    user_name = current_user['name']
     console.log(tada);
-    if(tasks !== null) {
+    if (tasks !== null) {
         console.log(tasks);
         taskInBoard = tasks.length;
         tasks.forEach(task => {
             checkPrioAndDate(task.prio);
-            checkStatus(task.status);        
+            checkStatus(task.status);
         });
-        
+
     }
     genHtmlToSeite();
+    renderUserName();
+}
+
+
+function renderUserName() {
+    document.getElementById('name').innerHTML = `${user_name}`;
 }
 
 function checkPrioAndDate(prio) {

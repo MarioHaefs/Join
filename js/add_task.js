@@ -1,5 +1,6 @@
 let prio;
 let enter_email = false
+let users;
 let current_user;
 let button_delay = false;
 let checkbox_subTask = false;
@@ -456,6 +457,15 @@ function renderOverlayAddTask() {
     renderOverlayHTML();
 }
 
+
+function getUserContacts() {
+    users.forEach(e => {
+        if (e.name === current_user) {
+            contacts = e.contacts;
+        }
+    });
+}
+
 //save content on the backend server
 
 async function saveInLocalStorage(key, array) {
@@ -467,12 +477,13 @@ async function saveInLocalStorage(key, array) {
 async function loadData() {
     await downloadFromServer();
     current_user = localStorage.getItem('currentUser');
-    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    users =  JSON.parse(backend.getItem('users')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     task_id = backend.getItem('index');
     task_id++;
     await backend.setItem('index', task_id);
+    getUserContacts();
 };
 
 
