@@ -26,7 +26,6 @@ async function init() {
     await downloadFromServer();
     let tasks = await JSON.parse(backend.getItem('tasks'));
     let tada = await JSON.parse(backend.getItem('users'));
-    current_user = JSON.parse(localStorage.getItem('currentUser'));
     user_name = current_user['name']
     console.log(tada);
     if (tasks !== null) {
@@ -39,12 +38,6 @@ async function init() {
 
     }
     genHtmlToSeite();
-    renderUserName();
-}
-
-
-function renderUserName() {
-    document.getElementById('name').innerHTML = `${user_name}`;
 }
 
 function checkPrioAndDate(prio) {
