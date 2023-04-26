@@ -644,6 +644,7 @@
   .header {
     margin-left: unset;
     justify-content: flex-end;
+    background-color: white;
   }
   .header .mobile-template-logo {
     display: block !important;
@@ -658,6 +659,9 @@
   }
   .header .question-icon {
     display: none;
+  }
+  .profil-pic {
+    margin-right: 25px !important;
   }
 }
 @media (max-width: 430px) {

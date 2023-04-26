@@ -1,4 +1,7 @@
 let prio;
+let enter_email = false
+let users;
+let current_user;
 let button_delay = false;
 let checkbox_subTask = false;
 let task_id;
@@ -123,12 +126,14 @@ function renderContacts() {
 
 function inviteContact() {
     renderInviteContactHTML();
+    enter_email = true;
 }
 
 
 function clearEmailField() {
     renderClearEmaailHTML();
     menuContactsOpen = false;
+    enter_email = false;
 };
 
 
@@ -365,6 +370,7 @@ function createTask() {
         } else {
             if (!taskCategory) clearInputField();
             if (taskCategory) setCategory(taskCategory, color);
+            if (enter_email) clearEmailField();
             closeMenu('contacts', 'dropDownContacts')
             showNotice('missing');
             checkWhichFieldIsEmpty()
@@ -451,6 +457,15 @@ function renderOverlayAddTask() {
     renderOverlayHTML();
 }
 
+
+function getUserContacts() {
+    users.forEach(e => {
+        if (e.name === current_user) {
+            contacts = e.contacts;
+        }
+    });
+}
+
 //save content on the backend server
 
 async function saveInLocalStorage(key, array) {
@@ -461,12 +476,14 @@ async function saveInLocalStorage(key, array) {
 
 async function loadData() {
     await downloadFromServer();
-    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    current_user = localStorage.getItem('currentUser');
+    users =  JSON.parse(backend.getItem('users')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     task_id = backend.getItem('index');
     task_id++;
     await backend.setItem('index', task_id);
+    getUserContacts();
 };
 
 
