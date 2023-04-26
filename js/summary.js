@@ -16,6 +16,7 @@ function greet() {
     if (curentlyHour >= 12 && curentlyHour < 18) document.getElementById('hallo').innerHTML = `Good afternoon,`;
     if (curentlyHour >= 18) document.getElementById('hallo').innerHTML = `Good evening,`;
     if (curentlyHour >= 0 && curentlyHour < 3) document.getElementById('hallo').innerHTML = `Good evening,`;
+    document.getElementById('greetName').innerHTML = localStorage.getItem('currentUser');
 };
 
 
