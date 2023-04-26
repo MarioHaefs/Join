@@ -130,7 +130,7 @@ function changeActiv() {
 async function showContact(id) {
     let btnContainer = document.getElementById('contacts-list');
     let btns = btnContainer.getElementsByClassName('list-contact');
-    let contactId = id || btns[0].id
+    let contactId = id || btns[0].id;
     let contactElement = document.getElementById(contactId);
 
     Array.from(document.querySelectorAll('.list-contact.list-contact-activ')).forEach((el) => el.classList.remove('list-contact-activ'));
@@ -214,9 +214,9 @@ async function pushToServer() {
 }
 
 function addContactsToUser() {
+    userData = { ...userData, contacts: contacts };
     allUsers.splice(userArryId, 1);
     allUsers.push(userData);
-    userData = { ...userData, contacts: contacts };
     pushToServer();
 }
 
