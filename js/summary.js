@@ -6,8 +6,8 @@ let doneCount = 0;
 let urgentCount = 0;
 let current_user = {};
 let user_name;
-
-let tada = [];
+let dates = new Array;
+let upcomingDeadline = '';
 
 
 function greet() {
@@ -25,26 +25,47 @@ function greet() {
 async function init() {
     await downloadFromServer();
     let tasks = await JSON.parse(backend.getItem('tasks'));
-    let tada = await JSON.parse(backend.getItem('users'));
     user_name = current_user['name']
-    console.log(tada);
     if (tasks !== null) {
         console.log(tasks);
         taskInBoard = tasks.length;
         tasks.forEach(task => {
-            checkPrioAndDate(task.prio);
+            checkPrioAndDate(task);
             checkStatus(task.status);
         });
-
+        dateDeatline(dates);
     }
     genHtmlToSeite();
 }
 
-function checkPrioAndDate(prio) {
-    if (prio === 'urgent') {
+function checkPrioAndDate(task) {
+    if (task.prio === 'urgent') {
         urgentCount++;
+        dates.push(task.date);
     }
-    //TODO: Date checker!
+}
+
+function dateDeatline(array) {
+    var today = new Date();
+
+    var nextDate = array
+        .filter(function (datum) {
+            return new Date(datum) <= today;
+        })
+        .sort(function (a, b) {
+            return new Date(b) - new Date(a);
+        })
+        .shift();
+
+    formatDate(nextDate);
+}
+
+function formatDate(nextDate) {
+    let d = new Date(nextDate)
+    let day = d.getDate();
+    let month = d.getMonth() + 1;
+    let year = d.getFullYear();
+    upcomingDeadline = day + "." + month + "." + year;
 }
 
 function checkStatus(status) {
@@ -122,7 +143,7 @@ function genHtmlToSeite() {
             <div>
                 <div class="todo">
                     <span class="datum">
-                        Datum
+                        ${upcomingDeadline}
                         <span class="status">Upcoming Deadline</span>
                     </span>
                     
