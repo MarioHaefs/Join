@@ -1,4 +1,8 @@
 let prio;
+let allUsers
+let enter_email = false
+let user;
+let current_user;
 let button_delay = false;
 let checkbox_subTask = false;
 let task_id;
@@ -6,7 +10,7 @@ let checked;
 let menuContactsOpen = false;
 let contacts = [];
 let initials = {
-    'id': [],
+    'mail': [],
     'initials': [],
     'color': []
 };
@@ -17,6 +21,7 @@ let date;
 let menuOpen = false;
 let color;
 let taskCategory
+let task_contacts = [];
 let subTasks = [];
 let tasks = [];
 let task = {
@@ -25,7 +30,7 @@ let task = {
     'description': '',
     'category': '',
     'category_color': '',
-    'contacts_id': [],
+    'contacts': [],
     'date': '',
     'prio': '',
     'subtasks': [],
@@ -109,12 +114,12 @@ function openContacts() {
 
 function renderContacts() {
     document.getElementById('contacts').innerHTML = ``;
-    document.getElementById('contacts').innerHTML = `<div class="render_categorys">you</div>`;
+    document.getElementById('contacts').innerHTML = `<div class="render_categorys" onclick="">you</div>`;
     document.getElementById('contacts').innerHTML += `<div class="render_categorys" onclick="inviteContact() ">Invite new contact</div>`;
     for (let i = 0; i < contacts.length; i++) {
         let userName = contacts[i]['name'];
         renderContactsHTML(i, userName);
-        if (initials['id'].includes(contacts[i]['id'])) {
+        if (initials['mail'].includes(contacts[i]['mail'])) {
             document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         }
     }
@@ -123,12 +128,14 @@ function renderContacts() {
 
 function inviteContact() {
     renderInviteContactHTML();
+    enter_email = true;
 }
 
 
 function clearEmailField() {
     renderClearEmaailHTML();
     menuContactsOpen = false;
+    enter_email = false;
 };
 
 
@@ -150,7 +157,7 @@ function sendEmail() {
 
 function clearContacts() {
     initials['initials'].length = 0;
-    initials['id'].length = 0;
+    initials['mail'].length = 0;
     showInitials();
     if (menuContactsOpen) {
         closeMenu('contacts', 'dropDownContacts')
@@ -163,18 +170,20 @@ function clearContacts() {
 //*
 
 function setContacts(i) {
-    let index = initials['id'].indexOf(contacts[i]['id'])
+    let index = initials['mail'].indexOf(contacts[i]['mail'])
     if (index == -1) {
         document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         initials['initials'].push(contacts[i]['initials']);
-        initials['id'].push(contacts[i]['id']);
+        initials['mail'].push(contacts[i]['mail']);
         initials['color'].push(contacts[i]['color']);
+        task_contacts.push(contacts[i]);
         showInitials();
     } else {
         document.getElementById('Checkbox' + i).classList.remove('custom_checkBox_child');
         initials['initials'].splice(index, 1);
-        initials['id'].splice(index, 1);
+        initials['mail'].splice(index, 1);
         initials['color'].splice(index, 1);
+        task_contacts.splice(index, 1);
         showInitials();
     }
 };
@@ -365,6 +374,7 @@ function createTask() {
         } else {
             if (!taskCategory) clearInputField();
             if (taskCategory) setCategory(taskCategory, color);
+            if (enter_email) clearEmailField();
             closeMenu('contacts', 'dropDownContacts')
             showNotice('missing');
             checkWhichFieldIsEmpty()
@@ -380,7 +390,7 @@ function fillTaskjJson() {
     task['description'] = document.getElementById('description').value
     task['category'] = taskCategory;
     task['category_color'] = color;
-    task['contacts_id'] = initials['id'];
+    task['contacts'] = task_contacts;
     task['done'] = boolians;
     task['date'] = date;
     task['task_id'] = task_id;
@@ -394,7 +404,7 @@ function fillTaskjJson() {
 
 function loadBoardHTML() {
     setTimeout(() => document.getElementById('body').classList.add('body_move_right'), 2400);
-    setTimeout(() => location.href = "board.html", 2800);
+    setTimeout(() => location.href = "board.html", 2000);
 }
 
 //validates which input field has no value and apply a red boarder
@@ -451,6 +461,15 @@ function renderOverlayAddTask() {
     renderOverlayHTML();
 }
 
+
+function getUserContacts() {
+    user.forEach(e => {
+        if (e.name === current_user) {
+            contacts = e.contacts;
+        }
+    });
+}
+
 //save content on the backend server
 
 async function saveInLocalStorage(key, array) {
@@ -461,12 +480,15 @@ async function saveInLocalStorage(key, array) {
 
 async function loadData() {
     await downloadFromServer();
-    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    allUsers = await JSON.parse(backend.getItem('users')) || [];
+    current_user = localStorage.getItem('currentUser');
+    user =  JSON.parse(backend.getItem('users')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     task_id = backend.getItem('index');
     task_id++;
     await backend.setItem('index', task_id);
+    getUserContacts();
 };
 
 

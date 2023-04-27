@@ -130,7 +130,7 @@ function changeActiv() {
 async function showContact(id) {
     let btnContainer = document.getElementById('contacts-list');
     let btns = btnContainer.getElementsByClassName('list-contact');
-    let contactId = id || btns[0].id
+    let contactId = id || btns[0].id;
     let contactElement = document.getElementById(contactId);
 
     Array.from(document.querySelectorAll('.list-contact.list-contact-activ')).forEach((el) => el.classList.remove('list-contact-activ'));
@@ -190,7 +190,7 @@ function addContact() {
         alert('Bitte geben Sie einen Namen, eine E-Mail-Adresse und eine Telefonnummer ein.');
         return;
     }
-    
+
     let initials = getInitial(name);
     let color = getRandomColor();
     let singelContact = {
@@ -200,9 +200,9 @@ function addContact() {
         initials: initials,
         color: color
     }
-    
+
     contacts.push(singelContact);
-    addContactsToUser();    
+    addContactsToUser();
     toggleDNone('overlayContent');
     showContact(contacts.length - 1);
     insertContactsToContactList();
@@ -214,11 +214,33 @@ async function pushToServer() {
 }
 
 function addContactsToUser() {
+    userData = { ...userData, contacts: contacts };
     allUsers.splice(userArryId, 1);
     allUsers.push(userData);
-    userData = { ...userData, contacts: contacts };
     pushToServer();
 }
+
+function showDetailsAtMobile() {
+    let windowWidth = window.innerWidth;
+    if (windowWidth < 1000) {
+        document.getElementById('contacts-list').classList.add('d-none')
+        document.getElementsByClassName('contact-info')[0].classList.remove('d-none-mobile')
+        document.getElementsByClassName('new-contact')[0].classList.add('d-none')
+        document.getElementById('mobile-menu').innerHTML = /*html */`
+                <div class="mobile-icon"><img src="./assets/img/contacts-icons/pen-white.png" alt=""></div>
+        `;
+    } 
+}
+
+function hideContactInfo() {
+    document.getElementById('contacts-list').classList.remove('d-none')
+        document.getElementsByClassName('contact-info')[0].classList.add('d-none-mobile')
+        document.getElementsByClassName('new-contact')[0].classList.remove('d-none')
+        document.getElementById('mobile-menu').innerHTML = '';
+}
+
+
+
 
 
 /*Gen HTML Content */
@@ -231,7 +253,7 @@ function addContactsToUser() {
  */
 function genContactHtml(contact) {
     return /*html */`
-    <div class="list-contact" onclick="showDetails(${contact.id})" id="${contact.id}">
+    <div class="list-contact" onclick="showDetails(${contact.id}); showDetailsAtMobile(${contact.id})" id="${contact.id}">
             <span class="contact-frame" style="background-color: ${contact.color}" >${contact.initials}</span>
             <div class="list-contact-info">
                 <p>${contact.name}</p>
@@ -261,30 +283,31 @@ function showDetails(id) {
     let editname = id;
     document.getElementById('contactDetails').innerHTML = '';
     document.getElementById('contactDetails').innerHTML = /*html */`
-    <div class="contact-details-head">
-    <span class="list-contact-frame" style="background-color: ${contacts[id].color}">${contacts[id].initials}</span>
-    <div class="contactInfo">
-        <span class="contact-name">${contacts[id].name}</span>
-        <div class="add-task"> + Add Task</div>
-    </div>
-    </div>
-    <div class="contact-info-head">
-        <p>Contact Information</p>
-        <div class="contact-edit">
-            <img src="./assets/img/contacts-icons/pen.png" alt="">
-            <p onclick="editShowContact(${editname})">Edit Contact</p>
+        <div class="contact-details-head">
+        <span class="list-contact-frame" style="background-color: ${contacts[id].color}">${contacts[id].initials}</span>
+        <div class="contactInfo">
+            <span class="contact-name">${contacts[id].name}</span>
+            <div class="add-task"> + Add Task</div>
         </div>
-    </div>
-    <div class="contact-info-container">
-        <div class="contact-info-segment">
-            <span class="contact-info-title">Email</span>
-            <a href="mailto:mail@egal.de">${contacts[id].mail}</a>
         </div>
-        <div class="contact-info-segment">
-            <span class="contact-info-title">Phone</span>
-            <a href="tel:+4915166456">${contacts[id].phone}</a>
+        <div class="contact-info-head">
+            <p>Contact Information</p>
+            <div class="contact-edit">
+                <img src="./assets/img/contacts-icons/pen.png" alt="">
+                <p onclick="editShowContact(${editname})">Edit Contact</p>
+            </div>
         </div>
-    </div>`;
+        <div class="contact-info-container">
+            <div class="contact-info-segment">
+                <span class="contact-info-title">Email</span>
+                <a href="mailto:mail@egal.de">${contacts[id].mail}</a>
+            </div>
+            <div class="contact-info-segment">
+                <span class="contact-info-title">Phone</span>
+                <a href="tel:+4915166456">${contacts[id].phone}</a>
+            </div>
+        </div>
+        <div id="mobile-menu" onclick="editShowContact(${editname})"></div>`   ;
 }
 
 function editShowContact(contact) {
@@ -330,7 +353,7 @@ function showCreateContact() {
 function showEditContact(id) {
     let userId = id;
     document.getElementById('overlayContent').innerHTML =  /*html */`<div class="overlay-left">
-    <img src="./assets/img/menu-logo.png" alt="">
+    <img src="./assets/img/menu-logo.png" alt="" id="logo">
     <p class="overlay-title">Edit contact</p>
     <div class="overlay-sep"></div>
 </div>
