@@ -106,7 +106,7 @@ async function login() {
     let password = document.getElementById('login-password').value;
     let rememberMe = document.querySelector('input[name="remember-me"]').checked;
     let user = users.find(u => u.email == email);
-    
+
     if (user && await isPasswordValid(password, user.password)) {
         handleLoginSuccess(email, password, rememberMe, user);
     } else {
@@ -152,7 +152,7 @@ function clearLoginData() {
 
 
 function setCurrentUser(user) {
-    localStorage.setItem("currentUser", JSON.stringify(user));
+    localStorage.setItem("currentUser", user.name);
 }
 
 
@@ -282,10 +282,67 @@ function hideResetPasswordMessage() {
 }
 
 /**
- * go to summary.html Page
+ * go to Page and save status in local storage for bg
  */
 function goToSummary() {
     window.location.href = 'summary.html';
+    localStorage.setItem('selectedMenuItem', 'summary');
+}
+
+
+function goToBoard() {
+    window.location.href = 'board.html';
+    localStorage.setItem('selectedMenuItem', 'board');
+}
+
+
+function goToAddTask() {
+    window.location.href = 'add_task.html';
+    localStorage.setItem('selectedMenuItem', 'addTask');
+}
+
+
+function goToContacts() {
+    window.location.href = 'contacts.html';
+    localStorage.setItem('selectedMenuItem', 'contacts');
+}
+
+
+function goToLegalNotice() {
+    window.location.href = 'legal_notice.html';
+    localStorage.setItem('selectedMenuItem', 'legalNotice');
+}
+
+/**
+ * highlight the Menu Nav with a Bg. necessary because on Page change CSS Classes are resettet and now we get status from Local Storage
+ */
+function highlightSelectedMenuItem() {
+    const selectedMenuItem = localStorage.getItem('selectedMenuItem');
+    const bgSummary = document.getElementById('bg-summary');
+    const bgBoard = document.getElementById('bg-board');
+    const bgAddTask = document.getElementById('bg-add-task');
+    const bgContacts = document.getElementById('bg-contacts');
+    const bgLegalNotice = document.getElementById('bg-legal-notice');
+    
+    switch (selectedMenuItem) {
+        case 'summary':
+            bgSummary.classList.add('highlight-nav');
+            break;
+        case 'board':
+            bgBoard.classList.add('highlight-nav');
+            break;
+        case 'addTask':
+            bgAddTask.classList.add('highlight-nav');
+            break;
+        case 'contacts':
+            bgContacts.classList.add('highlight-nav');
+            break;
+        case 'legalNotice':
+            bgLegalNotice.classList.add('highlight-nav');
+            break;
+        default:
+            break;
+    }
 }
 
 

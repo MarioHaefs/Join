@@ -238,6 +238,9 @@
   background: white url("../assets/img/lock-icon.png") right no-repeat;
   background-position: 94% 55%;
 }
+.log-in .form-class .log-in-form ::-moz-placeholder {
+  opacity: 0.5;
+}
 .log-in .form-class .log-in-form ::placeholder {
   opacity: 0.5;
 }
@@ -534,6 +537,9 @@
   background-color: #091931;
   cursor: pointer;
 }
+.menu .menu-content .highlight-nav {
+  background-color: #091931;
+}
 .menu .menu-content .nav-icon-box {
   width: 30px;
   height: 30px;
@@ -729,6 +735,7 @@ body {
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
+  height: -moz-fit-content;
   height: fit-content;
   padding: 15px 25px;
   margin-left: 48px;
@@ -737,6 +744,7 @@ body {
   width: 100%;
   box-sizing: border-box;
   border-radius: 10px;
+  width: -moz-fit-content;
   width: fit-content;
   font-size: 16px;
   cursor: pointer;
@@ -746,6 +754,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -812,6 +821,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -1042,17 +1052,14 @@ body {
  */
 @keyframes slide-top {
   0% {
-    -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 0;
   }
   50% {
-    -webkit-transform: translateY(-200px);
     transform: translateY(-200px);
     opacity: 1;
   }
   100% {
-    -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 0;
   }
@@ -1139,7 +1146,8 @@ body {
   transform: translateX(-100%);
   padding: 6px 12px 6px 12px;
   border-left: 2px solid #D1D1D1;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   cursor: pointer;
 }
 .board-content .board-header .search-container .btn-add-task {
@@ -1215,6 +1223,7 @@ body {
 .board-content .board-tasks .tasks .task .task-topic {
   padding: 4px 18px;
   margin-bottom: 16px;
+  width: -moz-fit-content;
   width: fit-content;
   border-radius: 6px;
   color: white;
@@ -1271,7 +1280,8 @@ body {
   display: flex;
 }
 .board-content .board-tasks .tasks .task .task-prio img {
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 #overlayAddTask {
