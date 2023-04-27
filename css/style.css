@@ -1418,31 +1418,42 @@ body {
   object-fit: contain;
 }
 
-#overlayAddTask {
+.overlay-add-task {
   position: absolute;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
+  right: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
   background-color: rgba(0, 0, 0, 0.2);
-  animation: shadow-background-color 0.25s normal;
+  animation: slide-in-from-right 0.25s normal;
 }
-#overlayAddTask .add-task {
+.overlay-add-task .add-task {
   position: relative;
   width: 80%;
   height: 90%;
   background-color: #F6F7F8;
   border-radius: 32px;
-  animation: slide-in-from-right 0.25s normal;
 }
-#overlayAddTask .add-task .close {
+.overlay-add-task .add-task .close {
   display: flex;
   justify-content: flex-end;
   margin: 24px;
   cursor: pointer;
+}
+
+.overlay-closed {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 100% !important;
+  top: 0;
+  z-index: 10;
+  animation: slide-out-from-left 2.25s normal !important;
 }
 
 .display-none {
@@ -1452,9 +1463,19 @@ body {
 @keyframes slide-in-from-right {
   from {
     left: 100%;
+    width: 0%;
   }
   to {
     left: 0%;
+    width: 100%;
+  }
+}
+@keyframes slide-out-from-left {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
   }
 }
 @keyframes shadow-background-color {
@@ -1465,6 +1486,90 @@ body {
     background-color: rgba(0, 0, 0, 0.2);
   }
 }
+@keyframes clean-background-color {
+  from {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+@media (max-width: 1100px) {
+  .greeting {
+    display: none !important;
+  }
+}
+@media (max-width: 835px) {
+  .summery_head {
+    display: block !important;
+  }
+  .summery_head .headline {
+    padding-right: 0px;
+  }
+  .summery_head .nutshell {
+    display: block;
+    border-left: none;
+    padding-left: 0px;
+  }
+  .summery_head .seperator {
+    display: block !important;
+    width: 100px;
+    height: 2px;
+    background-color: #29ABE2;
+    margin-bottom: 16px;
+  }
+  .count {
+    font-size: 37px !important;
+  }
+  .status {
+    font-size: 16px !important;
+  }
+  .task_sub {
+    width: 124px !important;
+    height: 124px !important;
+  }
+  .prio_date {
+    width: 444px !important;
+  }
+  .prio_date .prio_date_sub img {
+    width: 50px !important;
+  }
+  .todo_done_sub {
+    width: 203px !important;
+  }
+}
+@media (max-width: 690px) {
+  .task {
+    gap: 7px !important;
+  }
+  .task .task_sub {
+    width: 104px !important;
+  }
+  .prio_date {
+    width: 328px !important;
+  }
+  .prio_date .prio_date_sub {
+    padding-right: 40px !important;
+  }
+  .prio_date .datum {
+    padding-left: 12px !important;
+  }
+  .todo_done_sub {
+    width: 142px !important;
+    gap: 8px !important;
+  }
+  .todo_done_sub > img {
+    width: 60px;
+  }
+}
+@media (max-width: 600px) {
+  .main_box {
+    top: 0 !important;
+    left: 0px !important;
+    margin-top: 68px;
+    margin-left: 16px;
+  }
+}
 a {
   text-decoration: none;
   color: unset;
@@ -1472,7 +1577,7 @@ a {
 
 .main_box {
   position: absolute;
-  left: calc(50% - 400px);
+  left: 240px;
   top: 150px;
   display: flex;
   align-items: center;

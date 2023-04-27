@@ -76,6 +76,7 @@ function genHtmlToSeite() {
             <div class="nutshell">
                 <span>Everything in a nutshell!</span>
             </div>
+            <div class="seperator" style="display: none;"></div>
         </div>
         <div class="task">
             <a href="board.html" class="task_sub">
