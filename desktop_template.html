@@ -15,38 +15,28 @@
 <body>
     <div class="menu">
         <div class="menu-content">
-            <a href="summary.html"><img class="menu-logo" src="assets/img/menu-logo.png"></a>
+            <img onclick="goToSummary()" class="menu-logo" src="assets/img/menu-logo.png">
             <div class="menu-nav">
-                <a class="menu-a" href="summary.html">
-                    <div class="nav-text">
+                    <div id="bg-summary" onclick="goToSummary()" class="nav-text">
                         <div class="nav-icon-box"><img src="assets/img/summary.png"></div>
                         Summary
                     </div>
-                </a>
-                <a class="menu-a" href="board.html">
-                    <div class="nav-text">
+                    <div id="bg-board" onclick="goToBoard()" class="nav-text">
                         <div class="nav-icon-box"><img src="assets/img/board.png"></div>
                         Board
                     </div>
-                </a>
-                <a class="menu-a" href="add_task.html">
-                    <div class="nav-text">
+                    <div id="bg-add-task" onclick="goToAddTask()" class="nav-text">
                         <div class="nav-icon-box"><img src="assets/img/add-task.png"></div>
                         Add Task
                     </div>
-                </a>
-                <a class="menu-a" href="contacts.html">
-                    <div class="nav-text">
+                    <div id="bg-contacts" onclick="goToContacts()" class="nav-text">
                         <div class="nav-icon-box"><img src="assets/img/contacts.png"></div>
                         Contacts
                     </div>
-                </a>
-                <a class="menu-a" href="legal_notice.html">
-                    <div class="legal-notice">
+                    <div id="bg-legal-notice" onclick="goToLegalNotice()" class="legal-notice">
                         <div class="nav-icon-box"><img src="assets/img/legal-notice.png"></div>
                         Legal notice
                     </div>
-                </a>
             </div>
         </div>
     </div>
