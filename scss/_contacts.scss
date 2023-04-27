@@ -523,6 +523,8 @@
         .phone-input {
             margin-bottom: 25px;
             @include inputForm('../assets/img/phone-icon.png', 94%, 55%);
+            font-size: 14px !important;
+            box-sizing: unset !important;
         }
 
         form {

@@ -1,4 +1,4 @@
-let contacts = [];
+let contactsA = [];
 let contact = {};
 let allUsers;
 let regUser = localStorage.getItem('currentUser');
@@ -29,7 +29,7 @@ function showAlert() {
     }, 2500);
 }
 async function addContacts() {
-    await backend.setItem('contacts', JSON.stringify(contacts));
+    await backend.setItem('contacts', JSON.stringify(contactsA));
 }
 
 /**
@@ -55,7 +55,7 @@ async function insertContactsToContactList() {
  * Sort Contacts by Firstname from A to Z
  */
 function sortContacts() {
-    contacts = contacts.sort(function (a, b) {
+    contactsA = contactsA.sort(function (a, b) {
         return a.name.toLowerCase().localeCompare(
             b.name.toLowerCase()
         );
@@ -69,13 +69,13 @@ function sortContacts() {
 function orderContacts() {
     sortContacts();
     orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
-    for (let i = 0; i < contacts.length; i++) {
-        contacts[i].id = i;
-        let letter = contacts[i].name.toLowerCase().toString();
+    for (let i = 0; i < contactsA.length; i++) {
+        contactsA[i].id = i;
+        let letter = contactsA[i].name.toLowerCase().toString();
         letter = letter.replace(/\u00e4/g, "ae").replace(/\u00fc/g, "ue").replace(/\u00f6/g, "oe");
         letter = letter.slice(0, 1);
         letter = letter.charCodeAt(0) - 97;
-        orderedContacts[letter].push(contacts[i]);
+        orderedContacts[letter].push(contactsA[i]);
     }
 }
 
@@ -159,12 +159,12 @@ async function getCurrentUserData() {
         if (value.name === regUser) {
             userData = value;
             userArryId = index;
-            contacts = value.contacts || [];
+            contactsA = value.contacts || [];
         }
     })
 }
 function delContact(userId) {
-    contacts.splice(userId, 1);
+    contactsA.splice(userId, 1);
     animationAndPushToServer();
 }
 
@@ -188,7 +188,7 @@ function addContact() {
         color: color
     }
 
-    contacts.push(singelContact);
+    contactsA.push(singelContact);
     animationAndPushToServer();
     showAlert();
 }
@@ -203,10 +203,10 @@ function editContact(id) {
     let phone = document.getElementById('phone-input').value;
     let initials = getInitial(name);
 
-    contacts[id].name = name;
-    contacts[id].mail = email;
-    contacts[id].phone = phone;
-    contacts[id].initials = initials;
+    contactsA[id].name = name;
+    contactsA[id].mail = email;
+    contactsA[id].phone = phone;
+    contactsA[id].initials = initials;
     animationAndPushToServer();
 }
 
@@ -223,7 +223,7 @@ async function pushToServer() {
 }
 
 function addContactsToUser() {
-    userData = { ...userData, contacts: contacts };
+    userData = { ...userData, contacts: contactsA };
     allUsers.splice(userArryId, 1);
     allUsers.push(userData);
     pushToServer();
@@ -293,10 +293,10 @@ function showDetails(id) {
     document.getElementById('contactDetails').innerHTML = '';
     document.getElementById('contactDetails').innerHTML = /*html */`
         <div class="contact-details-head">
-        <span class="list-contact-frame" style="background-color: ${contacts[id].color}">${contacts[id].initials}</span>
+        <span class="list-contact-frame" style="background-color: ${contactsA[id].color}">${contactsA[id].initials}</span>
         <div class="contactInfo">
-            <span class="contact-name">${contacts[id].name}</span>
-            <div class="add-task"> + Add Task</div>
+            <span class="contact-name">${contactsA[id].name}</span>
+            <div class="add-task" onclick="overlayAddTask()"> + Add Task</div>
         </div>
         </div>
         <div class="contact-info-head">
@@ -309,11 +309,11 @@ function showDetails(id) {
         <div class="contact-info-container">
             <div class="contact-info-segment">
                 <span class="contact-info-title">Email</span>
-                <a href="mailto:mail@egal.de">${contacts[id].mail}</a>
+                <a href="mailto:mail@egal.de">${contactsA[id].mail}</a>
             </div>
             <div class="contact-info-segment">
                 <span class="contact-info-title">Phone</span>
-                <a href="tel:+4915166456">${contacts[id].phone}</a>
+                <a href="tel:+4915166456">${contactsA[id].phone}</a>
             </div>
         </div>
         <div id="mobile-menu" onclick="editShowContact(${editname})"></div>`;
@@ -380,9 +380,9 @@ function showEditContact(id) {
     <img src="./assets/img/contacts-icons/userIcon.png" alt="">
     
     <form action="#" onsubmit="editContact(${userId}); return false">
-        <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required value="${contacts[id].name}">
-        <input class="email-input" id="email-input" placeholder="Email" type="email" required value="${contacts[id].mail}">
-        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+/ ]*" minlength="6" maxlength="30" required value="${contacts[id].phone}">
+        <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required value="${contactsA[id].name}">
+        <input class="email-input" id="email-input" placeholder="Email" type="email" required value="${contactsA[id].mail}">
+        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+/ ]*" minlength="6" maxlength="30" required value="${contactsA[id].phone}">
         <div class="buttons">
             <button type="button" class="cancel-contact-btn" onclick="delContact(${userId})">Delete</button>
             <button type="submit" class="add-contact-btn" >
@@ -396,3 +396,7 @@ function showEditContact(id) {
     </div>
 </div>`
 }
+
+
+
+

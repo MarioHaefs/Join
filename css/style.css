@@ -1125,6 +1125,8 @@
   border: 1px solid #D1D1D1;
   background: white url("../assets/img/phone-icon.png") right no-repeat;
   background-position: 94% 55%;
+  font-size: 14px !important;
+  box-sizing: unset !important;
 }
 #overlayContent .overlay-right form {
   display: flex;
@@ -1651,6 +1653,8 @@ body {
   border: 1px solid #D1D1D1;
   background: white url("../assets/img/person-icon.png") right no-repeat;
   background-position: 94% 55%;
+  font-size: 14px !important;
+  box-sizing: unset !important;
 }
 
 .email-input {
@@ -1661,6 +1665,8 @@ body {
   border: 1px solid #D1D1D1;
   background: white url("../assets/img/letter-icon.png") right no-repeat;
   background-position: 94% 55%;
+  font-size: 14px !important;
+  box-sizing: unset !important;
 }
 
 .d-none {

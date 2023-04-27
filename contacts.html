@@ -10,15 +10,22 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/fonts.css">
+
+    <link rel="stylesheet" href="./css/overlay.style.css">
+    
     <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/add_task_templates.js"></script>
+    <script src="./js/add_task.js"></script>
+    <script src="./js/board.js"></script>
     <script src="./js/contacts.js"></script>
+
 
 
 </head>
 
-<body onload="includeHTML(), init()">
+<body onload="includeHTML(), init(), hideNotices()">
     <div w3-include-html="desktop_template.html"></div>
     <div id="contacts-container">
         <div class="contacts-list" id="contacts-list">
@@ -48,20 +55,41 @@
             New Contact
             <img src="./assets/img/contacts-icons/addContact.png" alt="">
         </div>
-        
-    </div>
-    <div id="overlayContent" class="d-none">
-       
-    </div>
-    <div class="alert" id="alert"> 
-        <div class="alert-content">
-            Contact succesfuly created
-        </div> 
     </div>
 
-    <!-- <div class="addTast">
-        <div w3-include-html="add_task.html"></div>
-    </div> -->
+    <div id="overlayContent" class="d-none"></div>
+    <div id="overlayAddTask" class="display-none" onclick="closeOverlay()">
+        <!-- <iframe src="add_task.html" frameborder="0" width="80%" height="90%"></iframe> -->
+        <div class="add-task" onclick="noClose(event)">
+            <div class="close">
+                <img src="./assets/img/close.png" onclick="closeOverlay()">
+            </div>
+            
+            <!-- ToDo: Render include/render AddTask -->
+            <div id="overlay"></div>
+        </div>
+    </div>
+    <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
+    <div class="addBord_box" id="addBordBox">
+        Task added to Board
+        <img src="assets/img/board.png" class="add_board_image">
+    </div>
+    <div class="addBord_box" id="pleaseEnterName">
+        Please enter a Task Name
+    </div>
+    <div class="addBord_box" id="pleaseCategoryName">
+        Please enter a color and a category 
+    </div>
+    <div class="addBord_box" id="missing">
+        Something is missing
+    </div>
+    <div class="addBord_box" id="emailSend">
+        Email sent
+    </div>
+    <div class="addBord_box" id="enterEmail">
+       Please enter a E-Mail
+    </div>
+    <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
 </body>
 
 </html>
