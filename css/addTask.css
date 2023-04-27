@@ -8,13 +8,13 @@ input[type="date"] {
     -webkit-text-fill-color: rgb(0, 0, 0);
 }
 
+input[type="date"]:hover {
+    cursor: pointer;
+}
+
 .head {
     color: black;
     margin-left: 250px;
-}
-
-textarea {
-    resize: none;
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -56,6 +56,12 @@ h1 {
     font-size: 61px;
 }
 
+.sub_headline {
+    font-weight: 400;
+    font-size: 16px;
+    display: none;
+}
+
 .form {
 
     position: absolute;
@@ -93,6 +99,8 @@ input {
 }
 
 textarea {
+    font-family: Open Sans;
+    resize: none;
     outline: none;
     font-size: 20px;
     box-sizing: border-box;
@@ -199,6 +207,7 @@ span {
 .render_categorys {
     position: relative;
     border-top: 1px solid #D1D1D1;
+    border-right: 1px solid #D1D1D1;
     font-size: 21px;
     font-weight: 400;
     background-color: white;
@@ -425,6 +434,41 @@ span {
     transition: 300ms;
 }
 
+.mobile_create_button {
+    transform: scale(0);
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    justify-content: center;
+    width: 124px;
+    height: 51px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 21px;
+    color: white;
+    background-color: #2A3647;
+    transition: 300ms;
+}
+
+.mobile_create_button:hover {
+    cursor: pointer;
+    background: #29ABE2;
+    transition: 300ms;
+    box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.41)
+}
+
+.mobile_create_button img {
+    filter: brightness(0) invert(1);
+    margin-left: 10px;
+}
+
+.create_button img {
+    filter: brightness(0) invert(1);
+    margin-left: 10px;
+}
+
 .create_button:hover {
     cursor: pointer;
     background: #29ABE2;
@@ -528,7 +572,7 @@ span {
 }
 
 .addBord_box {
-    bottom: 0px;
+    bottom: 150px;
     position: absolute;
     left: calc(50% - 163px);
     color: white;
@@ -570,7 +614,7 @@ span {
 
 @keyframes slide-in-bottom {
     0% {
-        transform: translateY(300px);
+        transform: translateY(200px);
         opacity: 0;
     }
 
@@ -613,3 +657,4 @@ span {
         opacity: 0;
     }
 }
+

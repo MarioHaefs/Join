@@ -1,0 +1,264 @@
+$bgr_color1: #29ABE2;
+$bgr_color2: #2A3647;
+
+@media (max-width: 1100px) {
+    .greeting {
+        display: none !important;
+    }
+}
+
+@media (max-width: 835px) {
+    .summery_head {
+        display: block !important;
+
+        .headline {
+            padding-right: 0px;
+        }
+
+        .nutshell {
+            display: block;
+            border-left: none;
+            padding-left: 0px;
+        }
+
+        .seperator {
+            display: block !important;
+            width: 100px;
+            height: 2px;
+            background-color: $lightblue;
+            margin-bottom: 16px;
+        }
+
+    }
+
+    .count {
+        font-size: 37px !important;
+    }
+
+    .status {
+        font-size: 16px !important;
+    }
+
+    .task_sub {
+        width: 124px !important;
+        height: 124px !important;
+
+    }
+
+    .prio_date {
+        width: 444px !important;
+
+        .prio_date_sub {
+            img {
+                width: 50px !important;
+            }
+        }
+    }
+
+    .todo_done_sub {
+        width: 203px !important;
+    }
+}
+
+
+@media (max-width: 690px) {
+    .task {
+        gap: 7px !important;
+        .task_sub {
+            width: 104px !important;
+        }
+    }
+    .prio_date {
+        width: 328px !important;
+        .prio_date_sub {
+            padding-right: 40px !important;
+            
+        }
+        .datum {
+            padding-left: 12px !important;
+        }
+    }
+    .todo_done_sub {
+        width: 142px !important;
+        gap: 8px !important;
+        & > img {
+            width: 60px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .main_box {
+        top: 0 !important;
+        left: 0px !important;
+        margin-top: 68px;
+        margin-left: 16px;
+    }
+}
+
+@mixin flex_center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin bgr() {
+    background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+}
+
+@mixin hover() {
+    background-color: $bgr_color2;
+    cursor: pointer;
+    scale: 1.1;
+    color: #fff;
+    -webkit-box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
+    box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.46);
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+.main_box {
+    position: absolute;
+    left: 240px;
+    top: 150px;
+    display: flex;
+    align-items: center;
+    gap: 70px;
+}
+
+.greeting {
+    display: flex;
+    flex-direction: column;
+    margin-top: 200px;
+}
+
+.name {
+    color: $bgr_color1;
+    font-weight: 700;
+    font-size: 64px;
+}
+
+.hallo {
+    font-weight: 500;
+    font-size: 47px;
+}
+
+.summery_head {
+
+    @include flex_center()
+}
+
+.headline {
+    font-weight: 700;
+    font-size: 61px;
+    padding-right: 60px;
+    margin: 0;
+}
+
+.nutshell {
+    @include flex_center();
+    height: 60px;
+    padding-left: 30px;
+    font-weight: 400;
+    font-size: 27px;
+    border-left: 3px solid $bgr_color1;
+}
+
+.task {
+    gap: 35px;
+    margin-top: 100px;
+    display: flex;
+}
+
+.task_sub {
+    @include flex_center();
+    flex-direction: column;
+    width: 170px;
+    height: 170px;
+    @include bgr();
+    transition: 300ms;
+
+    &:hover {
+        @include hover()
+    }
+}
+
+.count {
+    font-weight: 600;
+    font-size: 47px;
+}
+
+.status {
+    text-align: center;
+    font-weight: 400;
+    font-size: 21px;
+}
+
+.prio_date {
+    @include flex_center();
+    width: 580px;
+    height: 150px;
+    @include bgr();
+    margin-top: 35px;
+    transition: 300ms;
+
+    &:hover {
+        @include hover()
+    }
+}
+
+.todo_done {
+    display: flex;
+    margin-top: 35px;
+    gap: 35px;
+}
+
+.todo_done_sub {
+    width: 272.5px;
+    height: 150px;
+    @include bgr();
+    @include flex_center();
+    transition: 300ms;
+    gap: 40px;
+
+    &:hover {
+        @include hover();
+
+        img {
+            filter: invert(100%) brightness(2);
+        }
+    }
+}
+
+.todo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.datum {
+    padding-left: 61px;
+    @include flex_center();
+    border-left: 2px solid #D1D1D1;
+    flex-direction: column;
+    height: 100px;
+    font-weight: 700;
+    font-size: 21px;
+}
+
+.prio_date_sub {
+    padding-right: 61px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    img {
+        width: 60px;
+        height: 60px;
+    }
+}

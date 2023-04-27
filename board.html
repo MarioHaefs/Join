@@ -16,11 +16,6 @@
     <script src="./js/add_task_templates.js"></script>
     <script src="./js/add_task.js"></script>
     <script src="./js/board.js"></script>
-
-    <!-- include add_task files -->
-    <!-- <script src="./js/add_task.js"></script> -->
-    <!-- <script src="./js/add_task_templates.js"></script> -->
-    <!-- <link rel="stylesheet" href="./css/addTask.css"> -->
 </head>
 
 <body onload="includeHTML(), initBoard(), hideNotices()" ondragend="markDraggableArea('')">
@@ -81,17 +76,17 @@
     </div>
 
     <div id="overlayAddTask" class="display-none" onclick="closeOverlay()">
-        <!-- <iframe src="add_task.html" frameborder="0" width="80%" height="90%"></iframe> -->
         <div class="add-task" onclick="noClose(event)">
             <div class="close">
                 <img src="./assets/img/close.png" onclick="closeOverlay()">
             </div>
+            <h1>Add Task</h1>
             
             <!-- ToDo: Render include/render AddTask -->
             <div id="overlay"></div>
         </div>
     </div>
-    <!-----------------------------------------------------------Animation Div's----------------------------------------------------------------------->
+    <!-- ---------------------------------------------------------Animation Div's----------------------------------------------------------------------->
     <div class="addBord_box" id="addBordBox">
         Task added to Board
         <img src="assets/img/board.png" class="add_board_image">
@@ -111,7 +106,7 @@
     <div class="addBord_box" id="enterEmail">
        Please enter a E-Mail
     </div>
-    <!-----------------------------------------------------------Animation Div's---------------------------------------------------------------------->
+    <!-----------------------------------------------------------Animation Div's-------------------------------------------------------------------- -->
 </div>
 </body>
 

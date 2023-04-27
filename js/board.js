@@ -14,7 +14,6 @@ async function initBoard() {
 
 
 //displays the current date
-
 function getDateOverlay() {
     document.getElementById('dateOverlay').valueAsDate = new Date();
     date = document.getElementById('dateOverlay').value;
@@ -219,12 +218,16 @@ function markDraggableArea(style) {
 
 function overlayAddTask() {
     document.getElementById('overlayAddTask').classList.remove('display-none');
+    document.getElementById('overlayAddTask').classList.add('overlay-add-task');
     renderOverlayAddTask();
     getDateOverlay();
 }
 
 function closeOverlay() {
+    // todo animation ein ausblenden
+    document.getElementById('overlayAddTask').classList.remove('overlay-add-task');
     document.getElementById('overlayAddTask').classList.add('display-none');
+    // document.getElementsByClassName('add-task')[0].classList.add('test');
 }
 
 function noClose(event) {
