@@ -47,7 +47,7 @@ async function addUser() {
     }
 
     let hashedPassword = await hashWithSHA256(passwordInput.value);
-    let newUser = { name: nameInput.value, email: emailInput.value, password: hashedPassword.toString() };
+    let newUser = { name: nameInput.value, email: emailInput.value, password: hashedPassword.toString(), initials: getInitial(nameInput.value), color: getRandomColor()};
     addNewUser(newUser);
     showSuccessMessage();
     setTimeout(goToLogin, 3000);
@@ -346,3 +346,34 @@ function highlightSelectedMenuItem() {
 }
 
 
+/**
+ * The function returns the first letter of the first name and last name.
+ * If the last name does not exist, then only the first letter of the first name is output
+ * @example
+ * getInitial('Max Mustermann');
+ * @returns {String} MM
+ * @param {String} username The name of the person you want to get the initials of.
+ * @returns first letter of the first name and last name or only the first letter of the first name.
+ * 
+ */
+function getInitial(username) {
+    if (username.includes(' ')) {
+        return username.charAt(0).toUpperCase() + username.charAt(username.lastIndexOf(' ') + 1).toUpperCase();
+    } else {
+        return username.charAt(0).toUpperCase();
+    }
+}
+
+
+/**
+ * Retrunt a random Color-Hexcode 
+ * @returns random color hexcode (#7D735F)
+ */
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
