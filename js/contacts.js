@@ -1,6 +1,6 @@
 let contactsA = [];
 let contact = {};
-let allUsers;
+let allUsersDB;
 let regUser = localStorage.getItem('currentUser');
 let userData;
 let userArryId;
@@ -150,12 +150,12 @@ async function showContact(id) {
 
 
 async function getAllUsers() {
-    allUsers = await JSON.parse(backend.getItem('users')) || [];
+    allUsersDB = await JSON.parse(backend.getItem('users')) || [];
     getCurrentUserData();
 }
 
 async function getCurrentUserData() {
-    await allUsers.forEach(function users(value, index) {
+    await allUsersDB.forEach(function users(value, index) {
         if (value.name === regUser) {
             userData = value;
             userArryId = index;
@@ -219,13 +219,13 @@ function animationAndPushToServer() {
 }
 
 async function pushToServer() {
-    await backend.setItem('users', JSON.stringify(allUsers))
+    await backend.setItem('users', JSON.stringify(allUsersDB))
 }
 
 function addContactsToUser() {
     userData = { ...userData, contacts: contactsA };
-    allUsers.splice(userArryId, 1);
-    allUsers.push(userData);
+    allUsersDB.splice(userArryId, 1);
+    allUsersDB.push(userData);
     pushToServer();
 }
 
