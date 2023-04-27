@@ -23,7 +23,7 @@ function getDateOverlay() {
 // load data from backend
 async function loadData() {
     await downloadFromServer();
-    editors = JSON.parse(backend.getItem('contacts')) || [];
+    // editors = JSON.parse(backend.getItem('users')) || [];
     tasks_board = JSON.parse(backend.getItem('tasks')) || [];
     categorys_board = JSON.parse(backend.getItem('categorys')) || [];
 }
@@ -38,6 +38,7 @@ function renderTasks(inputArray) {
 
     for (let i = 0; i < inputArray.length; i++) {
         const task = inputArray[i];
+        // editors = task['contacts'];
         renderSingleTask(task);
     }
 }
@@ -50,7 +51,7 @@ function renderTasks(inputArray) {
 function renderSingleTask(task) {
     let destination = document.getElementById(`${checkTaskStatus(task)}`);//${task['category']}`);
     destination.innerHTML += `
-        <div draggable="true" ondragstart="startDragging(${task['task_id']})" class="task" id="task${task['task_id']}">
+        <div draggable="true" onclick="openTaskDetailView(${task['task_id']})" ondragstart="startDragging(${task['task_id']})" class="single-task" id="task${task['task_id']}">
             ${htmlTaskTopic(task)}
             ${htmlTaskTitle(task)}
             ${htmlTaskDescription(task)}
@@ -77,7 +78,7 @@ function htmlTaskTitle(task) {
 }
 
 function htmlTaskDescription(task) {
-    return `<span>${task['description']}</span>`;
+    return `<div class="task-description-board">${task['description']}</div>`;
 }
 
 
@@ -127,11 +128,12 @@ function htmlTaskDivBottom(task) {
  */
 function htmlTaskEditors(task) {
     let htmlCodeTemp = '';
-    for (let i = 0; i < task['contacts_id'].length; i++) {
-        const editor = task['contacts_id'][i];
+    editors = task['contacts'];
+    for (let i = 0; i < editors.length; i++) {
+        const editor = editors[i];
         if (editor == null) break; // exit for each loop when no editor is available - prevent error
         if (moreThan2Editors(i)) {
-            htmlCodeTemp += htmlTaskLeftOverEditors(task);
+            htmlCodeTemp += htmlTaskLeftOverEditors(editors);
             break;
         }
         htmlCodeTemp += htmlTaskSingleEditor(editor);
@@ -140,14 +142,14 @@ function htmlTaskEditors(task) {
 }
 
 function htmlTaskSingleEditor(editor) {
-    return `<div class="contact-frame" style="background-color: ${editors[editor]['color']}">
-                ${editors[editor]['initials']}
+    return `<div class="contact-frame" style="background-color: ${editor['color']}">
+                ${editor['initials']}
             </div>`;
 }
 
-function htmlTaskLeftOverEditors(task) {
+function htmlTaskLeftOverEditors(editors) {
     return `<div class="contact-frame">
-                +${task['contacts_id'].length - 2}
+                +${editors.length - 2}
             </div>`;
 }
 
@@ -159,6 +161,17 @@ function htmlTaskPrio(task) {
     return `<div class="task-prio">
                 <img src="assets/img/prio${capitalizeFirstLetter(task['prio'])}.png">
             </div>`;
+}
+
+function openTaskDetailView(id) {
+    console.log(id);
+    let task = tasks_board.find((e => e['task_id'] == id));
+    console.log(task);
+    renderTaskDetailView(task);
+}
+
+function renderTaskDetailView() {
+
 }
 
 function capitalizeFirstLetter(str) {

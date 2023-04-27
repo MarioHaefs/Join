@@ -238,9 +238,6 @@
   background: white url("../assets/img/lock-icon.png") right no-repeat;
   background-position: 94% 55%;
 }
-.log-in .form-class .log-in-form ::-moz-placeholder {
-  opacity: 0.5;
-}
 .log-in .form-class .log-in-form ::placeholder {
   opacity: 0.5;
 }
@@ -886,7 +883,6 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 15px 25px;
   margin-left: 48px;
@@ -895,7 +891,6 @@
   width: 100%;
   box-sizing: border-box;
   border-radius: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   font-size: 16px;
   cursor: pointer;
@@ -905,7 +900,6 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -972,7 +966,6 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: -moz-fit-content;
   width: fit-content;
   min-width: 42px;
   height: 42px;
@@ -1220,14 +1213,17 @@
  */
 @keyframes slide-top {
   0% {
+    -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 0;
   }
   50% {
+    -webkit-transform: translateY(-200px);
     transform: translateY(-200px);
     opacity: 1;
   }
   100% {
+    -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 0;
   }
@@ -1290,8 +1286,7 @@ body {
   transform: translateX(-100%);
   padding: 6px 12px 6px 12px;
   border-left: 2px solid #D1D1D1;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   cursor: pointer;
 }
 .board-content .board-header .search-container .btn-add-task {
@@ -1344,7 +1339,7 @@ body {
   height: calc(100% - 64px);
   border: 2px solid transparent;
 }
-.board-content .board-tasks .tasks .task {
+.board-content .board-tasks .tasks .single-task {
   display: flex;
   flex-direction: column;
   padding: 16px;
@@ -1354,26 +1349,25 @@ body {
   margin-bottom: 16px;
   cursor: pointer;
 }
-.board-content .board-tasks .tasks .task h4 {
+.board-content .board-tasks .tasks .single-task h4 {
   margin: 8px 0px;
 }
-.board-content .board-tasks .tasks .task span {
+.board-content .board-tasks .tasks .single-task .task-description-board {
   color: #a8a8a8;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.board-content .board-tasks .tasks .task .task-topic {
+.board-content .board-tasks .tasks .single-task .task-topic {
   padding: 4px 18px;
   margin-bottom: 16px;
-  width: -moz-fit-content;
   width: fit-content;
   border-radius: 6px;
   color: white;
   background-color: orangered;
 }
-.board-content .board-tasks .tasks .task .task-subtasks {
+.board-content .board-tasks .tasks .single-task .task-subtasks {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1381,30 +1375,30 @@ body {
   width: 100%;
   margin: 8px 0;
 }
-.board-content .board-tasks .tasks .task .task-subtasks .task-subtasks-line {
+.board-content .board-tasks .tasks .single-task .task-subtasks .task-subtasks-line {
   height: 8px;
   width: calc(100% - 60px);
   background-color: #f4f4f4;
   border-radius: 2px;
 }
-.board-content .board-tasks .tasks .task .task-subtasks .task-subtasks-line .progress {
+.board-content .board-tasks .tasks .single-task .task-subtasks .task-subtasks-line .progress {
   background-color: #29ABE2;
   height: inherit;
   border-radius: 2px;
 }
-.board-content .board-tasks .tasks .task .task-subtasks span {
+.board-content .board-tasks .tasks .single-task .task-subtasks span {
   font-size: small;
   color: black;
 }
-.board-content .board-tasks .tasks .task .task-bottom {
+.board-content .board-tasks .tasks .single-task .task-bottom {
   display: flex;
 }
-.board-content .board-tasks .tasks .task .task-bottom .editors {
+.board-content .board-tasks .tasks .single-task .task-bottom .editors {
   display: flex;
   height: 42px;
   width: 100%;
 }
-.board-content .board-tasks .tasks .task .task-bottom .editors .contact-frame {
+.board-content .board-tasks .tasks .single-task .task-bottom .editors .contact-frame {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1414,18 +1408,17 @@ body {
   border-radius: 100%;
   background-color: #2A3647;
 }
-.board-content .board-tasks .tasks .task .task-bottom .editors .contact-frame:nth-child(2) {
+.board-content .board-tasks .tasks .single-task .task-bottom .editors .contact-frame:nth-child(2) {
   transform: translateX(-10px);
 }
-.board-content .board-tasks .tasks .task .task-bottom .editors .contact-frame:nth-child(3) {
+.board-content .board-tasks .tasks .single-task .task-bottom .editors .contact-frame:nth-child(3) {
   transform: translateX(-20px);
 }
-.board-content .board-tasks .tasks .task .task-prio {
+.board-content .board-tasks .tasks .single-task .task-prio {
   display: flex;
 }
-.board-content .board-tasks .tasks .task .task-prio img {
-  -o-object-fit: contain;
-     object-fit: contain;
+.board-content .board-tasks .tasks .single-task .task-prio img {
+  object-fit: contain;
 }
 
 .overlay-add-task {

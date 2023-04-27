@@ -93,7 +93,7 @@ body {
                 border: 2px solid transparent;
             }
 
-            .task {
+            .single-task {
                 display: flex;
                 flex-direction: column;
                 padding: 16px;
@@ -107,7 +107,7 @@ body {
                     margin: 8px 0px;
                 }
 
-                span {
+                .task-description-board {
                     color: $gray;
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
