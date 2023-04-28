@@ -1,7 +1,8 @@
 let prio;
-let allUsers
-let enter_email = false
+let you = false;
+let enter_email = false;
 let user;
+let userId;
 let current_user;
 let button_delay = false;
 let checkbox_subTask = false;
@@ -114,16 +115,56 @@ function openContacts() {
 
 function renderContacts() {
     document.getElementById('contacts').innerHTML = ``;
-    document.getElementById('contacts').innerHTML = `<div class="render_categorys" onclick="">you</div>`;
+    renderAddYouHTML();
     document.getElementById('contacts').innerHTML += `<div class="render_categorys" onclick="inviteContact() ">Invite new contact</div>`;
-    for (let i = 0; i < contacts.length; i++) {
-        let userName = contacts[i]['name'];
-        renderContactsHTML(i, userName);
-        if (initials['mail'].includes(contacts[i]['mail'])) {
-            document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
+    if (contacts.length > 0) {
+        for (let i = 0; i < contacts.length; i++) {
+            let userName = contacts[i]['name'];
+            renderContactsHTML(i, userName);
+            if (initials['mail'].includes(contacts[i]['mail'])) {
+                document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
+            }
         }
     }
 };
+
+
+function CurrentUser() {
+    if (!you) addCurrentUser();
+    else removeCurrentUser();
+};
+
+
+function removeCurrentUser() {
+    document.getElementById('Checkbox_you').classList.remove('custom_checkBox_child');
+    i = task_contacts.indexOf(user[userId]);
+    task_contacts.splice(i, 1);
+    initials['initials'] = initials['initials'].filter(e => e !== user[userId]['initials']);
+    initials['color'] = initials['color'].filter(e => e !== user[userId]['color']);
+    showInitials();
+    you = false;
+}
+
+
+function addCurrentUser() {
+    document.getElementById('Checkbox_you').classList.add('custom_checkBox_child');
+    getCurrentUserData();
+    task_contacts.push(user[userId]);
+    initials['color'].push(user[userId]['color']);
+    initials['initials'].push(user[userId]['initials'])
+    showInitials();
+    you = true;
+}
+
+
+async function getCurrentUserData() {
+    await user.forEach(function users(value, index) {
+        if (value.name === current_user) {
+            userData = value;
+            userId = index;
+        }
+    })
+}
 
 
 function inviteContact() {
@@ -151,7 +192,6 @@ function sendEmail() {
         }
     }
 };
-
 
 //deletes the selected contacts and closes the contacts menu if it's open
 
@@ -480,9 +520,8 @@ async function saveInLocalStorage(key, array) {
 
 async function loadData() {
     await downloadFromServer();
-    allUsers = await JSON.parse(backend.getItem('users')) || [];
     current_user = localStorage.getItem('currentUser');
-    user =  JSON.parse(backend.getItem('users')) || [];
+    user = JSON.parse(backend.getItem('users')) || [];
     categorys = JSON.parse(backend.getItem('categorys')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     task_id = backend.getItem('index');
