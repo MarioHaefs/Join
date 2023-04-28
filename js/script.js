@@ -127,7 +127,7 @@ function handleLoginSuccess(email, password, rememberMe, user) {
         clearLoginData();
     }
     setCurrentUser(user);
-    redirectToSummaryPage();
+    goToSummary();
 }
 
 
@@ -153,11 +153,6 @@ function clearLoginData() {
 
 function setCurrentUser(user) {
     localStorage.setItem("currentUser", user.name);
-}
-
-
-function redirectToSummaryPage() {
-    window.location.href = "summary.html";
 }
 
 
@@ -200,7 +195,7 @@ function guestLogin() {
     event.preventDefault();
     currentUser = 'Guest';
     localStorage.setItem('currentUser', 'Guest');
-    window.location.href = 'summary.html';
+    goToSummary();
 }
 
 
