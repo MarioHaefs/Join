@@ -1513,6 +1513,10 @@ body {
   padding: 8px;
   font-size: 16px;
 }
+.board-detail-view .content .edit-task {
+  font-size: 24px;
+  font-weight: normal;
+}
 .board-detail-view .content .icons {
   position: absolute;
   display: flex;
@@ -1544,6 +1548,22 @@ body {
   background-color: #2A3647;
 }
 .board-detail-view .content .icons .edit-button:hover {
+  background-color: #29ABE2;
+}
+.board-detail-view .content .icons .check-button {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border-radius: 10px;
+  color: white;
+  background-color: #2A3647;
+  font-weight: bold;
+  font-size: 20px;
+}
+.board-detail-view .content .icons .check-button:hover {
   background-color: #29ABE2;
 }
 

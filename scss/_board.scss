@@ -295,6 +295,11 @@ body {
             }
         }
 
+        .edit-task {
+            font-size: 24px;
+            font-weight: normal;
+        }
+
         .icons {
             position: absolute;
             display: flex;
@@ -326,6 +331,24 @@ body {
                 border-radius: 0px 10px 10px 0px;
                 border: 1px solid transparent;
                 background-color: $darkblue;
+
+                &:hover {
+                    background-color: $lightblue;
+                }
+            }
+
+            .check-button {
+                width: 100px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 16px;
+                border-radius: 10px;
+                color: white;
+                background-color: $darkblue;
+                font-weight: bold;
+                font-size: 20px;
 
                 &:hover {
                     background-color: $lightblue;

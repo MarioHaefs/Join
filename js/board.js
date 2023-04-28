@@ -181,7 +181,7 @@ function htmlTaskDetailView(task) {
             <div class="close">
                 <img src="./assets/img/close.png" onclick="closeDetailView()">
             </div>
-            <div class="task-details">
+            <div id="content" class="task-details">
                 <div class="category" style="background-color: ${task['category_color']}">${task['category']}</div>
                 <div class="title">${task['title']}</div>
                 <div>${task['description']}</div>
@@ -201,7 +201,7 @@ function htmlTaskDetailView(task) {
                     ${htmlAllEditors(task)}
                 </div>
             </div>
-            <div class="icons">
+            <div id="icons" class="icons">
                 <div class="delete-button" onclick="deleteTask(${tasks_board.indexOf(task)})">
                     <img src="./assets/img/board-icons/delete.png">
                 </div>
@@ -213,8 +213,47 @@ function htmlTaskDetailView(task) {
     `;
 }
 
-async function editTask() {
+async function editTask(index) {
+    let content = document.getElementById('content');
+    let icons = document.getElementById('icons');
+    content.innerHTML = '';
+    content.classList.remove('task-details');
+    content.classList.add('edit-task');
+    icons.innerHTML = htmlCheckIcon(index);
+    content.innerHTML = htmlEditTask(tasks_board[index]);
+}
 
+function htmlEditTask(task) {
+    return `
+            <div class="title">
+                ${task['title']}
+                <input type="text" id="taskTitle">
+            </div>
+                <div>${task['description']}</div>
+                <div class="date">
+                    <b>Due date:</b>
+                    <div>${task['date']}</div>
+                </div>
+                <div class="priority">
+                    <b>Priority:</b>
+                    <div class="prio-icon" style="background-color: ${getCategoryColor(task['prio'])}">
+                        <div>${task['prio']}</div>
+                        <img src="./assets/img/prio${capitalizeFirstLetter(task['prio'])}.png">
+                    </div>
+                </div>
+                <div class="editors">
+                    <b>Assigned To:</b>
+                    ${htmlAllEditors(task)}
+                </div>
+    `;
+}
+
+function htmlCheckIcon(index) {
+    return `
+        <div class="check-button" onclick="saveTask(${index})">
+            OK
+            <img src="./assets/img/board-icons/check.png">
+        </div>`;
 }
 
 async function deleteTask(index) {
