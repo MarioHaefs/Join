@@ -134,7 +134,9 @@ function CurrentUser() {
     else removeCurrentUser();
 };
 
-
+/**
+ * removes the current user from the task
+ */
 function removeCurrentUser() {
     document.getElementById('Checkbox_you').classList.remove('custom_checkBox_child');
     i = task_contacts.indexOf(user[userId]);
@@ -145,26 +147,32 @@ function removeCurrentUser() {
     you = false;
 }
 
+/**
+ * add the current user to the task
+ */
 
 function addCurrentUser() {
     document.getElementById('Checkbox_you').classList.add('custom_checkBox_child');
-    getCurrentUserData();
+    getCurrentUserIndex();
     task_contacts.push(user[userId]);
     initials['color'].push(user[userId]['color']);
     initials['initials'].push(user[userId]['initials'])
     showInitials();
     you = true;
-}
+};
 
+/**
+ * fills the variable userId with the index of the user
+ */
 
-async function getCurrentUserData() {
+async function getCurrentUserIndex() {
     await user.forEach(function users(value, index) {
         if (value.name === current_user) {
             userData = value;
             userId = index;
         }
-    })
-}
+    });
+};
 
 
 function inviteContact() {
@@ -381,6 +389,10 @@ function deleteSubtask(i) {
 
 };
 
+/**
+ * saves whether the subtask is already completed
+ */
+
 function setSubtaskStatus(i) {
     if (document.getElementById('CheckboxTask' + i).checked == true) boolians[i] = true;
     else boolians[i] = false;
@@ -501,6 +513,9 @@ function renderOverlayAddTask() {
     renderOverlayHTML();
 }
 
+/**
+ * fills the contacts array with the user's contacts
+ */
 
 function getUserContacts() {
     user.forEach(e => {
