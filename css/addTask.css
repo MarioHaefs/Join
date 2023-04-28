@@ -167,6 +167,7 @@ span {
     top: 18px;
     width: 16px;
     height: 16px;
+    z-index: 10;
 }
 
 .delete_image {
@@ -561,6 +562,7 @@ span {
 }
 
 .initials {
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;

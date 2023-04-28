@@ -73,6 +73,18 @@ function renderContactsHTML(i, userName) {
             </div>`;
 };
 
+
+function renderAddYouHTML() {
+    document.getElementById('contacts').innerHTML = `
+    <div class="render_categorys" onclick="CurrentUser()">
+        You 
+        <div class="custom_checkBox">
+            <div id="Checkbox_you"></div>
+        </div>
+    </div>`;
+}
+
+
 function renderOverlayHTML() {
     document.getElementById('overlay').innerHTML = `
     <div class="form">
