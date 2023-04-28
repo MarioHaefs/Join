@@ -164,14 +164,96 @@ function htmlTaskPrio(task) {
 }
 
 function openTaskDetailView(id) {
-    console.log(id);
     let task = tasks_board.find((e => e['task_id'] == id));
-    console.log(task);
-    renderTaskDetailView(task);
+    renderTaskDetailView(task)
 }
 
-function renderTaskDetailView() {
+// todo
+function renderTaskDetailView(task) {
+    let detailView = document.getElementById('taskDetailView');
+    detailView.classList.remove('display-none');
+    detailView.innerHTML = htmlTaskDetailView(task);
+}
 
+function htmlTaskDetailView(task) {
+    return `
+        <div class="content" onclick="noClose(event)">
+            <div class="close">
+                <img src="./assets/img/close.png" onclick="closeDetailView()">
+            </div>
+            <div class="task-details">
+                <div class="category" style="background-color: ${task['category_color']}">${task['category']}</div>
+                <div class="title">${task['title']}</div>
+                <div>${task['description']}</div>
+                <div class="date">
+                    <b>Due date:</b>
+                    <div>${task['date']}</div>
+                </div>
+                <div class="priority">
+                    <b>Priority:</b>
+                    <div class="prio-icon" style="background-color: ${getCategoryColor(task['prio'])}">
+                        <div>${task['prio']}</div>
+                        <img src="./assets/img/prio${capitalizeFirstLetter(task['prio'])}.png">
+                    </div>
+                </div>
+                <div class="editors">
+                    <b>Assigned To:</b>
+                    ${htmlAllEditors(task)}
+                </div>
+            </div>
+            <div class="icons">
+                <div class="delete-button" onclick="deleteTask(${tasks_board.indexOf(task)})">
+                    <img src="./assets/img/board-icons/delete.png">
+                </div>
+                <div class="edit-button" onclick="editTask(${tasks_board.indexOf(task)})">
+                    <img src="./assets/img/board-icons/edit.png">
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+async function editTask() {
+
+}
+
+async function deleteTask(index) {
+    tasks_board.splice(index, 1);
+    document.getElementById('taskDetailView').classList.add('display-none');
+    await saveData('tasks', tasks_board);
+    await initBoard();
+}
+
+function htmlAllEditors(task) {
+    let htmlCodeTemp = '';
+    editors = task['contacts'];
+    for (let i = 0; i < editors.length; i++) {
+        const editor = editors[i];
+        if (editor == null) break; // exit for each loop when no editor is available - prevent error
+        htmlCodeTemp += htmlTaskSingleEditorDetail(editor);
+    }
+    return htmlCodeTemp;
+}
+
+function htmlTaskSingleEditorDetail(ed) {
+    return `
+        <div class="single-editor">
+            <div class="ed-initials" style="background-color: ${ed['color']}">${ed['initials']}</div>
+            <div>${ed['name']}</div>
+        </div>
+    `;
+}
+
+function getCategoryColor(prio) {
+    if (prio == 'low') {
+        return '#7AE229';
+    } else if (prio == 'medium') {
+        return '#FFA800';
+    } else if (prio == 'urgent') {
+        return '#FF3D00';
+    } else {
+        return '#000000';
+    };
 }
 
 function capitalizeFirstLetter(str) {
@@ -241,6 +323,10 @@ function closeOverlay() {
     document.getElementById('overlayAddTask').classList.remove('overlay-add-task');
     document.getElementById('overlayAddTask').classList.add('display-none');
     // document.getElementsByClassName('add-task')[0].classList.add('test');
+}
+
+function closeDetailView() {
+    document.getElementById('taskDetailView').classList.add('display-none');
 }
 
 function noClose(event) {

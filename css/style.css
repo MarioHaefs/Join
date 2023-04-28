@@ -1421,6 +1421,132 @@ body {
   object-fit: contain;
 }
 
+.board-detail-view {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+}
+.board-detail-view .content {
+  position: relative;
+  width: 40%;
+  height: 80%;
+  background-color: #F6F7F8;
+  border-radius: 32px;
+}
+.board-detail-view .content .close {
+  position: absolute;
+  right: 48px;
+  top: 48px;
+  cursor: pointer;
+  z-index: 20;
+}
+.board-detail-view .content .task-details {
+  position: relative;
+  margin: 48px;
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+}
+.board-detail-view .content .task-details .category {
+  padding: 4px 18px;
+  margin-bottom: 16px;
+  width: fit-content;
+  border-radius: 6px;
+  color: white;
+  font-size: large;
+}
+.board-detail-view .content .task-details .title {
+  color: #2A3647;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+.board-detail-view .content .task-details .date {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+.board-detail-view .content .task-details .priority {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  text-transform: capitalize;
+}
+.board-detail-view .content .task-details .priority .prio-icon {
+  display: flex;
+  gap: 24px;
+  padding: 4px 18px;
+  border-radius: 6px;
+  color: white;
+}
+.board-detail-view .content .task-details .priority .prio-icon img {
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.board-detail-view .content .task-details .editors {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.board-detail-view .content .task-details .editors .single-editor {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.board-detail-view .content .task-details .editors .single-editor .ed-initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  height: 24px;
+  width: 24px;
+  padding: 8px;
+  font-size: 16px;
+}
+.board-detail-view .content .icons {
+  position: absolute;
+  display: flex;
+  right: 48px;
+  bottom: 48px;
+  cursor: pointer;
+  z-index: 20;
+}
+.board-detail-view .content .icons .delete-button {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #2A3647;
+  border-radius: 10px 0px 0px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.board-detail-view .content .icons .delete-button:hover {
+  filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
+}
+.board-detail-view .content .icons .edit-button {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px 10px 10px 0px;
+  border: 1px solid transparent;
+  background-color: #2A3647;
+}
+.board-detail-view .content .icons .edit-button:hover {
+  background-color: #29ABE2;
+}
+
 .overlay-add-task {
   position: absolute;
   width: 100%;
