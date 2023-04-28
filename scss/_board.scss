@@ -93,7 +93,7 @@ body {
                 border: 2px solid transparent;
             }
 
-            .task {
+            .single-task {
                 display: flex;
                 flex-direction: column;
                 padding: 16px;
@@ -107,7 +107,7 @@ body {
                     margin: 8px 0px;
                 }
 
-                span {
+                .task-description-board {
                     color: $gray;
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
@@ -137,7 +137,7 @@ body {
                         width: calc(100% - 60px);
                         background-color: #f4f4f4;
                         border-radius: 2px;
-                        
+
                         .progress {
                             background-color: #29ABE2;
                             height: inherit;
@@ -192,6 +192,172 @@ body {
     }
 }
 
+.board-detail-view {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+
+    .content {
+        position: relative;
+        width: 40%;
+        height: 80%;
+        background-color: $pagebackground;
+        border-radius: 32px;
+
+        .close {
+            position: absolute;
+            right: 48px;
+            top: 48px;
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        .task-details {
+            position: relative;
+            margin: 48px;
+            display: flex;
+            flex-direction: column;
+            font-size: large;
+
+            .category {
+                padding: 4px 18px;
+                margin-bottom: 16px;
+                width: fit-content;
+                border-radius: 6px;
+                color: white;
+                font-size: large;
+            }
+
+            .title {
+                color: $darkblue;
+                font-size: 40px;
+                font-weight: bold;
+                margin-bottom: 24px;
+            }
+
+            .date {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                margin-top: 24px;
+                margin-bottom: 24px;
+            }
+
+            .priority {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                text-transform: capitalize;
+
+                .prio-icon {
+                    display: flex;
+                    gap: 24px;
+                    padding: 4px 18px;
+                    border-radius: 6px;
+                    color: white;
+
+                    img {
+                        object-fit: contain;
+                        filter: brightness(0) invert(1);
+                    }
+                }
+            }
+
+            .editors {
+                margin-top: 24px;
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+
+                .single-editor {
+                    display: flex;
+                    align-items: center;
+                    gap: 24px;
+
+                    .ed-initials {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 100%;
+                        height: 24px;
+                        width: 24px;
+                        padding: 8px;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+
+        .edit-task {
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        .icons {
+            position: absolute;
+            display: flex;
+            right: 48px;
+            bottom: 48px;
+            cursor: pointer;
+            z-index: 20;
+
+            .delete-button {
+                width: 50px;
+                height: 50px;
+                border: 1px solid $darkblue;
+                border-radius: 10px 0px 0px 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
+                    filter: invert(77%) sepia(50%) saturate(5605%) hue-rotate(165deg) brightness(95%) contrast(85%);
+                }
+            }
+
+            .edit-button {
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 0px 10px 10px 0px;
+                border: 1px solid transparent;
+                background-color: $darkblue;
+
+                &:hover {
+                    background-color: $lightblue;
+                }
+            }
+
+            .check-button {
+                width: 100px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 16px;
+                border-radius: 10px;
+                color: white;
+                background-color: $darkblue;
+                font-weight: bold;
+                font-size: 20px;
+
+                &:hover {
+                    background-color: $lightblue;
+                }
+            }
+        }
+    }
+}
+
 .overlay-add-task {
     position: absolute;
     width: 100%;
@@ -217,7 +383,7 @@ body {
             display: flex;
             justify-content: flex-end;
             margin: 24px;
-            cursor: pointer;            
+            cursor: pointer;
         }
     }
 }
@@ -247,6 +413,7 @@ body {
         left: 100%;
         width: 0%;
     }
+
     to {
         left: 0%;
         width: 100%;
@@ -254,16 +421,31 @@ body {
 }
 
 @keyframes slide-out-from-left {
-    from {left: 0%;}
-    to {left: 100%;}
+    from {
+        left: 0%;
+    }
+
+    to {
+        left: 100%;
+    }
 }
 
 @keyframes shadow-background-color {
-    from {background-color: rgba($color: #000000, $alpha: 0.0);}
-    to {background-color: rgba($color: #000000, $alpha: 0.2);}
+    from {
+        background-color: rgba($color: #000000, $alpha: 0.0);
+    }
+
+    to {
+        background-color: rgba($color: #000000, $alpha: 0.2);
+    }
 }
 
 @keyframes clean-background-color {
-    from {background-color: rgba($color: #000000, $alpha: 0.2);}
-    to {background-color: rgba($color: #000000, $alpha: 0.0);}
+    from {
+        background-color: rgba($color: #000000, $alpha: 0.2);
+    }
+
+    to {
+        background-color: rgba($color: #000000, $alpha: 0.0);
+    }
 }
