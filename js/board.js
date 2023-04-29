@@ -167,7 +167,8 @@ function htmlTaskPrio(task) {
 
 function openTaskDetailView(id) {
     let task = tasks_board.find((e => e['task_id'] == id));
-    renderTaskDetailView(task)
+    renderTaskDetailView(task);
+    document.body.classList.add('overflow-hidden');
 }
 
 // todo
@@ -402,6 +403,7 @@ function markDraggableArea(style) {
 function overlayAddTask() {
     document.getElementById('overlayAddTask').classList.remove('display-none');
     document.getElementById('overlayAddTask').classList.add('overlay-add-task');
+    document.body.classList.add('overflow-hidden');
     renderOverlayAddTask();
     getDateOverlay();
 }
@@ -411,11 +413,13 @@ function closeOverlay() {
     // todo animation ein ausblenden
     document.getElementById('overlayAddTask').classList.remove('overlay-add-task');
     document.getElementById('overlayAddTask').classList.add('display-none');
+    document.body.classList.remove('overflow-hidden');
     // document.getElementsByClassName('add-task')[0].classList.add('test');
 }
 
 function closeDetailView() {
     document.getElementById('taskDetailView').classList.add('display-none');
+    document.body.classList.remove('overflow-hidden');
 }
 
 function noClose(event) {
