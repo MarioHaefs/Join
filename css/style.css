@@ -1435,15 +1435,15 @@ body {
 }
 .board-detail-view .content {
   position: relative;
-  width: 40%;
+  width: 50%;
   height: 80%;
   background-color: #F6F7F8;
   border-radius: 32px;
 }
 .board-detail-view .content .close {
   position: absolute;
-  right: 48px;
-  top: 48px;
+  right: 40px;
+  top: 40px;
   cursor: pointer;
   z-index: 20;
 }
@@ -1514,14 +1514,70 @@ body {
   font-size: 16px;
 }
 .board-detail-view .content .edit-task {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: normal;
+  padding: 48px 150px 48px 48px;
+}
+.board-detail-view .content .edit-task .title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.board-detail-view .content .edit-task .title input {
+  width: unset !important;
+  margin-bottom: 16px;
+}
+.board-detail-view .content .edit-task .description {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.board-detail-view .content .edit-task .description textarea {
+  width: inherit;
+  margin-bottom: 16px;
+}
+.board-detail-view .content .edit-task .date {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.board-detail-view .content .edit-task .date input {
+  width: inherit;
+  margin-bottom: 16px;
+}
+.board-detail-view .content .edit-task .priority {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.board-detail-view .content .edit-task .priority .edit-prio-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.board-detail-view .content .edit-task .priority .edit-prio-buttons .prio_button {
+  width: 30%;
+}
+.board-detail-view .content .edit-task .editors {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+}
+.board-detail-view .content .edit-task .editors .drop_down {
+  width: unset;
+  font-size: unset;
+  padding-left: 16px;
+}
+.board-detail-view .content .edit-task .editors .drop_down .down_image {
+  left: unset;
+  right: 16px;
 }
 .board-detail-view .content .icons {
   position: absolute;
   display: flex;
-  right: 48px;
-  bottom: 48px;
+  right: 40px;
+  bottom: 40px;
   cursor: pointer;
   z-index: 20;
 }

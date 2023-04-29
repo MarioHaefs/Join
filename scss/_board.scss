@@ -206,15 +206,15 @@ body {
 
     .content {
         position: relative;
-        width: 40%;
+        width: 50%;
         height: 80%;
         background-color: $pagebackground;
         border-radius: 32px;
 
         .close {
             position: absolute;
-            right: 48px;
-            top: 48px;
+            right: 40px;
+            top: 40px;
             cursor: pointer;
             z-index: 20;
         }
@@ -296,15 +296,83 @@ body {
         }
 
         .edit-task {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: normal;
+            padding: 48px 150px 48px 48px;
+
+            .title {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                input {
+                    width: unset !important;
+                    margin-bottom: 16px;
+                }
+            }
+
+            .description {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                textarea {
+                    width: inherit;
+                    margin-bottom: 16px;
+                }
+            }
+
+            .date {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                input {
+                    width: inherit;
+                    margin-bottom: 16px;
+                }
+            }
+
+            .priority {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                .edit-prio-buttons {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 8px;
+
+                    .prio_button {
+                        width: 30%;
+                    }
+                }
+            }
+
+            .editors {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-top: 24px;
+
+                .drop_down {
+                    width: unset;
+                    font-size: unset;
+                    padding-left: 16px;
+
+                    .down_image {
+                        left: unset;
+                        right: 16px;
+                    }
+                }
+            }
         }
 
         .icons {
             position: absolute;
             display: flex;
-            right: 48px;
-            bottom: 48px;
+            right: 40px;
+            bottom: 40px;
             cursor: pointer;
             z-index: 20;
 

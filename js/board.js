@@ -3,6 +3,7 @@ let editors;
 let tasks_board;
 let categorys_board;
 let filteredTasks;
+let currentPrioEditTask;
 
 // set backend url
 setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
@@ -221,30 +222,61 @@ async function editTask(index) {
     content.classList.add('edit-task');
     icons.innerHTML = htmlCheckIcon(index);
     content.innerHTML = htmlEditTask(tasks_board[index]);
+    setPrioInEditTask(tasks_board[index]);
+}
+
+function setPrioInEditTask(task) {
+    currentPrioEditTask = task['prio'];
+    document.getElementById(`editPrio${capitalizeFirstLetter(currentPrioEditTask)}`).classList.add(`prio_button_${currentPrioEditTask}`);
+}
+
+function editPrio(prio) {
+    document.getElementById(`editPrio${capitalizeFirstLetter(currentPrioEditTask)}`).classList.remove(`prio_button_${currentPrioEditTask}`);
+    currentPrioEditTask = prio;
+    document.getElementById(`editPrio${capitalizeFirstLetter(currentPrioEditTask)}`).classList.add(`prio_button_${currentPrioEditTask}`);
 }
 
 function htmlEditTask(task) {
     return `
             <div class="title">
-                ${task['title']}
-                <input type="text" id="taskTitle">
+                Title
+                <input type="text" id="editTaskTitle" value="${task['title']}">
             </div>
-                <div>${task['description']}</div>
-                <div class="date">
-                    <b>Due date:</b>
-                    <div>${task['date']}</div>
-                </div>
-                <div class="priority">
-                    <b>Priority:</b>
-                    <div class="prio-icon" style="background-color: ${getCategoryColor(task['prio'])}">
-                        <div>${task['prio']}</div>
-                        <img src="./assets/img/prio${capitalizeFirstLetter(task['prio'])}.png">
+            <div class="description">
+                Description
+                <textarea id="editTaskDescription" rows="5" required>${task['description']}</textarea>
+            </div>
+            <div class="date">
+                Due date:
+                <input type="date" id="editTaskDueDate" value="${task['date']}">
+            </div>
+            <div class="priority">
+                Prio
+                <div class="edit-prio-buttons">
+                    <div class="prio_button" id="editPrioUrgent" onclick="editPrio('urgent')">
+                        Urgent
+                        <img src="./assets/img/prioUrgent.png">
+                    </div>
+                    <div class="prio_button" id="editPrioMedium" onclick="editPrio('medium')">
+                        Medium
+                        <img src="./assets/img/prioMedium.png">
+                    </div>
+                    <div class="prio_button" id="editPrioLow" onclick="editPrio('low')">
+                        Low
+                        <img src="./assets/img/prioLow.png">
                     </div>
                 </div>
-                <div class="editors">
-                    <b>Assigned To:</b>
-                    ${htmlAllEditors(task)}
+            </div>
+            <div class="editors">
+                Assigned to
+                <div id="contactBox">
+                    <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
+                        Select contacts to assign
+                        <img class="down_image" src="assets/img/drop-down-arrow.png">
+                    </div>
+                    <div id="contacts" class="render_categorys_box"></div>
                 </div>
+            </div>
     `;
 }
 
@@ -419,3 +451,32 @@ function showTasknotFull() {
         setTimeout(() => button_delay = false, 2500);
     }
 }
+
+
+// delete 
+function openEditTaskContacts() {
+    if (!menuContactsOpen) {
+        document.getElementById('editContacts').innerHTML = '';
+        openMenu('editContacts', 'dropDownEditContacts');
+        menuContactsOpen = true;
+        renderEditContacts();
+    } else {
+        closeMenu('editContacts', 'dropDownEditContacts')
+        menuContactsOpen = false;
+    }
+};
+
+// delete
+function renderEditContacts() {
+    document.getElementById('editContacts').innerHTML = ``;
+    document.getElementById('editContacts').innerHTML += `<div class="render_categorys" onclick="inviteContact() ">Invite new contact</div>`;
+    if (contacts.length > 0) {
+        for (let i = 0; i < contacts.length; i++) {
+            let userName = contacts[i]['name'];
+            renderContactsHTML(i, userName);
+            if (initials['mail'].includes(contacts[i]['mail'])) {
+                document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
+            }
+        }
+    }
+};
