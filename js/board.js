@@ -10,6 +10,7 @@ setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
 
 async function initBoard() {
     await loadData();
+    await loadDataTask();
     renderTasks(tasks_board);
 }
 
@@ -270,11 +271,11 @@ function htmlEditTask(task) {
             <div class="editors">
                 Assigned to
                 <div id="contactBox">
-                    <div class="drop_down" id="dropDownContacts" onclick="openContacts()">
+                    <div class="drop_down" id="dropDownEditContacts" onclick="openEditTaskContacts()">
                         Select contacts to assign
                         <img class="down_image" src="assets/img/drop-down-arrow.png">
                     </div>
-                    <div id="contacts" class="render_categorys_box"></div>
+                    <div id="editContacts" class="render_categorys_box"></div>
                 </div>
             </div>
     `;
@@ -287,6 +288,22 @@ function htmlCheckIcon(index) {
             <img src="./assets/img/board-icons/check.png">
         </div>`;
 }
+
+async function saveTask(idx) {
+    saveChangedDataLocal(idx);
+}
+
+async function saveChangedDataLocal(idx) {
+    tasks_board[idx]['title'] = document.getElementById('editTaskTitle').value;
+    tasks_board[idx]['description'] = document.getElementById('editTaskDescription').value;
+    tasks_board[idx]['date'] = document.getElementById('editTaskDueDate').value;
+    tasks_board[idx]['prio'] = currentPrioEditTask;
+    tasks_board[idx]['contacts'] = task_contacts;
+    await saveData('tasks', tasks_board);
+    document.getElementById('taskDetailView').classList.add('display-none');
+    await initBoard();
+}
+
 
 async function deleteTask(index) {
     tasks_board.splice(index, 1);
@@ -452,8 +469,6 @@ function showTasknotFull() {
     }
 }
 
-
-// delete 
 function openEditTaskContacts() {
     if (!menuContactsOpen) {
         document.getElementById('editContacts').innerHTML = '';
@@ -466,17 +481,43 @@ function openEditTaskContacts() {
     }
 };
 
-// delete
 function renderEditContacts() {
     document.getElementById('editContacts').innerHTML = ``;
     document.getElementById('editContacts').innerHTML += `<div class="render_categorys" onclick="inviteContact() ">Invite new contact</div>`;
     if (contacts.length > 0) {
         for (let i = 0; i < contacts.length; i++) {
             let userName = contacts[i]['name'];
-            renderContactsHTML(i, userName);
+            renderEditTaskContactsHTML(i, userName);
             if (initials['mail'].includes(contacts[i]['mail'])) {
                 document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
             }
         }
+    }
+};
+
+function renderEditTaskContactsHTML(i, userName) {
+    document.getElementById('editContacts').innerHTML += `
+            <div class="render_categorys" onclick="editTaskSetContacts(${i})">
+                ${userName}  
+                <div class="custom_checkBox">
+                    <div id="Checkbox${i}"></div>
+                </div>
+            </div>`;
+};
+
+function editTaskSetContacts(i) {
+    let index = initials['mail'].indexOf(contacts[i]['mail'])
+    if (index == -1) {
+        document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
+        initials['initials'].push(contacts[i]['initials']);
+        initials['mail'].push(contacts[i]['mail']);
+        initials['color'].push(contacts[i]['color']);
+        task_contacts.push(contacts[i]);
+    } else {
+        document.getElementById('Checkbox' + i).classList.remove('custom_checkBox_child');
+        initials['initials'].splice(index, 1);
+        initials['mail'].splice(index, 1);
+        initials['color'].splice(index, 1);
+        task_contacts.splice(index, 1);
     }
 };
