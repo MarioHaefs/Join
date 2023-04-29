@@ -292,17 +292,18 @@ function htmlCheckIcon(index) {
 
 async function saveTask(idx) {
     saveChangedDataLocal(idx);
+    await saveData('tasks', tasks_board);
+    document.getElementById('taskDetailView').classList.add('display-none');
+    document.body.classList.remove('overflow-hidden');
+    await initBoard();
 }
 
-async function saveChangedDataLocal(idx) {
+function saveChangedDataLocal(idx) {
     tasks_board[idx]['title'] = document.getElementById('editTaskTitle').value;
     tasks_board[idx]['description'] = document.getElementById('editTaskDescription').value;
     tasks_board[idx]['date'] = document.getElementById('editTaskDueDate').value;
     tasks_board[idx]['prio'] = currentPrioEditTask;
     tasks_board[idx]['contacts'] = task_contacts;
-    await saveData('tasks', tasks_board);
-    document.getElementById('taskDetailView').classList.add('display-none');
-    await initBoard();
 }
 
 
