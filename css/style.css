@@ -1430,7 +1430,7 @@ body {
 }
 
 .board-detail-view {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
@@ -1689,6 +1689,13 @@ body {
   overflow: hidden;
 }
 
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #F6F7F8;
+}
+
 @keyframes slide-in-from-right {
   from {
     left: 100%;
@@ -1723,6 +1730,16 @@ body {
     background-color: rgba(0, 0, 0, 0);
   }
 }
+@media (max-width: 1405px) {
+  .tasks {
+    width: 31% !important;
+  }
+}
+@media (max-width: 1130px) {
+  .tasks {
+    width: 47% !important;
+  }
+}
 @media (max-width: 1100px) {
   .btn-add-task-text {
     display: none;
@@ -1740,13 +1757,18 @@ body {
     gap: 32px;
   }
 }
+@media (max-width: 855px) {
+  .tasks {
+    width: 100% !important;
+  }
+}
 @media (max-width: 600px) {
   .board-content {
     margin: unset !important;
     padding: 32px;
   }
   .tasks {
-    width: unset !important;
+    width: 100% !important;
   }
   .board-detail-view {
     background-color: unset;

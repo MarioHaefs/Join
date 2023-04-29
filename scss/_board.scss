@@ -199,7 +199,7 @@ body {
 }
 
 .board-detail-view {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background-color: rgba($color: #000000, $alpha: 0.2);
@@ -496,6 +496,13 @@ body {
     overflow: hidden;
 }
 
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: $pagebackground;
+}
+
 // @keyframes slide-in-from-right {
 //     from {left: 100%;}
 //     to {left: 0%;}
@@ -543,6 +550,18 @@ body {
     }
 }
 
+@media (max-width: 1405px) {
+    .tasks {
+        width: calc(31%) !important;
+    }
+}
+
+@media (max-width: 1130px) {
+    .tasks {
+        width: calc(47%) !important;
+    }
+}
+
 @media (max-width: 1100px) {
     .btn-add-task-text {
         display: none;
@@ -564,6 +583,12 @@ body {
     }
 }
 
+@media (max-width: 855px) {
+    .tasks {
+        width: 100% !important;
+    }
+}
+
 @media (max-width: 600px) {
     .board-content {
         margin: unset !important;
@@ -571,7 +596,7 @@ body {
     }
 
     .tasks {
-        width: unset !important;
+        width: 100% !important;
     }
 
     .board-detail-view {
