@@ -74,20 +74,11 @@ function renderContactsHTML(i, userName) {
 };
 
 
-function renderAddYouHTML() {
-    document.getElementById('contacts').innerHTML = `
-    <div class="render_categorys" onclick="CurrentUser()">
-        You 
-        <div class="custom_checkBox">
-            <div id="Checkbox_you"></div>
-        </div>
-    </div>`;
-}
-
-
 function renderOverlayHTML() {
     document.getElementById('overlay').innerHTML = `
+    
     <div class="form">
+    <div class="overlay_headline">Add Task</div>
         <div class="form_left">
 
             <!---------------------------------------------------------Title Input----------------------------------------------------------------------------->
@@ -154,7 +145,7 @@ function renderOverlayHTML() {
             <div class="subtask_box" id="subtaskBox"></div>
             <div class="clear_create_task">
                 <div class="clear_button" onclick="clearAll()">Clear x</div>
-                <div class="create_button" onclick="createTask()">Create Task ✔</div>
+                <div class="create_button" onclick="createTaskonBoard()">Create Task ✔</div>
             </div>
         </div>`;
 }

@@ -358,6 +358,7 @@ function overlayAddTask() {
 }
 
 function closeOverlay() {
+    clearAll();
     // todo animation ein ausblenden
     document.getElementById('overlayAddTask').classList.remove('overlay-add-task');
     document.getElementById('overlayAddTask').classList.add('display-none');
@@ -384,4 +385,37 @@ function filterTasks() {
 
 function inputValueIsInTask(input, task) {
     return task['title'].toLowerCase().includes(input.toLowerCase()) || task['description'].toLowerCase().includes(input.toLowerCase());
+}
+
+
+function createTaskonBoard() {
+    if (allFilled()) addTask();
+    else showTasknotFull();
+};
+
+
+async function addTask() {
+    closeMenu('contacts', 'dropDownContacts')
+    showNotice('addBordBox');
+    await fillTaskjJson();
+    task = {};
+    contacts = {};
+    editors = {};
+    clearAll();
+    closeOverlay();
+    initBoard();
+};
+
+
+function showTasknotFull() {
+    if (!button_delay) {
+        button_delay = true;
+        if (!taskCategory) clearInputField();
+        if (taskCategory) setCategory(taskCategory, color);
+        if (enter_email) clearEmailField();
+        closeMenu('contacts', 'dropDownContacts')
+        showNotice('missing');
+        checkWhichFieldIsEmpty()
+        setTimeout(() => button_delay = false, 2500);
+    }
 }

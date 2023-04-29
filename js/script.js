@@ -47,7 +47,7 @@ async function addUser() {
     }
 
     let hashedPassword = await hashWithSHA256(passwordInput.value);
-    let newUser = { name: nameInput.value, email: emailInput.value, password: hashedPassword.toString(), initials: getInitial(nameInput.value), color: getRandomColor()};
+    let newUser = { name: nameInput.value, mail: emailInput.value, password: hashedPassword.toString(), initials: getInitial(nameInput.value), color: getRandomColor()};
     addNewUser(newUser);
     showSuccessMessage();
     setTimeout(goToLogin, 3000);

@@ -25,18 +25,7 @@ let taskCategory
 let task_contacts = [];
 let subTasks = [];
 let tasks = [];
-let task = {
-    'task_id': '',
-    'title': '',
-    'description': '',
-    'category': '',
-    'category_color': '',
-    'contacts': [],
-    'date': '',
-    'prio': '',
-    'subtasks': [],
-    'done': [],
-};
+let task = {};
 let categorys = {
     'category': [],
     'color': []
@@ -115,7 +104,6 @@ function openContacts() {
 
 function renderContacts() {
     document.getElementById('contacts').innerHTML = ``;
-    renderAddYouHTML();
     document.getElementById('contacts').innerHTML += `<div class="render_categorys" onclick="inviteContact() ">Invite new contact</div>`;
     if (contacts.length > 0) {
         for (let i = 0; i < contacts.length; i++) {
@@ -126,52 +114,6 @@ function renderContacts() {
             }
         }
     }
-};
-
-
-function CurrentUser() {
-    if (!you) addCurrentUser();
-    else removeCurrentUser();
-};
-
-/**
- * removes the current user from the task
- */
-function removeCurrentUser() {
-    document.getElementById('Checkbox_you').classList.remove('custom_checkBox_child');
-    i = task_contacts.indexOf(user[userId]);
-    task_contacts.splice(i, 1);
-    initials['initials'] = initials['initials'].filter(e => e !== user[userId]['initials']);
-    initials['color'] = initials['color'].filter(e => e !== user[userId]['color']);
-    showInitials();
-    you = false;
-}
-
-/**
- * add the current user to the task
- */
-
-function addCurrentUser() {
-    document.getElementById('Checkbox_you').classList.add('custom_checkBox_child');
-    getCurrentUserIndex();
-    task_contacts.push(user[userId]);
-    initials['color'].push(user[userId]['color']);
-    initials['initials'].push(user[userId]['initials'])
-    showInitials();
-    you = true;
-};
-
-/**
- * fills the variable userId with the index of the user
- */
-
-async function getCurrentUserIndex() {
-    await user.forEach(function users(value, index) {
-        if (value.name === current_user) {
-            userData = value;
-            userId = index;
-        }
-    });
 };
 
 
@@ -206,6 +148,7 @@ function sendEmail() {
 function clearContacts() {
     initials['initials'].length = 0;
     initials['mail'].length = 0;
+    initials['color'].length = 0;
     showInitials();
     if (menuContactsOpen) {
         closeMenu('contacts', 'dropDownContacts')
@@ -407,7 +350,7 @@ function clearAll() {
     color = undefined;
     taskCategory = undefined;
     subTasks.length = 0;
-    initials['initials'].length = 0;
+    task_contacts.length = 0;
     clearInputField();
     removePrio();
     clearContacts();
@@ -437,7 +380,7 @@ function createTask() {
 
 // fill the tasks Array with values and save it on the server
 
-function fillTaskjJson() {
+async function fillTaskjJson() {
     task['title'] = document.getElementById('title').value;
     task['description'] = document.getElementById('description').value
     task['category'] = taskCategory;
@@ -449,7 +392,7 @@ function fillTaskjJson() {
     task['prio'] = prio;
     task['subtasks'] = subTasks;
     tasks.push(task);
-    saveInLocalStorage('tasks', tasks);
+    await saveInLocalStorage('tasks', tasks);
 }
 
 //move the body out of the screent and load the board.HTML
@@ -496,7 +439,7 @@ function showNotice(id) {
     setTimeout(() => document.getElementById(id).style.display = 'none', 2300);
     document.getElementById(id).classList.remove('addBord_box_inactive')
     document.getElementById(id).classList.add('addBord_box_active');
-    setTimeout(() => document.getElementById(id).classList.add('addBord_box_inactive'), 2000);
+    setTimeout(() => document.getElementById(id).classList.add('addBord_box_inactive'), 1500);
 }
 
 // remove the display property from the notice div's
@@ -511,6 +454,7 @@ function hideNotices() {
 function renderOverlayAddTask() {
     document.getElementById('overlay').innerHTML = ``;
     renderOverlayHTML();
+    loadDataTask();
 }
 
 /**
@@ -533,7 +477,7 @@ async function saveInLocalStorage(key, array) {
 
 //load content from the backend server
 
-async function loadData() {
+async function loadDataTask() {
     await downloadFromServer();
     current_user = localStorage.getItem('currentUser');
     user = JSON.parse(backend.getItem('users')) || [];
@@ -542,7 +486,29 @@ async function loadData() {
     task_id = backend.getItem('index');
     task_id++;
     await backend.setItem('index', task_id);
+    getUserInfo();
+};
+
+
+function getUserInfo() {
     getUserContacts();
+    getCurrentUserIndex();
+    user[userId]['name'] = 'You';
+    delete user[userId]['contacts'];
+    contacts.splice(0, 0, user[userId]);
+};
+
+/**
+ * fills the variable userId with the index of the user
+ */
+
+async function getCurrentUserIndex() {
+    await user.forEach(function users(value, index) {
+        if (value.name === current_user) {
+            userData = value;
+            userId = index;
+        }
+    });
 };
 
 

@@ -1583,8 +1583,8 @@ body {
 }
 .overlay-add-task .add-task {
   position: relative;
-  width: 80%;
-  height: 90%;
+  width: 1116px;
+  height: 914px;
   background-color: #F6F7F8;
   border-radius: 32px;
 }

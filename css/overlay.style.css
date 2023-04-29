@@ -43,9 +43,16 @@ button {
     padding: 0;
 }
 
+.overlay_headline {
+    position: absolute;
+    top: -100px;
+    font-weight: 700;
+    font-size: 61px;
+}
+
 .form {
     position: absolute;
-    left: calc(50% - 550px);
+    left: calc(50% - 496px);
     top: calc(50% - 300px);
     display: flex;
 
@@ -53,7 +60,7 @@ button {
 
 .form_left {
     border-right: 1px solid #D1D1D1;
-    padding-right: 110px;
+    padding-right: 60px;
     display: flex;
     flex-direction: column;
     padding-bottom: 50px;
@@ -63,7 +70,7 @@ button {
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-left: 110px;
+    margin-left: 60px;
 }
 
 input {
@@ -370,7 +377,7 @@ span {
 .clear_create_task {
     position: absolute;
     right: 10px;
-    top: 500px;
+    top: 610px;
     width: 422px;
     display: flex;
     justify-content: flex-end;
@@ -496,13 +503,15 @@ span {
 }
 
 .initials_box {
+    overflow-x: auto;
     width: 422px;
     display: flex;
     flex-wrap: wrap;
-    padding-left: 15px;
+    height: 45px;
 }
 
 .initials {
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -514,6 +523,7 @@ span {
 }
 
 .addBord_box {
+    z-index: 10;
     bottom: 400px;
     position: absolute;
     left: calc(50% - 163px);
