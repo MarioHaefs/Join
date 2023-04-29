@@ -1264,6 +1264,7 @@ body {
 .board-content .board-header {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 .board-content .board-header h1 {
   font-size: 48px;
@@ -1272,7 +1273,7 @@ body {
 .board-content .board-header .search-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  margin-right: 100px;
 }
 .board-content .board-header .search-container #search-input {
   padding: 10px;
@@ -1289,7 +1290,10 @@ body {
   object-fit: contain;
   cursor: pointer;
 }
-.board-content .board-header .search-container .btn-add-task {
+.board-content .board-header .search-container .add-task-plus-icon {
+  margin-left: 6px;
+}
+.board-content .board-header .btn-add-task {
   background-color: #2A3647;
   color: white;
   padding: 10px 32px;
@@ -1303,21 +1307,24 @@ body {
   padding-right: 16px;
   height: 48px;
   font-size: 20px;
+  position: absolute;
+  right: 0;
+  top: 8.5px;
 }
-.board-content .board-header .search-container .btn-add-task:hover {
+.board-content .board-header .btn-add-task:hover {
   background-color: #29ABE2;
-}
-.board-content .board-header .search-container .add-task-plus-icon {
-  margin-left: 6px;
 }
 .board-content .board-tasks {
   display: flex;
   width: 100%;
   gap: 16px;
   margin-top: 56px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .board-content .board-tasks .tasks {
-  width: 25%;
+  width: 23%;
+  min-width: 250px;
   padding: 4px;
 }
 .board-content .board-tasks .tasks .task-header {
@@ -1337,6 +1344,7 @@ body {
 }
 .board-content .board-tasks .tasks .task-body {
   height: calc(100% - 64px);
+  min-height: 100px;
   border: 2px solid transparent;
 }
 .board-content .board-tasks .tasks .single-task {
@@ -1426,7 +1434,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  z-index: 15;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1435,15 +1443,17 @@ body {
 }
 .board-detail-view .content {
   position: relative;
-  width: 40%;
-  height: 80%;
+  width: 50%;
+  min-width: 580px;
+  height: 90%;
   background-color: #F6F7F8;
   border-radius: 32px;
+  overflow: auto;
 }
 .board-detail-view .content .close {
   position: absolute;
-  right: 48px;
-  top: 48px;
+  right: 40px;
+  top: 40px;
   cursor: pointer;
   z-index: 20;
 }
@@ -1514,14 +1524,80 @@ body {
   font-size: 16px;
 }
 .board-detail-view .content .edit-task {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: normal;
+  padding: 48px 150px 48px 48px;
+}
+.board-detail-view .content .edit-task .title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.board-detail-view .content .edit-task .title input {
+  width: unset !important;
+  margin-bottom: 16px;
+}
+.board-detail-view .content .edit-task .description {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.board-detail-view .content .edit-task .description textarea {
+  width: inherit;
+  margin-bottom: 16px;
+}
+.board-detail-view .content .edit-task .date {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.board-detail-view .content .edit-task .date input {
+  width: inherit;
+  margin-bottom: 16px;
+}
+.board-detail-view .content .edit-task .priority {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.board-detail-view .content .edit-task .priority .edit-prio-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.board-detail-view .content .edit-task .priority .edit-prio-buttons .prio_button {
+  width: 30%;
+}
+.board-detail-view .content .edit-task .editors {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+}
+.board-detail-view .content .edit-task .editors .drop_down {
+  width: unset;
+  font-size: unset;
+  padding-left: 16px;
+}
+.board-detail-view .content .edit-task .editors .drop_down .down_image {
+  left: unset;
+  right: 16px;
+}
+.board-detail-view .content .edit-task .editors .render_categorys_box {
+  width: unset;
+}
+.board-detail-view .content .edit-task .editors .render_categorys_box .render_categorys {
+  padding-left: 20px;
+}
+.board-detail-view .content .edit-task .editors .render_categorys_box .custom_checkBox {
+  left: unset;
+  right: 16px;
 }
 .board-detail-view .content .icons {
   position: absolute;
   display: flex;
-  right: 48px;
-  bottom: 48px;
+  right: 40px;
+  bottom: 40px;
   cursor: pointer;
   z-index: 20;
 }
@@ -1609,6 +1685,10 @@ body {
   display: none !important;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 @keyframes slide-in-from-right {
   from {
     left: 100%;
@@ -1641,6 +1721,55 @@ body {
   }
   to {
     background-color: rgba(0, 0, 0, 0);
+  }
+}
+@media (max-width: 1100px) {
+  .btn-add-task-text {
+    display: none;
+  }
+  .add-task-plus-icon {
+    margin-left: unset !important;
+  }
+  .search-container {
+    margin-right: 16px !important;
+  }
+}
+@media (max-width: 980px) {
+  .board-header {
+    flex-direction: column;
+    gap: 32px;
+  }
+}
+@media (max-width: 600px) {
+  .board-content {
+    margin: unset !important;
+    padding: 32px;
+  }
+  .tasks {
+    width: unset !important;
+  }
+  .board-detail-view {
+    background-color: unset;
+  }
+  .board-detail-view .content {
+    width: 100%;
+    height: calc(100vh - 82px - 75px);
+    position: absolute;
+    top: 82px;
+    border-radius: 0;
+    background-color: #F6F7F8;
+    min-width: unset;
+  }
+  .board-detail-view .content .edit-task {
+    padding: 32px;
+  }
+  .board-detail-view .content .close {
+    right: 32px;
+    top: 20px;
+  }
+  .board-detail-view .content .icons {
+    right: 32px;
+    bottom: 32px;
   }
 }
 @media (max-width: 1100px) {
