@@ -609,3 +609,10 @@ span {
         opacity: 0;
     }
 }
+
+@media (max-width: 1350px) {
+    .clear_create_task {
+        top: 485px;
+        right: 0;
+    }
+}

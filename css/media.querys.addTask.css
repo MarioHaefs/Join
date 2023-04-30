@@ -34,6 +34,10 @@
     .category_name_box {
         margin-left: -53px;
     }
+
+    .form_right {
+        margin-top: -54px;
+    }
 }
 
 @media only screen and (max-width: 700px) {
@@ -145,7 +149,6 @@
     }
 
     .mobile_create_button {
-        z-index: 25;
         position: absolute;
         top: 12px;
         right: 20px;
@@ -161,18 +164,6 @@
         background-color: #2A3647;
         transition: 300ms;
         transform: scale(1);
-    }
-
-    .mobile_create_button:hover {
-        cursor: pointer;
-        background: #29ABE2;
-        transition: 300ms;
-        box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.41)
-    }
-    
-    .mobile_create_button img {
-        filter: brightness(0) invert(1);
-        margin-left: 10px;
     }
 
     .drop_down {
@@ -233,6 +224,7 @@
 
     .render_categorys_box {
         margin-bottom: 9px;
+        max-height: 165px;
     }
 
     .subtask_box {
@@ -241,6 +233,10 @@
 
     .custom_checkBox {
         top: 12px;
+    }
+
+    .form_right {
+        margin-top: 0px;
     }
 }
 

@@ -436,21 +436,17 @@ function allFilled() {
 // displays a notice from the bottom edge of the screen
 
 function showNotice(id) {
-    document.getElementById(id).style.display = ''
-    setTimeout(() => document.getElementById(id).style.display = 'none', 2300);
+    document.getElementById(id).style.display = '';
+    document.getElementById(id).style.zIndex = '10';
+    setTimeout(() => {
+        document.getElementById(id).style.display = '' 
+        document.getElementById(id).style.display = 'none' 
+    }, 1900); 
     document.getElementById(id).classList.remove('addBord_box_inactive')
     document.getElementById(id).classList.add('addBord_box_active');
     setTimeout(() => document.getElementById(id).classList.add('addBord_box_inactive'), 1500);
-}
+};
 
-// remove the display property from the notice div's
-
-function hideNotices() {
-    document.getElementById('addBordBox').style.display = 'none'
-    document.getElementById('pleaseEnterName').style.display = 'none'
-    document.getElementById('missing').style.display = 'none'
-    document.getElementById('pleaseCategoryName').style.display = 'none'
-}
 
 function renderOverlayAddTask() {
     document.getElementById('overlay').innerHTML = ``;

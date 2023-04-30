@@ -503,6 +503,35 @@ body {
     background-color: $pagebackground;
 }
 
+.mobile_create_overlay {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    justify-content: center;
+    width: 124px;
+    height: 51px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 21px;
+    color: white;
+    background-color: #2A3647;
+    transition: 300ms;
+
+    img {
+        filter: brightness(0) invert(1);
+        margin-left: 10px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background: #29ABE2;
+        transition: 300ms;
+        box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.41)
+    }
+}
+
 // @keyframes slide-in-from-right {
 //     from {left: 100%;}
 //     to {left: 0%;}
@@ -557,6 +586,7 @@ body {
 }
 
 @media (max-width: 1350px) {
+
     .sticky {
         z-index: 20;
     }
@@ -613,6 +643,10 @@ body {
 }
 
 @media (max-width: 600px) {
+    .mobile_create_overlay {
+        z-index: 30;
+    }
+
     .overlay {
         position: unset;
     }

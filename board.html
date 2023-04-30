@@ -20,7 +20,7 @@
     <script src="./js/board.js"></script>
 </head>
 
-<body onload="includeHTML(), initBoard(), hideNotices()" ondragend="markDraggableArea('')">
+<body onload="includeHTML(), initBoard()" ondragend="markDraggableArea('')">
     <div class="sticky" w3-include-html="desktop_template.html"></div>
     <div class="board-content">
         <div class="board-header">
@@ -102,13 +102,13 @@
     <div class="addBord_box" id="missing">
         Something is missing
     </div>
-    <div class="addBord_box" id="emailSend">
+    <div class="addBord_box" id="emailSent">
         Email sent
     </div>
     <div class="addBord_box" id="enterEmail">
        Please enter a E-Mail
     </div>
-    <div class="mobile_create_button" onclick="createTask()">Create<img src="assets/img/haken.png" alt=""></div>
+    <div class="mobile_create_overlay" onclick="createTask()" id="mobileCreate">Create<img src="assets/img/haken.png"></div>
     <!-----------------------------------------------------------Animation Div's-------------------------------------------------------------------- -->
 </div>
 </body>

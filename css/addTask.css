@@ -574,6 +574,8 @@ span {
 }
 
 .addBord_box {
+    z-index: -10;
+    display: none;
     bottom: 150px;
     position: absolute;
     left: calc(50% - 163px);
