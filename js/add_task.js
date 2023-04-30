@@ -461,7 +461,7 @@ function renderOverlayAddTask() {
 function getUserContacts() {
     user.forEach(e => {
         if (e.name === current_user) {
-            contacts = e.contacts;
+           if(e.contacts != undefined) contacts = e.contacts;
         }
     });
 }
@@ -491,7 +491,7 @@ function getUserInfo() {
     getUserContacts();
     getCurrentUserIndex();
     user[userId]['name'] = 'You';
-    delete user[userId]['contacts'];
+    if (user[userId]['contacts'] != undefined) delete user[userId]['contacts'];
     contacts.splice(0, 0, user[userId]);
 };
 
