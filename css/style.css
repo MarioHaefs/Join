@@ -1697,6 +1697,7 @@ body {
 }
 
 .mobile_create_overlay {
+  visibility: hidden;
   position: absolute;
   top: 12px;
   right: 20px;
