@@ -55,7 +55,7 @@ async function addUser() {
 
 
 function isEmailAlreadyRegistered(email) {
-    return users.some(user => user.email === email);
+    return users.some(user => user.mail === email);
 }
 
 
@@ -105,7 +105,7 @@ async function login() {
     let email = document.getElementById('login-email').value;
     let password = document.getElementById('login-password').value;
     let rememberMe = document.querySelector('input[name="remember-me"]').checked;
-    let user = users.find(u => u.email == email);
+    let user = users.find(u => u.mail == email);
 
     if (user && await isPasswordValid(password, user.password)) {
         handleLoginSuccess(email, password, rememberMe, user);
