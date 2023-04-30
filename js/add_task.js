@@ -167,6 +167,7 @@ function setContacts(i) {
         initials['initials'].push(contacts[i]['initials']);
         initials['mail'].push(contacts[i]['mail']);
         initials['color'].push(contacts[i]['color']);
+        if (contacts[i]['name'] == 'You') contacts[i]['name'] = current_user;
         task_contacts.push(contacts[i]);
         showInitials();
     } else {

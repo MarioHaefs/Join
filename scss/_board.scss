@@ -556,6 +556,29 @@ body {
     }
 }
 
+@media (max-width: 1350px) {
+    .sticky {
+        z-index: 20;
+    }
+
+    .add-task {
+        height: 100vh !important;
+        width: 100% !important;
+    }
+
+    .overlay {
+        position: absolute;
+        left: calc(50% + 250px);
+        top: 550px;
+    }
+
+    .close {
+        position: absolute;
+        top: 100px;
+        left: 90%;
+    }
+}
+
 @media (max-width: 1130px) {
     .tasks {
         width: calc(47%) !important;
@@ -590,6 +613,14 @@ body {
 }
 
 @media (max-width: 600px) {
+    .overlay {
+        position: unset;
+    }
+
+    .close {
+        left: 80%;
+    }
+
     .board-content {
         margin: unset !important;
         padding: 32px;

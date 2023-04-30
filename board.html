@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/overlay.style.css">
+    <link rel="stylesheet" href="./css/media.querys.addTask.css">
     <!-- <link rel="stylesheet" href="./css/media.querys.addTask.css"> -->
     <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
@@ -21,7 +22,6 @@
 
 <body onload="includeHTML(), initBoard(), hideNotices()" ondragend="markDraggableArea('')">
     <div class="sticky" w3-include-html="desktop_template.html"></div>
-
     <div class="board-content">
         <div class="board-header">
             <h1>Board</h1>
@@ -85,7 +85,7 @@
             </div>
             
             <!-- ToDo: Render include/render AddTask -->
-            <div id="overlay"></div>
+            <div id="overlay" class="overlay"></div>
         </div>
     </div>
     <!-- ---------------------------------------------------------Animation Div's----------------------------------------------------------------------->
@@ -108,6 +108,7 @@
     <div class="addBord_box" id="enterEmail">
        Please enter a E-Mail
     </div>
+    <div class="mobile_create_button" onclick="createTask()">Create<img src="assets/img/haken.png" alt=""></div>
     <!-----------------------------------------------------------Animation Div's-------------------------------------------------------------------- -->
 </div>
 </body>

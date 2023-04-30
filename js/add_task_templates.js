@@ -76,7 +76,6 @@ function renderContactsHTML(i, userName) {
 
 function renderOverlayHTML() {
     document.getElementById('overlay').innerHTML = `
-    
     <div class="form">
     <div class="overlay_headline">Add Task</div>
         <div class="form_left">
