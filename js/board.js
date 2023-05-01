@@ -4,6 +4,9 @@ let tasks_board;
 let categorys_board;
 let filteredTasks;
 let currentPrioEditTask;
+let editContacts = [];
+
+
 
 // set backend url
 setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
@@ -166,6 +169,7 @@ function htmlTaskPrio(task) {
 }
 
 function openTaskDetailView(id) {
+    editContacts.length = 0
     let task = tasks_board.find((e => e['task_id'] == id));
     renderTaskDetailView(task);
     document.body.classList.add('overflow-hidden');
@@ -225,6 +229,34 @@ async function editTask(index) {
     icons.innerHTML = htmlCheckIcon(index);
     content.innerHTML = htmlEditTask(tasks_board[index]);
     setPrioInEditTask(tasks_board[index]);
+    renderEditorsInitials();
+    pushEditorstoContacts();
+};
+
+
+function pushEditorstoContacts() {
+    let edit_colors = [];
+    editors.forEach(element => {
+        console.log(element.color)
+        editContacts.push(element)
+        edit_colors.push(element.color)
+    });
+    contacts.forEach(element => {
+        if(edit_colors.includes(element.color) == false) editContacts.push(element)
+    });
+};
+
+
+function renderEditorsInitials() {
+    document.getElementById('initials').innerHTML = '';
+    for (let i = 0; i < editors.length; i++) {
+        let initial = editors[i]['initials'];
+        let bgrColor = editors[i]['color'];
+        document.getElementById('initials').innerHTML += `
+        <div class="initials" style="background-color: ${bgrColor};">
+        ${initial}
+        </div>`;
+    }
 }
 
 function setPrioInEditTask(task) {
@@ -278,6 +310,7 @@ function htmlEditTask(task) {
                     </div>
                     <div id="editContacts" class="render_categorys_box"></div>
                 </div>
+                <div id="initials" class="initials_box"></div>
             </div>
     `;
 }
@@ -295,6 +328,7 @@ async function saveTask(idx) {
     await saveData('tasks', tasks_board);
     document.getElementById('taskDetailView').classList.add('display-none');
     document.body.classList.remove('overflow-hidden');
+    menuContactsOpen = false;
     await initBoard();
 }
 
@@ -303,7 +337,7 @@ function saveChangedDataLocal(idx) {
     tasks_board[idx]['description'] = document.getElementById('editTaskDescription').value;
     tasks_board[idx]['date'] = document.getElementById('editTaskDueDate').value;
     tasks_board[idx]['prio'] = currentPrioEditTask;
-    tasks_board[idx]['contacts'] = task_contacts;
+    tasks_board[idx]['contacts'] = editors;
 }
 
 
@@ -421,8 +455,10 @@ function closeOverlay() {
 }
 
 function closeDetailView() {
+    editContacts = [];
     document.getElementById('taskDetailView').classList.add('display-none');
     document.body.classList.remove('overflow-hidden');
+    menuContactsOpen = false;
 }
 
 function noClose(event) {
@@ -491,15 +527,13 @@ function openEditTaskContacts() {
 function renderEditContacts() {
     document.getElementById('editContacts').innerHTML = ``;
     document.getElementById('editContacts').innerHTML += `<div class="render_categorys" onclick="inviteContact() ">Invite new contact</div>`;
-    if (contacts.length > 0) {
-        for (let i = 0; i < contacts.length; i++) {
-            let userName = contacts[i]['name'];
+    for (let i = 0; i < editContacts.length; i++) {
+            let userName = editContacts[i]['name'];
             renderEditTaskContactsHTML(i, userName);
-            if (initials['mail'].includes(contacts[i]['mail'])) {
+            if (editors.includes(editContacts[i])) {
                 document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
             }
         }
-    }
 };
 
 function renderEditTaskContactsHTML(i, userName) {
@@ -513,18 +547,15 @@ function renderEditTaskContactsHTML(i, userName) {
 };
 
 function editTaskSetContacts(i) {
-    let index = initials['mail'].indexOf(contacts[i]['mail'])
+    let index = editors.indexOf(editContacts[i])
     if (index == -1) {
         document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
-        initials['initials'].push(contacts[i]['initials']);
-        initials['mail'].push(contacts[i]['mail']);
-        initials['color'].push(contacts[i]['color']);
-        task_contacts.push(contacts[i]);
+        if (editContacts[i]['name'] == 'You') editContacts[i]['name'] = current_user;
+        editors.push(editContacts[i]);
+        renderEditorsInitials()
     } else {
         document.getElementById('Checkbox' + i).classList.remove('custom_checkBox_child');
-        initials['initials'].splice(index, 1);
-        initials['mail'].splice(index, 1);
-        initials['color'].splice(index, 1);
-        task_contacts.splice(index, 1);
+        editors.splice(index, 1);
+        renderEditorsInitials()
     }
 };
