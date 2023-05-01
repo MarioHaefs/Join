@@ -131,8 +131,9 @@ function clearEmailField() {
 
 
 function sendEmail() {
+    console.log('test')
     if (document.getElementById('inviteValue').value.includes('@')) {
-        showNotice('emailSend');
+        showNotice('emailSent');
         clearEmailField();
     } else {
         if (!button_delay) {
@@ -437,7 +438,7 @@ function allFilled() {
 
 function showNotice(id) {
     document.getElementById(id).style.display = '';
-    document.getElementById(id).style.zIndex = '10';
+    document.getElementById(id).style.zIndex = '20';
     setTimeout(() => {
         document.getElementById(id).style.display = '' 
         document.getElementById(id).style.display = 'none' 

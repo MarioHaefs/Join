@@ -237,7 +237,7 @@ async function editTask(index) {
 function pushEditorstoContacts() {
     let edit_colors = [];
     editors.forEach(element => {
-        console.log(element.color)
+        if (element.name == current_user) element.name = 'You';
         editContacts.push(element)
         edit_colors.push(element.color)
     });
