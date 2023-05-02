@@ -393,6 +393,7 @@ async function fillTaskjJson() {
     task['task_id'] = task_id;
     task['prio'] = prio;
     task['subtasks'] = subTasks;
+    task['status'] = 'todo';
     tasks.push(task);
     await saveInLocalStorage('tasks', tasks);
 }
