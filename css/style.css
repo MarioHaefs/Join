@@ -986,10 +986,6 @@
   font-size: 16px;
   color: #29ABE2;
 }
-#contacts-container .contact-info .contact-details .contact-details-head .contactInfo .add-task:hover {
-  transform: scale(1.1);
-  transition: all 125ms ease-in-out;
-}
 #contacts-container .contact-info .contact-details .contact-info-head {
   margin-top: 24px;
   display: flex;
