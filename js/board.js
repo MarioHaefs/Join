@@ -221,6 +221,7 @@ function htmlTaskDetailView(task) {
 }
 
 async function editTask(index) {
+    edit_active = true;
     let content = document.getElementById('content');
     let icons = document.getElementById('icons');
     content.innerHTML = '';

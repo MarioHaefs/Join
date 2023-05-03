@@ -170,3 +170,14 @@ function renderInviteContactHTML() {
                     </div>
                 </div>`;
 }
+
+
+function renderEditClearEmailHTML() {
+    document.getElementById('contactBox').innerHTML = `
+    <div class="drop_down" id="dropDownEditContacts" onclick="openEditTaskContacts()">
+                        Select contacts to assign
+                        <img class="down_image" src="assets/img/drop-down-arrow.png">
+                    </div>
+                    <div id="editContacts" class="render_categorys_box"></div>
+                </div>`;
+};

@@ -1,4 +1,5 @@
 let prio;
+let edit_active = false;
 let you = false;
 let enter_email = false;
 let user;
@@ -124,9 +125,11 @@ function inviteContact() {
 
 
 function clearEmailField() {
-    renderClearEmaailHTML();
+    if (edit_active) renderEditClearEmailHTML();
+     else renderClearEmaailHTML();
     menuContactsOpen = false;
     enter_email = false;
+    
 };
 
 
