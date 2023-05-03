@@ -249,7 +249,13 @@ function hideContactInfo() {
 }
 
 
-
+function addScroll() {
+    document.getElementById('overlayAddTask').classList.remove('display-none');
+    document.getElementById('overlayAddTask').classList.add('overlay-add-task');
+    document.getElementById('mobileCreate').style.visibility = 'visible';
+    renderOverlayAddTask();
+    getDateOverlay();
+}
 
 
 /*Gen HTML Content */
@@ -296,7 +302,7 @@ function showDetails(id) {
         <span class="list-contact-frame" style="background-color: ${contactsA[id].color}">${contactsA[id].initials}</span>
         <div class="contactInfo">
             <span class="contact-name">${contactsA[id].name}</span>
-            <div class="add-task" onclick="overlayAddTask()"> + Add Task</div>
+            <div class="add-task" onclick="addScroll()"> + Add Task</div>
         </div>
         </div>
         <div class="contact-info-head">
