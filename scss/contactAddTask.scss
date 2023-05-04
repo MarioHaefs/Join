@@ -1,0 +1,150 @@
+.overflow-auto {
+    overflow: auto !important;
+}
+
+@media (max-width: 600px) {
+    .form {
+        top: 150px ;
+    }
+}
+
+@media (min-width: 1351px) {
+    .mobile_create_overlay {
+        visibility: hidden !important;
+    }
+}
+
+@media (max-width: 1350px) {
+    .mobile_create_overlay {
+        visibility: visible;
+        z-index: 99;
+    }
+    .form {
+        left: calc(50% - 180px);
+        top: 150px;
+        margin-left: unset;
+    }
+
+    h1 {
+        left: calc(50% - 180px);
+        font-size: 47px;
+        top: 117px;
+    }
+
+    span {
+        font-size: 16px;
+    }
+
+    input {
+        margin-bottom: 9px;
+        height: 41px;
+        font-size: 16px;
+    }
+
+    textarea {
+        margin-bottom: 9px;
+        font-size: 16px;
+        height: 93px;
+    }
+
+    span {
+        margin-top: 9px !important;
+    }
+
+    .addBord_box {
+        bottom: 250px;
+        font-size: 16px;
+        width: 290px;
+    }
+
+    .mobile_create_button {
+        position: absolute;
+        top: 12px;
+        right: 20px;
+        justify-content: center;
+        width: 124px;
+        height: 51px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        font-size: 21px;
+        color: white;
+        background-color: #2A3647;
+        transition: 300ms;
+        transform: scale(1);
+    }
+
+    .drop_down {
+        height: 41px;
+        font-size: 16px;
+    }
+
+    .form_left {
+        padding-bottom: 0;
+        align-items: start;
+    }
+
+    .form_right {
+        align-items: start;
+    }
+
+
+    .sub_headline {
+        display: block;
+        position: absolute;
+        left: calc(50% - 180px);
+        top: 110px;
+    }
+
+    .render_categorys {
+        height: 41px;
+        font-size: 16px;
+    }
+
+    .x✔ {
+        height: 41px;
+    }
+
+    .down_image {
+        top: 13px;
+    }
+
+    .category_name_box {
+        margin-left: 0;
+    }
+
+    .prio_button {
+        font-size: 16px;
+        height: 41px;
+    }
+
+    .plus_image {
+        top: 9px;
+    }
+
+    .set_category {
+        height: 41px;
+    }
+
+    .clear_create_task {
+        display: none;
+    }
+
+    .render_categorys_box {
+        margin-bottom: 9px;
+        max-height: 165px;
+    }
+
+    .subtask_box {
+        min-height: 150px;
+    }
+
+    .custom_checkBox {
+        top: 12px;
+    }
+
+    .form_right {
+        margin-top: 0px;
+    }
+}

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/overlay.style.css">
     <link rel="stylesheet" href="./css/media.querys.addTask.css">
+    <link rel="stylesheet" href="./css/contactAddTask.css">
     
     <script src="./js/mini_backend.js"></script>
     <script src="./js/includeHTML.js"></script>
@@ -20,12 +21,9 @@
     <script src="./js/add_task.js"></script>
     <script src="./js/board.js"></script>
     <script src="./js/contacts.js"></script>
-
-
-
 </head>
 
-<body onload="includeHTML(), init(), hideNotices()">
+<body onload="includeHTML(), init()">
     <div w3-include-html="desktop_template.html"></div>
     <div id="contacts-container">
         <div class="contacts-list" id="contacts-list">
@@ -64,8 +62,6 @@
             <div class="close">
                 <img src="./assets/img/close.png" onclick="closeOverlay()">
             </div>
-            
-            <!-- ToDo: Render include/render AddTask -->
             <div id="overlay"></div>
         </div>
     </div>
