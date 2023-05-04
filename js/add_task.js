@@ -136,7 +136,7 @@ function clearEmailField() {
 function sendEmail() {
     console.log('test')
     if (document.getElementById('inviteValue').value.includes('@')) {
-        showNotice('emailSent');
+        showNotice('emailSend');
         clearEmailField();
     } else {
         if (!button_delay) {
