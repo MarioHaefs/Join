@@ -10,6 +10,9 @@ let dates = new Array;
 let upcomingDeadline = '';
 
 
+/**
+ * greet user on page load
+ */
 function greet() {
     init();
     currentlyDate = new Date();
@@ -22,12 +25,14 @@ function greet() {
 };
 
 
+/**
+ * init summary
+ */
 async function init() {
     await downloadFromServer();
     let tasks = await JSON.parse(backend.getItem('tasks'));
     user_name = current_user['name']
     if (tasks !== null) {
-        console.log(tasks);
         taskInBoard = tasks.length;
         tasks.forEach(task => {
             checkPrioAndDate(task);
@@ -38,6 +43,10 @@ async function init() {
     genHtmlToSeite();
 }
 
+
+/**
+ * check if urgent task are in board
+ */
 function checkPrioAndDate(task) {
     if (task.prio === 'urgent') {
         urgentCount++;
@@ -45,10 +54,16 @@ function checkPrioAndDate(task) {
     }
 }
 
-function dateDeatline(array) {
-    var today = new Date();
 
-    var nextDate = array
+/**
+ * shows the most urgent datum on summary
+ * 
+ * @param {array} array 
+ */
+function dateDeatline(array) {
+    let today = new Date();
+
+    let nextDate = array
         .filter(function (datum) {
             return new Date(datum) <= today;
         })
@@ -60,6 +75,12 @@ function dateDeatline(array) {
     formatDate(nextDate);
 }
 
+
+/**
+ * formate Date in day.month.year
+ * 
+ * @param {array} nextDate 
+ */
 function formatDate(nextDate) {
     let d = new Date(nextDate)
     let day = d.getDate();
@@ -68,6 +89,12 @@ function formatDate(nextDate) {
     upcomingDeadline = day + "." + month + "." + year;
 }
 
+
+/**
+ * check if tasks are in board & if so shows it in summary
+ * 
+ * @param {boolean} status 
+ */
 function checkStatus(status) {
     switch (status) {
         case 'progress':
@@ -87,8 +114,10 @@ function checkStatus(status) {
     }
 }
 
-// HTML Teil
 
+/**
+ * generate summary html
+ */
 function genHtmlToSeite() {
     document.getElementById('overview').innerHTML = /*html */`
     
@@ -100,7 +129,7 @@ function genHtmlToSeite() {
             <div class="seperator" style="display: none;"></div>
         </div>
         <div class="task">
-            <a href="board.html" class="task_sub">
+            <a onclick="goToBoardAddTask()" class="task_sub">
                 <span class="count">
                     ${taskInBoard}
                 </span>
@@ -109,7 +138,7 @@ function genHtmlToSeite() {
                     Board
                 </span>
             </a>
-            <a href="board.html" class="task_sub">
+            <a onclick="goToBoardAddTask()" class="task_sub">
                 <span class="count">
                     ${inProgessCount}
                 </span>
@@ -118,7 +147,7 @@ function genHtmlToSeite() {
                     Progress
                 </span>
             </a>
-            <a href="board.html" class="task_sub">
+            <a onclick="goToBoardAddTask()" class="task_sub">
                 <span class="count">
                     ${awitFeedbackCount}
                 </span>
@@ -128,9 +157,9 @@ function genHtmlToSeite() {
                 </span>
             </a>
         </div>
-        <a href="board.html" class="prio_date">
+        <a onclick="goToBoardAddTask()" class="prio_date">
             <div class="prio_date_sub">
-                <img src="assets/img/urgent.svg" alt="">
+                <img class="prio_date_sub-img" src="assets/img/urgent.svg" alt="">
                 <div class="todo">
                     <span class="count">
                         ${urgentCount}
@@ -151,7 +180,7 @@ function genHtmlToSeite() {
             </div>
         </a>
         <div class="todo_done">
-            <a href="board.html" class="todo_done_sub">
+            <a onclick="goToBoardAddTask()" class="todo_done_sub">
                 <img src="assets/img/pencil.svg" alt="">
                 <div class="todo">
                     <span class="count">
@@ -162,7 +191,7 @@ function genHtmlToSeite() {
                     </span>
                 </div>
             </a>
-            <a href="board.html" class="todo_done_sub">
+            <a onclick="goToBoardAddTask()" class="todo_done_sub">
                 <img src="assets/img/check.svg" alt="">
                 <div class="todo">
                     <span class="count">

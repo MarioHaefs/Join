@@ -31,20 +31,30 @@ let categorys = {
     'category': [],
     'color': []
 };
+let createTaskonBoardExecuted = false;
 
-//address of the backend server
 
-setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
+setURL('https://mario-haefs.developerakademie.net/smallest_backend_ever');
 
-//displays the current date
-
+/**
+ * displays the current date
+ */
 function getDate() {
     document.getElementById('date').valueAsDate = new Date();
     date = document.getElementById('date').value;
 };
 
-//sets the priority of the task
 
+function todayTask() {
+    document.getElementById("date").setAttribute("min", today);
+}
+
+
+/**
+ * sets the priority of the task
+ * 
+ * @param {number} x 
+ */
 function setPrio(x) {
     document.getElementById('prio').style.borderColor = `#F6F7F8`;
     if (x == prio) removePrio();
@@ -65,8 +75,10 @@ function setPrio(x) {
     }
 };
 
-//remove the class properties from all prio-buttons
 
+/**
+ * remove the class properties from all prio-buttons
+ */
 function removePrio() {
     document.getElementById('prioUrgent').classList.remove('prio_button_urgent');
     document.getElementById('prioMedium').classList.remove('prio_button_medium');
@@ -74,8 +86,10 @@ function removePrio() {
     prio = undefined;
 };
 
-//opens or close the category menu. When opened, the existing categories are displayed
 
+/**
+ * opens or close the category menu. if opened, the existing categories are displayed
+ */
 function openCategory() {
     if (!menuOpen) {
         openMenu('categorys', 'dropDown')
@@ -86,8 +100,10 @@ function openCategory() {
     }
 }
 
-//opens or close the contacts menu. When opened, the existing contacts are displayed
 
+/**
+ * opens or close the contacts menu. When opened, the existing contacts are displayed
+ */
 function openContacts() {
     if (!menuContactsOpen) {
         document.getElementById('contacts').innerHTML = '';
@@ -101,11 +117,13 @@ function openContacts() {
     }
 };
 
-//the individual contacts are rendered in the contacts-menu
 
+/**
+ * the individual contacts are rendered in the contacts-menu
+ */
 function renderContacts() {
     document.getElementById('contacts').innerHTML = ``;
-    document.getElementById('contacts').innerHTML += `<div class="render_categorys" onclick="inviteContact() ">Invite new contact</div>`;
+    document.getElementById('contacts').innerHTML += `<div class="render_categorys" onclick="inviteContact()">Invite new contact</div>`;
     if (contacts.length > 0) {
         for (let i = 0; i < contacts.length; i++) {
             let userName = contacts[i]['name'];
@@ -118,37 +136,47 @@ function renderContacts() {
 };
 
 
+/**
+ * render invite contacct if mail is true
+ */
 function inviteContact() {
     renderInviteContactHTML();
     enter_email = true;
 }
 
 
+/**
+ * clear email Field
+ */
 function clearEmailField() {
     if (edit_active) renderEditClearEmailHTML();
-     else renderClearEmaailHTML();
+    else renderClearEmaailHTML();
     menuContactsOpen = false;
     enter_email = false;
-    
+
 };
 
 
+/**
+ * send email
+ */
 function sendEmail() {
-    console.log('test')
     if (document.getElementById('inviteValue').value.includes('@')) {
-        showNotice('emailSend');
+        //showNotice('emailSend');
         clearEmailField();
     } else {
         if (!button_delay) {
             button_delay = true;
-            showNotice('enterEmail');
-            setTimeout(() => button_delay = false, 2500);
+            //showNotice('enterEmail');
+            setTimeout(() => button_delay = false, 1000);
         }
     }
 };
 
-//deletes the selected contacts and closes the contacts menu if it's open
 
+/**
+ * deletes the selected contacts and closes the contacts menu if it's open
+ */
 function clearContacts() {
     initials['initials'].length = 0;
     initials['mail'].length = 0;
@@ -159,11 +187,12 @@ function clearContacts() {
     }
 };
 
-//*
-//*checks whether the contact has already been selected. if so, the contact is deleted and the checkbox is set to not active
-//*if not, the checkbox is active and the contact is selected
-//*
 
+/**
+ * checks whether the contact has already been selected. if so, the contact is deleted and the checkbox is set to not active
+ * 
+ * @param {number} i 
+ */
 function setContacts(i) {
     let index = initials['mail'].indexOf(contacts[i]['mail'])
     if (index == -1) {
@@ -171,7 +200,7 @@ function setContacts(i) {
         initials['initials'].push(contacts[i]['initials']);
         initials['mail'].push(contacts[i]['mail']);
         initials['color'].push(contacts[i]['color']);
-        if (contacts[i]['name'] == 'You') contacts[i]['name'] = current_user;
+        if (contacts[i]['name'] == current_user) contacts[i]['name'] = current_user;
         task_contacts.push(contacts[i]);
         showInitials();
     } else {
@@ -184,8 +213,10 @@ function setContacts(i) {
     }
 };
 
-//renders the initials of the selected contact on the screen
 
+/**
+ * renders the initials of the selected contact on the screen
+ */
 function showInitials() {
     document.getElementById('initials').innerHTML = '';
     for (let i = 0; i < initials['initials'].length; i++) {
@@ -198,16 +229,26 @@ function showInitials() {
     }
 }
 
-//open the contact- or category menu
 
+/**
+ * open the contact- or category menu
+ * 
+ * @param {number} id1 
+ * @param {number} id2 
+ */
 function openMenu(id1, id2) {
     removeBorder(id2)
     document.getElementById(id1).style.borderBottom = `1px solid #D1D1D1`;
     document.getElementById(id2).classList.add('drop_down_open');
 }
 
-//close the contact- or category menu
 
+/**
+ * close the contact- or category menu
+ * 
+ * @param {number} id1 
+ * @param {number} id2 
+ */
 function closeMenu(id1, id2) {
     document.getElementById(id1).innerHTML = ''
     document.getElementById(id2).classList.remove('drop_down_open');
@@ -216,9 +257,12 @@ function closeMenu(id1, id2) {
     menuContactsOpen = false;
 };
 
-//renders the categories into the category menu
 
+/**
+ * renders the categories into the category menu
+ */
 function renderCategorys() {
+    categorys = JSON.parse(localStorage.getItem('categorys')) || { 'category': [], 'color': [] };
     document.getElementById('categorys').innerHTML = ''
     document.getElementById('categorys').innerHTML = `<div class="render_categorys" onclick="inputCategory()">New category</div>`;
     for (let i = 0; i < categorys['category'].length; i++) {
@@ -228,8 +272,12 @@ function renderCategorys() {
     }
 };
 
-//remove the category from the category menu
 
+/**
+ * remove the category from the category menu
+ * 
+ * @param {number} i 
+ */
 function deleteCategory(i) {
     if (categorys['category'][i] == taskCategory) {
         document.getElementById('dropDown').innerHTML = `
@@ -246,23 +294,31 @@ function deleteCategory(i) {
 
 }
 
-//renders the input field for a new category
 
+/**
+ * renders the input field for a new category
+ */
 function inputCategory() {
     color = undefined;
     taskCategory = undefined;
     showInputCategoryHTML();
 }
 
-//sets the category menu to its initial state
 
+/**
+ * sets the category menu to its initial state
+ */
 function clearInputField() {
     showCategoryHTML();
     menuOpen = false;
 };
 
-//sets the color of the category
 
+/**
+ * sets the color of the category
+ * 
+ * @param {color code} clr 
+ */
 function setColor(clr) {
     if (color) {
         document.getElementById(color).classList.remove('color_active');
@@ -271,15 +327,17 @@ function setColor(clr) {
     color = clr;
 };
 
-//saves a new category
 
+/**
+ * saves a new category
+ */
 function addNewCategory() {
     let categoryValue = document.getElementById('categoryValue').value;
     if (categoryValue.length < 1 || !color) {
         if (!button_delay) {
             button_delay = true;
             showNotice('pleaseCategoryName');
-            setTimeout(() => button_delay = false, 2500);
+            setTimeout(() => button_delay = false, 1000);
         }
     } else {
         categorys['color'].push(color);
@@ -291,8 +349,13 @@ function addNewCategory() {
     }
 };
 
-//renders the selected category into the input field
 
+/**
+ * renders the selected category into the input field
+ * 
+ * @param {} ctgry 
+ * @param {color code} clr 
+ */
 function setCategory(ctgry, clr) {
     color = clr;
     taskCategory = ctgry;
@@ -300,15 +363,17 @@ function setCategory(ctgry, clr) {
     menuOpen = false;
 };
 
-//render a subtask to the screen
 
+/**
+ * render a subtask to the screen
+ */
 function addSubtask() {
     subtaskValue = document.getElementById('subTask').value
     if (subtaskValue.length < 1) {
         if (!button_delay) {
             button_delay = true;
             showNotice('pleaseEnterName');
-            setTimeout(() => button_delay = false, 2500);
+            setTimeout(() => button_delay = false, 1000);
         }
     } else {
         document.getElementById('subTask').value = '';
@@ -322,8 +387,12 @@ function addSubtask() {
     }
 };
 
-//remove the subtask from the screen
 
+/**
+ * remove the subtask from the screen
+ * 
+ * @param {number} i 
+ */
 function deleteSubtask(i) {
     document.getElementById('subTask' + i).classList.add('slide-out-right');
     subTasks.splice(i, 1);
@@ -340,14 +409,39 @@ function deleteSubtask(i) {
 /**
  * saves whether the subtask is already completed
  */
+function setSubtaskStatus(taskId, subtaskIndex) {
+    let checkbox = document.getElementById(`CheckboxTask${taskId}_${subtaskIndex}`);
+    let isChecked = checkbox.checked;
 
-function setSubtaskStatus(i) {
-    if (document.getElementById('CheckboxTask' + i).checked == true) boolians[i] = true;
-    else boolians[i] = false;
+    let subtaskStatus = JSON.parse(localStorage.getItem('subtaskStatus')) || {};
+    subtaskStatus[taskId] = subtaskStatus[taskId] || {};
+    subtaskStatus[taskId][subtaskIndex] = isChecked;
+    localStorage.setItem('subtaskStatus', JSON.stringify(subtaskStatus));
+
+    updateTaskDetailView(taskId);
+    updateTaskSubtasks(taskId);
 }
 
-// clear all inputfields en remove selected categorys and contacts
 
+function updateTaskDetailView(taskId) {
+    let task = tasks_board.find((e) => e['task_id'] == taskId);
+    let detailView = document.getElementById('taskDetailView');
+    detailView.innerHTML = htmlTaskDetailView(task);
+    updateTaskSubtasks(taskId);
+}
+
+
+function updateTaskSubtasks(taskId) {
+    let task = tasks_board.find((e) => e['task_id'] == taskId);
+    let taskSubtasks = document.getElementById(`taskSubtasks${taskId}`);
+    taskSubtasks.innerHTML = htmlTaskSubtasks(task);
+}
+
+
+
+/**
+ * clear all inputfields en remove selected categorys and contacts
+ */
 function clearAll() {
     document.getElementById('description').value = '';
     document.getElementById('title').value = '';
@@ -361,14 +455,18 @@ function clearAll() {
     clearContacts();
 };
 
-// fill the task JSON when the mandatory fields are filled or shows the alert : something is missing
 
+/**
+ * fill the task JSON when the mandatory fields are filled or shows the alert
+ */
 function createTask() {
     if (!button_delay) {
         button_delay = true;
         if (allFilled()) {
             closeMenu('contacts', 'dropDownContacts')
-            showNotice('addBordBox');
+            if (!createTaskonBoardExecuted) {
+                showNotice('addBordBox');
+            }
             fillTaskjJson();
             loadBoardHTML();
         } else {
@@ -378,13 +476,15 @@ function createTask() {
             closeMenu('contacts', 'dropDownContacts')
             showNotice('missing');
             checkWhichFieldIsEmpty()
-            setTimeout(() => button_delay = false, 2500);
+            setTimeout(() => button_delay = false, 500);
         }
     }
 };
 
-// fill the tasks Array with values and save it on the server
 
+/**
+ * fill the tasks Array with values and save it on the server
+ */
 async function fillTaskjJson() {
     task['title'] = document.getElementById('title').value;
     task['description'] = document.getElementById('description').value
@@ -396,20 +496,24 @@ async function fillTaskjJson() {
     task['task_id'] = task_id;
     task['prio'] = prio;
     task['subtasks'] = subTasks;
-    task['status'] = 'todo';
+    task['status'] = task.status;
     tasks.push(task);
     await saveInLocalStorage('tasks', tasks);
 }
 
-//move the body out of the screent and load the board.HTML
 
+/**
+ * move the body out of the screent and load the board.html
+ */
 function loadBoardHTML() {
     setTimeout(() => document.getElementById('body').classList.add('body_move_right'), 2400);
-    setTimeout(() => location.href = "board.html", 2000);
+    setTimeout(() => goToBoardAddTask(), 500);
 }
 
-//validates which input field has no value and apply a red boarder
 
+/**
+ * validates which input field has no value and apply a red boarder
+ */
 function checkWhichFieldIsEmpty() {
     if (document.getElementById('title').value.length < 1) document.getElementById('title').style.borderColor = `red`;
     if (document.getElementById('description').value.length < 1) document.getElementById('description').style.borderColor = `red`;
@@ -418,14 +522,22 @@ function checkWhichFieldIsEmpty() {
     if (!prio) document.getElementById('prio').style.borderColor = `red`;
 };
 
-// remove the red boarder from the priority section
 
+/**
+ * remove the red boarder from the priority section
+ * 
+ * @param {number} id 
+ */
 function removeBorder(id) {
     document.getElementById(id).style.borderColor = `#D1D1D1`;
 }
 
-// Checks whether the mandatory fields are filled
 
+/**
+ * checks whether the mandatory fields are filled
+ * 
+ * @returns true or false
+ */
 function allFilled() {
     if (document.getElementById('title').value.length > 0 &&
         document.getElementById('description').value.length > 0 &&
@@ -438,21 +550,28 @@ function allFilled() {
     }
 };
 
-// displays a notice from the bottom edge of the screen
 
+/**
+ * displays a notice from the bottom edge of the screen
+ * 
+ * @param {number} id 
+ */
 function showNotice(id) {
     document.getElementById(id).style.display = '';
     document.getElementById(id).style.zIndex = '20';
     setTimeout(() => {
-        document.getElementById(id).style.display = '' 
-        document.getElementById(id).style.display = 'none' 
-    }, 1900); 
+        document.getElementById(id).style.display = ''
+        document.getElementById(id).style.display = 'none'
+    }, 1000);
     document.getElementById(id).classList.remove('addBord_box_inactive')
     document.getElementById(id).classList.add('addBord_box_active');
-    setTimeout(() => document.getElementById(id).classList.add('addBord_box_inactive'), 1500);
+    setTimeout(() => document.getElementById(id).classList.add('addBord_box_inactive'), 1000);
 };
 
 
+/**
+ * render overlay of add task
+ */
 function renderOverlayAddTask() {
     document.getElementById('overlay').innerHTML = ``;
     renderOverlayHTML();
@@ -462,23 +581,29 @@ function renderOverlayAddTask() {
 /**
  * fills the contacts array with the user's contacts
  */
-
 function getUserContacts() {
     user.forEach(e => {
         if (e.name === current_user) {
-           if(e.contacts != undefined) contacts = e.contacts;
+            if (e.contacts != undefined) contacts = e.contacts;
         }
     });
 }
 
-//save content on the backend server
 
+/**
+ * save content on the backend server
+ * 
+ * @param {string} key 
+ * @param {array} array 
+ */
 async function saveInLocalStorage(key, array) {
     await backend.setItem(key, JSON.stringify(array));
 };
 
-//load content from the backend server
 
+/**
+ * load content from the backend server
+ */
 async function loadDataTask() {
     await downloadFromServer();
     current_user = localStorage.getItem('currentUser');
@@ -489,21 +614,25 @@ async function loadDataTask() {
     task_id++;
     await backend.setItem('index', task_id);
     getUserInfo();
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
 };
 
 
+/**
+ * get infos about the logged in user
+ */
 function getUserInfo() {
     getUserContacts();
     getCurrentUserIndex();
-    user[userId]['name'] = 'You';
+    user[userId]['name'] = current_user;
     if (user[userId]['contacts'] != undefined) delete user[userId]['contacts'];
     contacts.splice(0, 0, user[userId]);
 };
 
+
 /**
  * fills the variable userId with the index of the user
  */
-
 async function getCurrentUserIndex() {
     await user.forEach(function users(value, index) {
         if (value.name === current_user) {

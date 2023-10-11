@@ -18,7 +18,7 @@
 
 </head>
 
-<body onload="includeHTML(), loadDataTask(), getDate()" id="body">
+<body onload="includeHTML(), loadDataTask(), getDate(), todayTask()" id="body">
     <div w3-include-html="desktop_template.html"></div>
     <div class="head">
         <span class="sub_headline">Kanban Project Management Tool</span>
@@ -68,7 +68,7 @@
             <!-------------------------------------------------------------input Date------------------------------------------------------------------------->
 
             <span>Due date</span>
-            <input type="date" id="date" autofocus>
+            <input type="date" id="date" min="" autofocus>
 
             <!-------------------------------------------------------------input Priority--------------------------------------------------------------------->
 

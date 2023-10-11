@@ -51,7 +51,6 @@ button {
 
 h1 {
     position: absolute;
-    top: 80px;
     left: calc(50% - 437px);
     font-size: 61px;
 }
@@ -63,10 +62,9 @@ h1 {
 }
 
 .form {
-
     position: absolute;
     left: calc(50% - 690px);
-    top: 260px;
+    top: 240px;
     display: flex;
     margin-left: 250px;
 }

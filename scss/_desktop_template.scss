@@ -7,7 +7,7 @@
     float: left;
     width: 200px;
     font-size: 16px;
-    z-index: 1;
+    z-index: 100;
 
     .menu-content {
         display: flex;
@@ -130,6 +130,49 @@
         border-top-right-radius: 0px;
         font-weight: 700;
         border: none;
+        z-index: 999;
+
+        &:hover {
+            background-color: $lightblue;
+        }
+    }
+
+    .help-mobile-field {
+        position: absolute;
+        top: 199%;
+        right: calc(3% + 20px);
+        transform: translate(0, -50%);
+        color: white;
+        background-color: $darkblue;
+        cursor: pointer;
+        padding: 8px 8px;
+        border-radius: 10px;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        font-weight: 700;
+        border: none;
+        width: 99px;
+        z-index: 999;
+
+        &:hover {
+            background-color: $lightblue;
+        }
+    }
+
+    .legal-notice-mobile-field {
+        position: absolute;
+        top: 149%;
+        right: calc(3% + 20px);
+        transform: translate(0, -50%);
+        color: white;
+        background-color: $darkblue;
+        cursor: pointer;
+        padding: 8px 8px;
+        border-radius: 0px;
+        font-weight: 700;
+        border: none;
+        width: 99px;
+        z-index: 999;
 
         &:hover {
             background-color: $lightblue;
@@ -139,11 +182,17 @@
 
 /*** MEDIA QUERY ***/
 @media (max-width: 600px) {
+    .log-out-field {
+        border-bottom-right-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+        width: 99px;
+    }
     .menu {
         float: none;
         top: unset;
         left: 0;
         right: 0;
+        bottom: 0 !important;
         width: 100%;
 
         .menu-content {
@@ -175,6 +224,7 @@
         margin-left: unset;
         justify-content: flex-end;
         background-color: white;
+        z-index: 100;
 
         .mobile-template-logo {
             display: block !important;

@@ -8,9 +8,11 @@ let editContacts = [];
 
 
 
-// set backend url
-setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
+setURL('https://mario-haefs.developerakademie.net/smallest_backend_ever');
 
+/**
+ * initialises board  
+ */
 async function initBoard() {
     await loadData();
     await loadDataTask();
@@ -18,38 +20,58 @@ async function initBoard() {
 }
 
 
-//displays the current date
+/**
+ * displays the current date 
+ */
 function getDateOverlay() {
-    document.getElementById('dateOverlay').valueAsDate = new Date();
-    date = document.getElementById('dateOverlay').value;
-};
-
-
-// load data from backend
-async function loadData() {
-    await downloadFromServer();
-    // editors = JSON.parse(backend.getItem('users')) || [];
-    tasks_board = JSON.parse(backend.getItem('tasks')) || [];
-    categorys_board = JSON.parse(backend.getItem('categorys')) || [];
+    var dateOverlay = document.getElementById('dateOverlay');
+    if (dateOverlay !== null) {
+        dateOverlay.valueAsDate = new Date();
+        date = dateOverlay.value;
+    }
 }
 
-// save data to backend
+
+/**
+ * load data from backend 
+ */
+async function loadData() {
+    await downloadFromServer();
+    tasks_board = JSON.parse(backend.getItem('tasks')) || [];
+    categorys_board = JSON.parse(backend.getItem('categorys')) || [];
+    users = JSON.parse(backend.getItem('users')) || [];
+}
+
+
+/**
+ * save data to backend
+ * 
+ * @param {string} key 
+ * @param {array} array
+ */
 async function saveData(key, array) {
     await backend.setItem(key, JSON.stringify(array));
 };
 
+
+/**
+ * render tasks 
+ * 
+ * @param {array} inputArray - task array
+ */
 function renderTasks(inputArray) {
     deleteTasksOnBoard();
 
     for (let i = 0; i < inputArray.length; i++) {
         const task = inputArray[i];
-        // editors = task['contacts'];
         renderSingleTask(task);
     }
 }
 
+
 /**
  * render card for single task
+ * 
  * @param {string} taskStatus - Status / column of the task
  * @todo complete task
  */
@@ -65,23 +87,108 @@ function renderSingleTask(task) {
         </div>`;
 }
 
+
 /**
  * 
  * @returns html code for the topic of the task
  */
 function htmlTaskTopic(task) {
-    return `<div class="task-topic" style="background-color: ${getCategorysColor(task['category'])}">${task['category']}</div>`;
+    let mobileArrowUpStyle = '';
+    let mobileArrowDownStyle = '';
+
+    if (task.status === 'todo') {
+        mobileArrowUpStyle = 'display: none;';
+    } else if (task.status === 'done') {
+        mobileArrowDownStyle = 'display: none;';
+    }
+
+    return /*html*/`
+    <div class="mobile-task-topic">
+        <div class="task-topic" style="background-color: ${getCategorysColor(task['category'])}">
+            ${task['category']}
+        </div>
+        <div class="mobile-arrows"> 
+            <img id="mobileArrowUp" onclick="event.stopPropagation(); moveMobile(${task['task_id']}, 'up')"  src="assets/img/arrow-up.png" style="${mobileArrowUpStyle}">
+            <img id="mobileArrowDown" onclick="event.stopPropagation(); moveMobile(${task['task_id']}, 'down')" src="assets/img/arrow-down.png" style="${mobileArrowDownStyle}">
+        </div>
+    </div>
+    `;
 }
 
+
+
+/**
+ * Move tasks to other areas on mobile devices
+ * @param {number} taskId 
+ * @returns task.status
+ */
+function moveMobile(taskId, direction) {
+    const task = tasks_board.find((t) => t.task_id === taskId);
+    if (!task) return;
+
+    const currentCategory = task.status;
+    const newCategory = getNewCategory(currentCategory, direction);
+
+    if (!newCategory) return;
+
+    task.status = newCategory;
+    saveData("tasks", tasks_board);
+    renderTasks(tasks_board);
+}
+
+
+/**
+ * 
+ * @param {string} currentCategory 
+ * @param {string} direction 
+ * @returns task.status
+ */
+function getNewCategory(currentCategory, direction) {
+    const categoryMapping = {
+        up: {
+            todo: "done",
+            progress: "todo",
+            feedback: "progress",
+            done: "feedback"
+        },
+        down: {
+            todo: "progress",
+            progress: "feedback",
+            feedback: "done",
+            done: "todo"
+        }
+    };
+
+    return categoryMapping[direction][currentCategory];
+}
+
+
+/**
+ * get the color of a Task in addTask
+ * 
+ * @param {color} category 
+ * @returns color from category of a task
+ */
 function getCategorysColor(category) {
     let index = categorys_board['category'].indexOf(category);
     return categorys_board['color'][index];
 }
 
+
+/**
+ * 
+ * @param {Array of JSON} task 
+ * @returns task title
+ */
 function htmlTaskTitle(task) {
     return `<h4>${task['title']}</h4>`;
 }
 
+/**
+ * 
+ * @param {Array of JSON} task 
+ * @returns task description
+ */
 function htmlTaskDescription(task) {
     return `<div class="task-description-board">${task['description']}</div>`;
 }
@@ -97,29 +204,45 @@ function htmlTaskDescription(task) {
  */
 function htmlTaskSubtasks(task) {
     if (task['subtasks'].length == 0) return '<div class="task-subtasks"></div>';
-    return `<div class="task-subtasks">
+
+    let subtaskStatus = JSON.parse(localStorage.getItem('subtaskStatus')) || {};
+    let taskSubtaskStatus = subtaskStatus[task['task_id']] || {};
+
+    let doneCount = Object.values(taskSubtaskStatus).filter(Boolean).length;
+    let progress = calcProgress(task, taskSubtaskStatus);
+
+    return `<div class="task-subtasks" id="taskSubtasks${task['task_id']}">
                 <div class="task-subtasks-line">
-                    <div class="progress" style="width: ${calcProgress(task)}%"></div>
+                    <div class="progress" style="width: ${progress}%"></div>
                 </div>
-                <span>${task['done'].filter(Boolean).length}/${task['subtasks'].length} Done</span>
+                <span>${doneCount}/${task['subtasks'].length} Done</span>
             </div>`;
 }
+
 
 /**
  * 
  * @param {Array of JSON} task includes all information to render the task on board - it is loaded from the server
  * @returns progress of subtasks in %
  */
-function calcProgress(task) {
-    return task['done'].filter(Boolean).length / task['subtasks'].length * 100;
+function calcProgress(task, taskSubtaskStatus) {
+    let checkedSubtasks = Object.values(taskSubtaskStatus).filter(Boolean).length;
+    return checkedSubtasks / task['subtasks'].length * 100;
 }
 
+
+/**
+ * 
+ * @param {Array of JSON} task 
+ * @returns 
+ */
 function htmlTaskDivBottom(task) {
     return `<div class="task-bottom">
                 ${htmlTaskEditors(task)}
                 ${htmlTaskPrio(task)}
             </div>`;
 }
+
 
 /**
  * 
@@ -146,11 +269,13 @@ function htmlTaskEditors(task) {
     return `<div class="editors">${htmlCodeTemp}</div>`;
 }
 
+
 function htmlTaskSingleEditor(editor) {
     return `<div class="contact-frame" style="background-color: ${editor['color']}">
                 ${editor['initials']}
             </div>`;
 }
+
 
 function htmlTaskLeftOverEditors(editors) {
     return `<div class="contact-frame">
@@ -158,15 +283,18 @@ function htmlTaskLeftOverEditors(editors) {
             </div>`;
 }
 
+
 function moreThan2Editors(i) {
     return i > 1;
 }
+
 
 function htmlTaskPrio(task) {
     return `<div class="task-prio">
                 <img src="assets/img/prio${capitalizeFirstLetter(task['prio'])}.png">
             </div>`;
 }
+
 
 function openTaskDetailView(id) {
     editContacts.length = 0
@@ -175,14 +303,17 @@ function openTaskDetailView(id) {
     document.body.classList.add('overflow-hidden');
 }
 
-// todo
+
+
 function renderTaskDetailView(task) {
     let detailView = document.getElementById('taskDetailView');
     detailView.classList.remove('display-none');
     detailView.innerHTML = htmlTaskDetailView(task);
 }
 
+
 function htmlTaskDetailView(task) {
+    let subtaskBoards = renderSubtaskBoards(task);
     return `
         <div class="content" onclick="noClose(event)">
             <div class="close">
@@ -207,6 +338,9 @@ function htmlTaskDetailView(task) {
                     <b>Assigned To:</b>
                     ${htmlAllEditors(task)}
                 </div>
+                <div class="subTaskBoard">
+                   ${subtaskBoards}
+                </div>
             </div>
             <div id="icons" class="icons">
                 <div class="delete-button" onclick="deleteTask(${tasks_board.indexOf(task)})">
@@ -220,6 +354,38 @@ function htmlTaskDetailView(task) {
     `;
 }
 
+
+function renderSubtaskBoards(task) {
+    let subtaskBoardsHTML = '';
+
+    let subtaskStatus = JSON.parse(localStorage.getItem('subtaskStatus')) || {};
+    let taskSubtaskStatus = subtaskStatus[task['task_id']] || {};
+
+    for (let i = 0; i < task['subtasks'].length; i++) {
+        let isChecked = taskSubtaskStatus[i] === true;
+        subtaskBoardsHTML += renderSubtaskBoardHTML(task['subtasks'][i], task['task_id'], i, isChecked);
+    }
+
+    return subtaskBoardsHTML;
+}
+
+
+function renderSubtaskBoardHTML(task, taskId, subtaskIndex, isChecked) {
+    let checkedAttribute = isChecked ? 'checked' : '';
+
+    return `
+      <div class="subtask_child" id="subTask${taskId}_${subtaskIndex}">
+          <input type="checkbox" id="CheckboxTask${taskId}_${subtaskIndex}" class="checkbox_subtask" onclick="setSubtaskStatus(${taskId}, ${subtaskIndex})" ${checkedAttribute}>
+          <div class ="subTask_Text">${task}</div>
+      </div>`;
+}
+
+
+/**
+ * edit a existing task - change key elements of that task
+ * 
+ * @param {number} index 
+ */
 async function editTask(index) {
     edit_active = true;
     let content = document.getElementById('content');
@@ -235,19 +401,25 @@ async function editTask(index) {
 };
 
 
+/**
+ * pushs editors to contacts
+ */
 function pushEditorstoContacts() {
     let edit_colors = [];
     editors.forEach(element => {
-        if (element.name == current_user) element.name = 'You';
+        if (element.name == current_user) element.name = current_user;
         editContacts.push(element)
         edit_colors.push(element.color)
     });
     contacts.forEach(element => {
-        if(edit_colors.includes(element.color) == false) editContacts.push(element)
+        if (edit_colors.includes(element.color) == false) editContacts.push(element)
     });
 };
 
 
+/**
+ * render the Initials of the editor user
+ */
 function renderEditorsInitials() {
     document.getElementById('initials').innerHTML = '';
     for (let i = 0; i < editors.length; i++) {
@@ -260,10 +432,17 @@ function renderEditorsInitials() {
     }
 }
 
+
+/**
+ * changes the priority of an edited task
+ * 
+ * @param {Array of JSON} task 
+ */
 function setPrioInEditTask(task) {
     currentPrioEditTask = task['prio'];
     document.getElementById(`editPrio${capitalizeFirstLetter(currentPrioEditTask)}`).classList.add(`prio_button_${currentPrioEditTask}`);
 }
+
 
 function editPrio(prio) {
     document.getElementById(`editPrio${capitalizeFirstLetter(currentPrioEditTask)}`).classList.remove(`prio_button_${currentPrioEditTask}`);
@@ -271,6 +450,15 @@ function editPrio(prio) {
     document.getElementById(`editPrio${capitalizeFirstLetter(currentPrioEditTask)}`).classList.add(`prio_button_${currentPrioEditTask}`);
 }
 
+
+
+
+
+/**
+ * 
+ * @param {Array of JSON} task 
+ * @returns complete html if you editing a task
+ */
 function htmlEditTask(task) {
     return `
             <div class="title">
@@ -283,7 +471,7 @@ function htmlEditTask(task) {
             </div>
             <div class="date">
                 Due date:
-                <input type="date" id="editTaskDueDate" value="${task['date']}">
+                <input type="date" id="editTaskDueDate" min="${today}" value="${task['date']}">
             </div>
             <div class="priority">
                 Prio
@@ -316,6 +504,7 @@ function htmlEditTask(task) {
     `;
 }
 
+
 function htmlCheckIcon(index) {
     return `
         <div class="check-button" onclick="saveTask(${index})">
@@ -324,6 +513,12 @@ function htmlCheckIcon(index) {
         </div>`;
 }
 
+
+/**
+ * save a edited task global
+ * 
+ * @param {number} idx 
+ */
 async function saveTask(idx) {
     saveChangedDataLocal(idx);
     await saveData('tasks', tasks_board);
@@ -333,6 +528,12 @@ async function saveTask(idx) {
     await initBoard();
 }
 
+
+/**
+ * save a edited task local
+ * 
+ * @param {number} idx 
+ */
 function saveChangedDataLocal(idx) {
     tasks_board[idx]['title'] = document.getElementById('editTaskTitle').value;
     tasks_board[idx]['description'] = document.getElementById('editTaskDescription').value;
@@ -342,6 +543,11 @@ function saveChangedDataLocal(idx) {
 }
 
 
+/**
+ * delete a task
+ *  
+ * @param {number} index 
+ */
 async function deleteTask(index) {
     tasks_board.splice(index, 1);
     document.getElementById('taskDetailView').classList.add('display-none');
@@ -349,6 +555,13 @@ async function deleteTask(index) {
     await initBoard();
 }
 
+
+/**
+ * show all editors of a task
+ * 
+ * @param {Array of JSON} task 
+ * @returns name and initials from a single editor
+ */
 function htmlAllEditors(task) {
     let htmlCodeTemp = '';
     editors = task['contacts'];
@@ -360,6 +573,11 @@ function htmlAllEditors(task) {
     return htmlCodeTemp;
 }
 
+/**
+ * 
+ * @param {string} ed 
+ * @returns name and initials from a single editor
+ */
 function htmlTaskSingleEditorDetail(ed) {
     return `
         <div class="single-editor">
@@ -369,6 +587,12 @@ function htmlTaskSingleEditorDetail(ed) {
     `;
 }
 
+
+/**
+ * 
+ * @param {string} prio - priority of a task
+ * @returns color of the priority 
+ */
 function getCategoryColor(prio) {
     if (prio == 'low') {
         return '#7AE229';
@@ -381,18 +605,36 @@ function getCategoryColor(prio) {
     };
 }
 
+/**
+ * 
+ * @param {string} str 
+ * @returns capitalize first letter 
+ */
 function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+
+/**
+ * starts dragging task event
+ * 
+ * @param {number} id 
+ */
 function startDragging(id) {
     currentDraggedElement = id;
     markDraggableArea(`2px dotted #a8a8a8`);
 }
 
+
+/**
+ * let task drop if dragging ends
+ * 
+ * @param {DragEvent} ev 
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
+
 
 /**
  * 
@@ -407,12 +649,17 @@ function moveTo(status) {
     renderTasks(tasks_board);
 }
 
+
+/**
+ * delete tasks on board
+ */
 function deleteTasksOnBoard() {
     document.getElementById('tasks-todo').innerHTML = '';
     document.getElementById('tasks-progress').innerHTML = '';
     document.getElementById('tasks-feedback').innerHTML = '';
     document.getElementById('tasks-done').innerHTML = '';
 }
+
 
 /**
  * 
@@ -428,6 +675,12 @@ function checkTaskStatus(task) {
     }
 }
 
+
+/**
+ * marks draggable areas on board where u can put tasks
+ * 
+ * @param {css property} style 
+ */
 function markDraggableArea(style) {
     let draggableArea = document.getElementsByClassName('task-body');
     for (let i = 0; i < draggableArea.length; i++) {
@@ -436,25 +689,38 @@ function markDraggableArea(style) {
     }
 }
 
+
+/**
+ * show overlay add task
+ */
 function overlayAddTask() {
     document.getElementById('overlayAddTask').classList.remove('display-none');
+    document.getElementById('board-content').classList.add('display-none');
     document.getElementById('overlayAddTask').classList.add('overlay-add-task');
-    document.getElementById('mobileCreate').style.visibility = 'visible';
+    document.getElementById('mobileCreate').style.visibility = 'visible'; getDateOverlay()
     document.body.classList.add('overflow-hidden');
+    document.body.classList.add('overflow-y');
     renderOverlayAddTask();
     getDateOverlay();
 }
 
+
+/**
+ * close overlay add task
+ */
 function closeOverlay() {
     clearAll();
-    // todo animation ein ausblenden
     document.getElementById('overlayAddTask').classList.remove('overlay-add-task');
     document.getElementById('overlayAddTask').classList.add('display-none');
+    document.getElementById('board-content').classList.remove('display-none');
     document.body.classList.remove('overflow-hidden');
     document.getElementById('mobileCreate').style.visibility = 'hidden';
-    // document.getElementsByClassName('add-task')[0].classList.add('test');
 }
 
+
+/**
+ * close detail view
+ */
 function closeDetailView() {
     editContacts = [];
     document.getElementById('taskDetailView').classList.add('display-none');
@@ -462,31 +728,106 @@ function closeDetailView() {
     menuContactsOpen = false;
 }
 
+
+/**
+ * 
+ * @param {PointerEvent} event 
+ */
 function noClose(event) {
     event.stopPropagation();
 }
 
+
+/**
+ * search function
+ */
 function filterTasks() {
-    filteredTasks = [];
     let inputValue = document.getElementById('search-input').value;
-    for (let i = 0; i < tasks_board.length; i++) {
-        const task = tasks_board[i];
-        if (inputValueIsInTask(inputValue, task)) filteredTasks.push(task);
+    if (inputValue === '') {
+        // Das Eingabefeld ist leer, zeige alle Aufgaben an
+        renderTasks(tasks_board);
+    } else {
+        // Das Eingabefeld ist nicht leer, filtere die Aufgaben
+        filteredTasks = [];
+        for (let i = 0; i < tasks_board.length; i++) {
+            const task = tasks_board[i];
+            if (inputValueIsInTask(inputValue, task)) filteredTasks.push(task);
+        }
+        renderTasks(filteredTasks);
     }
-    renderTasks(filteredTasks);
+    document.getElementById('search-input').addEventListener('input', filterTasks);
 }
 
+
+/**
+ * 
+ * @returns searching parameters for filterTasks
+ */
 function inputValueIsInTask(input, task) {
     return task['title'].toLowerCase().includes(input.toLowerCase()) || task['description'].toLowerCase().includes(input.toLowerCase());
 }
 
 
+/**
+ * create Task on Board
+ */
 function createTaskonBoard() {
-    if (allFilled()) addTask();
-    else showTasknotFull();
+    if (allFilled()) {
+        createTaskAccordingToStatus();
+        createTaskonBoardExecuted = true;
+        createTask();
+    }
+    else {
+        showTasknotFull();
+    }
 };
 
 
+function createTaskAccordingToStatus() {
+    let selectedStatus = localStorage.getItem('selectedStatus');
+
+    switch (selectedStatus) {
+        case 'todo':
+            task.status = "todo"
+            break;
+        case 'progress':
+            task.status = "progress"
+            break;
+        case 'feedback':
+            task.status = "feedback"
+            break;
+        case 'done':
+            task.status = "done"
+            break;
+        default:
+            break;
+    }
+}
+
+
+function selectToDo() {
+    localStorage.setItem('selectedStatus', 'todo');
+}
+
+
+function selectProgress() {
+    localStorage.setItem('selectedStatus', 'progress');
+}
+
+
+function selectFeedback() {
+    localStorage.setItem('selectedStatus', 'feedback');
+}
+
+
+function selectDone() {
+    localStorage.setItem('selectedStatus', 'done');
+}
+
+
+/**
+ * add Task to Board
+ */
 async function addTask() {
     closeMenu('contacts', 'dropDownContacts')
     showNotice('addBordBox');
@@ -500,6 +841,9 @@ async function addTask() {
 };
 
 
+/**
+ * shows a notification that task is not completely filled
+ */
 function showTasknotFull() {
     if (!button_delay) {
         button_delay = true;
@@ -507,12 +851,15 @@ function showTasknotFull() {
         if (taskCategory) setCategory(taskCategory, color);
         if (enter_email) clearEmailField();
         closeMenu('contacts', 'dropDownContacts')
-        showNotice('missing');
         checkWhichFieldIsEmpty()
         setTimeout(() => button_delay = false, 2500);
     }
 }
 
+
+/**
+ * opens the edit contacts in task
+ */
 function openEditTaskContacts() {
     if (!menuContactsOpen) {
         document.getElementById('editContacts').innerHTML = '';
@@ -525,18 +872,29 @@ function openEditTaskContacts() {
     }
 };
 
+
+/**
+ * render edited contacts
+ */
 function renderEditContacts() {
     document.getElementById('editContacts').innerHTML = ``;
     document.getElementById('editContacts').innerHTML += `<div class="render_categorys" onclick="inviteContact() ">Invite new contact</div>`;
     for (let i = 0; i < editContacts.length; i++) {
-            let userName = editContacts[i]['name'];
-            renderEditTaskContactsHTML(i, userName);
-            if (editors.includes(editContacts[i])) {
-                document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
-            }
+        let userName = editContacts[i]['name'];
+        renderEditTaskContactsHTML(i, userName);
+        if (editors.includes(editContacts[i])) {
+            document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
         }
+    }
 };
 
+
+/**
+ * Html of renderEditContacts()
+ * 
+ * @param {number} i 
+ * @param {string} userName 
+ */
 function renderEditTaskContactsHTML(i, userName) {
     document.getElementById('editContacts').innerHTML += `
             <div class="render_categorys" onclick="editTaskSetContacts(${i})">
@@ -547,11 +905,17 @@ function renderEditTaskContactsHTML(i, userName) {
             </div>`;
 };
 
+
+/**
+ * edit contacts in tasks
+ * 
+ * @param {number} i 
+ */
 function editTaskSetContacts(i) {
     let index = editors.indexOf(editContacts[i])
     if (index == -1) {
         document.getElementById('Checkbox' + i).classList.add('custom_checkBox_child');
-        if (editContacts[i]['name'] == 'You') editContacts[i]['name'] = current_user;
+        if (editContacts[i]['name'] == current_user) editContacts[i]['name'] = current_user;
         editors.push(editContacts[i]);
         renderEditorsInitials()
     } else {

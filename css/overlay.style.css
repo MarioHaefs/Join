@@ -20,7 +20,7 @@ textarea {
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-    width: 10px;
+    display: none;
 }
 
 *::-webkit-scrollbar-track {
@@ -28,7 +28,6 @@ textarea {
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #dee1e6;
     border-radius: 10px;
 }
 
@@ -117,7 +116,6 @@ input::placeholder {
 span {
     font-size: 21px;
     font-weight: 400;
-    margin-bottom: 8px;
 }
 
 .drop_down {
@@ -176,7 +174,6 @@ span {
 }
 
 .render_categorys_box {
-    background-color: white;
     overflow-x: hidden;
     width: 422px;
     overflow-y: auto;
@@ -530,7 +527,7 @@ span {
     color: white;
     font-weight: 400;
     font-size: 21px;
-    display: flex;
+    display: none;
     text-align: center;
     flex-direction: column;
     justify-content: center;
@@ -562,6 +559,10 @@ span {
 
 .slide-out-right {
     animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.subTaskBoard {
+    margin-top: 32px;
 }
 
 @keyframes slide-in-bottom {
@@ -614,5 +615,40 @@ span {
     .clear_create_task {
         top: 485px;
         right: 0;
+    }
+
+    .overlay_headline {
+        left: 80px !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .overlay_headline {
+        left: 75px;
+        font-size: 46px;
+        top: -113px;
+    }
+}
+
+@media (max-width: 600px) {
+    .overlay_headline {
+        left: 87px;
+        font-size: 36px;
+    }
+
+    .form_left {
+        margin-top: -50px;
+    }
+}
+
+@media (max-width: 400px) {
+    .overlay_headline {
+        left: 71px;
+        margin-top: 30px;
+    }
+
+    .close {
+        margin: 0px !important;
+        margin-left: 8px !important;
     }
 }
