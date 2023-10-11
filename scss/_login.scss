@@ -106,18 +106,21 @@
             }
 
             .name-input {
+                outline: none;
                 margin-bottom: 25px;
                 width: 60%;
                 @include inputForm('../assets/img/person-icon.png', 94%, 55%);
             }
 
             .email-input {
+                outline: none;
                 margin-bottom: 25px;
                 width: 60%;
                 @include inputForm('../assets/img/letter-icon.png', 94%, 55%);
             }
 
             .password-input {
+                outline: none;
                 margin-bottom: 25px;
                 width: 60%;
                 @include inputForm('../assets/img/lock-icon.png', 94%, 55%);

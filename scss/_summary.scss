@@ -1,101 +1,6 @@
 $bgr_color1: #29ABE2;
 $bgr_color2: #2A3647;
 
-@media (max-width: 1100px) {
-    .greeting {
-        display: none !important;
-    }
-}
-
-@media (max-width: 835px) {
-    .summery_head {
-        display: block !important;
-
-        .headline {
-            padding-right: 0px;
-        }
-
-        .nutshell {
-            display: block;
-            border-left: none;
-            padding-left: 0px;
-        }
-
-        .seperator {
-            display: block !important;
-            width: 100px;
-            height: 2px;
-            background-color: $lightblue;
-            margin-bottom: 16px;
-        }
-
-    }
-
-    .count {
-        font-size: 37px !important;
-    }
-
-    .status {
-        font-size: 16px !important;
-    }
-
-    .task_sub {
-        width: 124px !important;
-        height: 124px !important;
-
-    }
-
-    .prio_date {
-        width: 444px !important;
-
-        .prio_date_sub {
-            img {
-                width: 50px !important;
-            }
-        }
-    }
-
-    .todo_done_sub {
-        width: 203px !important;
-    }
-}
-
-
-@media (max-width: 690px) {
-    .task {
-        gap: 7px !important;
-        .task_sub {
-            width: 104px !important;
-        }
-    }
-    .prio_date {
-        width: 328px !important;
-        .prio_date_sub {
-            padding-right: 40px !important;
-            
-        }
-        .datum {
-            padding-left: 12px !important;
-        }
-    }
-    .todo_done_sub {
-        width: 142px !important;
-        gap: 8px !important;
-        & > img {
-            width: 60px;
-        }
-    }
-}
-
-@media (max-width: 600px) {
-    .main_box {
-        top: 0 !important;
-        left: 0px !important;
-        margin-top: 68px;
-        margin-left: 16px;
-    }
-}
-
 @mixin flex_center() {
     display: flex;
     justify-content: center;
@@ -125,7 +30,7 @@ a {
 .main_box {
     position: absolute;
     left: 240px;
-    top: 150px;
+    top: 100px;
     display: flex;
     align-items: center;
     gap: 70px;
@@ -140,12 +45,12 @@ a {
 .name {
     color: $bgr_color1;
     font-weight: 700;
-    font-size: 64px;
+    font-size: 48px;
 }
 
 .hallo {
     font-weight: 500;
-    font-size: 47px;
+    font-size: 45px;
 }
 
 .summery_head {
@@ -155,7 +60,7 @@ a {
 
 .headline {
     font-weight: 700;
-    font-size: 61px;
+    font-size: 48px;
     padding-right: 60px;
     margin: 0;
 }
@@ -260,5 +165,160 @@ a {
     img {
         width: 60px;
         height: 60px;
+    }
+}
+
+@media (max-width: 1120px) {
+    .greeting {
+        display: none !important;
+    }
+}
+
+@media (max-width: 835px) {
+    .summery_head {
+        display: block !important;
+
+        .headline {
+            padding-right: 0px;
+        }
+
+        .nutshell {
+            display: block;
+            border-left: none;
+            padding-left: 0px;
+        }
+
+        .seperator {
+            display: block !important;
+            width: 100px;
+            height: 2px;
+            background-color: $lightblue;
+            margin-bottom: 16px;
+        }
+
+    }
+
+    .task {
+        margin-top: 50px;
+    }
+
+    .main_box {
+        top: 85px;
+    }
+
+    .count {
+        font-size: 37px !important;
+    }
+
+    .status {
+        font-size: 16px !important;
+    }
+
+    .task_sub {
+        width: 124px !important;
+        height: 124px !important;
+
+    }
+
+    .prio_date {
+        width: 444px !important;
+
+        .prio_date_sub {
+            img {
+                width: 50px !important;
+            }
+        }
+    }
+
+    .todo_done_sub {
+        width: 203px !important;
+    }
+}
+
+
+@media (max-width: 690px) {
+    .task {
+        gap: 7px !important;
+        .task_sub {
+            width: 104px !important;
+        }
+    }
+    .prio_date {
+        width: 328px !important;
+        .prio_date_sub {
+            padding-right: 20px !important;
+            
+        }
+        .datum {
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+        }
+        .prio_date_sub-img {
+            margin-left: 10px;
+        }
+    }
+    .todo_done_sub {
+        width: 142px !important;
+        gap: 8px !important;
+        & > img {
+            width: 60px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .main_box {
+        position: static;
+        display: flex;
+        justify-content: center;
+    }
+
+    .task {
+        margin-top: 35px;
+    }
+}
+
+@media (max-height: 805px) {
+    .headline {
+        font-size: 48px;
+    }
+
+    .nutshell {
+        font-size: 20px;
+        height: 35px;
+    }
+
+    .seperator {
+        margin-bottom: 0px !important;
+    }
+
+    .task {
+        margin-top: 12px;
+    }
+
+    .prio_date {
+        margin-top: 12px;
+    }
+
+    .todo_done {
+        margin-top: 12px;
+    }
+}
+
+@media (max-height: 720px) {
+    .task_sub {
+        height: 120px !important;
+    }
+
+    .prio_date {
+        height: 120px;
+    }
+
+    .todo_done_sub {
+        height: 120px;
+    }
+
+    .headline {
+        font-size: 35px;
     }
 }

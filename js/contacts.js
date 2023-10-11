@@ -4,35 +4,43 @@ let allUsersDB;
 let regUser = localStorage.getItem('currentUser');
 let userData;
 let userArryId;
-
 let orderedContacts = new Array([], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []);
-setURL('https://gruppe-5009.developerakademie.net/smallest_backend_ever');
+
+setURL('https://mario-haefs.developerakademie.net/smallest_backend_ever');
+
 
 /**
- * Load Data from server
- * 
+ * load data from server
  */
 async function init() {
     await downloadFromServer();
-    // contacts = JSON.parse(backend.getItem('contacts')) || [];
     await getAllUsers();
+    contact = JSON.parse(backend.getItem('contacts')) || [];
+    contactsA = JSON.parse(backend.getItem('contacts')) || [];
     insertContactsToContactList();
     showContact(0);
     document.body.classList.add('overflow');
 };
 
-function showAlert() {
-    document.getElementById('alert').classList.add('animate');
-    setTimeout(() => {
-        document.getElementById('alert').classList.remove('animate');
-    }, 2500);
+
+/**
+ * delete all contacts
+ */
+function deleteUser() {
+    backend.deleteItem('contacts');
 }
+
+
+/**
+ * add contacts to backend
+ */
 async function addContacts() {
     await backend.setItem('contacts', JSON.stringify(contactsA));
 }
 
+
 /**
- * load all Contacts to contacts list
+ * load all contacts to contacts list
  * 
  */
 async function insertContactsToContactList() {
@@ -50,8 +58,9 @@ async function insertContactsToContactList() {
     }
 }
 
+
 /**
- * Sort Contacts by Firstname from A to Z
+ * sort contacts by firstname from a to z
  */
 function sortContacts() {
     contactsA = contactsA.sort(function (a, b) {
@@ -61,9 +70,9 @@ function sortContacts() {
     });
 }
 
+
 /**
- * Sort Contacts alphabetical to orderedContacts
- * 
+ * sort contacts alphabetical to orderedContacts()
  */
 function orderContacts() {
     sortContacts();
@@ -80,7 +89,7 @@ function orderContacts() {
 
 
 /**
- * Retrunt a random Color-Hexcode 
+ * return a random color-hexcode 
  * @returns random color hexcode (#7D735F)
  */
 function getRandomColor() {
@@ -92,13 +101,14 @@ function getRandomColor() {
     return color;
 }
 
+
 /**
- * The function returns the first letter of the first name and last name.
- * If the last name does not exist, then only the first letter of the first name is output
+ * returns the first letter of the first name and last name.
+ * if the last name does not exist, then only the first letter of the first name is output
  * @example
  * getInitial('Max Mustermann');
  * @returns {String} MM
- * @param {String} username The name of the person you want to get the initials of.
+ * @param {String} username the name of the person you want to get the initials of.
  * @returns first letter of the first name and last name or only the first letter of the first name.
  * 
  */
@@ -110,6 +120,10 @@ function getInitial(username) {
     }
 }
 
+
+/**
+ * change activ contact and highlight it in contact list
+ */
 function changeActiv() {
     let btnContainer = document.getElementById('contacts-list');
     let btns = btnContainer.getElementsByClassName('list-contact');
@@ -123,24 +137,43 @@ function changeActiv() {
     }
 }
 
+
 /**
- * shows the first Contact at the details
+ * shows the first contact at the details
  */
 async function showContact(id) {
+    changeActiv();
     let btnContainer = document.getElementById('contacts-list');
     let btns = btnContainer.getElementsByClassName('list-contact');
-    let contactId = id || btns[0].id;
+    let contactId;
+    if (id) {
+        contactId = id;
+    } else {
+        if (btns.length > 0) {
+            contactId = btns[0].id;
+        } else {
+            return;
+        }
+    }
     let contactElement = document.getElementById(contactId);
     Array.from(document.querySelectorAll('.list-contact.list-contact-activ')).forEach((el) => el.classList.remove('list-contact-activ'));
     contactElement.className += " list-contact-activ";
     showDetails(contactId);
 }
 
+
+/**
+ * get all users from backend 
+ */
 async function getAllUsers() {
     allUsersDB = await JSON.parse(backend.getItem('users')) || [];
     getCurrentUserData();
 }
 
+
+/**
+ * get current user data from backend array users
+ */
 async function getCurrentUserData() {
     await allUsersDB.forEach(function users(value, index) {
         if (value.name === regUser) {
@@ -150,38 +183,54 @@ async function getCurrentUserData() {
         }
     })
 }
+
+
+/**
+ * delete user from contacts
+ * @param {number} userId 
+ */
 function delContact(userId) {
     contactsA.splice(userId, 1);
+    addContacts();
+    insertContactsToContactList();
     animationAndPushToServer();
 }
 
-function addContact() {
+
+/**
+ * add contact to contacts
+ */
+async function addContact() {
     let name = document.getElementById('name-input').value;
     let email = document.getElementById('email-input').value;
     let phone = document.getElementById('phone-input').value;
-    // Verify that the user entered a name, email address, and phone number.
-    if (!name || !email || !phone) {
-        alert('Bitte geben Sie einen Namen, eine E-Mail-Adresse und eine Telefonnummer ein.');
-        return;
-    }
 
     let initials = getInitial(name);
     let color = getRandomColor();
-    let singelContact = {
+    let newContact = {
         name: name,
         mail: email,
         phone: phone,
         initials: initials,
         color: color
-    }
+    };
 
-    contactsA.push(singelContact);
-    animationAndPushToServer();
-    showAlert();
+    // Retrieve contacts from the server
+    await downloadFromServer();
+    // Add the new contact to the contacts array
+    contactsA.push(newContact);
+    // Save the updated contacts to the server
+    await addContacts();
+    // Refresh the contact list and display the newly added contact
+    insertContactsToContactList();
+    showContact(newContact.id);
+    toggleDNone('overlayContent');
 }
 
+
+
 /**
- * 
+ * edit contact infos
  * @param {Integer} id - id from user you want to edit
  */
 function editContact(id) {
@@ -194,8 +243,14 @@ function editContact(id) {
     contactsA[id].phone = phone;
     contactsA[id].initials = initials;
     animationAndPushToServer();
+    addContacts();
+    showContact(id);
 }
 
+
+/**
+ * starts animation of edit contact && add contacts to contact list and backend server
+ */
 function animationAndPushToServer() {
     addContactsToUser();
     toggleDNone('overlayContent');
@@ -203,10 +258,18 @@ function animationAndPushToServer() {
     showContact(0);
 }
 
+
+/**
+ * push user to backend server
+ */
 async function pushToServer() {
     await backend.setItem('users', JSON.stringify(allUsersDB))
 }
 
+
+/**
+ * add contacts to user
+ */
 function addContactsToUser() {
     userData = { ...userData, contacts: contactsA };
     allUsersDB.splice(userArryId, 1);
@@ -214,6 +277,10 @@ function addContactsToUser() {
     pushToServer();
 }
 
+
+/**
+ * media querys for devices  windowWidth < 1000px 
+ */
 function showDetailsAtMobile() {
     let windowWidth = window.innerWidth;
     if (windowWidth < 1000) {
@@ -226,6 +293,10 @@ function showDetailsAtMobile() {
     }
 }
 
+
+/**
+ * hide infos of contacts
+ */
 function hideContactInfo() {
     document.getElementById('contacts-list').classList.remove('d-none')
     document.getElementsByClassName('contact-info')[0].classList.add('d-none-mobile')
@@ -233,6 +304,10 @@ function hideContactInfo() {
     document.getElementById('mobile-menu').innerHTML = '';
 }
 
+
+/**
+ * add scroll function
+ */
 function addScroll() {
     document.getElementById('overlayAddTask').classList.remove('display-none');
     document.getElementById('overlayAddTask').classList.add('overlay-add-task');
@@ -241,7 +316,20 @@ function addScroll() {
     getDateOverlay();
 }
 
-/*Gen HTML Content */
+
+/**
+ * close overlay contacts add task
+ */
+function closeOverlayContacts() {
+    clearAll();
+    document.getElementById('overlayAddTask').classList.remove('overlay-add-task');
+    document.getElementById('overlayAddTask').classList.add('display-none');
+    document.body.classList.remove('overflow-hidden');
+    document.getElementById('mobileCreate').style.visibility = 'hidden';
+}
+
+
+/**********Gen HTML Content ***********/
 
 /**
  * 
@@ -250,7 +338,7 @@ function addScroll() {
  */
 function genContactHtml(contact) {
     return /*html */`
-    <div class="list-contact" onclick="showDetails(${contact.id}); showDetailsAtMobile(${contact.id})" id="${contact.id}">
+    <div class="list-contact" onclick="showDetails(${contact.id}); showDetailsAtMobile(${contact.id});" id="${contact.id}">
             <span class="contact-frame" style="background-color: ${contact.color}" >${contact.initials}</span>
             <div class="list-contact-info">
                 <p>${contact.name}</p>
@@ -274,8 +362,12 @@ function genContactsHeader(i) {
     `;
 }
 
+
+/**
+ * html code of contact details
+ * @param {number} id 
+ */
 function showDetails(id) {
-    changeActiv();
     let editname = id;
     document.getElementById('contactDetails').innerHTML = '';
     document.getElementById('contactDetails').innerHTML = /*html */`
@@ -283,7 +375,6 @@ function showDetails(id) {
         <span class="list-contact-frame" style="background-color: ${contactsA[id].color}">${contactsA[id].initials}</span>
         <div class="contactInfo">
             <span class="contact-name">${contactsA[id].name}</span>
-            <div class="add-task" onclick="addScroll()"> + Add Task</div>
         </div>
         </div>
         <div class="contact-info-head">
@@ -306,6 +397,11 @@ function showDetails(id) {
         <div id="mobile-menu" onclick="editShowContact(${editname})"></div>`;
 }
 
+
+/**
+ * show contact details if contact is already registered. show create contact details if not
+ * @param {Array} contact 
+ */
 function editShowContact(contact) {
     document.getElementById('overlayContent').innerHTML = ''; //createContact
 
@@ -318,7 +414,9 @@ function editShowContact(contact) {
 }
 
 
-
+/**
+ * show create contact window
+ */
 function showCreateContact() {
     document.getElementById('overlayContent').innerHTML =  /*html */`
     <div class="close-top">
@@ -335,7 +433,7 @@ function showCreateContact() {
     <form action="#" onsubmit="addContact(); return false">
         <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required>
         <input class="email-input" id="email-input" placeholder="Email" type="email" required>
-        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+/ ]*" minlength="6" maxlength="30" required>
+        <input class="phone-input" id="phone-input" placeholder="Phone" type="number" minlength="6" maxlength="30" required>
         <div class="buttons">
             <button type="button" class="cancel-contact-btn" onclick="toggleDNone('overlayContent')">Cancel </button>
             <button type="submit" class="add-contact-btn" >
@@ -349,6 +447,11 @@ function showCreateContact() {
 </div>`
 }
 
+
+/**
+ * show edit contact window
+ * @param {number} id 
+ */
 function showEditContact(id) {
     let userId = id;
     document.getElementById('overlayContent').innerHTML =  /*html */`<div class="overlay-left">
@@ -360,11 +463,11 @@ function showEditContact(id) {
     <div class="overlay-sep"></div>
 </div>
 <div class="overlay-right">
-    <img src="./assets/img/contacts-icons/userIcon.png" alt="">    
+    <img class="img-d-none" src="./assets/img/contacts-icons/userIcon.png" alt="">    
     <form action="#" onsubmit="editContact(${userId}); return false">
         <input class="name-input" id="name-input" placeholder="Name" type="text" pattern="[a-zA-ZÄäÜüÖöß ]*" maxlength="30" required value="${contactsA[id].name}">
         <input class="email-input" id="email-input" placeholder="Email" type="email" required value="${contactsA[id].mail}">
-        <input class="phone-input" id="phone-input" placeholder="Phone" type="tel" pattern="[0-9+/ ]*" minlength="6" maxlength="30" required value="${contactsA[id].phone}">
+        <input class="phone-input" id="phone-input" placeholder="Phone" type="number" minlength="6" maxlength="30" required value="${contactsA[id].phone}">
         <div class="buttons">
             <button type="button" class="cancel-contact-btn" onclick="delContact(${userId})">Delete</button>
             <button type="submit" class="add-contact-btn" >

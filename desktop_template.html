@@ -15,39 +15,47 @@
 <body>
     <div class="menu">
         <div class="menu-content">
-            <img onclick="goToSummary()" class="menu-logo" src="assets/img/menu-logo.png">
+            <a href="summary.html" oncontextmenu="goToSummary()"><img onclick="goToSummary()" class="menu-logo" src="assets/img/menu-logo.png"></a>
             <div class="menu-nav">
-                    <div id="bg-summary" onclick="goToSummary()" class="nav-text">
-                        <div class="nav-icon-box"><img src="assets/img/summary.png"></div>
-                        Summary
-                    </div>
-                    <div id="bg-board" onclick="goToBoard()" class="nav-text">
-                        <div class="nav-icon-box"><img src="assets/img/board.png"></div>
-                        Board
-                    </div>
-                    <div id="bg-add-task" onclick="goToAddTask()" class="nav-text">
-                        <div class="nav-icon-box"><img src="assets/img/add-task.png"></div>
-                        Add Task
-                    </div>
-                    <div id="bg-contacts" onclick="goToContacts()" class="nav-text">
-                        <div class="nav-icon-box"><img src="assets/img/contacts.png"></div>
-                        Contacts
-                    </div>
-                    <div id="bg-legal-notice" onclick="goToLegalNotice()" class="legal-notice">
-                        <div class="nav-icon-box"><img src="assets/img/legal-notice.png"></div>
-                        Legal notice
-                    </div>
+                <a href="summary.html" oncontextmenu="goToSummary()"><div id="bg-summary" onclick="goToSummary()" class="nav-text">
+                    <div class="nav-icon-box"><img src="assets/img/summary.png"></div>
+                    Summary
+                </div></a>
+                <a href="board.html" oncontextmenu="goToBoard()"><div id="bg-board" onclick="goToBoard()" class="nav-text">
+                    <div class="nav-icon-box"><img src="assets/img/board.png"></div>
+                    Board
+                </div></a>
+                <a href="add_task.html" oncontextmenu="goToAddTask()"><div id="bg-add-task" onclick="goToAddTask()" class="nav-text">
+                    <div class="nav-icon-box"><img src="assets/img/add-task.png"></div>
+                    Add Task
+                </div></a>
+                <a href="contacts.html" oncontextmenu="goToContacts()"><div id="bg-contacts" onclick="goToContacts()" class="nav-text">
+                    <div class="nav-icon-box"><img src="assets/img/contacts.png"></div>
+                    Contacts
+                </div></a>
+                <a href="legal_notice.html" oncontextmenu="goToLegalNotice()"><div id="bg-legal-notice" onclick="goToLegalNotice()" class="legal-notice">
+                    <div class="nav-icon-box"><img src="assets/img/legal-notice.png"></div>
+                    Legal notice
+                </div></a>
             </div>
         </div>
     </div>
 
     <div class="header">
-        <img onclick="goToSummary()" class="mobile-template-logo" src="assets/img/logo.png" style="display: none;">
+        <img onclick="goToSummaryLogo()" class="mobile-template-logo" src="assets/img/logo.png" style="display: none;">
         <span class="header-headline">Kanban Project Management Tool</span>
         <div class="header-icons">
             <img onclick="location.href='help.html';" class="question-icon" src="assets/img/question-icon.png">
-            <img onclick="openProfilIconMenu()" id="profil-icon" class="profil-pic" src="assets/img/placeholder.jpg">
-            <div id="log-out-field" style="display: none;" onclick="logout()" class="log-out-field">Log out</div>
+            <img onclick="openProfilIconMenu(), openHelpMobile(), openLegalNoticeMobile()" id="profil-icon" class="profil-pic" src="assets/img/placeholder.jpg">
+            <div id="log-out-field" style="display: none;" onclick="logout()" class="log-out-field">
+                Log out
+            </div>
+            <div id="help-mobile" style="display: none;" onclick="location.href='help.html';" class="help-mobile-field">
+                Help
+            </div>
+            <div id="legal-notice-mobile" style="display: none;" onclick="goToLegalNoticeMobile()" class="legal-notice-mobile-field">
+                Legal Notice
+            </div>
         </div>
     </div>
 </body>

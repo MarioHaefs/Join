@@ -28,13 +28,13 @@
     <div id="contacts-container">
         <div class="contacts-list" id="contacts-list">
             <div class="list-header">
-                A
+                
             </div>
             <div class="list-contact list-contact-activ">
                 <img src="./assets/img/contacts-icons/Frame 79.png" alt="">
                 <div>
-                    <p>Name hierundso</p>
-                    <p>mail@wasauchimmer.de</p>
+                    <p></p>
+                    <p></p>
                 </div>
             </div>
            
@@ -42,7 +42,7 @@
         <div class="contact-info d-none-mobile">
             <div class="contact-headline">
                 <img src="./assets/img/contacts-icons/arrow-left.png" class="arrowLeftMobile" style="display: none;" onclick="hideContactInfo()">
-                <h3>Contacts</h3>
+                <h3 class="h3-size">Contacts</h3>
                 <p>Better with a team</p>
                 <div class="seperator" style="display: none;"></div>
             </div>
@@ -51,16 +51,16 @@
         </div>
         <div class="new-contact" onclick="editShowContact()">
             New Contact
-            <img src="./assets/img/contacts-icons/addContact.png" alt="">
+            <img class="contact-img-dnone" src="./assets/img/contacts-icons/addContact.png" alt="">
         </div>
     </div>
 
     <div id="overlayContent" class="d-none"></div>
-    <div id="overlayAddTask" class="display-none" onclick="closeOverlay()">
+    <div id="overlayAddTask" class="display-none" onclick="closeOverlayContacts()">
         <!-- <iframe src="add_task.html" frameborder="0" width="80%" height="90%"></iframe> -->
         <div class="add-task" onclick="noClose(event)">
-            <div class="close">
-                <img src="./assets/img/close.png" onclick="closeOverlay()">
+            <div class="close-board">
+                <img src="./assets/img/close.png" onclick="closeOverlayContacts()">
             </div>
             <div id="overlay"></div>
         </div>

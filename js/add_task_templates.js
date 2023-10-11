@@ -120,7 +120,7 @@ function renderOverlayHTML() {
             <!-------------------------------------------------------------input Date------------------------------------------------------------------------->
 
             <span>Due date</span>
-            <input type="date" id="dateOverlay" autofocus>
+            <input type="date" id="dateOverlay" min="${today}" autofocus>
 
             <!-------------------------------------------------------------input Priority--------------------------------------------------------------------->
 
